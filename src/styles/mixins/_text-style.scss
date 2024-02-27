@@ -1,0 +1,11 @@
+@mixin text-style($size, $weight: 400, $color: false) {
+  font-size: $size * 1rem;
+  font-weight: $weight;
+
+  @if (type-of($color) == color) {
+    color: $color;
+  }
+
+  line-height: normal;
+  font-style: normal;
+}
