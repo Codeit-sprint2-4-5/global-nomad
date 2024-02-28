@@ -1,12 +1,3 @@
-$flex-map: (
-  start: flex-start,
-  end: flex-end,
-  between: space-between,
-  around: space-around,
-  stretch: stretch,
-  center: center,
-);
-
 @function flex-value($key) {
   @return map-get($flex-map, $key);
 }
