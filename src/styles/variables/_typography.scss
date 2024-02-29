@@ -1,7 +1,7 @@
 /* stylelint-disable */
 $font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue',
   'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
-  'Segoe UI Symbol', sans-serif, 'Inter', sans-serif, 'Spoqa Han Sans Neo', 'sans-serif';
+  'Segoe UI Symbol', sans-serif, 'Inter', sans-serif, 'Spoqa Han Sans Neo', 'sans-serif', 'Open Sans', sans-serif;
 
 $browser-font-size: 62.5%;
 
@@ -51,5 +51,17 @@ $font-size-24: 2.4rem;
 @font-face {
   font-family: 'Spoqa Han Sans Neo';
   src: url('/public/fonts/SpoqaHanSansNeo-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url('/public/fonts/OpenSans-Bold.woff2') format('woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url('/public/fonts/OpenSans-ExtraBold.woff2') format('woff2');
   font-weight: 700;
 }
