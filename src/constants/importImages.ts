@@ -150,72 +150,70 @@ export const ICON = {
   x: {
     default: {
       src: IconX,
-      alt: 'X',
+      alt: '닫기',
     },
     active: {},
   },
   xBold: {
     default: {
       src: IconXBold,
-      alt: 'X',
+      alt: '닫기',
     },
     active: {},
   },
   xMedium: {
     default: {
       src: IconXMedium,
-      alt: 'X',
+      alt: '닫기',
     },
-    active: {
-      alt: 'X',
-    },
+    active: {},
   },
   leftArrow: {
     default: {
       src: IconLeftArrow,
-      alt: '좌측 화살표',
+      alt: '이전',
     },
     active: {
       src: IconLeftArrowActive,
-      alt: '좌측 화살표',
+      alt: '이전',
     },
     variant1: {
       src: IconLeftArrowVariant1,
-      alt: '좌측 화살표',
+      alt: '이전',
     },
   },
   rightArrow: {
     default: {
       src: IconRightArrow,
-      alt: '우측 화살표',
+      alt: '다음',
     },
     active: {
       src: IconRightArrowActive,
-      alt: '우측 화살표',
+      alt: '다음',
     },
     variant1: {
       src: IconRightArrowVariant1,
-      alt: '우측 화살표',
+      alt: '다음',
     },
   },
   plus: {
     default: {
       src: IconPlus,
-      alt: '플러스',
+      alt: '추가',
     },
     active: {},
   },
   plusTime: {
     default: {
       src: IconPlusTime,
-      alt: '플러스',
+      alt: '추가',
     },
     active: {},
   },
   minusTime: {
     default: {
       src: IconMinusTime,
-      alt: '마이너스',
+      alt: '삭제',
     },
     active: {},
   },
