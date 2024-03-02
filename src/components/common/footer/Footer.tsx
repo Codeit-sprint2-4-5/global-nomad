@@ -10,15 +10,15 @@ const cx = classNames.bind(styles);
 
 export default function Footer() {
   return (
-    <div className={cx("footerEntire")}>
-      <div className={cx("footerCompanyName")}>
+    <div className={cx("footer-entire")}>
+      <div className={cx("footer-company-name")}>
         <span>©codeit - 2023</span>
-        <div className={cx("footerPolicyFaq")}>
+        <div className={cx("footer-policy-faq")}>
           <span>Privacy Policy</span>
           <span>FAQ</span>
         </div>
       </div>
-      <div className={cx("footerIconLink")}>
+      <div className={cx("footer-icon-link")}>
         <Link href="https://facebook.com/" target="_blank">
           <Image
             src={ICON.facebook.default.src}
