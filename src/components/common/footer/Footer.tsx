@@ -6,19 +6,19 @@ import classNames from "classnames/bind";
 
 import { ICON } from "@/constants/importImages";
 
-const cx = classNames.bind(styles);
+const cn = classNames.bind(styles);
 
 export default function Footer() {
   return (
-    <div className={cx("footer-entire")}>
-      <div className={cx("footer-company-name")}>
+    <div className={cn("footer-entire")}>
+      <div className={cn("footer-company-name")}>
         <span>©codeit - 2023</span>
-        <div className={cx("footer-policy-faq")}>
+        <div className={cn("footer-policy-faq")}>
           <span>Privacy Policy</span>
           <span>FAQ</span>
         </div>
       </div>
-      <div className={cx("footer-icon-link")}>
+      <div className={cn("footer-icon-link")}>
         <Link href="https://facebook.com/" target="_blank">
           <Image
             src={ICON.facebook.default.src}
