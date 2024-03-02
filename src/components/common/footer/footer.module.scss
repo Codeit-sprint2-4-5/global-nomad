@@ -7,8 +7,8 @@
   align-items: center;
   justify-content: center;
   gap: 400px;
-  background-color: #112211;
-  @include text-style(1.6, 400, #676767);
+  background-color: $gray90;
+  @include text-style(1.6, 400, $gray85);
 
   @include responsive("T") {
     gap: 60px;
