@@ -1,0 +1,45 @@
+@import "@/styles/mixins/_text-style";
+
+.footerEntire {
+  margin-top: 120px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 400px;
+  background-color: #112211;
+  @include text-style(1.6, 400, #676767);
+
+  @include responsive("T") {
+    gap: 60px;
+  }
+
+  @include responsive("M") {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.footerCompanyName {
+  display: flex;
+  gap: 400px;
+
+  @include responsive("T") {
+    gap: 60px;
+  }
+
+  @include responsive("M") {
+    gap: 12px;
+  }
+}
+
+.footerPolicyFaq {
+  display: flex;
+  gap: 30px;
+  padding-right: 18px;
+}
+
+.footerIconLink {
+  display: flex;
+  gap: 12px;
+}
