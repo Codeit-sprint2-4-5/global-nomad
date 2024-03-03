@@ -1,0 +1,46 @@
+@import "@/styles/mixins/_text-style";
+@import "@/styles/mixins/_flexbox";
+
+.side-menu-entire {
+  width: 384px;
+  padding: 24px;
+  gap: 24px;
+  background-color: $white;
+  border-radius: 12px;
+  border: 1px solid $gray30;
+  box-shadow: 0 4px 16px 0 rgba(17, 34, 17, 0.05);
+  @include column-flexbox(none, none);
+}
+.user-profile {
+  position: relative;
+  margin: 0 auto;
+}
+.user-profile-image {
+  border-radius: 100%;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+}
+.side-menu {
+  @include column-flexbox(center, none);
+  gap: 8px;
+
+  :hover {
+    background-color: $lightgreen;
+    color: #112211;
+    border-radius: 12px;
+  }
+}
+
+.side-menu-link {
+  padding: 9px 0 9px 16px;
+  gap: 12px;
+
+  @include flexbox(none, center);
+  @include text-style(1.6, 700, #a1a1a1);
+}
+
+.side-menu-Image {
+  filter: invert(60%);
+}
+.side-menu-link:hover .side-menu-Image {
+  filter: invert(0%);
+}
