@@ -25,6 +25,7 @@ export default function Footer() {
             height={20}
             width={20}
             alt={ICON.facebook.default.alt}
+            className={cn("footer-icon-image")}
           />
         </Link>
         <Link href="https://twitter.com/" target="_blank">
@@ -33,6 +34,7 @@ export default function Footer() {
             height={20}
             width={20}
             alt={ICON.twitter.default.alt}
+            className={cn("footer-icon-image")}
           />
         </Link>
         <Link href="https://youtube.com/" target="_blank">
@@ -41,6 +43,7 @@ export default function Footer() {
             height={20}
             width={20}
             alt={ICON.youtube.default.alt}
+            className={cn("footer-icon-image")}
           />
         </Link>
         <Link href="https://instagram.com/" target="_blank">
@@ -49,6 +52,7 @@ export default function Footer() {
             height={20}
             width={20}
             alt={ICON.instagram.default.alt}
+            className={cn("footer-icon-image")}
           />
         </Link>
       </div>

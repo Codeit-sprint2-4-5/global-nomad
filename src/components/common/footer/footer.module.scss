@@ -1,45 +1,50 @@
 @import "@/styles/mixins/_text-style";
 
 .footer-entire {
-  margin-top: 120px;
-  height: 160px;
+  margin-top: 12rem;
+  height: 16rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 400px;
+  gap: 40rem;
   background-color: $gray90;
   @include text-style(1.6, 400, $gray85);
 
   @include responsive("T") {
-    gap: 60px;
+    gap: 6rem;
   }
 
   @include responsive("M") {
     flex-direction: column;
-    gap: 24px;
+    gap: 2.4rem;
   }
 }
 
 .footer-company-name {
   display: flex;
-  gap: 400px;
+  gap: 40rem;
 
   @include responsive("T") {
-    gap: 60px;
+    gap: 6rem;
   }
 
   @include responsive("M") {
-    gap: 12px;
+    gap: 1.2rem;
   }
 }
 
 .footer-policy-faq {
   display: flex;
-  gap: 30px;
-  padding-right: 18px;
+  gap: 3rem;
+  padding-right: 1.8rem;
 }
 
 .footer-icon-link {
   display: flex;
-  gap: 12px;
+  gap: 1.2rem;
+}
+
+.footer-icon-image:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
 }
