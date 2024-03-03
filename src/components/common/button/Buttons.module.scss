@@ -64,7 +64,7 @@
     @include text-style(1.6, 700, $white);
   }
 
-  &.btn-md {
+  &.btn-sm {
     @include text-style(1.4, 700, $white);
   }
 }
@@ -83,7 +83,7 @@
     @include text-style(1.6, 700, $white);
   }
 
-  &.btn-md {
+  &.btn-sm {
     @include text-style(1.4, 700, $white);
   }
 }
@@ -113,7 +113,7 @@
   &.btn-md {
     @include text-style(1.6, 700, $black);
   }
-  &.btn-md {
+  &.btn-sm {
     @include text-style(1.4, 700, $black);
   }
 }
