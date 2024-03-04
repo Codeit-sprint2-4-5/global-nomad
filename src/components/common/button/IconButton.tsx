@@ -12,12 +12,12 @@ interface IconButtonProps {
   padding?: string;
 }
 
-const IconButton = ({ svg, size, alt, type = 'button', padding = 'pd0', ...props }: IconButtonProps) => (
-  <button type={type} className={cn('ic-btn', `ic-btn-${size}`, padding)} {...props}>
-    <div className={cn(`ic-box`)}>
-      <Image src={svg} alt={alt} className={cn('ic-fit')} />
-    </div>
-  </button>
-);
-
-export default IconButton;
+export default function IconButton({ svg, size, alt, type = 'button', padding = 'pd0', ...props }: IconButtonProps) {
+  return (
+    <button type={type} className={cn('ic-btn', `ic-btn-${size}`, padding)} {...props}>
+      <div className={cn(`ic-box`)}>
+        <Image src={svg} alt={alt} className={cn('ic-fit')} />
+      </div>
+    </button>
+  );
+}

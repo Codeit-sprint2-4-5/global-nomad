@@ -14,7 +14,7 @@ interface MixButtonProps {
   fontSize: string;
 }
 
-const MixButton = ({
+export default function MixButton({
   svg,
   alt,
   reverse,
@@ -23,16 +23,16 @@ const MixButton = ({
   text = '',
   fontSize = '18',
   ...props
-}: MixButtonProps) => (
-  <div className={cn('mix')}>
-    <button type={type} className={cn('mix-btn')} {...props}>
-      {reverse && <span className={cn(`mix-text-${fontSize}`)}>{text}</span>}
-      <div className={cn(`mix-box-${iconSize}`)}>
-        <Image src={svg} alt={alt} className={cn('ic-fit')} />
-      </div>
-      {!reverse && <span className={cn(`mix-text-${fontSize}`)}>{text}</span>}
-    </button>
-  </div>
-);
-
-export default MixButton;
+}: MixButtonProps) {
+  return (
+    <div className={cn('mix')}>
+      <button type={type} className={cn('mix-btn')} {...props}>
+        {reverse && <span className={cn(`mix-text-${fontSize}`)}>{text}</span>}
+        <div className={cn(`mix-box-${iconSize}`)}>
+          <Image src={svg} alt={alt} className={cn('ic-fit')} />
+        </div>
+        {!reverse && <span className={cn(`mix-text-${fontSize}`)}>{text}</span>}
+      </button>
+    </div>
+  );
+}

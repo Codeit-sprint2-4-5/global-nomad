@@ -11,19 +11,17 @@ interface BaseButtonProps {
   border?: string;
 }
 
-const BaseButton = ({
+export default function BaseButton({
   size,
   variant = 'primary',
   type = 'button',
   text = 'Button',
   border = 'br6',
   ...props
-}: BaseButtonProps) => {
+}: BaseButtonProps) {
   return (
     <button className={cn(`btn-${variant}`, `btn-${size}`, `${border}`)} type={type} {...props}>
       <span>{text}</span>
     </button>
   );
-};
-
-export default BaseButton;
+}
