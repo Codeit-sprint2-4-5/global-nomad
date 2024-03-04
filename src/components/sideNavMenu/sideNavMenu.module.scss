@@ -7,32 +7,41 @@
   border: 0.1rem solid $gray30;
 
   @include column-flexbox(none, none);
+  @include responsive("T") {
+    width: 25.1rem;
+  }
+  @include responsive("M") {
+    display: none;
+  }
 }
 
 .user-profile {
   position: relative;
   margin: 0 auto;
-
   width: 16rem;
   height: 16rem;
 }
+
 .user-profile-image {
   border-radius: 100%;
   overflow: hidden;
-  box-shadow: 0 0.4rem 1.6rem 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0.4rem 1.6rem 0 $user-profile-image-shadow;
 }
+
 .user-profile-image:hover {
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.07);
   transition: transform 0.3s;
 }
+
 .side-menu {
-  @include column-flexbox(center, none);
   gap: 0.8rem;
+
+  @include column-flexbox(center, none);
 
   :hover {
     background-color: $lightgreen;
-    color: #112211;
+    color: $gray90;
     border-radius: 1.2rem;
   }
 }
@@ -43,16 +52,18 @@
 
   &.active {
     background-color: $lightgreen;
-    color: #112211;
+    color: $gray90;
     border-radius: 1.2rem;
   }
 
   @include flexbox(none, center);
-  @include text-style(1.6, 700, #a1a1a1);
+  @include text-style(1.6, 700, $gray55);
 }
+
 .side-menu-link:hover {
   cursor: pointer;
 }
+
 .side-menu-Image {
   filter: invert(60%);
 }
@@ -62,9 +73,6 @@
   filter: invert(0%);
 }
 
-.side-menu-file-input {
-  display: none;
-}
 .side-menu-Image-modify {
   position: absolute;
   width: 4.2rem;
@@ -76,7 +84,12 @@
   @include flexbox(center, center);
   cursor: pointer;
 }
+
 .side-menu-Image-modify-icon:hover {
-  transform: scale(1.07);
+  transform: scale(1.08);
   transition: transform 0.2s;
+}
+
+.side-menu-file-input {
+  display: none;
 }
