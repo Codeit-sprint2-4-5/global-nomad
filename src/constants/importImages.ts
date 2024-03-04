@@ -29,7 +29,6 @@ import IconPlus from "/public/icons/Icon_plus.svg";
 import IconLeftArrowVariant1 from "/public/icons/Icon_left-arrow_variant1.svg";
 import IconRightArrowVariant1 from "/public/icons/Icon_right-arrow_variant1.svg";
 import IconPen from "/public/icons/Icon_pen.svg";
-import IconPopupCheck from "/public/icons/Icon_popup_check.svg";
 
 export const ICON = {
   logo: {
@@ -223,13 +222,6 @@ export const ICON = {
     default: {
       src: IconPen,
       alt: "펜",
-    },
-    active: {},
-  },
-  popupCheck: {
-    default: {
-      src: IconPopupCheck,
-      alt: "팝업 체크 아이콘",
     },
     active: {},
   },
