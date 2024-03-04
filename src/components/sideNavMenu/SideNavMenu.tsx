@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import { ICON } from "@/constants/importImages";
 import { ChangeEvent, useRef, useState } from "react";
 
+const cn = classNames.bind(styles);
 interface SideNavMenuProps {
   userProfileImage: string | null;
   activeMenu: string;
@@ -15,17 +16,16 @@ export default function SideNavMenu({
   activeMenu,
   onclick,
 }: SideNavMenuProps) {
-  const [profileImage, setProfileImage] = useState<string>(
-    userProfileImage || "/images/default_profile_image.png"
-  );
+  const initialValue = userProfileImage || "/images/default_profile_image.png";
+  const [profileImage, setProfileImage] = useState<string>(initialValue);
 
-  const cn = classNames.bind(styles);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleButtonClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
     }
+    return;
   };
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -33,29 +33,39 @@ export default function SideNavMenu({
     if (!file) return;
 
     try {
-      const imageUrl = await readFileAsDataURL(file);
+      const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
     } catch (error) {
       console.error("이미지 업로드 중 오류가 발생했습니다.", error);
     }
   };
 
-  const readFileAsDataURL = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (typeof reader.result === "string") {
-          resolve(reader.result);
-        } else {
-          reject(new Error("파일을 읽는 데 실패했습니다."));
-        }
-      };
-      reader.onerror = () => {
-        reject(reader.error);
-      };
-      reader.readAsDataURL(file);
-    });
-  };
+  const menuItems = [
+    {
+      name: "myInfo",
+      iconSrc: ICON.accountCheck.default.src,
+      iconAlt: ICON.accountCheck.default.alt,
+      content: "내 정보",
+    },
+    {
+      name: "reservationInfo",
+      iconSrc: ICON.textBoxCheck.default.src,
+      iconAlt: ICON.textBoxCheck.default.alt,
+      content: "예약 내역",
+    },
+    {
+      name: "myExperience",
+      iconSrc: ICON.setting.default.src,
+      iconAlt: ICON.setting.default.alt,
+      content: "내 체험 관리",
+    },
+    {
+      name: "reservationStatus",
+      iconSrc: ICON.calendarCheck.default.src,
+      iconAlt: ICON.calendarCheck.default.alt,
+      content: "예약 현황",
+    },
+  ];
 
   return (
     <div className={cn("side-menu-entire")}>
@@ -73,9 +83,9 @@ export default function SideNavMenu({
           onClick={handleButtonClick}
         >
           <Image
+            src={ICON.pen.default.src}
             width={24}
             height={24}
-            src={ICON.pen.default.src}
             alt={ICON.pen.default.alt}
             className={cn("side-menu-Image-modify-icon")}
           />
@@ -83,69 +93,24 @@ export default function SideNavMenu({
       </div>
 
       <ul className={cn("side-menu")}>
-        <li
-          className={cn("side-menu-link", {
-            active: activeMenu === "myInfo",
-          })}
-          onClick={() => onclick("myInfo")}
-        >
-          <Image
-            src={ICON.accountCheck.default.src}
-            width={24}
-            height={24}
-            alt={ICON.accountCheck.default.alt}
-            className={cn("side-menu-Image")}
-          />
-          <span>내 정보</span>
-        </li>
-
-        <li
-          className={cn("side-menu-link", {
-            active: activeMenu === "reservationInfo",
-          })}
-          onClick={() => onclick("reservationInfo")}
-        >
-          <Image
-            src={ICON.textBoxCheck.default.src}
-            width={24}
-            height={24}
-            alt={ICON.textBoxCheck.default.alt}
-            className={cn("side-menu-Image")}
-          />
-          <span>예약 내역</span>
-        </li>
-
-        <li
-          className={cn("side-menu-link", {
-            active: activeMenu === "myExperience",
-          })}
-          onClick={() => onclick("myExperience")}
-        >
-          <Image
-            src={ICON.setting.default.src}
-            width={24}
-            height={24}
-            alt={ICON.setting.default.alt}
-            className={cn("side-menu-Image")}
-          />
-          <span>내 체험 관리</span>
-        </li>
-
-        <li
-          className={cn("side-menu-link", {
-            active: activeMenu === "reservationStatus",
-          })}
-          onClick={() => onclick("reservationStatus")}
-        >
-          <Image
-            src={ICON.calendarCheck.default.src}
-            width={24}
-            height={24}
-            alt={ICON.calendarCheck.default.alt}
-            className={cn("side-menu-Image")}
-          />
-          <span>예약 현황</span>
-        </li>
+        {menuItems.map((menu, index) => (
+          <li
+            key={index}
+            className={cn("side-menu-link", {
+              active: activeMenu === menu.name,
+            })}
+            onClick={() => onclick(menu.name)}
+          >
+            <Image
+              width={24}
+              height={24}
+              src={menu.iconSrc}
+              alt={menu.iconAlt}
+              className={cn("side-menu-Image")}
+            />
+            <span>{menu.content}</span>
+          </li>
+        ))}
       </ul>
       <input
         type="file"
