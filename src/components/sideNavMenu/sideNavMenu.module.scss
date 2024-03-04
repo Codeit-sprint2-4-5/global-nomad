@@ -1,27 +1,26 @@
-@import "@/styles/mixins/_text-style";
-@import "@/styles/mixins/_flexbox";
-
 .side-menu-entire {
-  width: 384px;
-  padding: 24px;
-  gap: 24px;
+  width: 38.4rem;
+  padding: 2.4rem;
+  gap: 2.4rem;
   background-color: $white;
-  border-radius: 12px;
-  border: 1px solid $gray30;
-  box-shadow: 0 4px 16px 0 rgba(17, 34, 17, 0.05);
+  border-radius: 1.2rem;
+  border: 0.1rem solid $gray30;
+
   @include column-flexbox(none, none);
 }
 
 .user-profile {
   position: relative;
   margin: 0 auto;
-  overflow: hidden;
-  width: 160px;
-  height: 160px;
-  border-radius: 100%;
-  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
-}
 
+  width: 16rem;
+  height: 16rem;
+}
+.user-profile-image {
+  border-radius: 100%;
+  overflow: hidden;
+  box-shadow: 0 0.4rem 1.6rem 0 rgba(0, 0, 0, 0.08);
+}
 .user-profile-image:hover {
   cursor: pointer;
   transform: scale(1.1);
@@ -29,23 +28,23 @@
 }
 .side-menu {
   @include column-flexbox(center, none);
-  gap: 8px;
+  gap: 0.8rem;
 
   :hover {
     background-color: $lightgreen;
     color: #112211;
-    border-radius: 12px;
+    border-radius: 1.2rem;
   }
 }
 
 .side-menu-link {
-  padding: 9px 0 9px 16px;
-  gap: 12px;
+  padding: 0.9rem 0 0.9rem 1.6rem;
+  gap: 1.2rem;
 
   &.active {
     background-color: $lightgreen;
     color: #112211;
-    border-radius: 12px;
+    border-radius: 1.2rem;
   }
 
   @include flexbox(none, center);
@@ -65,4 +64,19 @@
 
 .side-menu-file-input {
   display: none;
+}
+.side-menu-Image-modify {
+  position: absolute;
+  width: 4.2rem;
+  height: 4.2rem;
+  background-color: $darkgreen;
+  border-radius: 100%;
+  bottom: 0%;
+  right: 3%;
+  @include flexbox(center, center);
+  cursor: pointer;
+}
+.side-menu-Image-modify-icon:hover {
+  transform: scale(1.07);
+  transition: transform 0.2s;
 }

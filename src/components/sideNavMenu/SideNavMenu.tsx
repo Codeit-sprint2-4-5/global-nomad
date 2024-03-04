@@ -1,16 +1,20 @@
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./sideNavMenu.module.scss";
 import classNames from "classnames/bind";
 import { ICON } from "@/constants/importImages";
-import { useRouter } from "next/router";
 import { ChangeEvent, useRef, useState } from "react";
 
 interface SideNavMenuProps {
   userProfileImage: string | null;
+  activeMenu: string;
+  onclick: (menu: string) => void;
 }
 
-export default function SideNavMenu({ userProfileImage }: SideNavMenuProps) {
+export default function SideNavMenu({
+  userProfileImage,
+  activeMenu,
+  onclick,
+}: SideNavMenuProps) {
   const [profileImage, setProfileImage] = useState<string>(
     userProfileImage || "/images/default_profile_image.png"
   );
@@ -58,16 +62,33 @@ export default function SideNavMenu({ userProfileImage }: SideNavMenuProps) {
       <div className={cn("user-profile")}>
         <Image
           src={profileImage}
-          fill
+          height={160}
+          width={160}
           alt="profileImage"
           className={cn("user-profile-image")}
           onClick={handleButtonClick}
         />
-        <button onClick={handleButtonClick}>수정</button>
+        <div
+          className={cn("side-menu-Image-modify")}
+          onClick={handleButtonClick}
+        >
+          <Image
+            width={24}
+            height={24}
+            src={ICON.pen.default.src}
+            alt={ICON.pen.default.alt}
+            className={cn("side-menu-Image-modify-icon")}
+          />
+        </div>
       </div>
 
       <ul className={cn("side-menu")}>
-        <li className={cn("side-menu-link", {})}>
+        <li
+          className={cn("side-menu-link", {
+            active: activeMenu === "myInfo",
+          })}
+          onClick={() => onclick("myInfo")}
+        >
           <Image
             src={ICON.accountCheck.default.src}
             width={24}
@@ -78,7 +99,12 @@ export default function SideNavMenu({ userProfileImage }: SideNavMenuProps) {
           <span>내 정보</span>
         </li>
 
-        <li className={cn("side-menu-link", {})}>
+        <li
+          className={cn("side-menu-link", {
+            active: activeMenu === "reservationInfo",
+          })}
+          onClick={() => onclick("reservationInfo")}
+        >
           <Image
             src={ICON.textBoxCheck.default.src}
             width={24}
@@ -89,7 +115,12 @@ export default function SideNavMenu({ userProfileImage }: SideNavMenuProps) {
           <span>예약 내역</span>
         </li>
 
-        <li className={cn("side-menu-link", {})}>
+        <li
+          className={cn("side-menu-link", {
+            active: activeMenu === "myExperience",
+          })}
+          onClick={() => onclick("myExperience")}
+        >
           <Image
             src={ICON.setting.default.src}
             width={24}
@@ -100,7 +131,12 @@ export default function SideNavMenu({ userProfileImage }: SideNavMenuProps) {
           <span>내 체험 관리</span>
         </li>
 
-        <li className={cn("side-menu-link", {})}>
+        <li
+          className={cn("side-menu-link", {
+            active: activeMenu === "reservationStatus",
+          })}
+          onClick={() => onclick("reservationStatus")}
+        >
           <Image
             src={ICON.calendarCheck.default.src}
             width={24}
@@ -113,7 +149,7 @@ export default function SideNavMenu({ userProfileImage }: SideNavMenuProps) {
       </ul>
       <input
         type="file"
-        accept="image/*"
+        accept="image/jpeg"
         onChange={handleImageChange}
         className={cn("side-menu-file-input")}
         ref={inputRef}
