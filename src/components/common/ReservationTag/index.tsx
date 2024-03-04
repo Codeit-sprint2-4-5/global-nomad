@@ -8,8 +8,6 @@ interface ReservationProps {
   state: '승인' | '거절';
 }
 
-const ReservationTag = ({ state }: ReservationProps) => {
+export default function ReservationTag({ state }: ReservationProps) {
   return <div className={cn('tag', { rejected: state === '거절' })}>예약 {state}</div>;
-};
-
-export default ReservationTag;
+}
