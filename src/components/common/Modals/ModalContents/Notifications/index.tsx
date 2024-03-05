@@ -1,31 +1,12 @@
 import { instance } from '@/pages/api/axios';
 import Image from 'next/image';
-
 import getTimeAgo from '../utill/getTimeAgo';
 import { ICON } from '@/constants';
-
 import styles from '../ModalContents.module.scss';
 import classNames from 'classnames/bind';
 const cn = classNames.bind(styles);
 
 const { ellipse, xMedium } = ICON;
-
-// const accessToken = 'd';
-// const refreshToken =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTA4LCJ0ZWFtSWQiOiIyLTUiLCJpYXQiOjE3MDk2MjE2MTEsImV4cCI6MTcxMDgzMTIxMSwiaXNzIjoic3AtZ2xvYmFsbm9tYWQifQ.WM1rD_Zp3djECzkvmL-l53lIQeH5acSfbhQM9lX9_z8';
-// async function getNotifications() {
-//   try {
-//     const res = await instance.get('/my-notifications?size=10', {
-//       headers: { Authorization: `Bearer ${refreshToken}` },
-//     });
-
-//     return res.data;
-//   } catch (error: any) {
-//     if (error.status >= 400) {
-//       return alert(error.message);
-//     }
-//   }
-// }
 
 const mook = {
   totalCount: 4,
