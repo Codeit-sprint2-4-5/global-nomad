@@ -55,7 +55,7 @@ export default function RatingInput({ setValue, control }: RatingInputProps) {
   return (
     <Controller
       control={control}
-      name="rating"
+      name='rating'
       render={({ field: { onChange, value } }) => (
         <ul className={cn('stars')}>
           {RATINGS.map((rating) => (
