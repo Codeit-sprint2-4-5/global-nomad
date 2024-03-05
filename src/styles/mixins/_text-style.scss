@@ -1,0 +1,20 @@
+@mixin text-style($size, $weight: 400, $color: false) {
+  font-size: $size * 1rem;
+  font-weight: $weight;
+
+  @if (type-of($color) == color) {
+    color: $color;
+  }
+
+  line-height: normal;
+  font-style: normal;
+}
+
+@mixin chips-text-style($color) {
+  font-family: Pretendard;
+  @include text-style(1.4, 500, $color);
+
+  @include responsive("M") {
+    font-size: $font-size-12;
+  }
+}
