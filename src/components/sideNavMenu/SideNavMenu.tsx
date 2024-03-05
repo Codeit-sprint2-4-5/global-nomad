@@ -1,22 +1,14 @@
 import Image from "next/image";
 import styles from "./sideNavMenu.module.scss";
 import classNames from "classnames/bind";
-import { ICON } from "@/constants/importImages";
 import { ChangeEvent, useRef, useState } from "react";
-
+import MENU_ITEMS from "@/constants/menuItems";
+import { ICON } from "@/constants";
 const cn = classNames.bind(styles);
-interface SideNavMenuProps {
-  userProfileImage: string | null;
-  activeMenu: string;
-  onclick: (menu: string) => void;
-}
 
-export default function SideNavMenu({
-  userProfileImage,
-  activeMenu,
-  onclick,
-}: SideNavMenuProps) {
-  const initialValue = userProfileImage || "/images/default_profile_image.png";
+export default function SideNavMenu() {
+  const initialValue = "/images/default_profile_image.png";
+  const [activeMenu, setActiveMenu] = useState<string>("myInfo");
   const [profileImage, setProfileImage] = useState<string>(initialValue);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,32 +32,9 @@ export default function SideNavMenu({
     }
   };
 
-  const menuItems = [
-    {
-      name: "myInfo",
-      iconSrc: ICON.accountCheck.default.src,
-      iconAlt: ICON.accountCheck.default.alt,
-      content: "내 정보",
-    },
-    {
-      name: "reservationInfo",
-      iconSrc: ICON.textBoxCheck.default.src,
-      iconAlt: ICON.textBoxCheck.default.alt,
-      content: "예약 내역",
-    },
-    {
-      name: "myExperience",
-      iconSrc: ICON.setting.default.src,
-      iconAlt: ICON.setting.default.alt,
-      content: "내 체험 관리",
-    },
-    {
-      name: "reservationStatus",
-      iconSrc: ICON.calendarCheck.default.src,
-      iconAlt: ICON.calendarCheck.default.alt,
-      content: "예약 현황",
-    },
-  ];
+  const handleMenuClick = (menu: string) => {
+    setActiveMenu(menu);
+  };
 
   return (
     <div className={cn("side-menu-entire")}>
@@ -93,13 +62,13 @@ export default function SideNavMenu({
       </div>
 
       <ul className={cn("side-menu")}>
-        {menuItems.map((menu, index) => (
+        {MENU_ITEMS.map((menu, index) => (
           <li
             key={index}
             className={cn("side-menu-link", {
               active: activeMenu === menu.name,
             })}
-            onClick={() => onclick(menu.name)}
+            onClick={() => handleMenuClick(menu.name)}
           >
             <Image
               width={24}
@@ -114,7 +83,7 @@ export default function SideNavMenu({
       </ul>
       <input
         type="file"
-        accept="image/jpeg"
+        accept="image/jpeg, image/bmp, image/svg+xml,image/jpg"
         onChange={handleImageChange}
         className={cn("side-menu-file-input")}
         ref={inputRef}

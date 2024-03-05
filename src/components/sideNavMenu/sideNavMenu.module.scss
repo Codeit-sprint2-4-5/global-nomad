@@ -7,6 +7,7 @@
   border: 0.1rem solid $gray30;
 
   @include column-flexbox(none, none);
+
   @include responsive("T") {
     width: 25.1rem;
   }
@@ -38,12 +39,6 @@
   gap: 0.8rem;
 
   @include column-flexbox(center, none);
-
-  :hover {
-    background-color: $lightgreen;
-    color: $gray90;
-    border-radius: 1.2rem;
-  }
 }
 
 .side-menu-link {
@@ -51,10 +46,15 @@
   gap: 1.2rem;
   cursor: pointer;
 
+  &:hover,
   &.active {
     background-color: $lightgreen;
     color: $gray90;
     border-radius: 1.2rem;
+
+    .side-menu-Image {
+      filter: invert(0%);
+    }
   }
 
   @include flexbox(none, center);
@@ -63,11 +63,6 @@
 
 .side-menu-Image {
   filter: invert(60%);
-}
-
-.side-menu-link:hover .side-menu-Image,
-.side-menu-link.active .side-menu-Image {
-  filter: invert(0%);
 }
 
 .side-menu-Image-modify {
@@ -80,11 +75,11 @@
   right: 3%;
   @include flexbox(center, center);
   cursor: pointer;
-}
 
-.side-menu-Image-modify-icon:hover {
-  transform: scale(1.08);
-  transition: transform 0.2s;
+  &:hover .side-menu-Image-modify-icon {
+    transform: scale(1.08);
+    transition: transform 0.2s;
+  }
 }
 
 .side-menu-file-input {
