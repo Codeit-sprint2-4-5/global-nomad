@@ -8,7 +8,7 @@ interface ChipsProps {
 	count?: number;
 }
 
-function Chips({ status, count = 0 }: ChipsProps) {
+export default function Chips({ status, count = 0 }: ChipsProps) {
 	const statusObject = {
 		confirmed: '확정',
 		complete: '완료',
@@ -23,5 +23,3 @@ function Chips({ status, count = 0 }: ChipsProps) {
 		</div>
 	);
 }
-
-export default Chips;
