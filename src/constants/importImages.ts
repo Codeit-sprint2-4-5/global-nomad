@@ -31,6 +31,7 @@ import IconRightArrowVariant1 from '/public/icons/Icon_right-arrow_variant1.svg'
 import IconPen from '/public/icons/Icon_pen.svg';
 import IconEllipse from '/public/icons/Icon_Ellipse.svg';
 
+
 export const ICON = {
   logo: {
     default: {
@@ -233,6 +234,7 @@ export const ICON = {
     },
     active: {},
   },
+
 };
 
 export const IMAGE = {};
