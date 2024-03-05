@@ -1,4 +1,4 @@
-import { instance } from '@/pages/api/axios';
+import { instance } from '@/apis/axios';
 
 export const postMyReview = async (activityId: number, reviewData: unknown) => {
   try {

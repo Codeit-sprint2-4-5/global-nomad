@@ -1,13 +1,13 @@
-import { Children, ReactNode } from 'react';
 import styles from './ReservationTag.module.scss';
 import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);
 
 interface ReservationProps {
-  state: '승인' | '거절';
+  status: 'declined' | 'confirmed';
 }
 
-export default function ReservationTag({ state }: ReservationProps) {
-  return <div className={cn('tag', { rejected: state === '거절' })}>예약 {state}</div>;
+export default function ReservationTag({ status }: ReservationProps) {
+  const stastusText = status === 'confirmed' ? '확정' : '거절';
+  return <div className={cn('tag', { declined: status === 'declined' })}>예약 {stastusText}</div>;
 }
