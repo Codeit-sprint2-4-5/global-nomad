@@ -44,9 +44,9 @@ export default function ReviewFrom({ id, onClickCloseModal }: Props) {
       <textarea
         {...register('content', { required: '후기를 작성해 주세요' })}
         className={cn('textarea')}
-        placeholder="후기를 작성해주세요"
+        placeholder='후기를 작성해주세요'
       ></textarea>
-      <BaseButton type="submit" text="작성하기" size="lg" />
+      <BaseButton type='submit' text='작성하기' size='lg' />
     </form>
   );
 }
