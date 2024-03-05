@@ -33,7 +33,7 @@ $gray10: #fafafa;
 $opacity-black-30: rgba(0 0 0 / 30%);
 $opacity-black-60: rgba(0 0 0 / 60%);
 $opacity-white-5: rgba(255 255 255 / 5%);
-
+$opacity-100: rgba(0, 0, 0, 0);
 // Specific color
 $search-popup-box-shadow: #1122110d;
 $user-profile-image-shadow: #00000014;
@@ -43,4 +43,7 @@ $column-background: $gray80;
 $stroke: $gray70;
 $card-background: $gray60;
 $tag-background: $opacity-white-5;
+$modal-shadow: rgba(121, 116, 126, 1);
+$modal-text-color: #121;
+$modal-box-shadow: rgba(17, 34, 17, 0.05);
 //$landing-background: $black10;
