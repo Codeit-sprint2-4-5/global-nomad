@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import { Control, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
@@ -61,14 +61,9 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
     [MODAL_TYPE.notifications]: { component: Notifications, prop: {} },
     [MODAL_TYPE.countMemberInput]: {
       component: CountMemberInput,
-      prop: {
-        setValue: props.setValue,
-        control: props.control,
-        onDownDisabled: props.onDownDisabled,
-      },
+      prop: { control: props.control, setValue: props.setValue, onDownDisabled: props.onDownDisabled },
     },
   };
-
   const { component: ContestComponent, prop } = ModalContents[modalType];
 
   return createPortal(
