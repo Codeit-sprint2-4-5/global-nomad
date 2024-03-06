@@ -1,15 +1,7 @@
 .card-resource-entire {
   @include column-flexbox(none, none);
-  width: 28.3rem;
   overflow: hidden;
   gap: 1.6rem;
-
-  @include responsive("T") {
-    width: 22.1rem;
-  }
-  @include responsive("M") {
-    width: 16.8rem;
-  }
 
   &.banner {
     width: 38.4rem;
@@ -18,7 +10,7 @@
     background: linear-gradient(
       180deg,
       $card-resource-gradient-from 33.33%,
-      $card-resource-gradient-from 91.67%
+      $card-resource-gradient-to 91.67%
     );
     border-radius: 2rem;
     flex-direction: column-reverse;
