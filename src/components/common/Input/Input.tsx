@@ -9,7 +9,6 @@ const cn = classNames.bind(style);
 
 interface InputProps {
   name: string;
-  variant?: string;
   type: string;
   isError?: boolean;
   errorMessage?: string;
@@ -21,7 +20,7 @@ interface InputProps {
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-export default function Input({ name, variant, type, isError, errorMessage, className, ...props }: InputProps) {
+export default function Input({ name, type, isError, errorMessage, className, ...props }: InputProps) {
   const { isToggle, handleToggleClick } = useToggleButton();
   const { src, alt, inputType } = isToggle ? USER_PASSWORD_SHOW.on : USER_PASSWORD_SHOW.off;
 
