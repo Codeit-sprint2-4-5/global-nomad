@@ -1,10 +1,9 @@
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import styles from "./cardResource.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
 import { ICON } from "@/constants";
 import { GetActivitiesList } from "@/types/activities";
+import Link from "next/link";
 
 const cn = classNames.bind(styles);
 interface CardResourceProps {
@@ -16,7 +15,10 @@ export default function CardResource({
   banner,
 }: CardResourceProps) {
   return (
-    <div className={cn("card-resource-entire", { banner: banner })}>
+    <Link
+      href={`/임의의페이지/${activitiesData.id}`}
+      className={cn("card-resource-entire", { banner: banner })}
+    >
       <Image
         src={activitiesData.bannerImageUrl}
         width={384}
@@ -46,6 +48,6 @@ export default function CardResource({
           <span>/ 인</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
