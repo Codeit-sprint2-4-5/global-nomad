@@ -23,6 +23,7 @@ import IconLeftArrow from '/public/icons/Icon_left-arrow_default.svg';
 import IconLeftArrowActive from '/public/icons/Icon_left-arrow_active.svg';
 import IconRightArrow from '/public/icons/Icon_right-arrow_default.svg';
 import IconRightArrowActive from '/public/icons/Icon_right-arrow_active.svg';
+import IconDownArrow from '/public/icons/Icon_down-arrow_default.svg';
 import IconPlusTime from '/public/icons/Icon_plus_time.svg';
 import IconMinusTime from '/public/icons/Icon_minus_time.svg';
 import IconPlus from '/public/icons/Icon_plus.svg';
@@ -30,7 +31,6 @@ import IconLeftArrowVariant1 from '/public/icons/Icon_left-arrow_variant1.svg';
 import IconRightArrowVariant1 from '/public/icons/Icon_right-arrow_variant1.svg';
 import IconPen from '/public/icons/Icon_pen.svg';
 import IconEllipse from '/public/icons/Icon_Ellipse.svg';
-
 
 export const ICON = {
   logo: {
@@ -199,6 +199,13 @@ export const ICON = {
       alt: '다음',
     },
   },
+  downArrow: {
+    default: {
+      src: IconDownArrow,
+      alt: '목록 열기/닫기',
+    },
+    active: {},
+  },
   plus: {
     default: {
       src: IconPlus,
@@ -234,7 +241,6 @@ export const ICON = {
     },
     active: {},
   },
-
 };
 
 export const IMAGE = {};
