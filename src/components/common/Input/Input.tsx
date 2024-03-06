@@ -28,7 +28,7 @@ export default function Input({ name, type, isError, errorMessage, className, ..
     <>
       <div className={cn(type === 'textarea' ? 'textarea-field' : 'input-field')}>
         {type === 'textarea' ? (
-          <textarea className={cn('textarea')} {...props} />
+          <textarea name={name} className={cn('textarea')} {...props} />
         ) : (
           <>
             <input
