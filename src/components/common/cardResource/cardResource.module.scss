@@ -1,29 +1,16 @@
-.card-resource-entire {
+.entire {
   @include column-flexbox(none, none);
   overflow: hidden;
   gap: 1.6rem;
   flex-shrink: 0;
+  cursor: pointer;
 
   &.banner {
-    width: 38.4rem;
-    height: 38.4rem;
-    position: relative;
-    background: linear-gradient(
-      180deg,
-      $card-resource-gradient-from 33.33%,
-      $card-resource-gradient-to 91.67%
-    );
-    border-radius: 2rem;
-    flex-direction: column-reverse;
-
-    @include responsive("M") {
-      width: 18.6rem;
-      height: 18.6rem;
-    }
+    @extend .carousel;
   }
 }
 
-.card-resource-image {
+.image {
   width: 28.3rem;
   height: 28.3rem;
   border-radius: 2rem;
@@ -37,31 +24,15 @@
     width: 16.8rem;
     height: 16.8rem;
   }
-
-  &.banner {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
 }
-.card-resource-info {
+
+.info {
   @include column-flexbox(none, none);
   gap: 1rem;
   color: $black;
-
-  &.banner {
-    padding: 3rem 0 3rem 2rem;
-    color: $white;
-    gap: 2rem;
-
-    @include responsive("M") {
-      padding: 1.2rem 0 1.2rem 2rem;
-      gap: 0.6rem;
-    }
-  }
 }
 
-.card-resource-info-rating {
+.info-rating {
   @include flexbox(none, center);
   @include text-style(1.6, 500, $black);
   margin-right: 0.5rem;
@@ -70,26 +41,13 @@
   span {
     color: $gray55;
   }
-
-  &.banner {
-    @include text-style(1.6, 600, $white);
-    line-height: 1.67rem;
-
-    span {
-      color: $white;
-    }
-  }
 }
-.card-resource-info-rating-star {
+
+.info-rating-star {
   margin-right: 0.5rem;
-
-  &.banner {
-    width: 1.8rem;
-    height: 1.8rem;
-  }
 }
 
-.card-resource-info-title {
+.info-title {
   line-height: 2.864rem;
   @include text-style(2.4, 600);
   margin-bottom: 0.5rem;
@@ -99,20 +57,9 @@
     @include text-style(1.8, 700);
     line-height: 2.15rem;
   }
-
-  &.banner {
-    @include text-style(3, 700);
-    line-height: 3.58rem;
-    width: 23rem;
-
-    @include responsive("M") {
-      width: 14.6rem;
-      @include text-style(1.8, 700);
-      line-height: 2.15rem;
-    }
-  }
 }
-.card-resource-info-price {
+
+.info-price {
   @include flexbox(none, center);
   @include text-style(2.8, 700);
   gap: 0.5rem;
@@ -131,8 +78,64 @@
       line-height: 1.9rem;
     }
   }
+}
 
-  &.banner {
+.carousel {
+  width: 38.4rem;
+  height: 38.4rem;
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    $card-resource-gradient-from 33.33%,
+    $card-resource-gradient-to 91.67%
+  );
+  border-radius: 2rem;
+  flex-direction: column-reverse;
+
+  @include responsive("M") {
+    width: 18.6rem;
+    height: 18.6rem;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  .info {
+    padding: 3rem 0 3rem 2rem;
+    color: $white;
+    gap: 2rem;
+
+    @include responsive("M") {
+      padding: 1.2rem 0 1.2rem 2rem;
+      gap: 0.6rem;
+    }
+  }
+  .info-rating {
+    @include text-style(1.6, 600, $white);
+    line-height: 1.67rem;
+
+    span {
+      color: $white;
+    }
+  }
+  .info-rating {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .info-title {
+    @include text-style(3, 700);
+    line-height: 3.58rem;
+    width: 23rem;
+
+    @include responsive("M") {
+      width: 14.6rem;
+      @include text-style(1.8, 700);
+      line-height: 2.15rem;
+    }
+  }
+  .info-price {
     @include text-style(2, 700);
     line-height: 2.39rem;
 

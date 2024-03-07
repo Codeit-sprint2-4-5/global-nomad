@@ -3,51 +3,56 @@ import classNames from "classnames/bind";
 import Image from "next/image";
 import { ICON } from "@/constants";
 import { GetActivitiesList } from "@/types/activities";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 const cn = classNames.bind(styles);
+
 interface CardResourceProps {
   activitiesData: GetActivitiesList;
-  banner?: boolean;
+  banner: boolean;
 }
+
 export default function CardResource({
   activitiesData,
-  banner = false,
+  banner,
 }: CardResourceProps) {
+  const router = useRouter();
+  const handleClick = (id: number) => {
+    router.push(`/activities/${id}`);
+  };
+
   return (
-    <Link
-      href={`/임의의페이지/${activitiesData.id}`}
-      className={cn("card-resource-entire", { banner: banner })}
+    <div
+      onClick={() => handleClick(activitiesData.id)}
+      className={cn("entire", { banner })}
     >
       <Image
         src={activitiesData.bannerImageUrl}
         width={384}
         height={384}
         alt="배너 이미지"
-        className={cn("card-resource-image", { banner: banner })}
+        className={cn("image")}
       />
 
-      <div className={cn("card-resource-info", { banner: banner })}>
-        <div className={cn("card-resource-info-rating", { banner: banner })}>
+      <div className={cn("info")}>
+        <div className={cn("info-rating")}>
           <Image
             src={ICON.star.active.src}
             width={20}
             height={20}
             alt={ICON.star.active.alt}
-            className={cn("card-resource-info-rating-star", { banner: banner })}
+            className={cn("info-rating-star")}
           />
           {activitiesData.rating}
           &nbsp;
           <span> ({activitiesData.reviewCount})</span>
         </div>
-        <div className={cn("card-resource-info-title", { banner: banner })}>
-          {activitiesData.title}
-        </div>
-        <div className={cn("card-resource-info-price", { banner: banner })}>
+        <div className={cn("info-title")}>{activitiesData.title}</div>
+        <div className={cn("info-price")}>
           ￦ {activitiesData.price.toLocaleString()}
           <span>/ 인</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
