@@ -31,6 +31,7 @@ import IconLeftArrowVariant1 from '/public/icons/Icon_left-arrow_variant1.svg';
 import IconRightArrowVariant1 from '/public/icons/Icon_right-arrow_variant1.svg';
 import IconPen from '/public/icons/Icon_pen.svg';
 import IconEllipse from '/public/icons/Icon_Ellipse.svg';
+import IconCheck from '/public/icons/Icon_check.svg';
 
 export const ICON = {
   logo: {
@@ -238,6 +239,13 @@ export const ICON = {
     default: {
       src: IconEllipse,
       alt: '점',
+    },
+    active: {},
+  },
+  check: {
+    default: {
+      src: IconCheck,
+      alt: '체크',
     },
     active: {},
   },
