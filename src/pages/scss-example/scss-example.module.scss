@@ -1,0 +1,136 @@
+/* 
+  - vscode에서 'scss intellisense' extension을 설치하면 variavles, mixins, functions에 대한 자동완성 기능을 이용할 수 있음 
+  - mixin 문법을 가장 상단에 기재하면 가독성을 높일 수 있음
+*/
+
+// global.scss file test
+.global {
+  background-color: magenta;
+  width: 3rem;
+  height: 3rem;
+  padding: 1rem;
+}
+
+// reset.scss file test
+.reset {
+  //h1 태그의 margin이 0이고 폰트가 pretendard이면 됨
+}
+
+// color.scss file test
+.color {
+  color: $blue;
+}
+
+// z-index.scss file test
+.z-index {
+  position: relative;
+
+  &-test1 {
+    background-color: magenta;
+    width: 3rem;
+    height: 3rem;
+    position: relative;
+    z-index: $modal;
+  }
+
+  &-test2 {
+    background-color: $green;
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    z-index: $modal-background;
+    top: 2rem;
+    left: 2rem;
+  }
+}
+
+// flexbox.scss file test
+/* 
+  1. flex를 적용하고 싶을 때 사용함
+  2. flexbox, inline-flexbox, column-flexbox 중 하나 고르기
+  3. 믹스인의 파라미터는 @include flexbox(justify-content, align-items)이며, (center, center)는 기본값으로 안 적어줘도 됨 
+  4. justify-content와 align-items가 헷갈릴 때는 styles 폴더의 _flexbox.scss 파일의 $flex-map을 참고하기
+ */
+
+.flexbox {
+  // @include flexbox(between, center);
+  // @include inline-flexbox(center, end);
+  @include column-flexbox(center, end);
+  width: 10rem;
+  height: 10rem;
+  border: 0.1rem solid $black;
+
+  p {
+    background-color: $orange;
+    width: 3rem;
+    height: 3rem;
+    border: 0.1rem solid $black;
+  }
+}
+
+// responsive.scss file test
+/*
+  1. 반응형 페이지를 만들 때 사용함
+  2. 테블릿 사이즈의 경우 @include responsive('T'), 모바일 사이즈의 경우  @include responsive('M')를 이용함
+  3. 디스플레이, 테블릿, 모바일 사이즈의 기준을 변경하고 싶을 때는 breakpoint.scss 파일의 변수 값을 조정해 주면 됨
+*/
+.responsive {
+  background-color: $black;
+  width: 3rem;
+  height: 3rem;
+
+  @include responsive('T') {
+    background-color: $red;
+  }
+
+  @include responsive('M') {
+    background-color: $gray30;
+  }
+}
+
+// text-style.scss file test
+/*
+  1. 폰트와 관련된 설정(font-size, font-weight, colr, line-height, font-style)을 한 번에 할 수 있음
+  2. line-height와 font-style은 nomal로 고정 돼 있음
+  3. 파라미터는 @include text-style(font-size, font-weight, color)임
+      font-size: rem을 기준으로 단위 없이 기재하기
+      font-weight: 단위 없이 100 단위로 기재하기
+      color: hex코드와 변수 모두 사용 가능함
+  4. font-weight와 color는 기본값이 400, 검정으로 정해져 있으므로 기재하지 않아도 됨
+*/
+.text-style {
+  // @include text-style(0.8);
+  @include text-style(1.5, 700, $orange);
+}
+
+// classnames 사용법
+.example {
+  font-style: italic;
+}
+
+.colored {
+  color: $red;
+}
+
+.selected {
+  color: $green;
+}
+
+//nesting 문법
+.selected {
+  &-nav {
+  }
+}
+
+// 해당 컴포넌트 파일에서 import 시
+// import classNames from 'classnames/bind';
+// import styles from './파일명.module.scss';
+
+// const cn = classNames.bind(styles);
+
+// className={cx(
+//   'ic-btn',
+//   `ic-btn-${size}`,
+//   { 'ic-btn-outline': outline },
+//   { 'ic-btn-outline-active': outline && isActive === true }
+// )}
