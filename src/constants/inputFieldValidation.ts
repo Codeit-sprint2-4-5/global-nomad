@@ -27,10 +27,6 @@ interface USER_INPUT_VALIDATION_TYPE {
       confirm: string;
     };
   };
-  [key: string]: {
-    regex?: RegExp;
-    errorMessage: Record<string, string>;
-  };
 }
 
 export const USER_INPUT_VALIDATION: USER_INPUT_VALIDATION_TYPE = {
@@ -59,7 +55,18 @@ export const USER_INPUT_VALIDATION: USER_INPUT_VALIDATION_TYPE = {
   },
 };
 
-export const USER_PASSWORD_SHOW = {
+export const USER_PASSWORD_SHOW: {
+  on: {
+    src: string;
+    alt: string;
+    inputType: string;
+  };
+  off: {
+    src: string;
+    alt: string;
+    inputType: string;
+  };
+} = {
   on: {
     src: eye.on.src,
     alt: eye.on.alt,

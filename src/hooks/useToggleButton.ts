@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-export default function useToggleButton() {
-  const [isToggle, setToggle] = useState(false);
+export default function useToggleButton(): { isToggle: boolean; handleToggleClick: () => void } {
+  const [isToggle, setIsToggle] = useState<boolean>(false);
 
   const handleToggleClick = () => {
-    setToggle((prev) => !prev);
+    setIsToggle((prev) => !prev);
   };
 
   return { isToggle, handleToggleClick };
