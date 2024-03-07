@@ -2,7 +2,7 @@
   @include column-flexbox(none, none);
   overflow: hidden;
   gap: 1.6rem;
-
+  flex-shrink: 0;
   &.banner {
     width: 38.4rem;
     height: 38.4rem;
