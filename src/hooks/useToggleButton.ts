@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function useToggleButton(): { isToggle: boolean; handleToggleClick: () => void } {
+export function useToggleButton(): { isToggle: boolean; handleToggleClick: () => void } {
   const [isToggle, setIsToggle] = useState<boolean>(false);
 
   const handleToggleClick = () => {

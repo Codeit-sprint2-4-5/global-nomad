@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FocusEventHandler } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
-import useToggleButton from '@/hooks/useToggleButton';
+import { useToggleButton } from '@/hooks';
 import { USER_PASSWORD_SHOW } from '@/constants';
 import style from '@/components/common/Input/inputField.module.scss';
 
