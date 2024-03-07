@@ -8,11 +8,11 @@ import Link from "next/link";
 const cn = classNames.bind(styles);
 interface CardResourceProps {
   activitiesData: GetActivitiesList;
-  banner: boolean;
+  banner?: boolean;
 }
 export default function CardResource({
   activitiesData,
-  banner,
+  banner = false,
 }: CardResourceProps) {
   return (
     <Link
