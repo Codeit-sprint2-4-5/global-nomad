@@ -1,14 +1,14 @@
 .category {
-  @include flexbox;
-  width: fit-content;
-  padding: 1.6rem 3rem;
-  gap: 1rem;
-  border-radius: 1.5rem;
-  border: 1px solid $darkgreen;
-  background: $white;
-  @include text-style(1.8, 500, $darkgreen);
-  text-align: center;
-  cursor: pointer;
+	@include flexbox;
+	width: fit-content;
+	padding: 1.6rem 3rem;
+	gap: 1rem;
+	border-radius: 1.5rem;
+	border: 1px solid $darkgreen;
+	background: $white;
+	@include text-style(1.8, 500, $darkgreen);
+	text-align: center;
+	cursor: pointer;
 
 	@include responsive('M') {
 		font-size: $font-size-16;
