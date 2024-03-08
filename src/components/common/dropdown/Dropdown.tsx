@@ -1,32 +1,26 @@
-import { MouseEvent, useRef, useState } from 'react';
+import { DetailedHTMLProps, InputHTMLAttributes, MouseEvent, useRef, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useOutsideClick, useToggleButton } from '@/hooks';
-import { ICON, USER_CATEGORYS } from '@/constants';
+import { ICON } from '@/constants';
 import style from '@/components/common/dropdown/dropdown.module.scss';
 
 const { downArrow, check } = ICON;
 
 const cn = classNames.bind(style);
 
-interface DropdownProps {
+interface DropdownProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   name: string;
   labelText?: string;
-  lists?: string[];
+  lists: { id: number; category: string; title?: string }[];
 }
 
-export default function Dropdown({ name, labelText, lists = USER_CATEGORYS, ...props }: DropdownProps) {
+export default function Dropdown({ name, labelText, lists, ...props }: DropdownProps) {
   const { isToggle, handleToggleClick } = useToggleButton();
-  const [selectedList, setSelectedList] = useState<string | null>(labelText ? lists[0] : null);
+  const [selectedList, setSelectedList] = useState<number | null>(labelText ? lists[0].id : null);
   const dropdownRef = useRef(null);
 
   useOutsideClick(dropdownRef, isToggle, handleToggleClick);
-
-  const handleCategorySelecte = (list: string | null, e: MouseEvent<HTMLLIElement>) => {
-    setSelectedList(list);
-    handleToggleClick();
-    e.stopPropagation();
-  };
 
   return (
     <div className={cn('dropdown-field')}>
@@ -37,12 +31,11 @@ export default function Dropdown({ name, labelText, lists = USER_CATEGORYS, ...p
         ref={dropdownRef}
       >
         <input
+          {...props}
           className={cn('dropdown')}
           name={name}
-          placeholder='카테고리'
           readOnly
-          value={selectedList || ''}
-          {...props}
+          value={labelText ? lists[selectedList as number]?.title : lists[selectedList as number]?.category}
         />
         {labelText && <span className={cn('dropdown-label')}>{labelText}</span>}
         <Image
@@ -53,26 +46,25 @@ export default function Dropdown({ name, labelText, lists = USER_CATEGORYS, ...p
           height={48}
         />
       </button>
-      {isToggle && (
-        <ul className={cn('dropdown-options')}>
-          {lists.map((list, index) => (
-            <li
-              className={cn('dropdown-option')}
-              key={`key-${index}`}
-              onClick={(e) => {
-                handleCategorySelecte(list, e);
+      <ul className={cn('dropdown-options', { show: isToggle })}>
+        {lists.map((list) => (
+          <li className={cn('dropdown-option')} key={`key-${list.id}`}>
+            <button
+              type='button'
+              className={cn('dropdown-option-btn', { selected: list.id === selectedList })}
+              onClick={() => {
+                setSelectedList(list.id);
+                handleToggleClick();
               }}
             >
-              <button className={cn('dropdown-option-btn', { selected: list === selectedList })}>
-                {list === selectedList && (
-                  <Image src={check.default.src} alt={check.default.alt} width={20} height={20} />
-                )}
-                <span>{list}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+              {list.id === selectedList && (
+                <Image src={check.default.src} alt={check.default.alt} width={20} height={20} />
+              )}
+              <span>{labelText ? list.title : list.category}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
