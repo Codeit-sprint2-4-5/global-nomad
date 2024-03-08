@@ -38,6 +38,7 @@ $opacity-100: rgba(0, 0, 0, 0);
 // Specific color
 $search-popup-box-shadow: #1122110d;
 $user-profile-image-shadow: #00000014;
+$user-category-box-shadow: 0px 10px 30px 3px rgba(5, 16, 55, 0.15);
 $popup-background: #000000b2;
 $modal-background: $opacity-black-60;
 $column-background: $gray80;
@@ -47,4 +48,6 @@ $tag-background: $opacity-white-5;
 $modal-shadow: rgba(121, 116, 126, 1);
 $modal-text-color: #121;
 $modal-box-shadow: rgba(17, 34, 17, 0.05);
+$card-resource-gradient-from: #00000000;
+$card-resource-gradient-to: #000000cc;
 //$landing-background: $black10;
