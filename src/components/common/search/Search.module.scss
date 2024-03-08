@@ -23,53 +23,64 @@
       @include flexbox(center, center);
       width: 100%;
       gap: 1.2rem;
-    }
 
-    .search-bar {
-      @include text-style(1.6, 400, $black);
-      width: 100%;
-      padding: 1.5rem 1.2rem 1.5rem 4.8rem;
-      border: 1px solid $gray70;
-      border-radius: 0.4rem;
-      line-height: 2.6rem;
-      background-color: $white;
-      background: url('~/public/icons/icon_bed.svg') no-repeat 1.2rem 1.6rem;
+      .search-bar {
+        @include text-style(1.6, 400, $black);
+        width: 100%;
+        padding: 1.5rem 1.2rem 1.5rem 4.8rem;
+        border: 1px solid $gray70;
+        border-radius: 0.4rem;
+        line-height: 2.6rem;
+        background-color: $white;
+        background: url('~/public/icons/icon_bed.svg') no-repeat 1.2rem 1.6rem;
 
-      @include responsive(M) {
-        @include text-style(1.4, 400, $primary);
-        background: url('~/public/icons/icon_bed.svg') no-repeat 1.2rem 1.2rem;
-      }
-
-      &::placeholder {
-        @include text-style(1.6, 400, $gray50);
         @include responsive(M) {
-          @include text-style(1.4, 400, $gray50);
+          @include text-style(1.4, 400, $primary);
+          background: url('~/public/icons/icon_bed.svg') no-repeat 1.2rem 1.2rem;
+        }
+
+        &::placeholder {
+          @include text-style(1.6, 400, $gray50);
+          @include responsive(M) {
+            @include text-style(1.4, 400, $gray50);
+          }
+        }
+
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+          display: none;
         }
       }
 
-      &::-webkit-search-decoration,
-      &::-webkit-search-cancel-button,
-      &::-webkit-search-results-button,
-      &::-webkit-search-results-decoration {
-        display: none;
+      &.acitve {
+        &::before {
+          @include text-style(1.6, 400, $gray60);
+          content: '내가 원하는 체험은';
+          display: block;
+          position: absolute;
+          left: 4.3rem;
+          top: -1.2rem;
+          padding: 0 0.5rem;
+          line-height: 2.6rem;
+          background-color: $white;
+      
+          @include responsive(M) {
+            @include text-style(1.5, 400, $gray60);
+            top: -1rem;
+          }
+        }
       }
-    }
 
-    &.acitve {
-      &::before {
-        @include text-style(1.6, 400, $gray60);
-        content: '내가 원하는 체험은';
-        display: block;
-        position: absolute;
-        left: 4.3rem;
-        top: -1.2rem;
-        padding: 0 0.5rem;
-        line-height: 2.6rem;
-        background-color: $white;
+      .button {
+        button {
+          height: 5.7rem;
 
-        @include responsive(M) {
-          @include text-style(1.5, 400, $gray60);
-          top: -1rem;
+          @include responsive(M) {
+            width: 9.6rem;
+            height: 4.8rem;
+          }
         }
       }
     }

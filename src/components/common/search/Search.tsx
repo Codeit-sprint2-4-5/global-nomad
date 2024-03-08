@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import BaseButton from '@/components/common/button/BaseButton';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
@@ -39,8 +40,8 @@ export default function Search({ data, setSearchResult }: Props) {
   return (
     <div className={cn('container')}>
       <p className={cn('text')}>무엇을 체험하고 싶으신가요?</p>
-      <div className={cn('wrap', { acitve: isKeyword })}>
-        <form onSubmit={handleSubmit} className={cn('form')}>
+      <div className={cn('wrap')}>
+        <form onSubmit={handleSubmit} className={cn('form', { acitve: isKeyword })}>
           <input
             className={cn('search-bar')}
             type='search'
@@ -48,8 +49,9 @@ export default function Search({ data, setSearchResult }: Props) {
             onChange={handleValueChange}
             value={keyword}
           />
-          {/* TODO 버튼 컴포넌트 만들어지면 바꾸기 */}
-          <button>검색하기</button>
+          <div className={cn('button')}>
+            <BaseButton type={'submit'} size={'md'} text={'검색하기'} />
+          </div>
         </form>
       </div>
     </div>
