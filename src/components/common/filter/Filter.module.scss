@@ -29,6 +29,12 @@
     padding: 1rem 2rem;
     font-size: $font-size-14;
   }
+
+  &.open {
+    img {
+      transform: rotate(180deg);
+    }
+  }
 }
 
 .dropdown-menu {
