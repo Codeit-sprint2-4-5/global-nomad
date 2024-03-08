@@ -32,6 +32,7 @@ import IconRightArrowVariant1 from '/public/icons/Icon_right-arrow_variant1.svg'
 import IconPen from '/public/icons/Icon_pen.svg';
 import IconEllipse from '/public/icons/Icon_Ellipse.svg';
 import IconFilter from '/public/icons/Icon_filter.svg';
+import IconCheck from '/public/icons/Icon_check.svg';
 
 export const ICON = {
   logo: {
@@ -247,6 +248,13 @@ export const ICON = {
       src: IconFilter,
       alt: '가격 필터 드롭다운',
     },
+  },
+  check: {
+    default: {
+      src: IconCheck,
+      alt: '체크',
+    },
+    active: {},
   },
 };
 
