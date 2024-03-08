@@ -62,19 +62,3 @@
   padding-top: 0.8rem;
   padding-left: 0.8rem;
 }
-
-%date-input-base {
-  @include inline-flexbox;
-
-  width: 100%;
-  padding: 1.5rem 1.6rem;
-  font-family: 'Pretendard';
-
-  &::placeholder {
-    @include text-style(16, 400, $gray55);
-  }
-}
-
-.date-input {
-  @extend %date-input-base;
-}
