@@ -2,7 +2,6 @@
   @include inline-flexbox;
 
   font-family: 'Spoqa Han Sans Neo';
-  transition: $base-transition;
 
   &.br6 {
     border-radius: 0.6rem;
@@ -15,11 +14,7 @@
   &:focus {
     cursor: pointer;
     opacity: 0.8;
-
-    @include responsive(M) {
-      cursor: auto;
-      opacity: 1;
-    }
+    transition: $base-transition;
   }
 
   &:disabled {
@@ -123,7 +118,6 @@
 %ic-btn-base {
   @include inline-flexbox;
 
-  transition: $base-transition;
   background-color: inherit;
 }
 
