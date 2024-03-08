@@ -31,6 +31,7 @@ import IconLeftArrowVariant1 from '/public/icons/Icon_left-arrow_variant1.svg';
 import IconRightArrowVariant1 from '/public/icons/Icon_right-arrow_variant1.svg';
 import IconPen from '/public/icons/Icon_pen.svg';
 import IconEllipse from '/public/icons/Icon_Ellipse.svg';
+import IconFilter from '/public/icons/Icon_filter.svg';
 import IconCheck from '/public/icons/Icon_check.svg';
 
 export const ICON = {
@@ -241,6 +242,12 @@ export const ICON = {
       alt: '점',
     },
     active: {},
+  },
+  filter: {
+    default: {
+      src: IconFilter,
+      alt: '가격 필터 드롭다운',
+    },
   },
   check: {
     default: {
