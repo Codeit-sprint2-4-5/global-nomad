@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
@@ -16,8 +16,8 @@ interface Props {
 }
 
 export default function Search({ data, setSearchResult }: Props) {
-  const [isKeyword, setIsKeyword] = useState<boolean>(false);
-  const [keyword, setKeyword] = useState<string>('');
+  const [isKeyword, setIsKeyword] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
@@ -27,7 +27,8 @@ export default function Search({ data, setSearchResult }: Props) {
     }
   };
 
-  const handleSearchClick = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!keyword) return;
 
     const filterItem = data.activities.filter((activity: Activity) => activity.title.includes(keyword));
@@ -39,15 +40,17 @@ export default function Search({ data, setSearchResult }: Props) {
     <div className={cn('container')}>
       <p className={cn('text')}>무엇을 체험하고 싶으신가요?</p>
       <div className={cn('wrap', { acitve: isKeyword })}>
-        <input
-          className={cn('search-bar')}
-          type='search'
-          placeholder='내가 원하는 체험은'
-          onChange={handleValueChange}
-          value={keyword}
-        />
-        {/* TODO 버튼 컴포넌트 만들어지면 바꾸기 */}
-        <button onClick={handleSearchClick}>검색하기</button>
+        <form onSubmit={handleSubmit} className={cn('form')}>
+          <input
+            className={cn('search-bar')}
+            type='search'
+            placeholder='내가 원하는 체험은'
+            onChange={handleValueChange}
+            value={keyword}
+          />
+          {/* TODO 버튼 컴포넌트 만들어지면 바꾸기 */}
+          <button>검색하기</button>
+        </form>
       </div>
     </div>
   );
