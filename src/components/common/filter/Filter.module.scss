@@ -2,11 +2,11 @@
   position: relative;
   width: 12.7rem;
 
-  @include responsive("T") {
+  @include responsive('T') {
     width: 12rem;
   }
 
-  @include responsive("M") {
+  @include responsive('M') {
     width: 9rem;
   }
 }
@@ -23,7 +23,7 @@
   @include text-style(1.8, 500, $darkgreen);
   font-family: Pretendard;
 
-  @include responsive("M") {
+  @include responsive('M') {
     @include flexbox(between, center);
     height: 4.1rem;
     padding: 1rem 2rem;
@@ -43,7 +43,7 @@
   left: 0;
   right: 0;
 
-  @include responsive("M") {
+  @include responsive('M') {
     top: 4.9rem;
   }
 
@@ -64,7 +64,7 @@
       border-radius: 0rem 0rem 0.6rem 0.6rem;
     }
 
-    @include responsive("M") {
+    @include responsive('M') {
       padding: 1rem 0;
       font-size: $font-size-14;
     }
