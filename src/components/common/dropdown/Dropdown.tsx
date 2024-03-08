@@ -19,8 +19,14 @@ export default function Dropdown({ name, labelText, lists, ...props }: DropdownP
   const { isToggle, handleToggleClick } = useToggleButton();
   const [selectedList, setSelectedList] = useState<number | null>(labelText ? lists[0].id : null);
   const dropdownRef = useRef(null);
+  const isLabelText = labelText ? lists[selectedList as number]?.title : lists[selectedList as number]?.category;
 
   useOutsideClick(dropdownRef, isToggle, handleToggleClick);
+
+  const handleSelectedClick = (id: number) => {
+    setSelectedList(id);
+    handleToggleClick();
+  };
 
   return (
     <div className={cn('dropdown-field')}>
@@ -30,13 +36,7 @@ export default function Dropdown({ name, labelText, lists, ...props }: DropdownP
         onClick={handleToggleClick}
         ref={dropdownRef}
       >
-        <input
-          {...props}
-          className={cn('dropdown')}
-          name={name}
-          readOnly
-          value={labelText ? lists[selectedList as number]?.title : lists[selectedList as number]?.category}
-        />
+        <input {...props} className={cn('dropdown')} name={name} readOnly value={isLabelText} />
         {labelText && <span className={cn('dropdown-label')}>{labelText}</span>}
         <Image
           className={cn('dropdown-btn-img')}
@@ -52,10 +52,7 @@ export default function Dropdown({ name, labelText, lists, ...props }: DropdownP
             <button
               type='button'
               className={cn('dropdown-option-btn', { selected: list.id === selectedList })}
-              onClick={() => {
-                setSelectedList(list.id);
-                handleToggleClick();
-              }}
+              onClick={() => handleSelectedClick(list.id)}
             >
               {list.id === selectedList && (
                 <Image src={check.default.src} alt={check.default.alt} width={20} height={20} />
