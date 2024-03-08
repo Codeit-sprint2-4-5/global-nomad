@@ -23,7 +23,7 @@ export default function Filter({ setPriceSort }: FilterProps) {
   };
   return (
     <div className={cn("dropdown")}>
-      <button className={cn("dropdown-button")} onClick={handleDropdownClick}>
+      <button className={cn("dropdown-button", `${isOpen ? "open" : ""}`)} onClick={handleDropdownClick}>
         <span>가격</span>
         <Image src={ICON.filter.default.src} alt={ICON.filter.default.alt} height={22} width={22} />
       </button>
