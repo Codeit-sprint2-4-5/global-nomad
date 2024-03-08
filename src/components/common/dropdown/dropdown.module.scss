@@ -7,14 +7,10 @@
   background-color: $white;
   border: 0.1rem solid $black;
   border-radius: 0.4rem;
-  font-family: 'Pretendard';
+  cursor: pointer;
 
   &::placeholder {
     @include text-style(1.6, 400, $gray60);
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 }
 
