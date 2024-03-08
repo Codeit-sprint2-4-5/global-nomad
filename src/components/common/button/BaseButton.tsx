@@ -9,6 +9,7 @@ interface BaseButtonProps {
   type?: 'button' | 'submit' | 'reset';
   text?: string;
   border?: string;
+  onClick?: () => void;
 }
 
 export default function BaseButton({
