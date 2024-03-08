@@ -31,22 +31,22 @@
 .btn {
   &-xl {
     width: 12.7rem;
-    height: 5.3rem;
+    padding: 1.6rem 0;
   }
   &-lg {
     display: block;
-    height: 4.8rem;
     width: 100%;
+    padding: 1.4rem 0;
   }
 
   &-md {
     width: 14.4rem;
-    height: 4.8rem;
+    padding: 1.6rem 0;
   }
 
   &-sm {
     width: 10.8rem;
-    height: 3.8rem;
+    padding: 1rem 0;
   }
 }
 
