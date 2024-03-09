@@ -2,47 +2,43 @@ import Image from "next/image";
 import styles from "./card.module.scss";
 import { Reservation } from "@/types/myReservation";
 import classNames from "classnames/bind";
+import clsx from "clsx";
 
 const cn = classNames.bind(styles);
 
 interface CardProps {
   reservationsInfo: Reservation;
-  onCancel: (id: number) => void;
-  onWriteReview: (id: number) => void;
+  handleCancelReservation: (id: number) => void;
+  handleWriteReview: (id: number) => void;
 }
 export default function Card({
   reservationsInfo,
-  onCancel,
-  onWriteReview,
+  handleCancelReservation,
+  handleWriteReview,
 }: CardProps) {
-  const statusText =
-    reservationsInfo.status === "pending"
-      ? "예약 신청"
-      : reservationsInfo.status === "confirmed"
-      ? "예약 완료"
-      : reservationsInfo.status === "completed"
-      ? "체험 완료"
-      : reservationsInfo.status === "declined"
-      ? "예약 거절"
-      : reservationsInfo.status === "canceled"
-      ? "예약 취소"
-      : "알 수 없는 상태";
+  const statusText = clsx({
+    "예약 신청": reservationsInfo.status === "pending",
+    "예약 완료": reservationsInfo.status === "confirmed",
+    "체험 완료": reservationsInfo.status === "completed",
+    "예약 거절": reservationsInfo.status === "declined",
+    "예약 취소": reservationsInfo.status === "canceled",
+  });
 
-  const buttonContent =
-    reservationsInfo.status === "confirmed"
-      ? "예약 취소"
-      : reservationsInfo.status === "completed"
-      ? "후기 작성"
-      : "";
+  const buttonContent = clsx({
+    "예약 취소": reservationsInfo.status === "confirmed",
+    "후기 작성": reservationsInfo.status === "completed",
+  });
 
-  let onClickHandler;
-  if (reservationsInfo.status === "confirmed") {
-    onClickHandler = () => onCancel(reservationsInfo.id);
-  } else if (reservationsInfo.status === "completed") {
-    onClickHandler = () => onWriteReview(reservationsInfo.id);
-  }
+  const handleButtonClick = () => {
+    if (reservationsInfo.status === "confirmed") {
+      handleCancelReservation(reservationsInfo.id);
+    }
+    if (reservationsInfo.status === "completed") {
+      handleWriteReview(reservationsInfo.id);
+    }
+  };
   return (
-    <div className={cn("card-entire")}>
+    <div className={cn("card-container")}>
       <Image
         src={reservationsInfo.activity.bannerImageUrl}
         width={204}
@@ -50,29 +46,27 @@ export default function Card({
         alt="배너이미지"
         className={cn("card-image")}
       />
-      <div className={cn("card-info")}>
-        <div className={cn("card-info-first")}>
-          <div className={cn("card-info-status", `${reservationsInfo.status}`)}>
+      <div className={cn("card-info-container")}>
+        <div className={cn("info-section")}>
+          <div className={cn("status", `${reservationsInfo.status}`)}>
             {statusText}
           </div>
-          <div className={cn("card-info-title")}>
-            {reservationsInfo.activity.title}
-          </div>
-          <div className={cn("card-info-date")}>
+          <div className={cn("title")}>{reservationsInfo.activity.title}</div>
+          <div className={cn("details")}>
             {reservationsInfo.date} · {reservationsInfo.startTime} -
             {reservationsInfo.endTime} · {reservationsInfo.headCount}명
           </div>
         </div>
 
-        <div className={cn("card-info-second")}>
-          <div className={cn("card-info-price")}>
+        <div className={cn("price-section")}>
+          <div className={cn("price")}>
             ₩{reservationsInfo.totalPrice.toLocaleString()}
           </div>
 
           {buttonContent && (
             <button
-              className={cn("card-info-button", `${reservationsInfo.status}`)}
-              onClick={onClickHandler}
+              className={cn("action-button", `${reservationsInfo.status}`)}
+              onClick={handleButtonClick}
             >
               {buttonContent}
             </button>

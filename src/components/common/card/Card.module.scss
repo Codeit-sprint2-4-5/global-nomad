@@ -1,4 +1,4 @@
-.card-entire {
+.card-container {
   @include flexbox(none, center);
   width: 79.2rem;
   height: 20.4rem;
@@ -24,7 +24,7 @@
     width: 12.8rem;
   }
 }
-.card-info {
+.card-info-container {
   background-color: $white;
   padding: 2.55rem 2.4rem;
   height: 100%;
@@ -37,12 +37,12 @@
   }
 }
 
-.card-info-first {
+.info-section {
   color: $gray90;
   line-height: 2.6rem;
 }
 
-.card-info-status {
+.status {
   margin-bottom: 0.8rem;
   @include text-style(1.6, 700, $gray70);
 
@@ -61,7 +61,7 @@
   }
 }
 
-.card-info-title {
+.title {
   margin-bottom: 1.6rem;
   @include text-style(2, 700);
 
@@ -75,7 +75,7 @@
   }
 }
 
-.card-info-date {
+.details {
   line-height: 2.4rem;
   @include text-style(1.8, 400);
 
@@ -87,13 +87,14 @@
   }
 }
 
-.card-info-second {
+.price-section {
   width: 54rem;
-
+  margin-top: 1.6rem;
   @include flexbox(between, center);
 
   @include responsive("T") {
     width: 24.5rem;
+    margin-top: 1rem;
   }
   @include responsive("M") {
     width: 19.3rem;
@@ -102,9 +103,10 @@
   }
 }
 
-.card-info-price {
+.price {
   padding: 0.5rem 0;
   line-height: 2.66rem;
+
   @include text-style(2.4, 500, $black);
 
   @include responsive("T") {
@@ -121,10 +123,11 @@
   }
 }
 
-.card-info-button {
+.action-button {
   padding: 0.7rem 4.25rem;
   border: 0.1rem solid $gray90;
   border-radius: 0.6rem;
+
   @include text-style(1.6, 700, $gray90);
 
   @include responsive("T") {
@@ -140,17 +143,18 @@
     color: $white;
   }
 }
+
 // MyActivitiesCard css
-.card-info-rating {
+.info-rating {
   @include flexbox(none, center);
   @include text-style(1.6, 400, $black);
   line-height: 1.9rem;
   margin-bottom: 0.6rem;
 }
-.info-rating-star {
+.rating-star-image {
   margin-right: 0.5rem;
 }
-.info-price {
+.section2-price {
   @include flexbox(none, center);
   @include text-style(2.8, 700);
   gap: 0.5rem;
@@ -174,8 +178,8 @@
     }
   }
 }
-.info-second {
-  @extend .card-info-second;
+.info-section2 {
+  @extend .price-section;
   margin-top: 7.2rem;
   position: relative;
   @include responsive("T") {
