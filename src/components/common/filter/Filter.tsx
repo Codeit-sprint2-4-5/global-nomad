@@ -1,38 +1,84 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import classNames from 'classnames/bind';
-import styles from './Filter.module.scss';
-import Image from 'next/image';
 import { ICON } from '@/constants/importImages';
+import { useToggleButton } from '@/hooks';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+import { Dispatch, SetStateAction } from 'react';
+import styles from './Filter.module.scss';
+import FilterDropdown from './FilterDropdown';
 
 const cn = classNames.bind(styles);
 
 interface FilterProps {
-  setPriceSort: Dispatch<SetStateAction<string>>;
+  type: 'price' | 'filter';
+  setFilterState: Dispatch<SetStateAction<string>>;
 }
 
-export default function Filter({ setPriceSort }: FilterProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleDropdownClick = () => {
-    setIsOpen((prev) => !prev);
+interface FilterTypeProps {
+  [type: string]: {
+    text: string;
+    list: {
+      text: string;
+      handleClick: () => void;
+    }[];
   };
+}
+
+export default function Filter({ type, setFilterState }: FilterProps) {
+  const { isToggle: isOpen, handleToggleClick: isOpentoggle } = useToggleButton();
 
   const handleDropdownOptionClick = (option: string) => {
-    setPriceSort(option);
-    setIsOpen(false);
+    setFilterState(option);
+    isOpentoggle();
   };
+
+  const FilterType: FilterTypeProps = {
+    price: {
+      text: '가격',
+      list: [
+        {
+          text: '가격이 낮은 순',
+          handleClick: () => handleDropdownOptionClick('price_asc'),
+        },
+        {
+          text: '가격이 높은 순',
+          handleClick: () => handleDropdownOptionClick('price_desc'),
+        },
+      ],
+    },
+    filter: {
+      text: '필터',
+      list: [
+        {
+          text: '예약 신청',
+          handleClick: () => handleDropdownOptionClick('pending'),
+        },
+        {
+          text: '예약 취소',
+          handleClick: () => handleDropdownOptionClick('cancled'),
+        },
+        {
+          text: '예약 승인',
+          handleClick: () => handleDropdownOptionClick('confirmed'),
+        },
+        {
+          text: '예약 거절',
+          handleClick: () => handleDropdownOptionClick('declined'),
+        },
+        {
+          text: '체험 완료',
+          handleClick: () => handleDropdownOptionClick('completed'),
+        },
+      ],
+    },
+  };
+
   return (
     <div className={cn('dropdown')}>
-      <button className={cn('dropdown-button', `${isOpen ? 'open' : ''}`)} onClick={handleDropdownClick}>
-        <span>가격</span>
-        <Image src={ICON.filter.default.src} alt={ICON.filter.default.alt} height={22} width={22} />
-      </button>
-      {isOpen && (
-        <div className={cn('dropdown-menu')}>
-          <button onClick={() => handleDropdownOptionClick('price_asc')}>가격이 낮은 순</button>
-          <button onClick={() => handleDropdownOptionClick('price_desc')}>가격이 높은 순</button>
-        </div>
-      )}
+        <button className={cn('dropdown-button', `${isOpen ? 'open' : ''}`)} onClick={isOpentoggle}>
+          <span>{FilterType[type].text}</span>
+          <Image src={ICON.filter.default.src} alt={ICON.filter.default.alt} height={22} width={22} />
+        </button>
+      {isOpen && <FilterDropdown dropdownMenuList={FilterType[type].list} />}
     </div>
   );
 }
