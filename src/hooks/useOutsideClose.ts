@@ -8,9 +8,9 @@ export function useOutsideClick(ref: MutableRefObject<HTMLElement | null>, state
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [ref, state, close]);
 }

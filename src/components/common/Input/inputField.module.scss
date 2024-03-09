@@ -59,3 +59,59 @@
   padding-top: 0.8rem;
   padding-left: 0.8rem;
 }
+
+%date-input-base {
+  @include text-style(1.6, 400, $black);
+
+  width: 100%;
+  padding: 1.5rem 1.6rem;
+  line-height: 2.6rem;
+  border: 0.1rem solid $gray70;
+  border-radius: 0.4rem;
+  cursor: pointer;
+
+  &::placeholder {
+    color: $gray55;
+  }
+}
+
+.date-input {
+  @extend %date-input-base;
+
+  &-field {
+    @include inline-flexbox;
+
+    width: 100%;
+    position: relative;
+  }
+
+  &-btn {
+    width: 100%;
+  }
+
+  &-img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2.1rem;
+  }
+
+  &-modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: $base-transition;
+    background-color: $modal-background;
+    z-index: $modal-background-z-index;
+
+    &.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
