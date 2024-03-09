@@ -56,8 +56,7 @@
 .error {
   @include text-style(1.2, 400, $red);
 
-  padding-top: 0.8rem;
-  padding-left: 0.8rem;
+  padding-top: 0.8rem 0 0 0.8rem;
 }
 
 %date-input-base {

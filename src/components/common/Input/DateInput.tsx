@@ -36,7 +36,7 @@ export default function DateInput({ name, ...props }: DateInputProps) {
             type='text'
             value={selectedDate ? selectedDate : ''}
             readOnly
-            placeholder='yy/mm/dd'
+            placeholder='YY/MM/DD'
           />
           <div className={cn('date-input-img')}>
             <Image src={calendar.default.src} alt={calendar.default.alt} width={28} height={28} />
