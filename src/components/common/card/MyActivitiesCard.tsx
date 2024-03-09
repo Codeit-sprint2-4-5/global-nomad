@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import { GetActivitiesList } from "@/types/activities";
 import { ICON } from "@/constants";
 import IconButton from "../button/IconButton";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 
 const cn = classNames.bind(styles);
@@ -24,9 +24,8 @@ export default function MyActivitiesCard({
     setKebabClick((prev) => !prev);
   };
   const handleModifyClick = (id: number) => {
-    console.log(id);
     setKebabClick((prev) => !prev);
-    // router.push(`/my-activities/${id}`);
+    router.push(`/my-activities/${id}`);
   };
 
   return (
