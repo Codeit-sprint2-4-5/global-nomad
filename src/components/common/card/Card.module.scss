@@ -176,7 +176,7 @@
 }
 .info-second {
   @extend .card-info-second;
-  margin-top: 72px;
+  margin-top: 7.2rem;
   position: relative;
   @include responsive("T") {
     margin-top: 40px;
@@ -186,23 +186,31 @@
   }
 }
 .context-menu {
-  z-index: 999;
+  z-index: 1;
   position: absolute;
   background-color: $white;
-  border: 1px solid $gray30;
-  border-radius: 6px;
+  border: 0.1rem solid $gray30;
+  border-radius: 0.6rem;
   top: 110%;
   right: 0%;
 }
 .menu {
-  padding: 18px 48.5px;
+  padding: 1.8rem 4.85rem;
   @include text-style(1.8, 500, $gray80);
   cursor: pointer;
   &.border {
-    border-bottom: 1px solid $gray30;
+    border-bottom: 0.1rem solid $gray30;
   }
   &:hover {
     background-color: $lightgreen;
     color: $gray90;
+  }
+  @include responsive("T") {
+    padding: 1.5rem 4rem;
+    @include text-style(1.6, 500, $gray80);
+  }
+  @include responsive("M") {
+    padding: 1.2rem 3.2rem;
+    @include text-style(1.4, 500, $gray80);
   }
 }
