@@ -9,6 +9,7 @@ interface IconButtonProps {
   size: string;
   alt: string;
   type?: 'button' | 'submit' | 'reset';
+  onClick?: () => void;
 }
 
 export default function IconButton({ svg, size, alt, type = 'button', ...props }: IconButtonProps) {
