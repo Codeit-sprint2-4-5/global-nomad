@@ -15,7 +15,6 @@ export default function Card({
   onCancel,
   onWriteReview,
 }: CardProps) {
-  console.log(reservationsInfo);
   const statusText =
     reservationsInfo.status === "pending"
       ? "예약 신청"
