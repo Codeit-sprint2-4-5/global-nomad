@@ -35,6 +35,7 @@ import IconFilter from '/public/icons/Icon_filter.svg';
 import IconCheck from '/public/icons/Icon_check.svg';
 import ImageLogo from '/public/images/Image_logo.svg';
 import IconLoading from '/public/icons/Icon_loading.svg';
+
 export const ICON = {
   logo: {
     default: {
