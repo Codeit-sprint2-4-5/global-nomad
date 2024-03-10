@@ -34,7 +34,7 @@ import IconEllipse from '/public/icons/Icon_Ellipse.svg';
 import IconFilter from '/public/icons/Icon_filter.svg';
 import IconCheck from '/public/icons/Icon_check.svg';
 
-import ImageLogo from 'public/images/Image_logo.svg';
+import ImageLogo from '/public/images/Image_logo.svg';
 
 export const ICON = {
   logo: {
