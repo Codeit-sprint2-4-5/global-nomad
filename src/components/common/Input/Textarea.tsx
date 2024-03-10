@@ -6,8 +6,8 @@ const cn = classNames.bind(style);
 
 interface TextareaProps extends DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
   name: string;
-  isError: boolean;
-  errorMessage: string;
+  isError?: boolean;
+  errorMessage?: string;
 }
 
 export default function Textarea({ name, isError, errorMessage, ...props }: TextareaProps) {
