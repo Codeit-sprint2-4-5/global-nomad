@@ -1,13 +1,15 @@
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import Review from './ModalContents/Review';
+import Notifications from './ModalContents/Notifications';
+import ReservationInfo from './ModalContents/ReservationInfo';
+import DateForm from './ModalContents/dateForm/DateForm';
 
 import { ICON } from '@/constants';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
-import ReservationInfo from './ModalContents/ReservationInfo';
-import Notifications from './ModalContents/Notifications';
+import { Control } from 'react-hook-form';
 
 const { x } = ICON;
 
@@ -16,26 +18,25 @@ const cn = classNames.bind(styles);
 const MODAL_TYPE = {
   review: 'review',
   reservationInfo: 'reservationInfo',
-  date: 'date',
+  dateForm: 'dateForm',
   notifications: 'notifications',
 };
 
 interface ModalProps {
   modalType: keyof typeof MODAL_TYPE;
   setShowModal: Dispatch<SetStateAction<string>>;
+  control?: Control<any>;
+  data?: any;
 }
 
-const ModalContents = {
-  [MODAL_TYPE.review]: Review,
-  [MODAL_TYPE.reservationInfo]: ReservationInfo,
-  [MODAL_TYPE.date]: '',
-  [MODAL_TYPE.notifications]: Notifications,
-};
-
-export default function Modal({ modalType, setShowModal }: ModalProps) {
-  const ContestComponent = ModalContents[modalType];
-
-  const noBackground = modalType === 'notifications' || modalType === 'date';
+export default function Modal({ modalType, setShowModal, ...porps }: ModalProps) {
+  const ModalContents = {
+    [MODAL_TYPE.review]: { component: Review, props: {} },
+    [MODAL_TYPE.reservationInfo]: { component: ReservationInfo, props: {} },
+    [MODAL_TYPE.dateForm]: { component: DateForm, props: { setShowModal: setShowModal, control: porps.control } },
+    [MODAL_TYPE.notifications]: { component: Notifications, props: {} },
+  };
+  const { component: ContestComponent, props } = ModalContents[modalType];
 
   const HandelClickCloseModal = () => {
     setShowModal('');
@@ -45,9 +46,12 @@ export default function Modal({ modalType, setShowModal }: ModalProps) {
     <>
       <section className={cn('modal-content', { notifications: modalType === 'notifications' })}>
         <Image src={x.default.src} alt={x.default.alt} width={40} height={40} onClick={HandelClickCloseModal} />
-        <ContestComponent />
+        <ContestComponent {...props} />
       </section>
-      <div className={cn('modal-background', { 'no-background': noBackground })} onClick={HandelClickCloseModal}></div>
+      <div
+        className={cn('modal-background', { 'no-background': modalType !== 'review' })}
+        onClick={HandelClickCloseModal}
+      ></div>
     </>,
     document.body
   );
