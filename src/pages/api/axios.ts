@@ -12,7 +12,7 @@ export const instance = axios.create({
 //     localStorage.removeItem('refreshToken');
 //     const accessToken = res.data.accessToken;
 //     const refreshToken = res.data.refreshToken;
-//     localStorage.setItem('accessToken', accessToken);
+//     localStorage.setItem('accessToken', accessTo ken);
 //     localStorage.setItem('refreshToken', refreshToken);
 
 //     return res.data;
@@ -29,7 +29,7 @@ export const MookLoginData = {
   password: 'qwer1234',
 };
 
-const login = async (data: typeof MookLoginData) => {
+const login = async (data) => {
   try {
     const response = await fetch('https://sp-globalnomad-api.vercel.app/2-5/auth/login', {
       method: 'POST',
@@ -46,13 +46,13 @@ const login = async (data: typeof MookLoginData) => {
     const res = await response.json();
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    const accessToken = res.data.accessToken;
-    const refreshToken = res.data.refreshToken;
+    const accessToken = res.accessToken;
+    const refreshToken = res.refreshToken;
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
 
-    return res.data;
-  } catch (error: any) {
+    return console.log(res.data);
+  } catch (error) {
     console.error('로그인 중 오류 발생:', error.message);
   }
 };
@@ -81,9 +81,13 @@ instance.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       const refreshToken = localStorage.getItem('refreshToken');
 
-      const res = await instance.post('/auth/tokens', {
-        headers: { Authorization: `bearer ${refreshToken}`, _retry: true },
-      });
+      const res = await instance.post(
+        '/auth/tokens',
+        {},
+        {
+          headers: { Authorization: `bearer ${refreshToken}`, _retry: true },
+        }
+      );
       const accessToken = res.data.accessToken;
       const nextRefreshToken = res.data.refreshToken;
       localStorage.setItem('accessToken', accessToken);
