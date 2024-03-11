@@ -1,57 +1,23 @@
-import { instance } from '@/pages/api/axios';
 import Image from 'next/image';
-import getTimeAgo from '../utill/getTimeAgo';
+import { useQuery } from '@tanstack/react-query';
 import { ICON } from '@/constants';
-import styles from '../ModalContents.module.scss';
+import styles from './Notifications.module.scss';
 import classNames from 'classnames/bind';
+import { getMyNotifications } from '@/pages/api/get/getMyNotifications';
+import { queryKey } from '@/pages/api/quertKey';
+import getTimeAgo from '../utills/getTimeAgo';
+
 const cn = classNames.bind(styles);
 
 const { ellipse, xMedium } = ICON;
 
-const mook = {
-  totalCount: 4,
-  notifications: [
-    {
-      id: 305,
-      teamId: 2 - 5,
-      userId: 108,
-      content: '댄스(2024-03-04 17:00~18:00) 예약이 승인되었습니다.',
-      createdAt: '2024-03-05T07:16:27.843Z',
-      updatedAt: '2024-03-05T07:16:27.845Z',
-      deletedAt: null,
-    },
-    {
-      id: 306,
-      teamId: 2 - 5,
-      userId: 108,
-      content: 'ssss(2024-03-04 17:00~18:00) 예약이 승인되었습니다.',
-      createdAt: '2024-04-04T07:16:27.843Z',
-      updatedAt: '2024-04-04T07:16:27.845Z',
-      deletedAt: null,
-    },
-    {
-      id: 307,
-      teamId: 2 - 5,
-      userId: 108,
-      content: 'hhh(2024-03-04 17:00~18:00) 예약이 거절되었습니다.',
-      createdAt: '2024-03-05T08:16:27.843Z',
-      updatedAt: '2024-03-05T08:16:27.845Z',
-      deletedAt: null,
-    },
-    {
-      id: 308,
-      teamId: 2 - 5,
-      userId: 108,
-      content: 'llll(2024-03-04 17:00~18:00) 예약이 거절되었습니다.',
-      createdAt: '2024-03-05T09:16:27.843Z',
-      updatedAt: '2024-03-05T09:16:27.845Z',
-      deletedAt: null,
-    },
-  ],
-  cursorId: null,
-};
-
 export default function Notifications() {
+  const { data: notificationsData } = useQuery({
+    queryKey: queryKey.myNotifications,
+    queryFn: getMyNotifications,
+  });
+
+  console.log(notificationsData);
   function highlightContent(content: string) {
     if (content.includes('승인')) {
       return content.replace(/승인/g, '<span style= "color: #0085ff " >$&</span>');
@@ -64,7 +30,7 @@ export default function Notifications() {
   }
 
   const description = (context: string) => {
-    // 이렇게 하면 안되는 걸아는데 다른 방법을 못찾겠어요
+    // 이렇게 하면 안되는 걸 아는데 다른 방법을 못찾겠어요
 
     return (
       <div
@@ -76,9 +42,9 @@ export default function Notifications() {
 
   return (
     <>
-      <h1 className={cn('title')}>알림 {mook.totalCount}개</h1>
+      <h1 className={cn('title')}>알림 {notificationsData?.totalCount}개</h1>
       <ul className={cn('notification-list')}>
-        {mook.notifications?.map((notification) => (
+        {notificationsData?.notifications.map((notification: any) => (
           <li key={notification.id} className={cn('notification-item')}>
             <div className={cn('notification-item-top-line')}>
               <Image
