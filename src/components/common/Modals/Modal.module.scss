@@ -28,8 +28,13 @@
 
   padding: 2.4rem 2.4rem 4.6rem;
 
-  /* shadow 5% */
   box-shadow: 0px 4px 16px 0px $modal-box-shadow;
+  max-height: 90vh;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   & > img {
     position: absolute;
@@ -42,9 +47,10 @@
   &.notifications {
     background-color: $lightgreen;
     padding: 2.4rem 2rem;
-    min-height: 46.9rem;
     > img {
-      right: 1.5rem;
+      width: 2.4rem;
+      height: 2.4rem;
+      filter: brightness(80%);
     }
   }
 
