@@ -4,11 +4,14 @@ import classNames from "classnames/bind";
 import { ChangeEvent, useRef, useState } from "react";
 import MENU_ITEMS from "@/constants/menuItems";
 import { ICON } from "@/constants";
+import { useRouter } from "next/router";
 const cn = classNames.bind(styles);
-
-export default function SideNavMenu() {
+interface sideNavMenuProps {
+  activeMenu: string;
+}
+export default function SideNavMenu({ activeMenu }: sideNavMenuProps) {
+  const router = useRouter();
   const initialValue = "/images/default_profile_image.png";
-  const [activeMenu, setActiveMenu] = useState<string>("myInfo");
   const [profileImage, setProfileImage] = useState<string>(initialValue);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -19,6 +22,7 @@ export default function SideNavMenu() {
     }
     return;
   };
+
   const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
 
@@ -32,8 +36,8 @@ export default function SideNavMenu() {
     }
   };
 
-  const handleMenuClick = (menu: string) => {
-    setActiveMenu(menu);
+  const handleMenuClick = (menuId: string) => {
+    router.push(`/mypage/${menuId}`);
   };
 
   return (
@@ -62,22 +66,22 @@ export default function SideNavMenu() {
       </div>
 
       <ul className={cn("side-menu")}>
-        {MENU_ITEMS.map((menu, index) => (
+        {MENU_ITEMS.map((menuItem, index) => (
           <li
             key={index}
             className={cn("side-menu-link", {
-              active: activeMenu === menu.name,
+              active: activeMenu === menuItem.id,
             })}
-            onClick={() => handleMenuClick(menu.name)}
+            onClick={() => handleMenuClick(menuItem.id)}
           >
             <Image
               width={24}
               height={24}
-              src={menu.iconSrc}
-              alt={menu.iconAlt}
+              src={menuItem.iconSrc}
+              alt={menuItem.iconAlt}
               className={cn("side-menu-Image")}
             />
-            <span>{menu.content}</span>
+            <span>{menuItem.content}</span>
           </li>
         ))}
       </ul>
