@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const instance = axios.create({
-  baseURL: "https://sp-globalnomad-api.vercel.app/2-5",
+  baseURL: 'https://sp-globalnomad-api.vercel.app/2-5',
 });
 
 //axios login 함수
@@ -25,38 +25,35 @@ export const instance = axios.create({
 //console 에 처음 복사 붙여넣기 할 함수
 
 const MookLoginData = {
-  email: "testKJH@test.com",
-  password: "test12345",
+  email: 'testKJH@test.com',
+  password: 'test12345',
 };
 
 const login = async (data) => {
   try {
-    const response = await fetch(
-      "https://sp-globalnomad-api.vercel.app/2-5/auth/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch('https://sp-globalnomad-api.vercel.app/2-5/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
     if (!response.ok) {
-      throw new Error("로그인에 실패했습니다");
+      throw new Error('로그인에 실패했습니다');
     }
 
     const res = await response.json();
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     const accessToken = res.accessToken;
     const refreshToken = res.refreshToken;
-    localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
 
     return res.data;
   } catch (error) {
-    console.error("로그인 중 오류 발생:", error.message);
+    console.error('로그인 중 오류 발생:', error.message);
   }
 };
 
@@ -69,9 +66,9 @@ const login = async (data) => {
 instance.interceptors.request.use((config) => {
   if (config.headers.Authorization) return config;
 
-  const accessToken = localStorage.getItem("accessToken");
+  const accessToken = localStorage.getItem('accessToken');
   if (accessToken) {
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
+    config.headers['Authorization'] = `Bearer ${accessToken}`;
   }
   return config;
 });
@@ -82,10 +79,10 @@ instance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
-      const refreshToken = localStorage.getItem("refreshToken");
+      const refreshToken = localStorage.getItem('refreshToken');
 
       const res = await instance.post(
-        "/auth/tokens",
+        '/auth/tokens',
         {},
         {
           headers: { Authorization: `Bearer ${refreshToken}`, _retry: true },
@@ -93,8 +90,8 @@ instance.interceptors.response.use(
       );
       const accessToken = res.data.accessToken;
       const nextRefreshToken = res.data.refreshToken;
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", nextRefreshToken);
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', nextRefreshToken);
       originalRequest._retry = true;
 
       return instance(originalRequest);
