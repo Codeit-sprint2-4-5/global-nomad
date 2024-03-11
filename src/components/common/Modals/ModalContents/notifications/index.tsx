@@ -1,21 +1,33 @@
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ICON } from '@/constants';
 import styles from './Notifications.module.scss';
 import classNames from 'classnames/bind';
 import { getMyNotifications } from '@/pages/api/get/getMyNotifications';
 import { queryKey } from '@/pages/api/quertKey';
 import getTimeAgo from '../utills/getTimeAgo';
+import { delelteNotifications } from '@/pages/api/delete/deleteNotification';
 
 const cn = classNames.bind(styles);
 
 const { ellipse, xMedium } = ICON;
 
 export default function Notifications() {
+  const queryClient = useQueryClient();
+
   const { data: notificationsData } = useQuery({
     queryKey: queryKey.myNotifications,
     queryFn: getMyNotifications,
   });
+
+  const deleteNotificationMutation = useMutation({
+    mutationFn: (id: number) => delelteNotifications(id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
+  });
+
+  const handelDeleteNotification = (id: number) => {
+    deleteNotificationMutation.mutate(id);
+  };
 
   console.log(notificationsData);
   function highlightContent(content: string) {
@@ -57,7 +69,9 @@ export default function Notifications() {
                   { approval: notification.content.includes('승인') }
                 )}
               />
-              <Image src={xMedium.default.src} alt={xMedium.default.alt} width={24} height={24} />
+              <button onClick={() => handelDeleteNotification(notification.id)}>
+                <Image src={xMedium.default.src} alt={xMedium.default.alt} width={24} height={24} />
+              </button>
             </div>
 
             <h2>{description(notification.content)}</h2>
@@ -66,6 +80,7 @@ export default function Notifications() {
           </li>
         ))}
       </ul>
+      {notificationsData?.totalCount === 0 && <h2>알림이 없습니다.</h2>}
     </>
   );
 }
