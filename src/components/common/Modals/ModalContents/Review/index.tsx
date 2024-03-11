@@ -1,43 +1,50 @@
 import Image from 'next/image';
 import ReviewFrom from './ReviewForm';
+import { Dispatch, SetStateAction } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getMyReserVations } from '@/pages/api/get/getAbledResrvations';
 import styles from '../ModalContents.module.scss';
 import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);
 
-const mook = {
-  title: '가나다라마바사',
-  date: '2024-03-04',
-  startTime: '17:00',
-  endTime: '18:00',
-  headCount: '3',
-  totalPrice: 30000,
-};
+interface Props {
+  HandelClickCloseModal: () => void;
+  id?: number;
+}
 
-const bannerImageUrl =
-  'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/a.png' || 'dd';
+export default function Review({ id = 535, HandelClickCloseModal }: Props) {
+  const { data: reservationsData } = useQuery({
+    queryKey: ['my-reservations'],
+    queryFn: getMyReserVations,
+  });
+  console.log('dd', reservationsData?.reservations);
+  const reservation = reservationsData?.reservations.find((reservation: any) => reservation.id === id);
 
-export default function Review() {
-  const formattedDate = mook.date.split('-').join('.');
+  const formattedDate = reservation?.date.split('-').join('.');
+  console.log('fff', reservation);
 
   return (
     <>
       <h1 className={cn('title')}>후기 작성</h1>
-      <article className={cn('activity')}>
-        <div className={cn('activity-img')}>
-          <Image fill alt="체험 이미지" src={bannerImageUrl} />
-        </div>
-        <div className={cn('activity-text')}>
-          <h2 className={cn('activity-text-title')}>{mook.title}</h2>
-          <p className={cn('activity-text-detail')}>
-            {formattedDate} {'\u00B7'} {mook.startTime}-{mook.endTime} {'\u00B7'} {mook.headCount}명
-          </p>
-          <h3 className={cn('activity-text-price')}>
-            {'\uFFE6'} {mook.totalPrice.toLocaleString()}
-          </h3>
-        </div>
-      </article>
-      <ReviewFrom />
+      {reservation && (
+        <article className={cn('activity')}>
+          <div className={cn('activity-img')}>
+            <Image fill alt="체험 이미지" src={reservation.activity.bannerImageUrl} style={{ objectFit: 'cover' }} />
+          </div>
+          <div className={cn('activity-text')}>
+            <h2 className={cn('activity-text-title')}>{reservation.activity.title}</h2>
+            <p className={cn('activity-text-detail')}>
+              {formattedDate} {'\u00B7'} {reservation.startTime}-{reservation.endTime} {'\u00B7'}
+              {reservation.headCount}명
+            </p>
+            <h3 className={cn('activity-text-price')}>
+              {'\uFFE6'} {reservation.totalPrice.toLocaleString()}
+            </h3>
+          </div>
+        </article>
+      )}
+      <ReviewFrom id={id} HandelClickCloseModal={HandelClickCloseModal} />
     </>
   );
 }
