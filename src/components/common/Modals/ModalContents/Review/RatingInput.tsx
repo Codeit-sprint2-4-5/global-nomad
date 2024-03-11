@@ -56,17 +56,18 @@ export default function RatingInput({ setValue, control }: RatingInputProps) {
       control={control}
       name="rating"
       render={({ field: { onChange, value } }) => (
-        <div className={cn('stars')}>
+        <ul className={cn('stars')}>
           {RATINGS.map((rating) => (
-            <Star
-              key={rating}
-              selected={rating <= (hoverRating || value)}
-              onClick={() => handleStarClick(rating)}
-              onMouseOver={() => handleStarMouseOver(rating)}
-              onMouseOut={handleStarMouseOut}
-            />
+            <li key={rating}>
+              <Star
+                selected={rating <= (hoverRating || value)}
+                onClick={() => handleStarClick(rating)}
+                onMouseOver={() => handleStarMouseOver(rating)}
+                onMouseOut={handleStarMouseOut}
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     />
   );
