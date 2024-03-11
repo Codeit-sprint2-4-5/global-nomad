@@ -27,26 +27,32 @@ interface ModalProps {
   setShowModal: Dispatch<SetStateAction<string>>;
   control?: Control<any>;
   data?: any;
+  id?: number;
 }
 
 export default function Modal({ modalType, setShowModal, ...porps }: ModalProps) {
-  const ModalContents = {
-    [MODAL_TYPE.review]: { component: Review, props: {} },
-    [MODAL_TYPE.reservationInfo]: { component: ReservationInfo, props: {} },
-    [MODAL_TYPE.dateForm]: { component: DateForm, props: { setShowModal: setShowModal, control: porps.control } },
-    [MODAL_TYPE.notifications]: { component: Notifications, props: {} },
-  };
-  const { component: ContestComponent, props } = ModalContents[modalType];
-
   const HandelClickCloseModal = () => {
     setShowModal('');
   };
+  const ModalContents = {
+    [MODAL_TYPE.review]: {
+      component: Review,
+      props: { id: porps.id as number, HandelClickCloseModal: HandelClickCloseModal },
+    },
+    [MODAL_TYPE.reservationInfo]: { component: ReservationInfo, props: {} },
+    [MODAL_TYPE.dateForm]: {
+      component: DateForm,
+      props: { HandelClickCloseModal: HandelClickCloseModal, control: porps.control },
+    },
+    [MODAL_TYPE.notifications]: { component: Notifications, props: {} },
+  };
+  const { component: ContestComponent, props } = ModalContents[modalType];
 
   return createPortal(
     <>
       <section className={cn('modal-content', { notifications: modalType === 'notifications' })}>
         <Image src={x.default.src} alt={x.default.alt} width={40} height={40} onClick={HandelClickCloseModal} />
-        <ContestComponent {...props} />
+        <ContestComponent HandelClickCloseModal={HandelClickCloseModal} {...props} />
       </section>
       <div
         className={cn('modal-background', { 'no-background': modalType !== 'review' })}
