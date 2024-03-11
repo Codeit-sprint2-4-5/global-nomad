@@ -1,0 +1,64 @@
+%input-base {
+  @include text-style(1.6, 400, $black);
+
+  width: 100%;
+  background-color: $white;
+  border: 0.1rem solid $gray70;
+  transition: $base-transition;
+
+  &::placeholder {
+    @include text-style(1.6, 400, $gray60);
+  }
+
+  &:focus {
+    border-color: $darkgreen;
+  }
+
+  &.error,
+  &.empty {
+    border-color: $red;
+  }
+}
+
+.input-field {
+  position: relative;
+  width: 100%;
+
+  .input {
+    @extend %input-base;
+
+    width: 100%;
+    padding: 1.6rem 2rem;
+    border-radius: 0.6rem;
+  }
+
+  .btn-password-show {
+    @include flexbox;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2rem;
+  }
+}
+
+.textarea-field {
+  width: 100%;
+
+  .textarea {
+    @extend %input-base;
+
+    width: 100%;
+    height: 34.6rem;
+    resize: none;
+    padding: 1.6rem;
+    border-radius: 0.6rem;
+  }
+}
+
+.error {
+  @include text-style(1.2, 400, $red);
+
+  padding-top: 0.8rem;
+  padding-left: 0.8rem;
+}

@@ -1,0 +1,48 @@
+.container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 54rem;
+  height: 25rem;
+  border-radius: 0.8rem;
+  border: none;
+
+  &::backdrop {
+    opacity: 0.7;
+    background-color: $popup-background;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    height: 22rem;
+  }
+
+  .text {
+    @include text-style(1.8, 500, $primary);
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 2.1rem);
+    transform: translateX(-50%);
+  }
+
+  .button {
+    button {
+      @include text-style(1.6, 500, $white);
+      position: absolute;
+      right: 2.8rem;
+      bottom: 2.8rem;
+      width: 12rem;
+
+      @media screen and (max-width: 550px) {
+        @include text-style(1.4, 500, $white);
+        position: absolute;
+        right: 50%;
+        bottom: 2.8rem;
+        transform: translateX(50%);
+        width: 13.8rem;
+        height: 4.2rem;
+      }
+    }
+  }
+}
