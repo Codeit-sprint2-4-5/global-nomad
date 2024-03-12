@@ -100,7 +100,7 @@
 */
 .text-style {
   // @include text-style(0.8);
-  @include text-style(1.5, 700, $orange);
+  @include text-style(5, 700, $orange);
 }
 
 // classnames 사용법
