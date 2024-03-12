@@ -12,6 +12,7 @@ interface MixButtonProps {
   type: 'button' | 'reset' | 'submit';
   text: string;
   fontSize: string;
+  onClick?: () => void;
 }
 
 export default function MixButton({
