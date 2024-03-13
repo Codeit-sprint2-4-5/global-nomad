@@ -6,15 +6,19 @@ import MENU_ITEMS from "@/constants/menuItems";
 import { ICON } from "@/constants";
 import { useRouter } from "next/router";
 const cn = classNames.bind(styles);
-interface sideNavMenuProps {
-  activeMenu: string;
-}
-export default function SideNavMenu({ activeMenu }: sideNavMenuProps) {
+export default function SideNavMenu({
+  isVisible = false,
+}: {
+  isVisible?: boolean;
+}) {
   const router = useRouter();
+  const pathname = router.pathname;
+  const selectedValue = pathname.substring("/mypage/".length);
+
   const initialValue = "/images/default_profile_image.png";
   const [profileImage, setProfileImage] = useState<string>(initialValue);
-
   const inputRef = useRef<HTMLInputElement>(null);
+
   const handleButtonClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
@@ -40,7 +44,7 @@ export default function SideNavMenu({ activeMenu }: sideNavMenuProps) {
   };
 
   return (
-    <div className={cn("side-menu-entire")}>
+    <div className={cn("side-menu-entire", { isVisible: isVisible })}>
       <div className={cn("user-profile")}>
         <Image
           src={profileImage}
@@ -69,7 +73,7 @@ export default function SideNavMenu({ activeMenu }: sideNavMenuProps) {
           <li
             key={index}
             className={cn("side-menu-link", {
-              active: activeMenu === menuItem.id,
+              active: selectedValue === menuItem.id,
             })}
             onClick={() => handleMenuClick(menuItem.id)}
           >

@@ -1,6 +1,7 @@
 .side-menu-entire {
   width: 38.4rem;
   padding: 2.4rem;
+  height: 43.2rem;
   gap: 2.4rem;
   background-color: $white;
   border-radius: 1.2rem;
@@ -12,7 +13,11 @@
     width: 25.1rem;
   }
   @include responsive("M") {
+    width: 34.4rem;
     display: none;
+    &.isVisible {
+      display: block;
+    }
   }
 }
 
