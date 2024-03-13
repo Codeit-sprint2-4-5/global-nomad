@@ -1,4 +1,4 @@
-@mixin dropdownMenu($PC: 6.1, $M: 4.9) {
+@mixin dropdown-menu($PC: 6.1, $M: 4.9) {
   position: absolute;
   top: $PC * 1rem;
   width: 100%;
