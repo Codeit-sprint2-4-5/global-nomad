@@ -20,6 +20,7 @@
   border-radius: 1.5rem;
   border: 1px solid $darkgreen;
   background: $white;
+  white-space: nowrap;
   @include text-style(1.8, 500, $darkgreen);
 
   @include responsive('M') {
