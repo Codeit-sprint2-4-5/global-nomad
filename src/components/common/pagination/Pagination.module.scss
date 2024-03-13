@@ -1,0 +1,58 @@
+.container {
+  @include flexbox(center, center);
+  gap: 1rem;
+
+  button {
+    width: 5.5rem;
+    height: 5.5rem;
+    border: 1px solid $darkgreen;
+    border-radius: 1.5rem;
+    background-color: $white;
+
+    @include responsive(M) {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  .control {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-indent: 100%;
+    background: url('~/public/icons/Icon_pagination_next.svg') no-repeat center $white;
+
+    &.prev {
+      transform: rotate(-180deg);
+
+      &:disabled {
+        border: 1px solid $gray30;
+        transform: rotate(0);
+        background: url('~/public/icons/Icon_pagination_prev.svg') no-repeat center $white;
+      }
+    }
+
+    &.next {
+      &:disabled {
+        border: 1px solid $gray30;
+        transform: rotate(-180deg);
+        background: url('~/public/icons/Icon_pagination_prev.svg') no-repeat center $white;
+      }
+    }
+  }
+
+  .page-number {
+    button {
+      @include text-style(1.8, 400, $darkgreen);
+
+      & + button {
+        margin: 0 0 0 1rem;
+      }
+
+      &.active {
+        color: $white;
+        background-color: $darkgreen;
+      }
+    }
+  }
+}
