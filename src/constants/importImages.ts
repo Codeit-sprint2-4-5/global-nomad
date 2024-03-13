@@ -9,7 +9,6 @@ import IconFacebook from '/public/icons/Icon_faceBook.svg';
 import IconInstagram from '/public/icons/Icon_instagram.svg';
 import IconTwitter from '/public/icons/Icon_twitter.svg';
 import IconYoutube from '/public/icons/Icon_youtube.svg';
-import IconLogoSmall from '/public/icons/Icon_logo_small.svg';
 import IconStarOn from '/public/icons/Icon_star_on.svg';
 import IconStarOff from '/public/icons/Icon_star_off.svg';
 import IconTextBoxCheck from '/public/icons/Icon_text-box_check.svg';
@@ -33,17 +32,12 @@ import IconPen from '/public/icons/Icon_pen.svg';
 import IconEllipse from '/public/icons/Icon_Ellipse.svg';
 import IconFilter from '/public/icons/Icon_filter.svg';
 import IconCheck from '/public/icons/Icon_check.svg';
-import ImageLogo from '/public/images/Image_logo.svg';
 import IconLoading from '/public/icons/Icon_loading.svg';
 
+import ImageLogoSmall from '/public/images/Image_logo_small.svg';
+import ImageLogo from '/public/images/Image_logo.svg';
+
 export const ICON = {
-  logo: {
-    default: {
-      src: IconLogoSmall,
-      alt: "로고",
-    },
-    active: {},
-  },
   accountCheck: {
     default: {
       src: IconAccount,
@@ -273,6 +267,9 @@ export const IMAGE = {
       src: ImageLogo,
       alt: "로고",
     },
-    nav: {},
+    nav: {
+      src: ImageLogoSmall,
+      alt: "로고",
+    },
   },
 };
