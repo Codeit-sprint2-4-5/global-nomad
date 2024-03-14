@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { instance } from '@/pages/api/axios';
+import { instance } from '@/apis/axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import BaseButton from '@/components/common/button/BaseButton';
 import classNames from 'classnames/bind';
@@ -28,6 +28,7 @@ export default function Question({ dialogRef, reservationId }: Props) {
 
   const handleCancelClick = () => {
     mutate();
+    handleCloseClick();
   };
 
   const handleCloseClick = () => {
@@ -40,8 +41,8 @@ export default function Question({ dialogRef, reservationId }: Props) {
       <dialog className={cn('container')} ref={dialogRef}>
         <p className={cn('text')}>예약을 취소하시겠어요?</p>
         <div className={cn('button-group')}>
-          <BaseButton onClick={handleCloseClick} size={'sm'} variant={'outline'} text={'아니오'} />
-          <BaseButton onClick={handleCancelClick} size={'sm'} text={'취소하기'} />
+          <BaseButton onClick={handleCloseClick} size='sm' variant='outline' text='아니오' />
+          <BaseButton onClick={handleCancelClick} size='sm' text='취소하기' />
         </div>
       </dialog>
     </>
