@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import { useToggleButton } from '@/hooks';
 import { USER_PASSWORD_SHOW } from '@/constants';
 import style from '@/components/common/Input/inputField.module.scss';
-import { UseFormRegisterReturn } from 'react-hook-form';
 
 const cn = classNames.bind(style);
 
