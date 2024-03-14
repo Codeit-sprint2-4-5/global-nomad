@@ -5,17 +5,17 @@ const cn = classNames.bind(styles);
 
 interface CategoryProps {
   category: "문화 · 예술" | "식음료" | "스포츠" | "투어" | "관광" | "웰빙";
-  active?: boolean;
+  isActive?: boolean;
   onClick: (category: string) => void;
 }
 
-export default function Category({ category, active = false, onClick }: CategoryProps) {
+export default function Category({ category, isActive = false, onClick }: CategoryProps) {
   const handleClick = () => {
     onClick(category);
   };
 
   return (
-    <div className={cn("category", `${active ? "category-active" : ""}`)} onClick={handleClick}>
+    <div className={cn("category", { active : isActive })} onClick={handleClick}>
       {category}
     </div>
   );

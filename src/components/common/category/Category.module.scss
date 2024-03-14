@@ -16,7 +16,7 @@
     padding: 1.6rem 2rem;
   }
 
-  &-active {
+  &.active {
     background: $darkgreen;
     @include text-style(1.8, 500, $white);
 
