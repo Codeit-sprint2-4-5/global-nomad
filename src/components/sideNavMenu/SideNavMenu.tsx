@@ -15,6 +15,7 @@ export default function SideNavMenu({ activeMenu }: sideNavMenuProps) {
   const [profileImage, setProfileImage] = useState<string>(initialValue);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
   const handleButtonClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
