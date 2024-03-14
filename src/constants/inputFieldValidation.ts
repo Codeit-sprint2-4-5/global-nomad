@@ -80,9 +80,9 @@ export const USER_PASSWORD_SHOW: {
 };
 
 export const USER_CATEGORYS = [
-  { id: 1, category: '문화 예술' },
+  { id: 1, category: '문화 · 예술' },
   { id: 2, category: '식음료' },
-  { id: 3, category: ' 스포츠 ' },
+  { id: 3, category: '스포츠' },
   { id: 4, category: '투어' },
   { id: 5, category: '관광' },
   { id: 6, category: '웰빙' },

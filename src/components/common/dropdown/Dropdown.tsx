@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes, MouseEvent, useRef, useState } from 'react';
+import { DetailedHTMLProps, InputHTMLAttributes, useRef, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useOutsideClick, useToggleButton } from '@/hooks';
