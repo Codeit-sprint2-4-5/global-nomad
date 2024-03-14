@@ -11,8 +11,10 @@ const { logo } = IMAGE;
 export default function FormHeader() {
   return (
     <div className={cn('form-header')}>
-      <Link className={cn('header')} href='/'>
-        <Image className={cn('header-logo')} src={logo.auth.src} alt={logo.auth.alt} sizes={'100%'} fill priority />
+      <Link href='/'>
+        <div className={cn('header')}>
+          <Image className={cn('header-logo')} src={logo.auth.src} alt={logo.auth.alt} sizes={'100%'} fill priority />
+        </div>
       </Link>
     </div>
   );

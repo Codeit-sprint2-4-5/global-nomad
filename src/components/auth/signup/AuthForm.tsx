@@ -45,8 +45,8 @@ interface AuthFormProps {
 }
 
 export default function AuthForm({ onSignupSubmit }: AuthFormProps) {
-  const { formState, register, handleSubmit, getValues, setError } = useForm<FormValues>({
-    mode: 'all',
+  const { formState, register, handleSubmit, getValues } = useForm<FormValues>({
+    mode: 'onBlur',
   });
   const { errors, isValid } = formState;
 
