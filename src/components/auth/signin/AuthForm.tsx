@@ -55,7 +55,7 @@ export default function AuthForm({ onSigninSubmit: handleSigninSubmit }: AuthFor
           <label className={cn('signin-label')}>
             <span className={cn('signin-label-text')}>이메일</span>
             <Input
-              register={register('email', rules.emailRules)}
+              {...register('email', rules.emailRules)}
               name='email'
               type='email'
               isError={!!errors.email}
@@ -66,7 +66,7 @@ export default function AuthForm({ onSigninSubmit: handleSigninSubmit }: AuthFor
           <label className={cn('signin-label')}>
             <span className={cn('signin-label-text')}>비밀번호</span>
             <Input
-              register={register('password', rules.passwordRules)}
+              {...register('password', rules.passwordRules)}
               name='password'
               type='password'
               isError={!!errors.password}

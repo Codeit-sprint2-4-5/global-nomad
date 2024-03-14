@@ -63,7 +63,7 @@ export default function AuthForm({ onSignupSubmit }: AuthFormProps) {
           <label className={cn('signup-label')}>
             <span className={cn('signup-label-text')}>이메일</span>
             <Input
-              register={register('email', rules.emailRules)}
+              {...register('email', rules.emailRules)}
               name='email'
               type='email'
               isError={!!errors.email}
@@ -74,7 +74,7 @@ export default function AuthForm({ onSignupSubmit }: AuthFormProps) {
           <label className={cn('signup-label')}>
             <span className={cn('signup-label-text')}>닉네임</span>
             <Input
-              register={register('nickname', rules.nicknameRules)}
+              {...register('nickname', rules.nicknameRules)}
               name='nickname'
               type='text'
               isError={!!errors.nickname}
@@ -85,7 +85,7 @@ export default function AuthForm({ onSignupSubmit }: AuthFormProps) {
           <label className={cn('signup-label')}>
             <span className={cn('signup-label-text')}>비밀번호</span>
             <Input
-              register={register('password', rules.passwordRules)}
+              {...register('password', rules.passwordRules)}
               name='password'
               type='password'
               isError={!!errors.password}
@@ -96,7 +96,7 @@ export default function AuthForm({ onSignupSubmit }: AuthFormProps) {
           <label className={cn('signup-label')}>
             <span className={cn('signup-label-text')}>비밀번호 확인</span>
             <Input
-              register={register('passwordConfirm', {
+              {...register('passwordConfirm', {
                 validate: {
                   notMatch: (value) => {
                     const { password } = getValues();
