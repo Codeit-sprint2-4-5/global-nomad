@@ -21,7 +21,7 @@ export default function Popup({ text, dialogRef }: Props) {
       <dialog className={cn('container')} ref={dialogRef}>
         <p className={cn('text')}>{text}</p>
         <div className={cn('button')}>
-          <BaseButton onClick={handleCloseClick} size={'md'} text={'확인'} />
+          <BaseButton onClick={handleCloseClick} size='md' text='확인' />
         </div>
       </dialog>
     </>
