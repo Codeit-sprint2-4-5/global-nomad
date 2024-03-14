@@ -1,20 +1,20 @@
-import { DetailedHTMLProps, InputHTMLAttributes, LegacyRef, TextareaHTMLAttributes } from 'react';
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useToggleButton } from '@/hooks';
 import { USER_PASSWORD_SHOW } from '@/constants';
 import style from '@/components/common/Input/inputField.module.scss';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 const cn = classNames.bind(style);
 
 interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  name: string;
-  type: 'text' | 'password';
+  type: 'text' | 'password' | 'email';
   isError?: boolean;
   errorMessage?: string;
-  placeholder?: string;
+  register: UseFormRegisterReturn;
 }
-export default function Input({ name, type, isError, errorMessage, ...props }: InputProps) {
+export default function Input({ type, isError, errorMessage, register, ...props }: InputProps) {
   const { isToggle, handleToggleClick } = useToggleButton();
   const { src, alt, inputType } = isToggle ? USER_PASSWORD_SHOW.on : USER_PASSWORD_SHOW.off;
 
@@ -24,7 +24,7 @@ export default function Input({ name, type, isError, errorMessage, ...props }: I
         <>
           <input
             {...props}
-            name={name}
+            {...register}
             type={type === 'password' ? inputType : type}
             className={cn('input', { error: isError })}
           />
