@@ -3,8 +3,8 @@ import { useToggleButton } from '@/hooks';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
+import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import styles from './Filter.module.scss';
-import FilterDropdown from './FilterDropdown';
 
 const cn = classNames.bind(styles);
 
@@ -74,11 +74,11 @@ export default function Filter({ type, setFilterState }: FilterProps) {
 
   return (
     <div className={cn('dropdown')}>
-        <button className={cn('dropdown-button', `${isOpen ? 'open' : ''}`)} onClick={isOpentoggle}>
+        <button className={cn('dropdown-button', { open: isOpen })} onClick={isOpentoggle}>
           <span>{FilterType[type].text}</span>
           <Image src={ICON.filter.default.src} alt={ICON.filter.default.alt} height={22} width={22} />
         </button>
-      {isOpen && <FilterDropdown dropdownMenuList={FilterType[type].list} />}
+      {isOpen && <DropdownMenu dropdownMenuList={FilterType[type].list} />}
     </div>
   );
 }

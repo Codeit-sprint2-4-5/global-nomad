@@ -37,38 +37,3 @@
   }
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 6.1rem;
-  width: 100%;
-  right: 0;
-
-  @include responsive('M') {
-    top: 4.9rem;
-  }
-
-  button {
-    @include flexbox;
-    width: 100%;
-    padding: 1.8rem 0;
-    gap: 1rem;
-    border: 1px solid $gray30;
-    background: $white;
-    @include text-style(1.8, 500, $gray80);
-    text-align: center;
-    line-height: 2.2rem; /* 122.222% */
-
-    &:first-child {
-      border-radius: 0.6rem 0.6rem 0rem 0rem;
-    }
-
-    &:last-child {
-      border-radius: 0rem 0rem 0.6rem 0.6rem;
-    }
-
-    @include responsive('M') {
-      padding: 1rem 0;
-      font-size: $font-size-14;
-    }
-  }
-}
