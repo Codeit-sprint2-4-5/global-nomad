@@ -37,6 +37,7 @@ import IconNotification from '/public/icons/Icon_notification.svg';
 
 import ImageLogoSmall from '/public/images/Image_logo_small.svg';
 import ImageLogo from '/public/images/Image_logo.svg';
+import ImageDefaultProfile from '/public/images/Image_default_profile_image.png';
 
 export const ICON = {
 	accountCheck: {
@@ -263,7 +264,7 @@ export const ICON = {
 	notification: {
 		default: {
 			src: IconNotification,
-			alt: '로딩',
+			alt: '알림',
 		},
 		active: {},
 	},
@@ -278,6 +279,12 @@ export const IMAGE = {
 		nav: {
 			src: ImageLogoSmall,
 			alt: '로고',
+		},
+	},
+	avatar: {
+		default: {
+			src: ImageDefaultProfile,
+			alt: '기본 프로필 이미지',
 		},
 	},
 };
