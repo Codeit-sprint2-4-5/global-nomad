@@ -1,0 +1,94 @@
+
+.side-menu-entire {
+  width: 38.4rem;
+  padding: 2.4rem;
+  height: 43.2rem;
+  gap: 2.4rem;
+  background-color: $white;
+  border-radius: 1.2rem;
+  border: 0.1rem solid $gray30;
+
+  @include column-flexbox(none, none);
+
+  @include responsive("T") {
+    width: 25.1rem;
+  }
+  @include responsive("M") {
+    width: 34.4rem;
+    display: none;
+    &.isVisible {
+      display: block;
+    }
+  }
+}
+
+.user-profile {
+  position: relative;
+  margin: 0 auto;
+  width: 16rem;
+  height: 16rem;
+}
+
+.user-profile-image {
+  border-radius: 100%;
+  overflow: hidden;
+  box-shadow: 0 0.4rem 1.6rem 0 $user-profile-image-shadow;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.07);
+    transition: transform 0.3s;
+  }
+}
+
+.side-menu {
+  gap: 0.8rem;
+
+  @include column-flexbox(center, none);
+}
+
+.side-menu-link {
+  padding: 0.9rem 0 0.9rem 1.6rem;
+  gap: 1.2rem;
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    background-color: $lightgreen;
+    color: $gray90;
+    border-radius: 1.2rem;
+
+    .side-menu-Image {
+      filter: invert(0%);
+    }
+  }
+
+  @include flexbox(none, center);
+  @include text-style(1.6, 700, $gray55);
+}
+
+.side-menu-Image {
+  filter: invert(60%);
+}
+
+.side-menu-Image-modify {
+  position: absolute;
+  width: 4.2rem;
+  height: 4.2rem;
+  background-color: $darkgreen;
+  border-radius: 100%;
+  bottom: 0%;
+  right: 3%;
+  @include flexbox(center, center);
+  cursor: pointer;
+
+  &:hover .side-menu-Image-modify-icon {
+    transform: scale(1.08);
+    transition: transform 0.2s;
+  }
+}
+
+.side-menu-file-input {
+  display: none;
+}
+
