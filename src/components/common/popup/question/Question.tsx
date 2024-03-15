@@ -14,7 +14,9 @@ interface Props {
 
 export default function Question({ dialogRef, reservationId }: Props) {
   async function patchReservation() {
-    await instance.patch(`/my-reservations/${reservationId}`, { status: 'canceled' });
+    await instance.patch(`/my-reservations/${reservationId}`, {
+      status: "canceled",
+    });
   }
 
   const queryClient = useQueryClient();
@@ -22,7 +24,7 @@ export default function Question({ dialogRef, reservationId }: Props) {
   const { mutate } = useMutation({
     mutationFn: patchReservation,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/my-reservations'] });
+      queryClient.invalidateQueries({ queryKey: ["/my-reservations"] });
     },
   });
 
