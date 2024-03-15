@@ -6,8 +6,7 @@ import { postMyReview } from '@/apis/post/postReview';
 import styles from '../ModalContents.module.scss';
 import className from 'classnames/bind';
 import BaseButton from '@/components/common/button/BaseButton';
-import { Dispatch, SetStateAction } from 'react';
-import { postMyReview } from '@/pages/api/post/postReview';
+import { postMyReview } from '@/apis/post/postReview';
 
 const cn = className.bind(styles);
 
@@ -30,6 +29,7 @@ export default function ReviewFrom({ id, onClickCloseModal }: Props) {
     onSuccess: () => {
       onClickCloseModal();
       //후기리스트 다시 불러오는 거추가..?
+      //함수 이름 맘에 안듦
     },
   });
 
