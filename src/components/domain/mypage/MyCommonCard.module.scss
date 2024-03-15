@@ -25,6 +25,16 @@
   }
   background-color: $white;
 }
+
+.back-button {
+  @include flexbox(none, center);
+}
+.back-icon {
+  display: none;
+  @include responsive('M') {
+    display: block;
+  }
+}
 .register-button {
   padding: 1.1rem 1.65rem;
   border-radius: 0.4rem;
@@ -46,15 +56,7 @@
 .ref-box {
   height: 0.1rem;
 }
-.ref-box {
-  height: 0.1rem;
-}
-.ref-box {
-  height: 0.1rem;
-}
-.ref-box {
-  height: 0.1rem;
-}
+
 .loading-container {
   @include flexbox(center, none);
   margin-top: 1.2rem;

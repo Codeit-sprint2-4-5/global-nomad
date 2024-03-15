@@ -12,6 +12,7 @@ import Title from '@/components/common/title/Title';
 import { useRouter } from 'next/router';
 import Question from '@/components/common/popup/question/Question';
 import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
+import { ICON } from '@/constants';
 
 const cn = classNames.bind(styles);
 
@@ -77,6 +78,9 @@ export default function MyActivities() {
     router.push('등록페이지 정해지면 수정');
   };
 
+  const handleBackButtonClick = () => {
+    router.back();
+  };
   //옵저버의 위치 다음페이지 유무 데이터 불러오는 상태에 따라 무한 스크롤이 구현됨
   useEffect(() => {
     if (inView && hasNextPage && !isFetching) {
@@ -88,7 +92,17 @@ export default function MyActivities() {
     <>
       <div className={cn('reservations-container')}>
         <div className={cn('title')}>
-          <Title text="내 체험 관리" />
+          <div className={cn('back-button')}>
+            <button className={cn('back-icon')} onClick={handleBackButtonClick}>
+              <Image
+                width={40}
+                height={40}
+                src={ICON.leftArrow.default.src}
+                alt={ICON.leftArrow.default.alt}
+              />
+            </button>
+            <Title text="내 체험 관리" />
+          </div>
           <button
             className={cn('register-button')}
             onClick={handleRegisterClick}
