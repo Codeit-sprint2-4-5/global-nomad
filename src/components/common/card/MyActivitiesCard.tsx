@@ -6,6 +6,7 @@ import { ICON } from "@/constants";
 import IconButton from "../button/IconButton";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
+import Menu from "../menu/Menu";
 
 const cn = classNames.bind(styles);
 
@@ -73,7 +74,13 @@ export default function MyActivitiesCard({
             ￦ {activityInfo.price.toLocaleString()}
             <span>/ 인</span>
           </div>
-          <div onClick={handleKebabClick}>
+          <Menu
+            handleModifyClick={() => handleModifyClick(activityInfo.id)}
+            handleDeleteClick={() => {
+              handleDelete(activityInfo.id);
+            }}
+          />
+          {/* <div onClick={handleKebabClick}>
             <IconButton
               svg={ICON.menu.default.src}
               size="40"
@@ -98,7 +105,7 @@ export default function MyActivitiesCard({
                 삭제하기
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
