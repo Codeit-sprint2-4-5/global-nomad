@@ -1,17 +1,15 @@
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import { Control, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
-import { AbledReservationListData } from '../floatingBox/FloatingBox';
-import CountMemberInput from '../floatingBox/CountMemberInput';
-import ReservationInfo from './ModalContents/ReservationInfo/ReservationInfo';
-import Review from './ModalContents/Review/Review';
-import Notifications from './ModalContents/Notifications/Notifications';
+import Review from './ModalContents/Review';
+import Notifications from './ModalContents/Notifications';
+import ReservationInfo from './ModalContents/ReservationInfo';
 import DateForm from './ModalContents/dateForm/DateForm';
 
 import { ICON } from '@/constants';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
+import { Control } from 'react-hook-form';
 
 const { x } = ICON;
 
@@ -22,59 +20,43 @@ const MODAL_TYPE = {
   reservationInfo: 'reservationInfo',
   dateForm: 'dateForm',
   notifications: 'notifications',
-  countMemberInput: 'countMemberInput',
 };
 
 interface ModalProps {
   modalType: keyof typeof MODAL_TYPE;
   setShowModal: Dispatch<SetStateAction<string>>;
   control?: Control<any>;
+  data?: any;
   id?: number;
-  abledReservationListData?: AbledReservationListData[];
-  setValue?: UseFormSetValue<any>;
-  onDownDisabled?: boolean;
 }
 
-export default function Modal({ modalType, setShowModal, ...props }: ModalProps) {
-  const HandleClickCloseModal = () => {
+export default function Modal({ modalType, setShowModal, ...porps }: ModalProps) {
+  const HandelClickCloseModal = () => {
     setShowModal('');
   };
   const ModalContents = {
     [MODAL_TYPE.review]: {
       component: Review,
-      prop: { id: props.id as number, onClickCloseModal: HandleClickCloseModal },
+      props: { id: porps.id as number, HandelClickCloseModal: HandelClickCloseModal },
     },
-    [MODAL_TYPE.reservationInfo]: { component: ReservationInfo, prop: {} },
+    [MODAL_TYPE.reservationInfo]: { component: ReservationInfo, props: {} },
     [MODAL_TYPE.dateForm]: {
       component: DateForm,
-      prop: {
-        onClickCloseModal: HandleClickCloseModal,
-        control: props.control,
-        abledReservationListData: props.abledReservationListData,
-      },
+      props: { HandelClickCloseModal: HandelClickCloseModal, control: porps.control },
     },
-    [MODAL_TYPE.notifications]: { component: Notifications, prop: {} },
-    [MODAL_TYPE.countMemberInput]: {
-      component: CountMemberInput,
-      prop: {
-        setValue: props.setValue,
-        control: props.control,
-        onDownDisabled: props.onDownDisabled,
-      },
-    },
+    [MODAL_TYPE.notifications]: { component: Notifications, props: {} },
   };
-
-  const { component: ContestComponent, prop } = ModalContents[modalType];
+  const { component: ContestComponent, props } = ModalContents[modalType];
 
   return createPortal(
     <>
       <section className={cn('modal-content', { notifications: modalType === 'notifications' })}>
-        <Image src={x.default.src} alt={x.default.alt} width={40} height={40} onClick={HandleClickCloseModal} />
-        <ContestComponent onClickCloseModal={HandleClickCloseModal} {...prop} />
+        <Image src={x.default.src} alt={x.default.alt} width={40} height={40} onClick={HandelClickCloseModal} />
+        <ContestComponent HandelClickCloseModal={HandelClickCloseModal} {...props} />
       </section>
       <div
         className={cn('modal-background', { 'no-background': modalType !== 'review' })}
-        onClick={HandleClickCloseModal}
+        onClick={HandelClickCloseModal}
       ></div>
     </>,
     document.body
