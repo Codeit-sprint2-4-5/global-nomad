@@ -5,8 +5,7 @@ import RatingInput from './RatingInput';
 import styles from '../ModalContents.module.scss';
 import className from 'classnames/bind';
 import BaseButton from '@/components/common/button/BaseButton';
-import { Dispatch, SetStateAction } from 'react';
-import { postMyReview } from '@/pages/api/post/postReview';
+import { postMyReview } from '@/apis/post/postReview';
 
 const cn = className.bind(styles);
 
@@ -17,17 +16,19 @@ interface FormData {
 
 interface Props {
   id: number;
-  HandelClickCloseModal: () => void;
+  onClickCloseModal: () => void;
 }
-export default function ReviewFrom({ id, HandelClickCloseModal }: Props) {
+
+export default function ReviewFrom({ id, onClickCloseModal }: Props) {
   const { control, handleSubmit, setValue, register } = useForm<FormData>({
     defaultValues: { rating: 0, content: '' },
   });
   const postReviewMutation = useMutation({
     mutationFn: (data: FormData) => postMyReview(id, data),
     onSuccess: () => {
-      HandelClickCloseModal;
+      onClickCloseModal();
       //후기리스트 다시 불러오는 거추가..?
+      //함수 이름 맘에 안듦
     },
   });
 

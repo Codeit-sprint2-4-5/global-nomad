@@ -7,6 +7,7 @@
 .activity {
   @include flexbox(start);
   margin-top: 4.1rem;
+  word-break: keep-all;
 
   gap: 2.4rem;
   @include text-style(1.8, 400, $modal-text-color);
@@ -38,6 +39,27 @@
       width: 100%;
     }
   }
+
+  @include responsive(M) {
+    gap: 1rem;
+    &-img {
+      width: 10rem;
+      height: 10rem;
+      flex-shrink: 0;
+    }
+
+    &-text {
+      @include text-style(1.4, 400, $modal-text-color);
+
+      &-title {
+        @include text-style(1.8, 700);
+      }
+
+      &-price {
+        @include text-style(2, 700);
+      }
+    }
+  }
 }
 
 .form {
@@ -48,7 +70,7 @@
   > button {
     @include responsive(M) {
       position: absolute;
-      bottom: 4rem;
+      bottom: 2rem;
       width: 90%;
     }
   }
@@ -60,13 +82,27 @@
 
   gap: 0.8rem;
   cursor: pointer;
+
+  @include responsive(M) {
+    margin: 1rem 0 1.6rem;
+  }
+}
+
+.star {
+  position: relative;
+  width: 5.6rem;
+  height: 5.6rem;
+  @include responsive(M) {
+    width: 4rem;
+    height: 4rem;
+  }
 }
 
 .textarea {
   @include text-style(1.6);
   border: 1px solid $gray70;
   width: 100%;
-  height: 22.4rem;
+  min-height: 22.4rem;
   resize: none;
 
   padding: 0.8rem 1.6rem;
