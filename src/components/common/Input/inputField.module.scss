@@ -22,6 +22,7 @@
 
 .input-field {
   position: relative;
+  width: 100%;
 
   .input {
     @extend %input-base;
@@ -42,6 +43,8 @@
 }
 
 .textarea-field {
+  width: 100%;
+
   .textarea {
     @extend %input-base;
 
