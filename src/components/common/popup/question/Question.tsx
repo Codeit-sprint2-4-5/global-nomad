@@ -1,9 +1,9 @@
-import { RefObject } from "react";
-import { instance } from "@/apis/axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import BaseButton from "@/components/common/button/BaseButton";
-import classNames from "classnames/bind";
-import styles from "./Question.module.scss";
+import { RefObject } from 'react';
+import { instance } from '@/apis/axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import BaseButton from '@/components/common/button/BaseButton';
+import classNames from 'classnames/bind';
+import styles from './Question.module.scss';
 
 const cn = classNames.bind(styles);
 
@@ -40,16 +40,11 @@ export default function Question({ dialogRef, reservationId }: Props) {
 
   return (
     <>
-      <dialog className={cn("container")} ref={dialogRef}>
-        <p className={cn("text")}>예약을 취소하시겠어요?</p>
-        <div className={cn("button-group")}>
-          <BaseButton
-            onClick={handleCloseClick}
-            size="sm"
-            variant="outline"
-            text="아니오"
-          />
-          <BaseButton onClick={handleCancelClick} size="sm" text="취소하기" />
+      <dialog className={cn('container')} ref={dialogRef}>
+        <p className={cn('text')}>예약을 취소하시겠어요?</p>
+        <div className={cn('button-group')}>
+          <BaseButton onClick={handleCloseClick} size='sm' variant='outline' text='아니오' />
+          <BaseButton onClick={handleCancelClick} size='sm' text='취소하기' />
         </div>
       </dialog>
     </>
