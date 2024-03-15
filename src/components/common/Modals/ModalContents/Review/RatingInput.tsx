@@ -24,6 +24,7 @@ function Star({ selected = false, onClick, onMouseOut, onMouseOver }: StarProps)
     <Image
       src={StarAction}
       alt={star.default.alt}
+      fill
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
       onClick={onClick}
@@ -58,7 +59,7 @@ export default function RatingInput({ setValue, control }: RatingInputProps) {
       render={({ field: { onChange, value } }) => (
         <ul className={cn('stars')}>
           {RATINGS.map((rating) => (
-            <li key={rating}>
+            <li className={cn('star')} key={rating}>
               <Star
                 selected={rating <= (hoverRating || value)}
                 onClick={() => handleStarClick(rating)}

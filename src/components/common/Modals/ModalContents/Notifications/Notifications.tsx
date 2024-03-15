@@ -3,10 +3,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ICON } from '@/constants';
 import styles from './Notifications.module.scss';
 import classNames from 'classnames/bind';
-import { getMyNotifications } from '@/pages/api/get/getMyNotifications';
-import { queryKey } from '@/pages/api/quertKey';
+import { getMyNotifications } from '@/apis/get/getMyNotifications';
+import { queryKey } from '@/apis/quertKey';
 import getTimeAgo from '../utills/getTimeAgo';
-import { delelteNotifications } from '@/pages/api/delete/deleteNotification';
+import { delelteNotifications } from '@/apis/delete/deleteNotification';
 
 const cn = classNames.bind(styles);
 

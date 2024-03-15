@@ -11,6 +11,9 @@
     list-style-type: disc !important;
     word-break: keep-all;
     min-width: 35rem;
+    @include responsive(M) {
+      min-width: 80vw;
+    }
   }
 
   &-item {
