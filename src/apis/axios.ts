@@ -12,7 +12,7 @@ export const instance = axios.create({
 //     localStorage.removeItem('refreshToken');
 //     const accessToken = res.data.accessToken;
 //     const refreshToken = res.data.refreshToken;
-//     localStorage.setItem('accessToken', accessToken);
+//     localStorage.setItem('accessToken', accessTo ken);
 //     localStorage.setItem('refreshToken', refreshToken);
 
 //     return res.data;
