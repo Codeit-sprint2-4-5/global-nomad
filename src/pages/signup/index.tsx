@@ -6,7 +6,7 @@ import { auth } from '@/apis/auth';
 import { useRef, useState } from 'react';
 import { AxiosError } from 'axios';
 import Router from 'next/router';
-import Popup from '@/components/common/popup/confirm/Confirm';
+import Confirm from '@/components/common/popup/confirm/Confirm';
 
 interface ErrorMessage {
   message: string;
@@ -53,7 +53,7 @@ export default function Signup() {
   return (
     <>
       <AuthForm onSignupSubmit={onSignupSubmit} />
-      <Popup dialogRef={dialogRef} text={popupError} />
+      <Confirm dialogRef={dialogRef} text={popupError} />
     </>
   );
 }
