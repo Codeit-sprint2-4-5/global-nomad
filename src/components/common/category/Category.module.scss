@@ -8,7 +8,6 @@
   background: $white;
   @include text-style(1.8, 500, $darkgreen);
   text-align: center;
-  font-family: Pretendard;
   cursor: pointer;
 
   @include responsive("M") {
