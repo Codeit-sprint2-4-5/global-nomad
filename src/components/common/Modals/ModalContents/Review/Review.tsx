@@ -1,19 +1,18 @@
 import Image from 'next/image';
 import ReviewFrom from './ReviewForm';
-import { Dispatch, SetStateAction } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getMyReserVations } from '@/pages/api/get/getAbledResrvations';
+import { getMyReserVations } from '@/apis/get/getAbledResrvations';
 import styles from '../ModalContents.module.scss';
 import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);
 
 interface Props {
-  HandelClickCloseModal: () => void;
+  onClickCloseModal: () => void;
   id?: number;
 }
 
-export default function Review({ id = 535, HandelClickCloseModal }: Props) {
+export default function Review({ id = 522, onClickCloseModal }: Props) {
   const { data: reservationsData } = useQuery({
     queryKey: ['my-reservations'],
     queryFn: getMyReserVations,
@@ -44,7 +43,7 @@ export default function Review({ id = 535, HandelClickCloseModal }: Props) {
           </div>
         </article>
       )}
-      <ReviewFrom id={id} HandelClickCloseModal={HandelClickCloseModal} />
+      <ReviewFrom id={id} onClickCloseModal={onClickCloseModal} />
     </>
   );
 }
