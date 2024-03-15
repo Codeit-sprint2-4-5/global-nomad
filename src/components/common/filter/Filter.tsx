@@ -54,7 +54,7 @@ export default function Filter({ type, setFilterState }: FilterProps) {
 				},
 				{
 					text: '예약 취소',
-					handleClick: () => handleDropdownOptionClick('cancled'),
+					handleClick: () => handleDropdownOptionClick('canceled'),
 				},
 				{
 					text: '예약 승인',
