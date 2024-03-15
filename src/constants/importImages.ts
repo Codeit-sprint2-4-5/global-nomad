@@ -263,7 +263,7 @@ export const ICON = {
 	notification: {
 		default: {
 			src: IconNotification,
-			alt: '로딩',
+			alt: '알림',
 		},
 		active: {},
 	},
