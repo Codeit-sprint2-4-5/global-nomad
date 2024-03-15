@@ -1,0 +1,220 @@
+.card-container {
+  @include flexbox(none, center);
+  width: 79.2rem;
+  height: 20.4rem;
+  border-radius: 2.4rem;
+  box-shadow: 0 0.4rem 1.6rem 0 $search-popup-box-shadow;
+
+  @include responsive("T") {
+    width: 42.9rem;
+    height: 15.6rem;
+  }
+  @include responsive("M") {
+    width: 34.4rem;
+    height: 12.8rem;
+  }
+}
+.card-image {
+  height: 100%;
+  border-radius: 2.4rem 0 0 2.4rem;
+  @include responsive("T") {
+    width: 15.6rem;
+  }
+  @include responsive("M") {
+    width: 12.8rem;
+  }
+}
+.card-info-container {
+  background-color: $white;
+  padding: 2.55rem 2.4rem;
+  height: 100%;
+  border-radius: 0 2.4rem 2.4rem 0;
+  @include responsive("T") {
+    padding: 1.2rem 1.8rem 1.2rem 1.2rem;
+  }
+  @include responsive("M") {
+    padding: 0.9rem 1.5rem 0.9rem 0.8rem;
+  }
+}
+
+.info-section {
+  color: $gray90;
+  line-height: 2.6rem;
+}
+
+.status {
+  margin-bottom: 0.8rem;
+  @include text-style(1.6, 700, $gray70);
+
+  @include responsive("M") {
+    @include text-style(1.4, 700);
+  }
+
+  &.pending {
+    color: $skyblue;
+  }
+  &.confirmed {
+    color: $green;
+  }
+  &.declined {
+    color: $red;
+  }
+}
+
+.title {
+  margin-bottom: 1.6rem;
+  @include text-style(2, 700);
+
+  @include responsive("T") {
+    @include text-style(1.8, 700);
+    margin-bottom: 0.8rem;
+  }
+  @include responsive("M") {
+    margin-bottom: 0.8rem;
+    @include text-style(1.4, 700);
+  }
+}
+
+.details {
+  line-height: 2.4rem;
+  @include text-style(1.8, 400);
+
+  @include responsive("T") {
+    @include text-style(1.4, 400);
+  }
+  @include responsive("M") {
+    @include text-style(1.2, 400);
+  }
+}
+
+.price-section {
+  width: 54rem;
+  margin-top: 1.6rem;
+  @include flexbox(between, center);
+
+  @include responsive("T") {
+    width: 24.5rem;
+    margin-top: 1rem;
+  }
+  @include responsive("M") {
+    width: 19.3rem;
+    margin-top: 0.8rem;
+    @include text-style(1.6);
+  }
+}
+
+.price {
+  padding: 0.5rem 0;
+  line-height: 2.66rem;
+
+  @include text-style(2.4, 500, $black);
+
+  @include responsive("T") {
+    @include text-style(2);
+
+    padding: 0.8rem 0;
+    line-height: 2.4rem;
+  }
+
+  @include responsive("M") {
+    @include text-style(1.6);
+    padding: 0.7rem 0 0.6rem;
+    line-height: 1.9rem;
+  }
+}
+
+.action-button {
+  padding: 0.7rem 4.25rem;
+  border: 0.1rem solid $gray90;
+  border-radius: 0.6rem;
+
+  @include text-style(1.6, 700, $gray90);
+
+  @include responsive("T") {
+    padding: 0.7rem 2.65rem;
+  }
+  @include responsive("T") {
+    padding: 0.6rem 1.4rem;
+    @include text-style(1.4, 700);
+  }
+
+  &.completed {
+    background-color: $gray90;
+    color: $white;
+  }
+}
+
+// MyActivitiesCard css
+.info-rating {
+  @include flexbox(none, center);
+  @include text-style(1.6, 400, $black);
+  line-height: 1.9rem;
+  margin-bottom: 0.6rem;
+}
+.rating-star-image {
+  margin-right: 0.5rem;
+}
+.section2-price {
+  @include flexbox(none, center);
+  @include text-style(2.8, 700);
+  gap: 0.5rem;
+  line-height: 2.8rem;
+
+  @include responsive("T") {
+    @include text-style(2.4, 500);
+    line-height: 2.48rem;
+  }
+  @include responsive("M") {
+    @include text-style(1.6, 750);
+    line-height: 1.9rem;
+  }
+
+  span {
+    @include text-style(2, 400, $gray80);
+
+    @include responsive("M") {
+      @include text-style(1.6, 400);
+      line-height: 1.9rem;
+    }
+  }
+}
+.info-section2 {
+  @extend .price-section;
+  margin-top: 7.2rem;
+  position: relative;
+  @include responsive("T") {
+    margin-top: 40px;
+  }
+  @include responsive("M") {
+    margin-top: 29px;
+  }
+}
+.context-menu {
+  z-index: 1;
+  position: absolute;
+  background-color: $white;
+  border: 0.1rem solid $gray30;
+  border-radius: 0.6rem;
+  top: 110%;
+  right: 0%;
+}
+.menu {
+  padding: 1.8rem 4.85rem;
+  @include text-style(1.8, 500, $gray80);
+  cursor: pointer;
+  &.border {
+    border-bottom: 0.1rem solid $gray30;
+  }
+  &:hover {
+    background-color: $lightgreen;
+    color: $gray90;
+  }
+  @include responsive("T") {
+    padding: 1.5rem 4rem;
+    @include text-style(1.6, 500, $gray80);
+  }
+  @include responsive("M") {
+    padding: 1.2rem 3.2rem;
+    @include text-style(1.4, 500, $gray80);
+  }
+}
