@@ -1,0 +1,43 @@
+.reservations-container {
+  @include column-flexbox(none, none);
+}
+
+.title {
+  @include flexbox(between, center);
+  margin-bottom: 24px;
+  top: 0;
+  @include responsive("M") {
+    margin-bottom: 16px;
+  }
+}
+.register-button {
+  padding: 11px 16.5px;
+  border-radius: 4px;
+  background-color: $gray90;
+  @include text-style(1.6, 700, $white);
+}
+.card-lists {
+  @include column-flexbox(none, none);
+  height: 1190px;
+  gap: 24px;
+  overflow: scroll;
+  scrollbar-width: none;
+
+  @include responsive("M") {
+    gap: 16px;
+  }
+}
+.loading-container {
+  margin: 0 auto;
+}
+.loading-image {
+  animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
