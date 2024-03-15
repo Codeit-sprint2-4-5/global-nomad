@@ -10,7 +10,7 @@ interface Props {
   dialogRef: RefObject<HTMLDialogElement>;
 }
 
-export default function Popup({ text, dialogRef }: Props) {
+export default function Confirm({ text, dialogRef }: Props) {
   const handleCloseClick = () => {
     if (!dialogRef.current) return;
     dialogRef.current.close();
