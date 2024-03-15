@@ -23,8 +23,6 @@ export default function Signin() {
     setPopupError(error);
   };
 
-  const queryClient = useQueryClient();
-
   const signupMutation = useMutation({
     mutationFn: (data: FormValues) => auth.signin(data),
     mutationKey: ['signin'],
@@ -36,7 +34,6 @@ export default function Signin() {
         const refreshToken = data.refreshToken;
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
-        queryClient.setQueryData(['user'], data.user);
 
         Router.replace('/');
       }
@@ -54,9 +51,7 @@ export default function Signin() {
     signupMutation.mutate(data);
   };
 
-  if (signupMutation.isPending) {
-    <div>Loading...</div>;
-  }
+  if (signupMutation.isPending) return <div>Loading...</div>;
 
   return (
     <>
