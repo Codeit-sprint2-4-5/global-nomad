@@ -3,7 +3,7 @@ import styles from "./sideNavMenu.module.scss";
 import classNames from "classnames/bind";
 import { ChangeEvent, useRef, useState } from "react";
 import MENU_ITEMS from "@/constants/menuItems";
-import { ICON } from "@/constants";
+import { ICON, IMAGE } from "@/constants";
 import { useRouter } from "next/router";
 const cn = classNames.bind(styles);
 export default function SideNavMenu({
@@ -47,7 +47,7 @@ export default function SideNavMenu({
     <div className={cn("side-menu-entire", { isVisible: isVisible })}>
       <div className={cn("user-profile")}>
         <Image
-          src={profileImage}
+          src={IMAGE.avatar.default.src}
           height={160}
           width={160}
           alt="profileImage"
