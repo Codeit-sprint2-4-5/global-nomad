@@ -13,18 +13,21 @@ interface DropdownProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputE
   name: string;
   labelText?: string;
   lists: { id: number; category: string; title?: string }[];
+  onSelectedId: (id:number) => void;
 }
 
-export default function Dropdown({ name, labelText, lists, ...props }: DropdownProps) {
+export default function Dropdown({ name, labelText, lists, onSelectedId, ...props }: DropdownProps) {
   const { isToggle, handleToggleClick } = useToggleButton();
   const [selectedList, setSelectedList] = useState<number | null>(labelText ? lists[0].id : null);
   const dropdownRef = useRef(null);
-  const isLabelText = labelText ? lists[selectedList as number]?.title : lists[selectedList as number]?.category;
+  const findId = lists.find(item => item.id === selectedList);
+  const isLabelText = labelText ? findId?.title : findId?.category;
 
   useOutsideClick(dropdownRef, isToggle, handleToggleClick);
 
   const handleSelectedClick = (id: number) => {
     setSelectedList(id);
+    onSelectedId(id);
     handleToggleClick();
   };
 
