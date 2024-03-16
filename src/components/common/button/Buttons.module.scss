@@ -2,7 +2,6 @@
   @include inline-flexbox;
 
   font-family: 'Spoqa Han Sans Neo';
-  transition: $base-transition;
 
   &.br6 {
     border-radius: 0.6rem;
@@ -15,16 +14,11 @@
   &:focus {
     cursor: pointer;
     opacity: 0.8;
-
-    @include responsive(M) {
-      cursor: auto;
-      opacity: 1;
-    }
+    transition: $base-transition;
   }
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.4;
   }
 }
 
@@ -54,6 +48,10 @@
   @extend %btn-base;
 
   background-color: $primary;
+
+  &:disabled {
+    background-color: $gray60;
+  }
 
   &.btn-xl {
     @include text-style(1.8, 500, $white);
@@ -123,7 +121,6 @@
 %ic-btn-base {
   @include inline-flexbox;
 
-  transition: $base-transition;
   background-color: inherit;
 }
 

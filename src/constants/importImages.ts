@@ -9,7 +9,6 @@ import IconFacebook from '/public/icons/Icon_faceBook.svg';
 import IconInstagram from '/public/icons/Icon_instagram.svg';
 import IconTwitter from '/public/icons/Icon_twitter.svg';
 import IconYoutube from '/public/icons/Icon_youtube.svg';
-import IconLogoSmall from '/public/icons/Icon_logo_small.svg';
 import IconStarOn from '/public/icons/Icon_star_on.svg';
 import IconStarOff from '/public/icons/Icon_star_off.svg';
 import IconTextBoxCheck from '/public/icons/Icon_text-box_check.svg';
@@ -33,15 +32,16 @@ import IconPen from '/public/icons/Icon_pen.svg';
 import IconEllipse from '/public/icons/Icon_Ellipse.svg';
 import IconFilter from '/public/icons/Icon_filter.svg';
 import IconCheck from '/public/icons/Icon_check.svg';
+import IconLoading from '/public/icons/Icon_loading.svg';
+import IconNotification from '/public/icons/Icon_notification.svg';
+import IconSubtract from '/public/icons/Icon_subtract.svg';
+import IconAdd from '/public/icons/Icon_Add.svg';
+
+import ImageLogoSmall from '/public/images/Image_logo_small.svg';
+import ImageLogo from '/public/images/Image_logo.svg';
+import ImageDefaultProfile from '/public/images/Image_default_profile_image.png';
 
 export const ICON = {
-  logo: {
-    default: {
-      src: IconLogoSmall,
-      alt: '로고',
-    },
-    active: {},
-  },
   accountCheck: {
     default: {
       src: IconAccount,
@@ -256,6 +256,51 @@ export const ICON = {
     },
     active: {},
   },
+  loading: {
+    default: {
+      src: IconLoading,
+      alt: '로딩',
+    },
+    active: {},
+  },
+  notification: {
+    default: {
+      src: IconNotification,
+      alt: '알림',
+    },
+    active: {},
+  },
+  subtract: {
+    default: {
+      src: IconSubtract,
+      alt: '빼기',
+    },
+    active: {},
+  },
+  add: {
+    default: {
+      src: IconAdd,
+      alt: '더하기',
+    },
+    active: {},
+  },
 };
 
-export const IMAGE = {};
+export const IMAGE = {
+  logo: {
+    auth: {
+      src: ImageLogo,
+      alt: '로고',
+    },
+    nav: {
+      src: ImageLogoSmall,
+      alt: '로고',
+    },
+  },
+  avatar: {
+    default: {
+      src: ImageDefaultProfile,
+      alt: '기본 프로필 이미지',
+    },
+  },
+};
