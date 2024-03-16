@@ -6,11 +6,11 @@ import { IMAGE } from '@/constants/importImages';
 const cn = classNames.bind(styles);
 
 interface AvatarProps {
-	profileImageUrl: string | null;
+	profileImageUrl?: string | null;
   type: string;
 }
 
-export default function Avatar({ profileImageUrl, type }: AvatarProps) {
+export default function Avatar({ profileImageUrl = null, type }: AvatarProps) {
   const imageUrl = profileImageUrl || IMAGE.avatar.default.src;
 	return (
   <div className={cn('container', type)}>
