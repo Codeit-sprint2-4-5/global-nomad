@@ -1,12 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import { Control, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { Control, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
 import CountMemberInput from '../floatingBox/CountMemberInput';
 import ReservationInfo from './ModalContents/reservationInfo/ReservationInfo';
 import Review from './ModalContents/review/Review';
 import Notifications from './ModalContents/notifications/Notifications';
 import DateForm from './ModalContents/dateForm/DateForm';
+import { AbledReservationListData } from '@/types/dateform';
+import { ICON, MODAL_TYPE } from '@/constants';
 import { AbledReservationListData } from '@/types/dateform';
 import { ICON, MODAL_TYPE } from '@/constants';
 import styles from './Modal.module.scss';

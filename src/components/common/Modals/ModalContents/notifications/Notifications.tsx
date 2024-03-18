@@ -20,8 +20,6 @@ export default function Notifications() {
     queryFn: () => getMyNotifications(10),
   });
 
-  console.log('알림', notificationsData);
-
   const deleteNotificationMutation = useMutation({
     mutationFn: (id: number) => delelteNotifications(id),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
