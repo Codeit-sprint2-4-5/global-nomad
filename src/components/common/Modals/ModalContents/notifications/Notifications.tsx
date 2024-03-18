@@ -17,8 +17,10 @@ export default function Notifications() {
 
   const { data: notificationsData } = useQuery({
     queryKey: queryKey.myNotifications,
-    queryFn: getMyNotifications,
+    queryFn: () => getMyNotifications(10),
   });
+
+  console.log('알림', notificationsData);
 
   const deleteNotificationMutation = useMutation({
     mutationFn: (id: number) => delelteNotifications(id),
