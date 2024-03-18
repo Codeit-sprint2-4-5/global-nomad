@@ -33,11 +33,11 @@ export default function SmallCalender({ control, name, setValue }: CalenderProps
             <Calendar
               minDate={new Date()}
               locale='en'
-              value={field.value} // react-hook-form으로 제어되는 value로 설정
+              value={field.value}
               onChange={(date) => {
-                field.onChange(date); // react-hook-form으로 제어되는 onChange 함수 호출
+                field.onChange(date);
                 if (setValue) {
-                  setValue(name, date); // setValue를 통해 상위 컴포넌트의 상태 업데이트
+                  setValue(name, date);
                 }
               }}
             />
