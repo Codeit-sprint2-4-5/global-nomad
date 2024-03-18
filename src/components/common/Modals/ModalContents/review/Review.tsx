@@ -5,6 +5,7 @@ import { getMyReserVations } from '@/apis/get/getAbledResrvations';
 
 import styles from '../ModalContents.module.scss';
 import classNames from 'classnames/bind';
+import { queryKey } from '@/apis/quertKey';
 
 const cn = classNames.bind(styles);
 
@@ -15,7 +16,7 @@ interface Props {
 
 export default function Review({ id = 522, onClickCloseModal }: Props) {
   const { data: reservationsData } = useQuery({
-    queryKey: ['my-reservations'],
+    queryKey: queryKey.myReservations,
     queryFn: () => getMyReserVations(10),
   });
 

@@ -7,6 +7,7 @@ import { changeDateToStringFormat } from '../utills';
 import styles from './Reservation.module.scss';
 import classNames from 'classnames/bind';
 import { ReservationCardType } from '@/types/reservationInfo';
+import { queryKey } from '@/apis/quertKey';
 
 const cn = classNames.bind(styles);
 
@@ -31,12 +32,12 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
   const [scheduledId, setScheduledId] = useState<number>(scheduleId);
 
   const { data: reservedScheduleData } = useQuery({
-    queryKey: ['my-activities', 'reservation', date],
+    queryKey: queryKey.getMyReservationUseDate(date),
     queryFn: () => getReservedScheduleDate(activityId, date),
   });
 
   const { data: reservationStatusData } = useQuery({
-    queryKey: ['my-activities', 'reservation', scheduledId, selectedStatus],
+    queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus),
     queryFn: () => getMyActivitiesReservation(activityId, scheduledId, selectedStatus),
   });
 
@@ -52,7 +53,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
 
   const onSelectedId = async (id: number) => {
     setScheduledId(id);
-    queryClient.invalidateQueries({ queryKey: ['my-activities', 'reservation', scheduledId, selectedStatus] });
+    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus) });
   };
 
   const schedule = reservedScheduleData?.find(
@@ -62,7 +63,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
   const handleSelect = (status: string) => {
     const newSelectedStatus = status === '신청' ? 'pending' : status === '확정' ? 'confirmed' : 'declined';
     setSelectedStatus(newSelectedStatus);
-    queryClient.invalidateQueries({ queryKey: ['my-activities', 'reservation', scheduledId, selectedStatus] });
+    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus) });
   };
 
   return (
