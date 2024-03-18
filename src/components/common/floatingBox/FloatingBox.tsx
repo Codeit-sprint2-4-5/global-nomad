@@ -62,7 +62,6 @@ export default function FloatingBox({ price = 10000 }) {
 
   const handelOnSubmit: SubmitHandler<PostReservationData> = (data) => {
     postReservationMutation.mutate(data);
-  };
 
   useEffect(() => {
     setTotalPrice(price * countMemberValue);
