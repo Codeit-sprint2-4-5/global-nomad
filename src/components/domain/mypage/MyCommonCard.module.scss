@@ -79,3 +79,9 @@
     margin-top: 4rem;
   }
 }
+.nodata-container {
+  margin-top: 5.6rem;
+  @include responsive('T') {
+    margin-top: 4rem;
+  }
+}
