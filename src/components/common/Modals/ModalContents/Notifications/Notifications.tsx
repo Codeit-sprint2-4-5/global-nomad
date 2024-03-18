@@ -20,8 +20,6 @@ export default function Notifications() {
     queryFn: () => getMyNotifications(10),
   });
 
-  console.log('알림', notificationsData);
-
   const deleteNotificationMutation = useMutation({
     mutationFn: (id: number) => delelteNotifications(id),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
@@ -31,7 +29,6 @@ export default function Notifications() {
     deleteNotificationMutation.mutate(id);
   };
 
-  console.log(notificationsData);
   function highlightContent(content: string) {
     if (content.includes('승인')) {
       return content.replace(/승인/g, '<span style= "color: #0085ff " >$&</span>');

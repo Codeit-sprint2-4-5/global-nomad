@@ -2,27 +2,19 @@ import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import { Control, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
-import { AbledReservationListData } from '../floatingBox/FloatingBox';
 import CountMemberInput from '../floatingBox/CountMemberInput';
 import ReservationInfo from './ModalContents/reservationInfo/ReservationInfo';
 import Review from './ModalContents/review/Review';
 import Notifications from './ModalContents/notifications/Notifications';
 import DateForm from './ModalContents/dateForm/DateForm';
-import { ICON } from '@/constants';
+import { AbledReservationListData } from '@/types/dateform';
+import { ICON, MODAL_TYPE } from '@/constants';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 
 const { x } = ICON;
 
 const cn = classNames.bind(styles);
-
-const MODAL_TYPE = {
-  review: 'review',
-  reservationInfo: 'reservationInfo',
-  dateForm: 'dateForm',
-  notifications: 'notifications',
-  countMemberInput: 'countMemberInput',
-};
 
 interface ModalProps {
   modalType: keyof typeof MODAL_TYPE;

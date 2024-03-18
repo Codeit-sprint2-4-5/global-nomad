@@ -34,7 +34,6 @@ export default function ReviewFrom({ id, onClickCloseModal }: Props) {
 
   const submit: SubmitHandler<FormData> = (data) => {
     postReviewMutation.mutate(data);
-    console.log(data);
   };
 
   return (
