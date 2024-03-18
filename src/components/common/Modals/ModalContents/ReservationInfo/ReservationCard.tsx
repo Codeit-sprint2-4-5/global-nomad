@@ -13,16 +13,16 @@ function ReservationStatus({ selected }: ReservationStatusProps) {
     case 'pending':
       return (
         <>
-          <BaseButton size="sm" text="확정하기" />
-          <BaseButton size="sm" variant="outline" text="거절하기" />
+          <BaseButton size='sm' text='확정하기' />
+          <BaseButton size='sm' variant='outline' text='거절하기' />
         </>
       );
       break;
     case 'declined':
-      return <ReservationTag status="declined" />;
+      return <ReservationTag status='declined' />;
       break;
     case 'confirmed':
-      return <ReservationTag status="confirmed" />;
+      return <ReservationTag status='confirmed' />;
       break;
     default:
       return <p>ddddd</p>;
