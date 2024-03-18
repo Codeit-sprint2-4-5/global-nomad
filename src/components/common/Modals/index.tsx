@@ -61,9 +61,14 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
     [MODAL_TYPE.notifications]: { component: Notifications, prop: {} },
     [MODAL_TYPE.countMemberInput]: {
       component: CountMemberInput,
-      prop: { control: props.control, setValue: props.setValue, onDownDisabled: props.onDownDisabled },
+      prop: {
+        setValue: props.setValue,
+        control: props.control,
+        onDownDisabled: props.onDownDisabled,
+      },
     },
   };
+
   const { component: ContestComponent, prop } = ModalContents[modalType];
 
   return createPortal(
@@ -81,7 +86,7 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
       </section>
       <div
         className={cn('modal-background', { 'no-background': modalType !== 'review' })}
-        onClick={handleClickCloseModal}
+        onClick={handelClickCloseModal}
       ></div>
     </>,
     document.getElementById('modal-root') || document.body
