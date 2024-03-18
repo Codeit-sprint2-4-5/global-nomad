@@ -1,39 +1,38 @@
 .dropdown {
-  position: relative;
-  width: 12.7rem;
+	position: relative;
+	width: 12.7rem;
 
-  @include responsive('T') {
-    width: 12rem;
-  }
+	@include responsive('T') {
+		width: 12rem;
+	}
 
-  @include responsive('M') {
-    width: 9rem;
-  }
+	@include responsive('M') {
+		width: 9rem;
+	}
 }
 
 .dropdown-button {
-  @include flexbox(between, end);
-  width: 100%;
-  height: 5.3rem;
-  padding: 1.6rem 2rem;
-  flex-shrink: 0;
-  border-radius: 1.5rem;
-  border: 1px solid $darkgreen;
-  background: $white;
-  white-space: nowrap;
-  @include text-style(1.8, 500, $darkgreen);
+	@include flexbox(between, end);
+	width: 100%;
+	height: 5.3rem;
+	padding: 1.6rem 2rem;
+	flex-shrink: 0;
+	border-radius: 1.5rem;
+	border: 1px solid $darkgreen;
+	background: $white;
+	white-space: nowrap;
+	@include text-style(1.8, 500, $darkgreen);
 
-  @include responsive('M') {
-    @include flexbox(between, center);
-    height: 4.1rem;
-    padding: 1rem 2rem;
-    font-size: $font-size-14;
-  }
+	@include responsive('M') {
+		@include flexbox(between, center);
+		height: 4.1rem;
+		padding: 1rem 2rem;
+		font-size: $font-size-14;
+	}
 
-  &.open {
-    img {
-      transform: rotate(180deg);
-    }
-  }
+	&.open {
+		img {
+			transform: rotate(180deg);
+		}
+	}
 }
-

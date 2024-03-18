@@ -303,10 +303,12 @@ export const IMAGE = {
       alt: '기본 프로필 이미지',
     },
   },
+
   noData: {
     default: {
       src: ImageNoData,
       alt: '데이터없음',
     },
   },
+
 };
