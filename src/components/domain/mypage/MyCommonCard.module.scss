@@ -47,6 +47,9 @@
 .ref-box {
   height: 0.1rem;
 }
+.ref-box {
+  height: 1px;
+}
 .loading-container {
   @include flexbox(center, none);
   margin-top: 1.2rem;
@@ -61,6 +64,12 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+.nodata-container {
+  margin-top: 5.6rem;
+  @include responsive('T') {
+    margin-top: 4rem;
   }
 }
 .nodata-container {
