@@ -4,6 +4,7 @@ import { patchReservationStatus } from '@/apis/patch/patchReservationStatus';
 import ReservationTag from '@/components/common/ReservationTag';
 import classNames from 'classnames/bind';
 import styles from './Reservation.module.scss';
+import { queryKey } from '@/apis/quertKey';
 const cn = classNames.bind(styles);
 
 interface ReservationStatusProps {
@@ -24,7 +25,8 @@ function ReservationStatus({ selectedStatus, reservationId, activityId }: Reserv
   const patchStatusMutation = useMutation({
     mutationFn: (data: { status: ReservationStatusProps['selectedStatus'] }) =>
       patchReservationStatus(activityId, reservationId, data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['my-activities', 'reservation', 'time'] }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(reservationId, selectedStatus) }),
   });
   const handleClickConfirmed = () => {
     patchStatusMutation.mutate({ status: 'confirmed' });
