@@ -41,10 +41,7 @@ export default function MyActivities() {
       queryKey: ['MyActivities'],
       queryFn: ({ pageParam }: any) => getMyActivities({ pageParam }),
     });
-  console.log(fetchNextPage);
-  console.log(hasNextPage);
-  console.log(isFetching);
-  console.log(data);
+
   //체험 카드 삭제 요청 API
   async function deleteActivity(activityId: number) {
     try {
