@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes, LegacyRef, TextareaHTMLAttributes } from 'react';
+import { DetailedHTMLProps, InputHTMLAttributes, forwardRef } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useToggleButton } from '@/hooks';
@@ -8,13 +8,11 @@ import style from '@/components/common/Input/inputField.module.scss';
 const cn = classNames.bind(style);
 
 interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  name: string;
-  type: 'text' | 'password';
+  type: 'text' | 'password' | 'email';
   isError?: boolean;
   errorMessage?: string;
-  placeholder?: string;
 }
-export default function Input({ name, type, isError, errorMessage, ...props }: InputProps) {
+export default forwardRef<HTMLInputElement, InputProps>(function Input({ type, isError, errorMessage, ...props }, ref) {
   const { isToggle, handleToggleClick } = useToggleButton();
   const { src, alt, inputType } = isToggle ? USER_PASSWORD_SHOW.on : USER_PASSWORD_SHOW.off;
 
@@ -24,7 +22,7 @@ export default function Input({ name, type, isError, errorMessage, ...props }: I
         <>
           <input
             {...props}
-            name={name}
+            ref={ref}
             type={type === 'password' ? inputType : type}
             className={cn('input', { error: isError })}
           />
@@ -38,4 +36,4 @@ export default function Input({ name, type, isError, errorMessage, ...props }: I
       {isError && <p className={cn('error')}>{errorMessage}</p>}
     </>
   );
-}
+});
