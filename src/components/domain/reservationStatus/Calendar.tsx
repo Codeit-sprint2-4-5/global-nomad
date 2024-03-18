@@ -193,11 +193,7 @@ function Days({ dayIdx, prevMonthDate, currentMonthDay, monthActivity, currentYe
           };
 
           return (
-            <td
-              key={i}
-              className={cn({ active: remainingDate }, { on: reservationDate })}
-              onClick={handleDateClick}
-            >
+            <td key={i} className={cn({ active: remainingDate }, { on: reservationDate })} onClick={handleDateClick}>
               {days[currentMonthDate]}
               {reservationDate && !remainingDate && (
                 <>
