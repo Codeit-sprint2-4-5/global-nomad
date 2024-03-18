@@ -34,6 +34,7 @@
   @include responsive('M') {
     display: block;
   }
+  background-color: $white;
 }
 .register-button {
   padding: 1.1rem 1.65rem;

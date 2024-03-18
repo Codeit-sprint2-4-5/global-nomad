@@ -41,7 +41,10 @@ export default function MyActivities() {
       queryKey: ['MyActivities'],
       queryFn: ({ pageParam }: any) => getMyActivities({ pageParam }),
     });
-
+  console.log(fetchNextPage);
+  console.log(hasNextPage);
+  console.log(isFetching);
+  console.log(data);
   //체험 카드 삭제 요청 API
   async function deleteActivity(activityId: number) {
     try {
@@ -157,6 +160,7 @@ export default function MyActivities() {
         dialogRef={deleteDialogRef}
         onClick={() => handleDeleteClick(deleteActivityId)}
       />
+      <Confirm text="체험을 삭제했습니다" dialogRef={confirmDialogRef} />
     </>
   );
 }
