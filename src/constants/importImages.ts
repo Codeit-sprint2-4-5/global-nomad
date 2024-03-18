@@ -40,7 +40,7 @@ import IconAdd from '/public/icons/Icon_Add.svg';
 import ImageLogoSmall from '/public/images/Image_logo_small.svg';
 import ImageLogo from '/public/images/Image_logo.svg';
 import ImageDefaultProfile from '/public/images/Image_default_profile_image.png';
-import ImageNoData from '/public/images/Image_no_data.png';
+import ImageNoData from '/public/images/Image_no_data.svg';
 export const ICON = {
   accountCheck: {
     default: {
