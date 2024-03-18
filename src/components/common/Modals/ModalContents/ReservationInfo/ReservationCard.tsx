@@ -21,8 +21,6 @@ function ReservationStatus({ selectedStatus, reservationId, activityId }: Reserv
 
   //버튼 클릭시 status 변경하는 프롭 받아오기
 
-  console.log(reservationId);
-
   const patchStatusMutation = useMutation({
     mutationFn: (data: { status: ReservationStatusProps['selectedStatus'] }) =>
       patchReservationStatus(activityId, reservationId, data),

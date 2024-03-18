@@ -19,11 +19,9 @@ export default function Review({ id = 522, onClickCloseModal }: Props) {
     queryFn: () => getMyReserVations(10),
   });
 
-  console.log('dd', reservationsData?.reservations);
   const reservation = reservationsData?.reservations.find((reservation: any) => reservation.id === id);
 
   const formattedDate = reservation?.date.split('-').join('.');
-  console.log('fff', reservation);
 
   return (
     <>

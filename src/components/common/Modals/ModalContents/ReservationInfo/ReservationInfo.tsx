@@ -6,6 +6,7 @@ import { getMyActivitiesReservation, getReservedScheduleDate } from '@/apis/get/
 import { changeDateToStringFormat } from '../utills';
 import styles from './Reservation.module.scss';
 import classNames from 'classnames/bind';
+import { ReservationCardType } from '@/types/reservationInfo';
 
 const cn = classNames.bind(styles);
 
@@ -16,33 +17,17 @@ export interface ReservationSchedule {
   startTime: string;
 }
 
-export interface ReservationCard {
-  activityId: number;
-  createdAt: string | Date;
-  date: string | Date;
-  endTime: string;
-  headCount: number;
-  id: number;
-  nickname: string;
-  reviewSubmitted: boolean;
-  scheduleId: number;
-  startTime: string;
-  status: 'declined' | 'confirmed' | 'pending';
-  teamId: string;
-  totalPrice: number;
-  updatedAt: string | Date;
-  userId: number;
-}
-
 interface Props {
   date?: string;
   activityId?: number;
   scheduleId?: number;
 }
 
+const STATUSES = ['신청', '확정', '거절'];
+
 export default function ReservationInfo({ date = '2024-03-20', activityId = 178, scheduleId = 764 }: Props) {
   const queryClient = useQueryClient();
-  const [selectedStatus, setSelectedStatus] = useState<ReservationCard['status']>('pending');
+  const [selectedStatus, setSelectedStatus] = useState<ReservationCardType['status']>('pending');
   const [scheduledId, setScheduledId] = useState<number>(scheduleId);
 
   const { data: reservedScheduleData } = useQuery({
@@ -63,9 +48,6 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
         }))
       : [{ id: scheduleId }];
 
-  console.log('시간대별 예약 ', reservationStatusData);
-  console.log('일별 예약리스트', reservedScheduleData);
-
   const cardList = reservationStatusData?.reservations ?? [];
 
   const onSelectedId = async (id: number) => {
@@ -77,7 +59,6 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
     (schedule: ReservationSchedule) => scheduledId === schedule.scheduleId
   ).count;
 
-  console.log(schedule);
   const handleSelect = (status: string) => {
     const newSelectedStatus = status === '신청' ? 'pending' : status === '확정' ? 'confirmed' : 'declined';
     setSelectedStatus(newSelectedStatus);
@@ -89,7 +70,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
       <h1 className={cn('title')}>예약 정보</h1>
 
       <ul className={cn('reservation-status')}>
-        {['신청', '확정', '거절'].map((status) => (
+        {STATUSES.map((status) => (
           <button
             key={status}
             onClick={() => handleSelect(status)}
@@ -108,13 +89,12 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
           <p className={cn('reservation-date')}>{changeDateToStringFormat(date)}</p>
 
           <Dropdown name='dateDropdown' onSelectedId={onSelectedId} labelText=' ' lists={dropdownList()} />
-          {/* 이렇게 쓰면안됨 */}
         </div>
         <div>
           <h3 className={cn('little-title')}>예약 내역</h3>
           <ul className={cn('reservation-card-list')}>
             {cardList?.length !== 0 ? (
-              cardList?.map((reservation: ReservationCard) => (
+              cardList?.map((reservation: ReservationCardType) => (
                 <ReservationCard
                   key={reservation.id}
                   nickname={reservation.nickname}
