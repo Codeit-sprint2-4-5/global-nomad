@@ -40,7 +40,10 @@ export default function MyActivities() {
       queryKey: ['MyActivities'],
       queryFn: ({ pageParam }: any) => getMyActivities({ pageParam }),
     });
-
+  console.log(fetchNextPage);
+  console.log(hasNextPage);
+  console.log(isFetching);
+  console.log(data);
   //체험 카드 삭제 요청 API
   async function deleteActivity(activityId: number) {
     try {
@@ -81,6 +84,7 @@ export default function MyActivities() {
   const handleBackButtonClick = () => {
     router.back();
   };
+
   //옵저버의 위치 다음페이지 유무 데이터 불러오는 상태에 따라 무한 스크롤이 구현됨
   useEffect(() => {
     if (inView && hasNextPage && !isFetching) {
@@ -153,6 +157,7 @@ export default function MyActivities() {
         dialogRef={deleteDialogRef}
         onClick={() => handleDeleteClick(deleteActivityId)}
       />
+      <Confirm text="체험을 삭제했습니다" dialogRef={confirmDialogRef} />
     </>
   );
 }
