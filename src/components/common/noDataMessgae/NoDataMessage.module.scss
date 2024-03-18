@@ -1,0 +1,24 @@
+.image-container {
+  padding: 3.15rem 0;
+  @include flexbox(center, none);
+  @include responsive('T') {
+    padding: 2.5rem 0;
+  }
+}
+
+.image {
+  @include responsive('T') {
+    width: 11rem;
+    height: 14.9rem;
+  }
+}
+.text {
+  margin-top: 2rem;
+  text-align: center;
+  line-height: 2.86rem;
+  @include text-style(2.4, 500, $gray70);
+
+  @include responsive('T') {
+    margin-top: 1.2rem;
+  }
+}
