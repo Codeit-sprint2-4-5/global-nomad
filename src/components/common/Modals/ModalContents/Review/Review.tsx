@@ -29,7 +29,7 @@ export default function Review({ id = 522, onClickCloseModal }: Props) {
       {reservation && (
         <article className={cn('activity')}>
           <div className={cn('activity-img')}>
-            <Image fill alt="체험 이미지" src={reservation.activity.bannerImageUrl} style={{ objectFit: 'cover' }} />
+            <Image fill alt='체험 이미지' src={reservation.activity.bannerImageUrl} style={{ objectFit: 'cover' }} />
           </div>
           <div className={cn('activity-text')}>
             <h2 className={cn('activity-text-title')}>{reservation.activity.title}</h2>
