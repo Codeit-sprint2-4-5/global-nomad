@@ -86,7 +86,7 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
       </section>
       <div
         className={cn('modal-background', { 'no-background': modalType !== 'review' })}
-        onClick={handelClickCloseModal}
+        onClick={handleClickCloseModal}
       ></div>
     </>,
     document.getElementById('modal-root') || document.body
