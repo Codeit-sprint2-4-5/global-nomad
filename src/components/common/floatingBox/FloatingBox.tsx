@@ -1,34 +1,24 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import BaseButton from '../button/BaseButton';
+import { PostformatDate, displayDateFormat } from '../Modals/ModalContents/utills';
+import Modal from '../Modals';
+import CountMemberInput from './CountMemberInput';
 import DateForm from '../Modals/ModalContents/dateForm/DateForm';
-import styles from './FloatingBox.module.scss';
-import classNames from 'classnames/bind';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { useQuery } from '@tanstack/react-query';
 import { queryKey } from '@/apis/quertKey';
 import { getAbledResrvationList } from '@/apis/get/getAbledResrvations';
-import BaseButton from '../button/BaseButton';
-import Input from '../Input/Input';
-import { PostformatDate } from '../Modals/ModalContents/utills';
-import Modal from '../Modals';
-import { ICON } from '@/constants';
-import Image from 'next/image';
-import CountMemberInput from './CountMemberInput';
+import styles from './FloatingBox.module.scss';
+import classNames from 'classnames/bind';
+import { postReservation } from '@/apis/post/postReservation';
 
-const { add, subtract } = ICON;
 const cn = classNames.bind(styles);
 
-const mook = {
-  price: 100000,
-};
-
-export interface AbledReservationListData {
-  date: string;
-  times: { id: number; startTime: string; endTime: string }[];
-}
-
-export default function FloatingBox() {
-  const [totalPrice, setTotalPrice] = useState(0);
+export default function FloatingBox({ price = 10000 }) {
+  const [totalPrice, setTotalPrice] = useState(price);
   const [showModal, setShowModal] = useState('');
+  const router = useRouter(); // 나중에 라우터에서 id 값 받아와서 아래 함수 id 에 넣어주기
 
   const { data: abledReservationListData } = useQuery({
     queryKey: queryKey.reservation(152, 2024, '04'),
@@ -38,34 +28,35 @@ export default function FloatingBox() {
   console.log('asdf', abledReservationListData);
 
   const { control, handleSubmit, setValue, getValues, watch } = useForm<any>({
-    defaultValues: { countMember: 1, date: abledReservationListData },
+    defaultValues: { headCount: 1, date: abledReservationListData },
   });
-  const countMemberValue = watch('countMember');
-  const watchDate = watch('abled-time');
+  const countMemberValue = watch('headCount');
   const getdate = getValues('date');
 
-  const handelOnSubmit: SubmitHandler<any> = (data) => {
-    const postData = data;
+  const postReservationMutation = useMutation({
+    mutationFn: (data: unknown) => postReservation(152, data),
+    //라우터에서 id 받아오기
+    onSuccess: () => alert('예약 신청 성공'),
+  });
 
-    const postDate = PostformatDate(data.date);
-    postData.date = postDate;
-    console.log(postData);
+  const handelOnSubmit: SubmitHandler<any> = (data) => {
+    postReservationMutation.mutate({ headCount: data.headCount, scheduleId: data.scheduleId });
   };
 
   useEffect(() => {
-    setTotalPrice(mook?.price * countMemberValue);
-  }, [countMemberValue]);
+    setTotalPrice(price * countMemberValue);
+  }, [countMemberValue, price]);
   //const countMember = register('countMember', { required: true });
 
   return (
     <section className={cn('floating-box')}>
       <h1 className={cn('floating-box-head')}>
         <span className={cn('floating-box-head-point')}>
-          {'\uFFE6'} {mook?.price.toLocaleString()}
+          {'\uFFE6'} {price.toLocaleString()}
         </span>
         /
         <button onClick={() => setShowModal('countMemberInput')} className={cn('floating-box-head-btn')}>
-          <span> 총 {getValues('countMember')}</span>인
+          <span> 총 {getValues('headCount')}</span>인
         </button>
       </h1>
       <form onSubmit={handleSubmit(handelOnSubmit)} className={cn('floating-box-form')}>
@@ -74,14 +65,15 @@ export default function FloatingBox() {
           abledReservationListData={abledReservationListData}
           control={control}
           setValue={setValue}
+          getdate={getdate}
         />
         <button type='button' onClick={() => setShowModal('dateForm')} className={cn('floating-box-form-modal-btn')}>
-          {getdate ? getdate : '날짜 선택하기'}
+          {getdate ? displayDateFormat(getdate) : '날짜 선택하기'}
         </button>
 
         <CountMemberInput
           control={control}
-          onDownDisabled={watch('countMember') <= 1}
+          onDownDisabled={watch('headCount') <= 1}
           setValue={setValue}
           // onClickCountUp={handleClickCountUp(getValues('countMember'))}
           // onClickCountDown={handleClickCountDown(getValues('countMember'))}

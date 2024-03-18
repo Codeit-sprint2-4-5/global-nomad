@@ -22,35 +22,35 @@ export default function CountMemberInput({ onDownDisabled, control, setValue, on
   const handleClickCountUp = (prev: number) => {
     if (setValue) {
       const nextCount = ++prev;
-      setValue('countMember', nextCount);
+      setValue('headCount', nextCount);
     }
   };
   const handleClickCountDown = (prev: number) => {
     if (setValue) {
       const nextCount = --prev;
-      setValue('countMember', nextCount);
+      setValue('headCount', nextCount);
     }
   };
 
   return (
     <div className={cn('countInput-wrapper', { modal: onClickCloseModal })}>
       {onClickCloseModal && <h3>인원</h3>}
-      <label htmlFor="contMember" className={cn('countInput-label')}>
+      <label htmlFor='contMember' className={cn('countInput-label')}>
         {onClickCloseModal ? '예약할 인원을 선택해 주세요' : '참여 인원 수'}
       </label>
 
       <Controller
         control={control}
-        name="countMember"
+        name='headCount'
         rules={{
           required: true,
         }}
         render={({ field: { value, onChange } }) => (
           <>
-            <input id="countMember" className={cn('countInput-input')} type="text" onChange={onChange} value={value} />
+            <input id='headCount' className={cn('countInput-input')} type='text' onChange={onChange} value={value} />
 
             <button
-              type="button"
+              type='button'
               disabled={onDownDisabled}
               onClick={() => handleClickCountDown(value)}
               className={cn('countInput-input-btn', 'subtract')}
@@ -58,14 +58,14 @@ export default function CountMemberInput({ onDownDisabled, control, setValue, on
               <Image height={20} width={20} src={subtract.default.src} alt={subtract.default.alt} />
             </button>
             <button
-              type="button"
+              type='button'
               onClick={() => handleClickCountUp(value)}
               className={cn('countInput-input-btn', 'add')}
             >
               <Image height={20} width={20} src={add.default.src} alt={add.default.alt} />
             </button>
 
-            {onClickCloseModal && <BaseButton text="확인" size="lg" type="button" onClick={onClickCloseModal} />}
+            {onClickCloseModal && <BaseButton text='확인' size='lg' type='button' onClick={onClickCloseModal} />}
           </>
         )}
       />

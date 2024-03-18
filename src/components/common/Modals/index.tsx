@@ -27,6 +27,7 @@ interface ModalProps {
   date?: string;
   activityId?: number;
   scheduleId?: number;
+  getdate?: string;
 }
 
 export default function Modal({ modalType, setShowModal, ...props }: ModalProps) {
@@ -49,6 +50,7 @@ export default function Modal({ modalType, setShowModal, ...props }: ModalProps)
         control: props.control,
         abledReservationListData: props.abledReservationListData,
         setValue: props.setValue,
+        getdate: props.getdate,
       },
     },
     [MODAL_TYPE.notifications]: { component: Notifications, prop: {} },
