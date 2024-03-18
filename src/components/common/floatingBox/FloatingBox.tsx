@@ -8,7 +8,7 @@ import { queryKey } from '@/apis/quertKey';
 import { getAbledResrvationList } from '@/apis/get/getAbledResrvations';
 import BaseButton from '../button/BaseButton';
 import Input from '../Input/Input';
-import PostformatDate from '../Modals/ModalContents/utills/dateChange';
+import { PostformatDate } from '../Modals/ModalContents/utills';
 import Modal from '../Modals';
 import { ICON } from '@/constants';
 import Image from 'next/image';
@@ -42,6 +42,7 @@ export default function FloatingBox() {
   });
   const countMemberValue = watch('countMember');
   const watchDate = watch('abled-time');
+  const getdate = getValues('date');
 
   const handelOnSubmit: SubmitHandler<any> = (data) => {
     const postData = data;
@@ -72,9 +73,10 @@ export default function FloatingBox() {
           className={cn('floating-box-form-date')}
           abledReservationListData={abledReservationListData}
           control={control}
+          setValue={setValue}
         />
-        <button type="button" onClick={() => setShowModal('dateForm')} className={cn('floating-box-form-modal-btn')}>
-          {watchDate ? watchDate : '날짜 선택하기'}
+        <button type='button' onClick={() => setShowModal('dateForm')} className={cn('floating-box-form-modal-btn')}>
+          {getdate ? getdate : '날짜 선택하기'}
         </button>
 
         <CountMemberInput
@@ -85,7 +87,7 @@ export default function FloatingBox() {
           // onClickCountDown={handleClickCountDown(getValues('countMember'))}
         />
 
-        <BaseButton type="submit" text="예약하기" size="lg" />
+        <BaseButton type='submit' text='예약하기' size='lg' />
       </form>
       <article className={cn('total-price')}>
         <h2>총 합계</h2>
@@ -95,14 +97,14 @@ export default function FloatingBox() {
       </article>
       {showModal === 'dateForm' && (
         <Modal
-          modalType="dateForm"
+          modalType='dateForm'
           abledReservationListData={abledReservationListData}
           control={control}
           setShowModal={setShowModal}
         />
       )}
       {showModal === 'countMemberInput' && (
-        <Modal modalType="countMemberInput" control={control} setShowModal={setShowModal} setValue={setValue} />
+        <Modal modalType='countMemberInput' control={control} setShowModal={setShowModal} setValue={setValue} />
       )}
     </section>
   );
