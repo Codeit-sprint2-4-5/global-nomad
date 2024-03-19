@@ -11,7 +11,6 @@ import { GetActivitiesList } from '@/types/activities';
 import Title from '@/components/common/title/Title';
 import { useRouter } from 'next/router';
 import Question from '@/components/common/popup/question/Question';
-import Confirm from '@/components/common/popup/confirm/Confirm';
 import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
 
 const cn = classNames.bind(styles);
@@ -22,7 +21,6 @@ export default function MyActivities() {
   const queryClient = useQueryClient();
   const router = useRouter();
   const deleteDialogRef = useRef(null);
-  const confirmDialogRef = useRef(null);
 
   //본인이 등록한 체험정보 get API
   async function getMyActivities({ pageParam }: any) {
@@ -63,8 +61,6 @@ export default function MyActivities() {
     try {
       if (!deleteDialogRef.current) return;
       deleteDialogRef.current.close();
-      if (!confirmDialogRef.current) return;
-      confirmDialogRef.current.showModal();
 
       mutate(activityId);
     } catch (error) {
@@ -143,7 +139,6 @@ export default function MyActivities() {
         dialogRef={deleteDialogRef}
         onClick={() => handleDeleteClick(deleteActivityId)}
       />
-      <Confirm text="체험을 삭제했습니다" dialogRef={confirmDialogRef} />
     </>
   );
 }
