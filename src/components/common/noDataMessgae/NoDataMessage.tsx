@@ -2,10 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './NodataMessage.module.scss';
 import classNames from 'classnames/bind';
-import { ICON, IMAGE } from '@/constants';
+import { IMAGE } from '@/constants';
 
 const cn = classNames.bind(styles);
-const NoDataMessage = ({ message }: { message: string }) => {
+export default function NoDataMessage({ message }: { message: string }) {
   return (
     <div className={cn('no-data-container')}>
       <div className={cn('image-container')}>
@@ -20,6 +20,4 @@ const NoDataMessage = ({ message }: { message: string }) => {
       <p className={cn('text')}>{message}</p>
     </div>
   );
-};
-
-export default NoDataMessage;
+}
