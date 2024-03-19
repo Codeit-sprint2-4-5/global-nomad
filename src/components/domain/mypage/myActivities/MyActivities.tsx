@@ -154,7 +154,6 @@ export default function MyActivities() {
         dialogRef={deleteDialogRef}
         onClick={() => handleDeleteClick(deleteActivityId)}
       />
-      <Confirm text="체험을 삭제했습니다" dialogRef={confirmDialogRef} />
     </>
   );
 }
