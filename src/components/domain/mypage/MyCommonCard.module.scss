@@ -1,7 +1,7 @@
 .reservations-container {
   @include column-flexbox(none, none);
   width: 80rem;
-  height: 1190px;
+  height: 119rem;
   overflow: scroll;
   scrollbar-width: none;
 
@@ -16,34 +16,34 @@
 .title {
   position: sticky;
   @include flexbox(between, center);
-  margin-bottom: 24px;
+  margin-bottom: 2.4rem;
   top: 0;
   @include responsive('M') {
-    margin-bottom: 16px;
+    margin-bottom: 1.6rem;
   }
   background-color: $white;
 }
 .register-button {
-  padding: 11px 16.5px;
-  border-radius: 4px;
+  padding: 1.1rem 1.65rem;
+  border-radius: 0.4rem;
   background-color: $gray90;
   @include text-style(1.6, 700, $white);
 }
 .card-lists {
   @include column-flexbox(none, none);
 
-  gap: 24px;
+  gap: 2.4rem;
 
   @include responsive('M') {
-    gap: 16px;
+    gap: 1.6rem;
   }
 }
 .ref-box {
-  height: 1px;
+  height: 0.1rem;
 }
 .loading-container {
   @include flexbox(center, none);
-  margin-top: 12px;
+  margin-top: 1.2rem;
 }
 .loading-image {
   animation: rotate 2s linear infinite;
