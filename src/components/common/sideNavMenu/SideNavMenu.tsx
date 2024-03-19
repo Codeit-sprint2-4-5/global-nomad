@@ -13,8 +13,10 @@ export default function SideNavMenu({
 }) {
   const router = useRouter();
   const pathname = router.pathname;
+
   const selectedValue = pathname.substring('/mypage/'.length);
   const initialValue = '/images/default_profile_image.png';
+
   const [profileImage, setProfileImage] = useState<string>(initialValue);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -44,8 +46,10 @@ export default function SideNavMenu({
   };
 
   return (
+
     <div className={cn('side-menu-entire', { isVisible: isVisible })}>
       <div className={cn('user-profile')}>
+
         <Image
           src={IMAGE.avatar.default.src}
           height={160}
@@ -73,6 +77,7 @@ export default function SideNavMenu({
           <li
             key={index}
             className={cn('side-menu-link', {
+
               active: selectedValue === menuItem.id,
             })}
             onClick={() => handleMenuClick(menuItem.id)}
