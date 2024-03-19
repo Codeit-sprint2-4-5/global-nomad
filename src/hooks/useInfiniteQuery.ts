@@ -1,4 +1,5 @@
 import { useInfiniteQuery, QueryFunction } from '@tanstack/react-query';
+
 interface useCustomInfiniteQueryProps {
   queryKey: string[];
   queryFn: QueryFunction<any>;
