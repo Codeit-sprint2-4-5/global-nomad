@@ -22,7 +22,7 @@ export default function MyActivities() {
   const queryClient = useQueryClient();
   const router = useRouter();
   const deleteDialogRef = useRef(null);
-  console.log(deleteActivityId);
+
   //본인이 등록한 체험정보 get API
   async function getMyActivities({ pageParam }: any) {
     const cursorId = pageParam ? `cursorId=${pageParam}&` : '';
@@ -157,7 +157,6 @@ export default function MyActivities() {
         dialogRef={deleteDialogRef}
         onClick={() => handleDeleteClick(deleteActivityId)}
       />
-      <Confirm text="체험을 삭제했습니다" dialogRef={confirmDialogRef} />
     </>
   );
 }
