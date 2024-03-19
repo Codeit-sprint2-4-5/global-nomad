@@ -1,26 +1,25 @@
 .card-container {
   @include flexbox(none, center);
-  width: 79.2rem;
+
   height: 20.4rem;
   border-radius: 2.4rem;
   box-shadow: 0 0.4rem 1.6rem 0 $search-popup-box-shadow;
 
-  @include responsive("T") {
-    width: 42.9rem;
+  @include responsive('T') {
     height: 15.6rem;
   }
-  @include responsive("M") {
-    width: 34.4rem;
+  @include responsive('M') {
     height: 12.8rem;
   }
 }
 .card-image {
   height: 100%;
   border-radius: 2.4rem 0 0 2.4rem;
-  @include responsive("T") {
+
+  @include responsive('T') {
     width: 15.6rem;
   }
-  @include responsive("M") {
+  @include responsive('M') {
     width: 12.8rem;
   }
 }
@@ -29,10 +28,11 @@
   padding: 2.55rem 2.4rem;
   height: 100%;
   border-radius: 0 2.4rem 2.4rem 0;
-  @include responsive("T") {
+
+  @include responsive('T') {
     padding: 1.2rem 1.8rem 1.2rem 1.2rem;
   }
-  @include responsive("M") {
+  @include responsive('M') {
     padding: 0.9rem 1.5rem 0.9rem 0.8rem;
   }
 }
@@ -46,7 +46,7 @@
   margin-bottom: 0.8rem;
   @include text-style(1.6, 700, $gray70);
 
-  @include responsive("M") {
+  @include responsive('M') {
     @include text-style(1.4, 700);
   }
 
@@ -65,11 +65,11 @@
   margin-bottom: 1.6rem;
   @include text-style(2, 700);
 
-  @include responsive("T") {
+  @include responsive('T') {
     @include text-style(1.8, 700);
     margin-bottom: 0.8rem;
   }
-  @include responsive("M") {
+  @include responsive('M') {
     margin-bottom: 0.8rem;
     @include text-style(1.4, 700);
   }
@@ -79,24 +79,24 @@
   line-height: 2.4rem;
   @include text-style(1.8, 400);
 
-  @include responsive("T") {
+  @include responsive('T') {
     @include text-style(1.4, 400);
   }
-  @include responsive("M") {
+  @include responsive('M') {
     @include text-style(1.2, 400);
   }
 }
 
 .price-section {
-  width: 54rem;
+  width: 55rem;
   margin-top: 1.6rem;
   @include flexbox(between, center);
 
-  @include responsive("T") {
+  @include responsive('T') {
     width: 24.5rem;
     margin-top: 1rem;
   }
-  @include responsive("M") {
+  @include responsive('M') {
     width: 19.3rem;
     margin-top: 0.8rem;
     @include text-style(1.6);
@@ -109,14 +109,14 @@
 
   @include text-style(2.4, 500, $black);
 
-  @include responsive("T") {
+  @include responsive('T') {
     @include text-style(2);
 
     padding: 0.8rem 0;
     line-height: 2.4rem;
   }
 
-  @include responsive("M") {
+  @include responsive('M') {
     @include text-style(1.6);
     padding: 0.7rem 0 0.6rem;
     line-height: 1.9rem;
@@ -130,10 +130,10 @@
 
   @include text-style(1.6, 700, $gray90);
 
-  @include responsive("T") {
+  @include responsive('T') {
     padding: 0.7rem 2.65rem;
   }
-  @include responsive("T") {
+  @include responsive('T') {
     padding: 0.6rem 1.4rem;
     @include text-style(1.4, 700);
   }
@@ -160,11 +160,11 @@
   gap: 0.5rem;
   line-height: 2.8rem;
 
-  @include responsive("T") {
+  @include responsive('T') {
     @include text-style(2.4, 500);
     line-height: 2.48rem;
   }
-  @include responsive("M") {
+  @include responsive('M') {
     @include text-style(1.6, 750);
     line-height: 1.9rem;
   }
@@ -172,7 +172,7 @@
   span {
     @include text-style(2, 400, $gray80);
 
-    @include responsive("M") {
+    @include responsive('M') {
       @include text-style(1.6, 400);
       line-height: 1.9rem;
     }
@@ -182,11 +182,12 @@
   @extend .price-section;
   margin-top: 7.2rem;
   position: relative;
-  @include responsive("T") {
-    margin-top: 40px;
+
+  @include responsive('T') {
+    margin-top: 4rem;
   }
-  @include responsive("M") {
-    margin-top: 29px;
+  @include responsive('M') {
+    margin-top: 2.9rem;
   }
 }
 .context-menu {
@@ -209,11 +210,12 @@
     background-color: $lightgreen;
     color: $gray90;
   }
-  @include responsive("T") {
+
+  @include responsive('T') {
     padding: 1.5rem 4rem;
     @include text-style(1.6, 500, $gray80);
   }
-  @include responsive("M") {
+  @include responsive('M') {
     padding: 1.2rem 3.2rem;
     @include text-style(1.4, 500, $gray80);
   }
