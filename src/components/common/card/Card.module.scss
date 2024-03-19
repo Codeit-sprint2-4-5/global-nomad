@@ -15,6 +15,7 @@
 .card-image {
   height: 100%;
   border-radius: 2.4rem 0 0 2.4rem;
+
   @include responsive('T') {
     width: 15.6rem;
   }
@@ -27,6 +28,7 @@
   padding: 2.55rem 2.4rem;
   height: 100%;
   border-radius: 0 2.4rem 2.4rem 0;
+
   @include responsive('T') {
     padding: 1.2rem 1.8rem 1.2rem 1.2rem;
   }
@@ -180,6 +182,7 @@
   @extend .price-section;
   margin-top: 7.2rem;
   position: relative;
+
   @include responsive('T') {
     margin-top: 4rem;
   }
@@ -207,6 +210,7 @@
     background-color: $lightgreen;
     color: $gray90;
   }
+
   @include responsive('T') {
     padding: 1.5rem 4rem;
     @include text-style(1.6, 500, $gray80);

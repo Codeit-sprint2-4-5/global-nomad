@@ -10,7 +10,7 @@ interface ChipsProps {
 
 export default function Chips({ status, count = 0 }: ChipsProps) {
 	const statusObject = {
-		confirmed: '확정',
+		confirmed: '승인',
 		complete: '완료',
 		reservation: '예약',
 		seat: '잔여',
