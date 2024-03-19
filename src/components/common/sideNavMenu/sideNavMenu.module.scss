@@ -1,4 +1,3 @@
-
 .side-menu-entire {
   width: 38.4rem;
   padding: 2.4rem;
@@ -10,10 +9,10 @@
 
   @include column-flexbox(none, none);
 
-  @include responsive("T") {
+  @include responsive('T') {
     width: 25.1rem;
   }
-  @include responsive("M") {
+  @include responsive('M') {
     width: 34.4rem;
     display: none;
     &.isVisible {
@@ -91,4 +90,3 @@
 .side-menu-file-input {
   display: none;
 }
-

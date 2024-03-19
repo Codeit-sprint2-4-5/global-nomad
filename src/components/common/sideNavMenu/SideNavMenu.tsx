@@ -1,10 +1,10 @@
-import Image from "next/image";
-import styles from "./sideNavMenu.module.scss";
-import classNames from "classnames/bind";
-import { ChangeEvent, useRef, useState } from "react";
-import MENU_ITEMS from "@/constants/menuItems";
-import { ICON } from "@/constants";
-import { useRouter } from "next/router";
+import Image from 'next/image';
+import styles from './sideNavMenu.module.scss';
+import classNames from 'classnames/bind';
+import { ChangeEvent, useRef, useState } from 'react';
+import MENU_ITEMS from '@/constants/menuItems';
+import { ICON, IMAGE } from '@/constants';
+import { useRouter } from 'next/router';
 const cn = classNames.bind(styles);
 export default function SideNavMenu({
   isVisible = false,
@@ -13,8 +13,8 @@ export default function SideNavMenu({
 }) {
   const router = useRouter();
   const pathname = router.pathname;
-  const selectedValue = pathname.substring("/mypage/".length);
-  const initialValue = "/images/default_profile_image.png";
+  const selectedValue = pathname.substring('/mypage/'.length);
+  const initialValue = '/images/default_profile_image.png';
   const [profileImage, setProfileImage] = useState<string>(initialValue);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +35,7 @@ export default function SideNavMenu({
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
     } catch (error) {
-      console.error("이미지 업로드 중 오류가 발생했습니다.", error);
+      console.error('이미지 업로드 중 오류가 발생했습니다.', error);
     }
   };
 
@@ -44,18 +44,18 @@ export default function SideNavMenu({
   };
 
   return (
-    <div className={cn("side-menu-entire", { isVisible: isVisible })}>
-      <div className={cn("user-profile")}>
+    <div className={cn('side-menu-entire', { isVisible: isVisible })}>
+      <div className={cn('user-profile')}>
         <Image
-          src={profileImage}
+          src={IMAGE.avatar.default.src}
           height={160}
           width={160}
           alt="profileImage"
-          className={cn("user-profile-image")}
+          className={cn('user-profile-image')}
           onClick={handleButtonClick}
         />
         <div
-          className={cn("side-menu-Image-modify")}
+          className={cn('side-menu-Image-modify')}
           onClick={handleButtonClick}
         >
           <Image
@@ -63,16 +63,16 @@ export default function SideNavMenu({
             width={24}
             height={24}
             alt={ICON.pen.default.alt}
-            className={cn("side-menu-Image-modify-icon")}
+            className={cn('side-menu-Image-modify-icon')}
           />
         </div>
       </div>
 
-      <ul className={cn("side-menu")}>
+      <ul className={cn('side-menu')}>
         {MENU_ITEMS.map((menuItem, index) => (
           <li
             key={index}
-            className={cn("side-menu-link", {
+            className={cn('side-menu-link', {
               active: selectedValue === menuItem.id,
             })}
             onClick={() => handleMenuClick(menuItem.id)}
@@ -82,7 +82,7 @@ export default function SideNavMenu({
               height={24}
               src={menuItem.iconSrc}
               alt={menuItem.iconAlt}
-              className={cn("side-menu-Image")}
+              className={cn('side-menu-Image')}
             />
             <span>{menuItem.content}</span>
           </li>
@@ -92,7 +92,7 @@ export default function SideNavMenu({
         type="file"
         accept="image/jpeg, image/bmp, image/svg+xml,image/jpg"
         onChange={handleImageChange}
-        className={cn("side-menu-file-input")}
+        className={cn('side-menu-file-input')}
         ref={inputRef}
       />
     </div>
