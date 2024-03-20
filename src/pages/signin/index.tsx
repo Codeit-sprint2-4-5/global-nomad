@@ -1,5 +1,5 @@
 import AuthForm from '@/components/auth/signin/AuthForm';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { FormValues } from '@/types/auth';
 import { SubmitHandler } from 'react-hook-form';
 import { auth } from '@/apis/auth';
