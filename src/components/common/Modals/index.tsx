@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import { Control, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
+import { Control, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import CountMemberInput from '../floatingBox/CountMemberInput';
 import ReservationInfo from './ModalContents/reservationInfo/ReservationInfo';
 import Review from './ModalContents/review/Review';
