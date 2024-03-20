@@ -11,6 +11,7 @@ interface BaseButtonProps {
   border?: string;
   disabled?: boolean;
   onClick?: () => void;
+  form?: string;
 }
 
 export default function BaseButton({
