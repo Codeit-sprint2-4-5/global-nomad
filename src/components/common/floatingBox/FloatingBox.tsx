@@ -12,35 +12,56 @@ import { getAbledResrvationList } from '@/apis/get/getAbledResrvations';
 import styles from './FloatingBox.module.scss';
 import classNames from 'classnames/bind';
 import { postReservation } from '@/apis/post/postReservation';
+import { AbledReservationListData } from '@/types';
 
 const cn = classNames.bind(styles);
+
+export interface PostReservationData {
+  headCount: number;
+  scheduleId: number;
+}
 
 export default function FloatingBox({ price = 10000 }) {
   const [totalPrice, setTotalPrice] = useState(price);
   const [showModal, setShowModal] = useState('');
+  const [reservedTime, setReservedTime] = useState('');
+  const { control, register, handleSubmit, setValue, getValues, watch } = useForm<PostReservationData>({
+    defaultValues: { headCount: 1, scheduleId: 0 },
+  });
   const router = useRouter(); // 나중에 라우터에서 id 값 받아와서 아래 함수 id 에 넣어주기
 
-  const { data: abledReservationListData } = useQuery({
+  const { data: abledReservationListData } = useQuery<AbledReservationListData[]>({
     queryKey: queryKey.reservation(152, 2024, '04'),
     queryFn: () => getAbledResrvationList(152, 2024, '04'),
     staleTime: 1000 * 60 * 5,
   });
-  console.log('asdf', abledReservationListData);
 
-  const { control, handleSubmit, setValue, getValues, watch } = useForm<any>({
-    defaultValues: { headCount: 1, date: abledReservationListData },
-  });
   const countMemberValue = watch('headCount');
-  const getdate = getValues('date');
+  const scheduleIdValue = getValues('scheduleId');
+  console.log('sss', scheduleIdValue);
+
+  // useEffect(() => {
+  //   if (abledReservationListData && scheduleIdValue) {
+  //     const foundDateData = abledReservationListData.find((item: AbledReservationListData) =>
+  //       item.times.find((time) => time.id === scheduleIdValue)
+  //     );
+  //     const foundTimeData = foundDateData ? foundDateData.times.find((time) => time.id === scheduleIdValue) : undefined;
+  //     const nextRserveTime = foundTimeData
+  //       ? `${foundDateData?.date.split('-').join('/')} ${foundTimeData.startTime} ~ ${foundTimeData.endTime}`
+  //       : '';
+  //     setReservedTime(nextRserveTime);
+  //   }
+  // }, [abledReservationListData, scheduleIdValue]);
 
   const postReservationMutation = useMutation({
-    mutationFn: (data: unknown) => postReservation(152, data),
+    mutationFn: (data: PostReservationData) => postReservation(152, data),
     //라우터에서 id 받아오기
     onSuccess: () => alert('예약 신청 성공'),
   });
 
-  const handelOnSubmit: SubmitHandler<any> = (data) => {
-    postReservationMutation.mutate({ headCount: data.headCount, scheduleId: data.scheduleId });
+  const handelOnSubmit: SubmitHandler<PostReservationData> = (data) => {
+    console.log(data);
+    //postReservationMutation.mutate(data);
   };
 
   useEffect(() => {
@@ -65,19 +86,13 @@ export default function FloatingBox({ price = 10000 }) {
           abledReservationListData={abledReservationListData}
           control={control}
           setValue={setValue}
-          getdate={getdate}
+          register={register}
         />
         <button type='button' onClick={() => setShowModal('dateForm')} className={cn('floating-box-form-modal-btn')}>
-          {getdate ? displayDateFormat(getdate) : '날짜 선택하기'}
+          {reservedTime ? reservedTime : '날짜 선택하기'}
         </button>
 
-        <CountMemberInput
-          control={control}
-          onDownDisabled={watch('headCount') <= 1}
-          setValue={setValue}
-          // onClickCountUp={handleClickCountUp(getValues('countMember'))}
-          // onClickCountDown={handleClickCountDown(getValues('countMember'))}
-        />
+        <CountMemberInput control={control} onDownDisabled={watch('headCount') <= 1} setValue={setValue} />
 
         <BaseButton type='submit' text='예약하기' size='lg' />
       </form>

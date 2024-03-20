@@ -1,11 +1,10 @@
 import { Control, Controller, UseFormSetValue } from 'react-hook-form';
-import { ICON } from '@/constants';
-
 import Image from 'next/image';
-
+import BaseButton from '../button/BaseButton';
+import { PostReservationData } from './FloatingBox';
+import { ICON } from '@/constants';
 import styles from './CountMemberInput.module.scss';
 import classNames from 'classnames/bind';
-import BaseButton from '../button/BaseButton';
 
 const { add, subtract } = ICON;
 
@@ -13,8 +12,8 @@ const cn = classNames.bind(styles);
 
 interface Props {
   onDownDisabled?: boolean;
-  control?: Control;
-  setValue?: UseFormSetValue<any>;
+  control?: Control<PostReservationData, any, PostReservationData>;
+  setValue?: UseFormSetValue<PostReservationData>;
   onClickCloseModal?: () => void;
 }
 
