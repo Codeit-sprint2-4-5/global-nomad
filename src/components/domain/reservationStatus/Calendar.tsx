@@ -74,9 +74,9 @@ export default function Calendar() {
 
   async function getMonthActivity() {
     try {
-      const res = await instance.get(
-        `/my-activities/${activityId}/reservation-dashboard?year=${currentYear}&month=${formattedmonth}`
-      );
+      const res = await instance.get(`/my-activities/${activityId}/reservation-dashboard`, {
+        params: { year: currentYear, month: formattedmonth },
+      });
       return res.data;
     } catch (error) {
       console.log(error);
