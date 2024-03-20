@@ -5,6 +5,8 @@ import Chips from '@/components/common/chips/Chips';
 import Dropdown from '@/components/common/dropdown/Dropdown';
 import classNames from 'classnames/bind';
 import styles from './Calendar.module.scss';
+import { all } from 'axios';
+import { resourceUsage } from 'process';
 
 const cn = classNames.bind(styles);
 
@@ -62,37 +64,39 @@ export default function Calendar() {
   };
 
   async function getAllActivity() {
-    const res = await instance.get('/my-activities');
-    return res.data;
+    try {
+      const res = await instance.get('/my-activities');
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function getMonthActivity() {
-    const res = await instance.get(
-      `/my-activities/${activityId}/reservation-dashboard?year=${currentYear}&month=${formattedmonth}`
-    );
-    return res.data;
+    try {
+      const res = await instance.get(
+        `/my-activities/${activityId}/reservation-dashboard?year=${currentYear}&month=${formattedmonth}`
+      );
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  const { data: allActivity, isLoading: allActivityLoading } = useQuery({
+  const { data: allActivity } = useQuery({
     queryKey: ['/my-activities'],
     queryFn: getAllActivity,
   });
 
-  const { data: monthActivity, isLoading: monthActivityLoading } = useQuery({
+  const { data: monthActivity } = useQuery({
     queryKey: [`/my-activities/${activityId}`],
     queryFn: getMonthActivity,
     enabled: activityId !== 0,
   });
 
-  useEffect(() => {
-    if (allActivity) {
-      setActivityId(allActivity.activities[0].id);
-    }
-  }, []);
-
   return (
     <>
-      <Dropdown lists={allActivity.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
+      <Dropdown lists={allActivity?.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
       <div className={cn('date-control')}>
         <button type='button' className={cn('button', 'prev')} onClick={handlePrevClick}>
           이전
