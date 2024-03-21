@@ -17,7 +17,7 @@ interface Props {
   dayIdx: number;
   prevMonthDate: number[];
   currentMonthDay: Date;
-  monthActivity: any;
+  monthActivity: [];
   currentYear: number;
   currentMonth: number;
   days: number[];
