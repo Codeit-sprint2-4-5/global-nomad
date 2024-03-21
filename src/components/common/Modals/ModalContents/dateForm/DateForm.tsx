@@ -75,22 +75,6 @@ export default function DateForm({
                 </>
               )}
             />
-
-            {/* {abledDate && abledDate.times.length > 0 ? (
-              abledDate.times.map((time) => (
-                <li key={time.id}>
-                  <input
-                    type='button'
-                    value={time.id}
-                    className={cn('abled-time-input-item', { valid: time.id === scheduleId })}
-                    onClick={() => handleClickTimes(time.id)}
-                    name={`${time.startTime}~${time.endTime}`}
-                  />
-                </li>
-              ))
-            ) : (
-              <p>해당하는 날짜에 예약 가능한 시간이 없습니다</p>
-            )} */}
           </ul>
         </div>
         {onClickCloseModal && <BaseButton onClick={onClickCloseModal} type='button' text='작성하기' size='lg' />}
