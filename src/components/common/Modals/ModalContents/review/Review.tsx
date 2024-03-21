@@ -15,7 +15,7 @@ interface Props {
 export default function Review({ id = 522, onClickCloseModal }: Props) {
   const { data: reservationsData } = useQuery({
     queryKey: ['my-reservations'],
-    queryFn: getMyReserVations,
+    queryFn: () => getMyReserVations(10),
   });
   console.log('dd', reservationsData?.reservations);
   const reservation = reservationsData?.reservations.find((reservation: any) => reservation.id === id);
