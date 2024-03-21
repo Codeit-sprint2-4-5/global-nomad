@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import { auth } from '@/apis/auth';
 import { ProfileFormValues } from '@/types/auth';
 import Confirm from '@/components/common/popup/confirm/Confirm';
-import AccountForm from '@/components/account/form/AccountForm';
+import AccountForm from '@/components/domain/account/form/AccountForm';
 import Question from '@/components/common/popup/question/Question';
 
 export default function Account() {
