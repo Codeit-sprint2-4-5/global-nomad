@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import Test from '@/pages/test';
 import { useEffect, useState } from 'react';
 import useRouteStore from '@/stores/useRoute';
+import debounce from '@/function/debounce';
 
 const cn = classNames.bind(style);
 
@@ -29,17 +30,16 @@ export default function Mypages() {
     }
   };
 
-  const handleResize = () => {
+  const handleResize = debounce(() => {
     if (window.innerWidth <= 767) {
       setIsMobile(true);
       if (prevRoute === '/mypage') return;
       router.push('/mypage', undefined, { shallow: true });
-
       return;
     }
     setIsMobile(false);
     useRouteStore.setState({ prevRoute: '' });
-  };
+  }, 20);
   useEffect(() => {
     handleResize();
     window.addEventListener('resize', handleResize);
