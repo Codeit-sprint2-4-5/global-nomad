@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Skeleton.module.scss';
+import { throttle } from 'lodash';
 const cn = classNames.bind(styles);
 
 type Props = 'popular' | 'all' | 'detail' | 'reservation' | 'management';
@@ -8,20 +9,31 @@ type Props = 'popular' | 'all' | 'detail' | 'reservation' | 'management';
 export default function Skeleton({ type }: { type: Props }) {
   const [allItem, setAllItem] = useState(8);
   const [popularItem, setPopularItem] = useState(3);
+  const [throttle, setThrottle] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       const breakPoint = window.innerWidth;
 
-      if (breakPoint > 1200) {
-        setAllItem(8);
-        setPopularItem(3);
-      } else if (breakPoint > 768) {
-        setAllItem(9);
-        setPopularItem(3);
-      } else if (breakPoint > 375) {
-        setAllItem(4);
-        setPopularItem(9);
+      if (throttle) return;
+
+      if (!throttle) {
+        setThrottle(true);
+
+        setTimeout(() => {
+          if (breakPoint > 1200) {
+            setAllItem(8);
+            setPopularItem(3);
+          } else if (breakPoint > 768) {
+            setAllItem(9);
+            setPopularItem(3);
+          } else if (breakPoint > 375) {
+            setAllItem(4);
+            setPopularItem(9);
+          }
+
+          setThrottle(false);
+        }, 100);
       }
     };
 
@@ -31,7 +43,7 @@ export default function Skeleton({ type }: { type: Props }) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [throttle]);
 
   switch (type) {
     case 'popular':
@@ -46,7 +58,7 @@ export default function Skeleton({ type }: { type: Props }) {
       return (
         <div className={cn('all-container')}>
           {[...Array(allItem)].map((_, idx) => (
-            <div key={idx} className={cn('box')}>
+            <div key={idx} className={cn('wrap')}>
               <div className={cn('img')}></div>
               <div className={cn('rating')}></div>
               <div className={cn('title')}></div>
@@ -58,7 +70,7 @@ export default function Skeleton({ type }: { type: Props }) {
     case 'detail':
       return (
         <div className={cn('detail-container')}>
-          <div className={cn('box')}></div>
+          <div className={cn('img')}></div>
           <div className={cn('wrap')}>
             {[...Array(4)].map((_, idx) => (
               <div key={idx} className={cn('box')}></div>
@@ -70,8 +82,8 @@ export default function Skeleton({ type }: { type: Props }) {
       return (
         <div className={cn('card-container')}>
           {[...Array(6)].map((_, idx) => (
-            <div key={idx} className={cn('box-wrap')}>
-              <div className={cn('box')}></div>
+            <div key={idx} className={cn('card-wrap')}>
+              <div className={cn('img')}></div>
               <div className={cn('text-wrap')}>
                 <div className={cn('status')}></div>
                 <div className={cn('title')}></div>
@@ -86,8 +98,8 @@ export default function Skeleton({ type }: { type: Props }) {
       return (
         <div className={cn('card-container')}>
           {[...Array(3)].map((_, idx) => (
-            <div key={idx} className={cn('box-wrap')}>
-              <div className={cn('box')}></div>
+            <div key={idx} className={cn('card-wrap')}>
+              <div className={cn('img')}></div>
               <div className={cn('text-wrap')}>
                 <div className={cn('status')}></div>
                 <div className={cn('title')}></div>
