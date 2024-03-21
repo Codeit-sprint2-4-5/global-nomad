@@ -29,7 +29,6 @@ export default function DateForm({
   abledReservationListData,
   onClickCloseModal,
   className,
-  register,
 }: DateFormProps) {
   const [calenderValue, onChangeCalender] = useState<Value>();
   const formatDate = PostformatDate(calenderValue as Date);
@@ -37,11 +36,8 @@ export default function DateForm({
   const [scheduleId, setscheduleId] = useState<number>();
   const abledDate = abledReservationListData?.find((data: AbledReservationListData) => data.date === formatDate);
 
-  console.log('날짜 데이터', abledDate);
-
   const handleClickTimes = (id: number) => {
     setscheduleId(id);
-    console.log(id);
     if (setValue) {
       setValue('scheduleId', id);
     }

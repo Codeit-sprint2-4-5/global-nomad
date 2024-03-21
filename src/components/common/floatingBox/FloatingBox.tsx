@@ -38,7 +38,6 @@ export default function FloatingBox({ price = 10000 }) {
 
   const countMemberValue = watch('headCount');
   const scheduleIdValue = getValues('scheduleId');
-  console.log('sss', scheduleIdValue);
 
   useEffect(() => {
     if (abledReservationListData && scheduleIdValue) {
