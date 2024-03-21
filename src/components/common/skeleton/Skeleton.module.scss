@@ -38,7 +38,7 @@
     gap: 2.4rem 0;
   }
 
-  .box {
+  .wrap {
     div {
       width: 28.3rem;
       @include skeleton(0);
@@ -98,11 +98,8 @@
     height: 31rem;
   }
 
-  .box {
+  .img {
     @include skeleton(0);
-  }
-
-  & > .box {
     width: 50%;
     height: 53.4rem;
     border-radius: 1.2rem 0 0 1.2rem;
@@ -143,6 +140,7 @@
     }
 
     .box {
+      @include skeleton(0);
       width: calc(50% - 0.4rem);
       height: 26.3rem;
       border-radius: 2.4rem 0 0 2.4rem;
@@ -182,7 +180,7 @@
 }
 
 .card-container {
-  .box-wrap {
+  .card-wrap {
     @include flexbox(center, center);
     gap: 2.4rem;
 
@@ -194,11 +192,11 @@
       gap: 0.8rem;
     }
 
-    & + .box-wrap {
+    & + .card-wrap {
       margin: 2.4rem 0 0;
     }
 
-    & > .box {
+    .img {
       @include skeleton(0);
       width: 20.4rem;
       height: 20.4rem;
