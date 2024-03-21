@@ -1,4 +1,3 @@
-import AuthForm from '@/components/auth/signin/AuthForm';
 import { useMutation } from '@tanstack/react-query';
 import { FormValues } from '@/types/auth';
 import { SubmitHandler } from 'react-hook-form';
@@ -6,6 +5,7 @@ import { auth } from '@/apis/auth';
 import { useRef, useState } from 'react';
 import { AxiosError } from 'axios';
 import Router from 'next/router';
+import AuthForm from '@/components/domain/auth/signin/AuthForm';
 import Confirm from '@/components/common/popup/confirm/Confirm';
 
 interface ErrorMessage {

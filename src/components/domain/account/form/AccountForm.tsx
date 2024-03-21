@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { auth } from '@/apis/auth';
-import Title from '../../common/title/Title';
-import Input from '../../common/Input/Input';
+import Title from '../../../common/title/Title';
+import Input from '../../../common/Input/Input';
 import { ProfileFormValues } from '@/types/auth';
 import { USER_INPUT_VALIDATION } from '@/constants';
-import BaseButton from '../../common/button/BaseButton';
-import style from '@/components/account/form/AccountForm.module.scss';
+import BaseButton from '../../../common/button/BaseButton';
+import style from './AccountForm.module.scss';
 
 const cn = classNames.bind(style);
 

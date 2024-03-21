@@ -1,4 +1,4 @@
-import Account from '@/components/account/Account';
+import Account from '@/components/domain/account/Account';
 import Layout from '@/components/common/layout/Layout';
 import SideNavMenu from '@/components/common/sideNavMenu/SideNavMenu';
 import { useRouter } from 'next/router';
@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 import Test from '@/pages/test';
 import { useEffect, useState } from 'react';
 import useRouteStore from '@/stores/useRoute';
-import debounce from '@/function/debounce';
+import throttle from '@/function/throttle';
 
 const cn = classNames.bind(style);
 
@@ -30,7 +30,7 @@ export default function Mypages() {
     }
   };
 
-  const handleResize = debounce(() => {
+  const handleResize = throttle(() => {
     if (window.innerWidth <= 767) {
       setIsMobile(true);
       if (prevRoute === '/mypage') return;
@@ -39,7 +39,7 @@ export default function Mypages() {
     }
     setIsMobile(false);
     useRouteStore.setState({ prevRoute: '' });
-  }, 20);
+  }, 100);
   useEffect(() => {
     handleResize();
     window.addEventListener('resize', handleResize);
