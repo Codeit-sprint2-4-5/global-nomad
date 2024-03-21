@@ -18,7 +18,7 @@ export default function ImageList({ onDeleteImageUrl, imageUrl, id }: Props) {
   return (
     <div className={cn('file-preview-list')}>
       <button className={cn('file-preview-item-cancel')} id={id && id} type='button' onClick={onDeleteImageUrl}>
-        <Image src={cancel.default.src} alt={cancel.default.alt} width={40} height={40} />
+        <Image src={cancel.default.src} alt={cancel.default.alt} fill />
       </button>
       <Image
         className={cn('file-preview-item')}
@@ -26,7 +26,7 @@ export default function ImageList({ onDeleteImageUrl, imageUrl, id }: Props) {
         width={180}
         height={180}
         alt='배너이미지'
-        objectFit='cover'
+        style={{ objectFit: 'cover' }}
       />
     </div>
   );
