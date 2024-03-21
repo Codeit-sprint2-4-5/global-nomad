@@ -89,8 +89,12 @@
       display: none;
       @include text-style(1.6, 600, $darkgreen);
       text-decoration-line: underline;
+      word-break: keep-all;
       @include responsive(T) {
         display: inline-block;
+      }
+      @include responsive(M) {
+        margin: 2rem 1rem 0;
       }
     }
     > button:last-child {
@@ -100,6 +104,7 @@
     @include responsive(M) {
       @include flexbox(between, end);
       flex-direction: row;
+
       padding: 0;
       > button:last-child {
         margin: 0;

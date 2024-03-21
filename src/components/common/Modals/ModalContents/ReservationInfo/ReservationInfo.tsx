@@ -6,7 +6,7 @@ import { getMyActivitiesReservation, getReservedScheduleDate } from '@/apis/get/
 import { changeDateToStringFormat } from '../utills';
 import { ReservationCardType } from '@/types/reservationInfo';
 import { queryKey } from '@/apis/quertKey';
-import styles from './Reservation.module.scss';
+import styles from './ReservationInfo.module.scss';
 import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);

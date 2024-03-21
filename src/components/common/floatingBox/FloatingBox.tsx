@@ -40,34 +40,35 @@ export default function FloatingBox({ price = 10000 }) {
   const scheduleIdValue = getValues('scheduleId');
   console.log('sss', scheduleIdValue);
 
-  // useEffect(() => {
-  //   if (abledReservationListData && scheduleIdValue) {
-  //     const foundDateData = abledReservationListData.find((item: AbledReservationListData) =>
-  //       item.times.find((time) => time.id === scheduleIdValue)
-  //     );
-  //     const foundTimeData = foundDateData ? foundDateData.times.find((time) => time.id === scheduleIdValue) : undefined;
-  //     const nextRserveTime = foundTimeData
-  //       ? `${foundDateData?.date.split('-').join('/')} ${foundTimeData.startTime} ~ ${foundTimeData.endTime}`
-  //       : '';
-  //     setReservedTime(nextRserveTime);
-  //   }
-  // }, [abledReservationListData, scheduleIdValue]);
+  useEffect(() => {
+    if (abledReservationListData && scheduleIdValue) {
+      const foundDateData = abledReservationListData.find((item: AbledReservationListData) =>
+        item.times.find((time) => time.id === scheduleIdValue)
+      );
+      const foundTimeData = foundDateData ? foundDateData.times.find((time) => time.id === scheduleIdValue) : undefined;
+      const nextRserveTime = foundTimeData
+        ? `${foundDateData?.date.split('-').join('/')} ${foundTimeData.startTime} ~ ${foundTimeData.endTime}`
+        : '';
+      setReservedTime(nextRserveTime);
+    }
+  }, [abledReservationListData, scheduleIdValue]);
 
   const postReservationMutation = useMutation({
     mutationFn: (data: PostReservationData) => postReservation(152, data),
     //라우터에서 id 받아오기
     onSuccess: () => alert('예약 신청 성공'),
+    onError: (e: any) => alert(e.response?.data.message),
+    //예약 실패했을땐 뭐나와야하지
   });
 
   const handelOnSubmit: SubmitHandler<PostReservationData> = (data) => {
     console.log(data);
-    //postReservationMutation.mutate(data);
+    postReservationMutation.mutate(data);
   };
 
   useEffect(() => {
     setTotalPrice(price * countMemberValue);
   }, [countMemberValue, price]);
-  //const countMember = register('countMember', { required: true });
 
   return (
     <section className={cn('floating-box')}>
@@ -108,6 +109,7 @@ export default function FloatingBox({ price = 10000 }) {
           abledReservationListData={abledReservationListData}
           control={control}
           setShowModal={setShowModal}
+          setValue={setValue}
         />
       )}
       {showModal === 'countMemberInput' && (

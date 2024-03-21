@@ -3,7 +3,7 @@ import BaseButton from '@/components/common/button/BaseButton';
 import { patchReservationStatus } from '@/apis/patch/patchReservationStatus';
 import ReservationTag from '@/components/common/ReservationTag';
 import classNames from 'classnames/bind';
-import styles from './Reservation.module.scss';
+import styles from './ReservationInfo.module.scss';
 import { queryKey } from '@/apis/quertKey';
 const cn = classNames.bind(styles);
 
