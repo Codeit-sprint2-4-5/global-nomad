@@ -25,6 +25,12 @@
   @include flexbox(start, end);
   gap: 2.4rem;
   flex-wrap: wrap;
+  @include responsive(T) {
+    gap: 1.6rem;
+  }
+  @include responsive(M) {
+    gap: 0.8rem;
+  }
 }
 
 .file {
@@ -63,12 +69,25 @@
     }
     &-item {
       @include flexbox(end, end);
+      width: 18rem;
+      height: 18rem;
       border-radius: 2.4rem;
+
+      overflow: hidden;
 
       &-cancel {
         position: absolute;
+        width: 4rem;
+        height: 4rem;
         top: -1.5rem;
         right: -1.5rem;
+
+        @include responsive(M) {
+          width: 3rem;
+          height: 3rem;
+          top: -1rem;
+          right: -1rem;
+        }
       }
     }
   }
@@ -77,4 +96,5 @@
 .guide-image-input {
   @include text-style(1.8, 400, $gray80);
   font-family: Pretendard;
+  word-break: keep-all;
 }
