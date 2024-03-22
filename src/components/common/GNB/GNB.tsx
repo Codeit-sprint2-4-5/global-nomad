@@ -69,9 +69,9 @@ export default function GNB() {
 
   return (
     <div className={cn('container')}>
-      <button>
+      <Link href='/'>
         <Image src={IMAGE.logo.nav.src} alt={IMAGE.logo.nav.alt} height={28} width={166} />
-      </button>
+      </Link>
       <div>
         {!Auth ? (
           <div className={cn('not', 'user')}>
