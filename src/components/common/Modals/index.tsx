@@ -12,6 +12,7 @@ import { ICON, MODAL_TYPE } from '@/constants';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import { PostReservationData } from '../floatingBox/FloatingBox';
+import { Reservation } from '@/types';
 
 const { x } = ICON;
 
@@ -30,16 +31,18 @@ interface ModalProps {
   scheduleId?: number;
   getdate?: string;
   register?: UseFormRegister<PostReservationData>;
+  reservationInfo?: Reservation;
+  className: string;
 }
 
-export default function Modal({ modalType, setShowModal, ...props }: ModalProps) {
+export default function Modal({ modalType, className, setShowModal, ...props }: ModalProps) {
   const handleClickCloseModal = () => {
     setShowModal('');
   };
   const ModalContents = {
     [MODAL_TYPE.review]: {
       component: Review,
-      prop: { id: props.id as number, onClickCloseModal: handleClickCloseModal },
+      prop: { reservationInfo: props.reservationInfo, onClickCloseModal: handleClickCloseModal },
     },
     [MODAL_TYPE.reservationInfo]: {
       component: ReservationInfo,
@@ -71,7 +74,7 @@ export default function Modal({ modalType, setShowModal, ...props }: ModalProps)
 
   return createPortal(
     <>
-      <section className={cn('modal-content', { notifications: modalType === 'notifications' })}>
+      <section className={cn('modal-content', { modalType: modalType }, className)}>
         <Image src={x.default.src} alt={x.default.alt} width={40} height={40} onClick={handleClickCloseModal} />
         <ContestComponent onClickCloseModal={handleClickCloseModal} {...prop} />
       </section>
