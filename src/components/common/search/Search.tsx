@@ -1,27 +1,27 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import BaseButton from '@/components/common/button/BaseButton';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
 const cn = classNames.bind(styles);
-
-interface Activity {
-  title: string;
-}
-
 interface Props {
-  data: {
-    activities: Activity[];
-  };
-  setSearchResult: Dispatch<SetStateAction<Activity[]>>;
+  onSubmit: () => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  keyword: string;
 }
 
-export default function Search({ data, setSearchResult }: Props) {
+export default function Search({ keyword, onSubmit, onChange }: Props) {
   const [isKeyword, setIsKeyword] = useState(false);
-  const [keyword, setKeyword] = useState('');
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      onChange(e);
+    }, 100);
 
     if (e.target.value === '') {
       setIsKeyword(false);
@@ -32,8 +32,7 @@ export default function Search({ data, setSearchResult }: Props) {
     e.preventDefault();
     if (!keyword) return;
 
-    const filterItem = data.activities.filter((activity: Activity) => activity.title.includes(keyword));
-    setSearchResult(filterItem);
+    onSubmit();
     setIsKeyword(true);
   };
 
@@ -50,7 +49,7 @@ export default function Search({ data, setSearchResult }: Props) {
             value={keyword}
           />
           <div className={cn('button')}>
-            <BaseButton type={'submit'} size={'md'} text={'검색하기'} />
+            <BaseButton type='submit' size='md' text='검색하기' />
           </div>
         </form>
       </div>
