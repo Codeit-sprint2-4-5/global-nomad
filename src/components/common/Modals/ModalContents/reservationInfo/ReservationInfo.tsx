@@ -45,13 +45,12 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
 
   useEffect(() => {
     if (reservedScheduleData) {
-      setScheduledId(reservedScheduleData[0].scheduleId);
+      setScheduledId(reservedScheduleData[0]?.scheduleId);
 
       const nextschedule = reservedScheduleData?.find(
         (schedule: ReservationSchedule) => scheduledId === schedule.scheduleId
       );
-      console.log(nextschedule?.count);
-      setSchedule(nextschedule.count);
+      setSchedule(nextschedule?.count);
     }
   }, [reservedScheduleData, scheduledId]);
 
@@ -117,10 +116,12 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
           </ul>
         </div>
       </article>
-      <div className={cn('reservation-current-situation')}>
-        <h2>예약 현황</h2>
-        <h2>{reservedScheduleData?.length}</h2>
-      </div>
+      {reservedScheduleData?.length !== 0 && (
+        <div className={cn('reservation-current-situation')}>
+          <h2>예약 현황</h2>
+          <h2>{reservedScheduleData?.length}</h2>
+        </div>
+      )}
     </>
   );
 }
