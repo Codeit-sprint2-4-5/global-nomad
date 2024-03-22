@@ -1,15 +1,17 @@
 .reservations-container {
   @include column-flexbox(none, none);
   width: 80rem;
-  height: 119rem;
+  height: 142rem;
   overflow: scroll;
   scrollbar-width: none;
 
   @include responsive('T') {
     width: 42.9rem;
+    height: 108.8rem;
   }
   @include responsive('M') {
     width: 34.4rem;
+    height: 86.3rem;
   }
 }
 
@@ -34,8 +36,11 @@
 
   gap: 2.4rem;
 
-  @include responsive('M') {
+  @include responsive('T') {
     gap: 1.6rem;
+  }
+  @include responsive('M') {
+    gap: 0.8rem;
   }
 }
 .ref-box {
