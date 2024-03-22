@@ -14,6 +14,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Filter from '@/components/common/filter/Filter';
 import { ICON } from '@/constants';
 import { useRouter } from 'next/router';
+import Modal from '@/components/common/Modals';
 
 const cn = classNames.bind(styles);
 
@@ -160,8 +161,13 @@ export default function MyReservations() {
         dialogRef={deleteDialogRef}
         onClick={() => handleSubmitCancel(reservationId)}
       />
-      {/* {showModal === 'review' &&<Modal modalType = "review" 
-                        reservationInfo={reservationInfo} setshowModal={setShowModal}} */}
+      {showModal === 'review' && (
+        <Modal
+          modalType="review"
+          reservationInfo={reservationInfo}
+          setShowModal={setShowModal}
+        />
+      )}
     </>
   );
 }
