@@ -5,7 +5,12 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import MENU_ITEMS from '@/constants/menuItems';
 import { ICON } from '@/constants';
 import { useRouter } from 'next/router';
-import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  UseQueryResult,
+} from '@tanstack/react-query';
 import { auth } from '@/apis/auth';
 import { AxiosError } from 'axios';
 import Confirm from '../popup/confirm/Confirm';
@@ -16,7 +21,11 @@ const cn = classNames.bind(styles);
 type ErrorMessage = {
   message: string;
 };
-export default function SideNavMenu({ initialState }: { initialState?: string }) {
+export default function SideNavMenu({
+  initialState,
+}: {
+  initialState?: string;
+}) {
   const initialValue = '/images/Image_default_profile_image.png';
   const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
@@ -26,7 +35,10 @@ export default function SideNavMenu({ initialState }: { initialState?: string })
 
   const queryClient = useQueryClient();
 
-  const { data: userData }: UseQueryResult<GetUserData> = useQuery({ queryKey: ['myInfo'], enabled: false });
+  const { data: userData }: UseQueryResult<GetUserData> = useQuery({
+    queryKey: ['myInfo'],
+    enabled: false,
+  });
 
   const { mutate: patchMutate } = useMutation({
     mutationKey: ['userPatch'],
@@ -102,12 +114,15 @@ export default function SideNavMenu({ initialState }: { initialState?: string })
             src={profileImage}
             height={160}
             width={160}
-            alt='profileImage'
+            alt="profileImage"
             className={cn('user-profile-image')}
             onClick={handleButtonClick}
             priority
           />
-          <div className={cn('side-menu-Image-modify')} onClick={handleButtonClick}>
+          <div
+            className={cn('side-menu-Image-modify')}
+            onClick={handleButtonClick}
+          >
             <Image
               src={ICON.pen.default.src}
               width={24}
@@ -139,8 +154,8 @@ export default function SideNavMenu({ initialState }: { initialState?: string })
           ))}
         </ul>
         <input
-          type='file'
-          accept='image/jpeg, image/bmp, image/svg+xml,image/jpg'
+          type="file"
+          accept="image/jpeg, image/bmp, image/svg+xml,image/jpg"
           onChange={handleImageChange}
           className={cn('side-menu-file-input')}
           ref={inputRef}
