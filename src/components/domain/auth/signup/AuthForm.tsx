@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Link from 'next/link';
-import FormHeader from '@/components/auth/formHeader/FormHeader';
+import FormHeader from '@/components/domain/auth/formHeader/FormHeader';
 import Input from '@/components/common/Input/Input';
 import BaseButton from '@/components/common/button/BaseButton';
 import { USER_INPUT_VALIDATION } from '@/constants';
 import { FormValues } from '@/types/auth';
-import style from '@/components/auth/signup/AuthForm.module.scss';
+import style from './AuthForm.module.scss';
 
 const cn = classNames.bind(style);
 
