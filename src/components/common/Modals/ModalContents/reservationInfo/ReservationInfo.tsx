@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import ReservationCard from './ReservationCard';
 import Dropdown from '@/components/common/dropdown/Dropdown';
@@ -21,33 +21,43 @@ export interface ReservationSchedule {
 interface Props {
   date?: string;
   activityId?: number;
-  scheduleId?: number;
 }
 
 const STATUSES = ['신청', '확정', '거절'];
 
-export default function ReservationInfo({ date = '2024-03-20', activityId = 178, scheduleId = 764 }: Props) {
+export default function ReservationInfo({ date = '2024-03-20', activityId = 178 }: Props) {
   const queryClient = useQueryClient();
   const [selectedStatus, setSelectedStatus] = useState<ReservationCardType['status']>('pending');
-  const [scheduledId, setScheduledId] = useState<number>(scheduleId);
+  const [scheduledId, setScheduledId] = useState<number>(0);
+  const [schedule, setSchedule] = useState();
 
-  const { data: reservedScheduleData } = useQuery({
+  const { data: reservedScheduleData, isSuccess } = useQuery({
     queryKey: queryKey.getMyReservationUseDate(date),
     queryFn: () => getReservedScheduleDate(activityId, date),
   });
-
   const { data: reservationStatusData } = useQuery({
     queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus),
     queryFn: () => getMyActivitiesReservation(activityId, scheduledId, selectedStatus),
   });
 
-  const dropdownList = () =>
-    reservedScheduleData
-      ? reservedScheduleData.map((reservation: ReservationSchedule) => ({
-          id: reservation.scheduleId,
-          title: `${reservation.startTime} ~ ${reservation.endTime}`,
-        }))
-      : [{ id: scheduleId }];
+  console.log(reservedScheduleData);
+
+  useEffect(() => {
+    if (reservedScheduleData) {
+      setScheduledId(reservedScheduleData[0].scheduleId);
+
+      const nextschedule = reservedScheduleData?.find(
+        (schedule: ReservationSchedule) => scheduledId === schedule.scheduleId
+      );
+      console.log(nextschedule?.count);
+      setSchedule(nextschedule.count);
+    }
+  }, [reservedScheduleData, scheduledId]);
+
+  const dropdownList = reservedScheduleData?.map((reservation: ReservationSchedule) => ({
+    id: reservation.scheduleId,
+    title: `${reservation.startTime} ~ ${reservation.endTime}`,
+  })) ?? [{ id: scheduledId }];
 
   const cardList = reservationStatusData?.reservations ?? [];
 
@@ -55,10 +65,6 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
     setScheduledId(id);
     queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus) });
   };
-
-  const schedule = reservedScheduleData?.find(
-    (schedule: ReservationSchedule) => scheduledId === schedule.scheduleId
-  ).count;
 
   const handleSelect = (status: string) => {
     const newSelectedStatus = status === '신청' ? 'pending' : status === '확정' ? 'confirmed' : 'declined';
@@ -89,7 +95,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178,
           <h3 className={cn('little-title')}>예약 날짜</h3>
           <p className={cn('reservation-date')}>{changeDateToStringFormat(date)}</p>
 
-          <Dropdown name='dateDropdown' onSelectedId={onSelectedId} labelText=' ' lists={dropdownList()} />
+          <Dropdown name='dateDropdown' onSelectedId={onSelectedId} labelText=' ' lists={dropdownList} />
         </div>
         <div>
           <h3 className={cn('little-title')}>예약 내역</h3>

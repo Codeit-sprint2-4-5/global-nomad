@@ -28,11 +28,10 @@ interface ModalProps {
   onDownDisabled?: boolean;
   date?: string;
   activityId?: number;
-  scheduleId?: number;
   getdate?: string;
   register?: UseFormRegister<PostReservationData>;
   reservationInfo?: Reservation;
-  className: string;
+  className?: string;
 }
 
 export default function Modal({ modalType, className, setShowModal, ...props }: ModalProps) {
@@ -46,7 +45,7 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
     },
     [MODAL_TYPE.reservationInfo]: {
       component: ReservationInfo,
-      prop: { date: props.date, activityId: props.activityId, scheduleId: props.scheduleId },
+      prop: { date: props.date, activityId: props.activityId },
     },
     [MODAL_TYPE.dateForm]: {
       component: DateForm,
