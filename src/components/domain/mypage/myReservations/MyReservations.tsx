@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-
 import Image from 'next/image';
 import Card from '@/components/common/card/Card';
-
-import { Reservation, Reservations } from '@/types/myReservation';
+import { Reservation } from '@/types/myReservation';
 import classNames from 'classnames/bind';
 import styles from '../MyCommonCard.module.scss';
 import { useCustomInfiniteQuery } from '@/hooks/useInfiniteQuery';
