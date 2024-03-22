@@ -1,0 +1,49 @@
+.container {
+  @include flexbox(around, center);
+  width: 100%;
+  height: 7rem;
+  background-color: $white;
+  border-bottom: 1px solid $gray30;
+
+  @include responsive('T') {
+    @include flexbox(between, center);
+    padding: 0 2.4rem;
+  }
+}
+
+.user {
+  @include flexbox;
+  gap: 2.5rem;
+
+  a {
+    @include flexbox;
+    @include text-style(1.4, 500, $black);
+  }
+
+  &.not {
+    @include flexbox(start, center);
+    gap: 2.5rem;
+  }
+}
+
+.dropdown-menu-box {
+  @include flexbox;
+  position: relative;
+  gap: 2.5rem;
+}
+
+.stroke {
+  height: 2.2rem;
+  border-right: 1px solid $gray30;
+}
+
+.user-profile-box {
+  @include flexbox;
+  width: fit-content;
+  gap: 1rem;
+}
+
+.gnb-button {
+  @include flexbox;
+  @include text-style(1.4, 500, $black);
+}

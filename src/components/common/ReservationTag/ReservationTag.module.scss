@@ -3,13 +3,13 @@
   font-family: 'Spoqa Han Sans Neo';
   text-align: center;
 
-  display: inline-flex;
+  @include inline-flexbox();
   padding: 1rem 1.5rem;
 
   border-radius: 2.65rem;
   background: $lightorange;
 
-  &.rejected {
+  &.declined {
     color: $red;
     background: $lightred;
   }
