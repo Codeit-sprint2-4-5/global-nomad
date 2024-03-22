@@ -4,7 +4,6 @@ import styles from '../ModalContents.module.scss';
 import classNames from 'classnames/bind';
 import { Reservation } from '@/types';
 
-
 const cn = classNames.bind(styles);
 
 interface Props {
