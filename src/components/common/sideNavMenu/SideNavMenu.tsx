@@ -22,7 +22,43 @@ export default function SideNavMenu({ initialState }: { initialState?: string })
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [selectedMenu, setSelectedMenu] = useState(initialState);
   const [profileImage, setProfileImage] = useState<string>(initialValue);
+  const [popupMessage, setPopupMessage] = useState<string>('');
 
+  const queryClient = useQueryClient();
+
+  const { data: userData }: UseQueryResult<GetUserData> = useQuery({ queryKey: ['myInfo'], enabled: false });
+
+  const { mutate: patchMutate } = useMutation({
+    mutationKey: ['userPatch'],
+    mutationFn: (url: ProfileFormValues) => auth.patchUser(url),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myInfo'] });
+      handlePopupOpen('프로필 이미지가 변경되었습니다.');
+    },
+    onError: (error: AxiosError<ErrorMessage>) => {
+      if (error.response && error.response.status >= 400) {
+        handlePopupOpen(error.response.data?.message);
+      }
+      console.error(`프로필 이미지 업로드 실패, ${error}`);
+    },
+  });
+
+  const { mutate: getMutate } = useMutation({
+    mutationKey: ['getImageUrl'],
+    mutationFn: (formData: FormData) => auth.getImageUrl(formData),
+    onSuccess: (data) => {
+      patchMutate(data);
+    },
+    onError: (error: AxiosError) => {
+      console.error(error.response);
+    },
+  });
+
+  const handlePopupOpen = (message: string) => {
+    if (!dialogRef.current) return;
+    setPopupMessage(message);
+    dialogRef.current.showModal();
+  };
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleButtonClick = () => {
@@ -53,8 +89,8 @@ export default function SideNavMenu({ initialState }: { initialState?: string })
     router.push(`/mypage/${menuId}`);
   };
   useEffect(() => {
-    if (userData?.profileImageUrl) {
-      setProfileImage(userData.profileImageUrl);
+    if (userData) {
+      setProfileImage(userData?.profileImageUrl);
     }
   }, [userData]);
 
