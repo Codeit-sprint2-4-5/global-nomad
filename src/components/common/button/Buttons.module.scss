@@ -1,0 +1,233 @@
+%btn-base {
+  @include inline-flexbox;
+
+  font-family: 'Spoqa Han Sans Neo';
+
+  &.br6 {
+    border-radius: 0.6rem;
+  }
+  &.br15 {
+    border-radius: 1.5rem;
+  }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: $base-transition;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.btn {
+  &-xl {
+    width: 12.7rem;
+    padding: 1.6rem 0;
+  }
+  &-lg {
+    display: block;
+    width: 100%;
+    padding: 1.4rem 0;
+  }
+
+  &-md {
+    width: 14.4rem;
+    padding: 1.6rem 0;
+  }
+
+  &-sm {
+    width: 10.8rem;
+    padding: 1rem 0;
+  }
+}
+
+.btn-primary {
+  @extend %btn-base;
+
+  background-color: $primary;
+
+  &:disabled {
+    background-color: $gray60;
+  }
+
+  &.btn-xl {
+    @include text-style(1.8, 500, $white);
+  }
+
+  &.btn-lg,
+  &.btn-md {
+    @include text-style(1.6, 700, $white);
+  }
+
+  &.btn-sm {
+    @include text-style(1.4, 700, $white);
+  }
+}
+
+.btn-secondary {
+  @extend %btn-base;
+
+  background-color: $gray60;
+
+  &.btn-xl {
+    @include text-style(1.8, 500, $white);
+  }
+
+  &.btn-lg,
+  &.btn-md {
+    @include text-style(1.6, 700, $white);
+  }
+
+  &.btn-sm {
+    @include text-style(1.4, 700, $white);
+  }
+}
+
+.btn-outline {
+  @extend %btn-base;
+
+  background-color: inherit;
+  border: 0.1rem solid $black;
+
+  &:hover,
+  &:focus {
+    background-color: $gray30;
+    border: 0.1rem solid $gray50;
+
+    @include responsive(M) {
+      background-color: inherit;
+      border: 0.1rem solid $black;
+    }
+  }
+
+  &.btn-xl {
+    @include text-style(1.8, 500, $black);
+  }
+
+  &.btn-lg,
+  &.btn-md {
+    @include text-style(1.6, 700, $black);
+  }
+  &.btn-sm {
+    @include text-style(1.4, 700, $black);
+  }
+}
+
+/** IconButton **/
+
+%ic-btn-base {
+  @include inline-flexbox;
+
+  background-color: inherit;
+}
+
+.ic-btn {
+  @extend %ic-btn-base;
+
+  &-56 {
+    width: 5.6rem;
+    height: 5.6rem;
+  }
+  &-48 {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+
+  &-40 {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  &-32 {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  &-27 {
+    width: 2.733rem;
+    height: 2.733rem;
+  }
+
+  &-24 {
+    width: 2.4rem;
+    height: 2.4rem;
+
+    &-47 {
+      height: 4.7rem;
+    }
+  }
+  &-22 {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  &-20 {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.ic-box {
+  position: relative;
+
+  @include inline-flexbox;
+}
+
+.ic-fit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/** MixButton **/
+
+%mix-btn-base {
+  @include inline-flexbox(between, center);
+
+  padding: 1.6rem, 2rem;
+}
+
+.mix {
+  max-width: 16rem;
+  height: 5.3rem;
+  border: 0.1rem solid $black;
+  border-radius: 1.6rem;
+
+  @include responsive(M) {
+    max-width: 10.7rem;
+  }
+}
+
+.mix-btn {
+  @extend %mix-btn-base;
+  width: 100%;
+  height: 100%;
+  padding: 1.6rem 2rem;
+
+  .mix-text {
+    &-18 {
+      @include text-style(1.8, 500, $black);
+    }
+
+    &-16 {
+      @include text-style(1.6, 500, $black);
+    }
+  }
+
+  .mix-box {
+    position: relative;
+
+    &-22 {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+
+    &-24 {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
+}

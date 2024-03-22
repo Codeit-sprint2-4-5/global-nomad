@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './Pagination.module.scss';
 
 const cn = classNames.bind(styles);
+
 interface Props {
   data: {
     totalCount: number;
