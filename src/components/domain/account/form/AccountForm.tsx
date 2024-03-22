@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { auth } from '@/apis/auth';
 import Title from '../../../common/title/Title';
 import Input from '../../../common/Input/Input';
-import { ProfileFormValues } from '@/types/auth';
+import { GetUserData, ProfileFormValues } from '@/types/auth';
 import { USER_INPUT_VALIDATION } from '@/constants';
 import BaseButton from '../../../common/button/BaseButton';
 import style from './AccountForm.module.scss';
@@ -35,7 +35,7 @@ interface AccountForm {
 }
 
 export default function AccountForm({ onProfileSubmit }: AccountForm) {
-  const { data: userData, isLoading } = useQuery({ queryKey: ['getUser'], queryFn: auth.getUser });
+  const { data: userData, isLoading }: UseQueryResult<GetUserData> = useQuery({ queryKey: ['myInfo'] });
 
   const { formState, register, handleSubmit, getValues, setValue, reset } = useForm<ProfileFormValues>({
     mode: 'onBlur',

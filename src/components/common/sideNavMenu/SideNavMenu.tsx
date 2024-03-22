@@ -26,13 +26,13 @@ export default function SideNavMenu({ initialState }: { initialState?: string })
 
   const queryClient = useQueryClient();
 
-  const { data: userData }: UseQueryResult<GetUserData> = useQuery({ queryKey: ['getUser'], enabled: false });
+  const { data: userData }: UseQueryResult<GetUserData> = useQuery({ queryKey: ['myInfo'], enabled: false });
 
   const { mutate: patchMutate } = useMutation({
     mutationKey: ['userPatch'],
     mutationFn: (url: ProfileFormValues) => auth.patchUser(url),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getUser'] });
+      queryClient.invalidateQueries({ queryKey: ['myInfo'] });
       handlePopupOpen('프로필 이미지가 변경되었습니다.');
     },
     onError: (error: AxiosError<ErrorMessage>) => {

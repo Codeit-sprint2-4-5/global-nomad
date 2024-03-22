@@ -42,7 +42,7 @@ export default function Account() {
     mutationFn: (patchData: ProfileFormValues) => auth.patchUser(patchData),
     onSuccess: () => {
       handleOpenPopup('내정보 변경에 성공하였습니다.');
-      queryClient.invalidateQueries({ queryKey: ['getUser'] });
+      queryClient.invalidateQueries({ queryKey: ['myInfo'] });
     },
     onError: (error: AxiosError) => {
       console.error(error.message);
