@@ -2,12 +2,11 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
-import { auth } from '@/apis/auth';
-import Title from '../../../common/title/Title';
-import Input from '../../../common/Input/Input';
+import Title from '@/components/common/title/Title';
+import Input from '@/components/common/Input/Input';
 import { GetUserData, ProfileFormValues } from '@/types/auth';
 import { USER_INPUT_VALIDATION } from '@/constants';
-import BaseButton from '../../../common/button/BaseButton';
+import BaseButton from '@/components/common/button/BaseButton';
 import style from './AccountForm.module.scss';
 
 const cn = classNames.bind(style);
