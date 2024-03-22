@@ -35,6 +35,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
     queryKey: queryKey.getMyReservationUseDate(date),
     queryFn: () => getReservedScheduleDate(activityId, date),
   });
+
   const { data: reservationStatusData } = useQuery({
     queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus),
     queryFn: () => getMyActivitiesReservation(activityId, scheduledId, selectedStatus),
@@ -65,7 +66,6 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
     setScheduledId(id);
     queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus) });
   };
-
   const handleSelect = (status: string) => {
     const newSelectedStatus = status === '신청' ? 'pending' : status === '확정' ? 'confirmed' : 'declined';
     setSelectedStatus(newSelectedStatus);
@@ -94,7 +94,6 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
         <div>
           <h3 className={cn('little-title')}>예약 날짜</h3>
           <p className={cn('reservation-date')}>{changeDateToStringFormat(date)}</p>
-
           <Dropdown name='dateDropdown' onSelectedId={onSelectedId} labelText=' ' lists={dropdownList} />
         </div>
         <div>

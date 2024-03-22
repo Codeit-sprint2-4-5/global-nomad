@@ -9,7 +9,7 @@ const cn = classNames.bind(styles);
 interface CardProps {
   reservationsInfo: Reservation;
   handleCancelReservation: (id: number) => void;
-  handleWriteReview: (id: number) => void;
+  handleWriteReview: (reservationInfo: Reservation) => void;
 }
 export default function Card({
   reservationsInfo,
@@ -34,7 +34,7 @@ export default function Card({
       handleCancelReservation(reservationsInfo.id);
     }
     if (reservationsInfo.status === 'completed') {
-      handleWriteReview(reservationsInfo.id);
+      handleWriteReview(reservationsInfo);
     }
   };
   return (
