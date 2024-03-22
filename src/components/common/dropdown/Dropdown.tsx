@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes, useRef, useState } from 'react';
+import { DetailedHTMLProps, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useOutsideClick, useToggleButton } from '@/hooks';
@@ -18,9 +18,10 @@ interface DropdownProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputE
 
 export default function Dropdown({ name, labelText, lists, onSelectedId, ...props }: DropdownProps) {
   const { isToggle, handleToggleClick } = useToggleButton();
-  const [selectedList, setSelectedList] = useState<number | null>(labelText ? lists[0].id : null);
+  const list = lists ?? [];
+  const [selectedList, setSelectedList] = useState<number | null>(null);
   const dropdownRef = useRef(null);
-  const findId = lists.find((item) => item.id === selectedList);
+  const findId = list.find((item) => item.id === selectedList);
   const isLabelText = labelText ? findId?.title : findId?.category;
 
   useOutsideClick(dropdownRef, isToggle, handleToggleClick);
@@ -30,6 +31,11 @@ export default function Dropdown({ name, labelText, lists, onSelectedId, ...prop
     onSelectedId(id);
     handleToggleClick();
   };
+
+  useEffect(() => {
+    setSelectedList(labelText ? list[0]?.id : null);
+  }, [list]);
+  
   return (
     <div className={cn('dropdown-field')}>
       <button
@@ -38,7 +44,7 @@ export default function Dropdown({ name, labelText, lists, onSelectedId, ...prop
         onClick={handleToggleClick}
         ref={dropdownRef}
       >
-        <input {...props} className={cn('dropdown')} name={name} readOnly value={isLabelText} />
+        <input {...props} className={cn('dropdown')} name={name} readOnly value={isLabelText || ''} />
         {labelText && <span className={cn('dropdown-label')}>{labelText}</span>}
         <Image
           className={cn('dropdown-btn-img')}
@@ -49,7 +55,7 @@ export default function Dropdown({ name, labelText, lists, onSelectedId, ...prop
         />
       </button>
       <ul className={cn('dropdown-options', { show: isToggle })}>
-        {lists.map((list) => (
+        {list.map((list) => (
           <li className={cn('dropdown-option')} key={`key-${list.id}`}>
             <button
               type='button'

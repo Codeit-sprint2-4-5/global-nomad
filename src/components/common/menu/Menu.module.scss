@@ -1,62 +1,62 @@
 .menu {
-  position: relative;
-  width: 16rem;
-  flex-shrink: 0;
+	@include flexbox(end, center);
+	position: relative;
+	width: 16rem;
+	flex-shrink: 0;
 
-  @include responsive('M') {
-    width: 12.8rem;
-  }
+	@include responsive('M') {
+		width: 12.8rem;
+	}
 }
 
 .menu-button {
-  @include flexbox(end, center);
-  width: 100%;
-  height: 4rem;
-  flex-shrink: 0;
-  @include text-style(1.8, 500, $darkgreen);
+	@include flexbox(end, center);
+	height: 4rem;
+	flex-shrink: 0;
+	@include text-style(1.8, 500, $darkgreen);
 
-  @include responsive('M') {
-    height: 3.2rem;
+	@include responsive('M') {
+		height: 3.2rem;
 
-    img {
-      width: 3.2rem;
-      height: 3.2rem;
-    }
-  }
+		img {
+			width: 3.2rem;
+			height: 3.2rem;
+		}
+	}
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: 4.8rem;
-  width: 100%;
-  right: 0;
+	position: absolute;
+	top: 4.8rem;
+	width: 100%;
+	right: 0;
 
-  @include responsive('M') {
-    top: 4rem;
-  }
+	@include responsive('M') {
+		top: 4rem;
+	}
 
-  button {
-    @include flexbox;
-    width: 100%;
-    padding: 1.8rem 0;
-    gap: 1rem;
-    border: 1px solid $gray30;
-    background: $white;
-    @include text-style(1.8, 500, $gray80);
-    text-align: center;
-    line-height: 2.2rem; /* 122.222% */
+	button {
+		@include flexbox;
+		width: 100%;
+		padding: 1.8rem 0;
+		gap: 1rem;
+		border: 1px solid $gray30;
+		background: $white;
+		@include text-style(1.8, 500, $gray80);
+		text-align: center;
+		line-height: 2.2rem; /* 122.222% */
 
-    &:first-child {
-      border-radius: 0.6rem 0.6rem 0rem 0rem;
-    }
+		&:first-child {
+			border-radius: 0.6rem 0.6rem 0rem 0rem;
+		}
 
-    &:last-child {
-      border-radius: 0rem 0rem 0.6rem 0.6rem;
-    }
+		&:last-child {
+			border-radius: 0rem 0rem 0.6rem 0.6rem;
+		}
 
-    @include responsive('M') {
-      padding: 1rem 0;
-      font-size: $font-size-14;
-    }
-  }
+		@include responsive('M') {
+			padding: 1rem 0;
+			font-size: $font-size-14;
+		}
+	}
 }

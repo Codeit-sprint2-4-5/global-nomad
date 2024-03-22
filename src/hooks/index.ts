@@ -1,2 +1,2 @@
-export * from '@/hooks/useOutsideClose';
+export * from '@/hooks/useOutsideClick';
 export * from '@/hooks/useToggleButton';
