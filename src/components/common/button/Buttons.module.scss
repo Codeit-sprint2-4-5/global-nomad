@@ -27,6 +27,7 @@
     width: 12.7rem;
     padding: 1.6rem 0;
   }
+
   &-lg {
     display: block;
     width: 100%;
@@ -57,9 +58,15 @@
     @include text-style(1.8, 500, $white);
   }
 
-  &.btn-lg,
+  &.btn-lg {
+    @include text-style(1.6, 700, $white);
+
+    line-height: 2rem;
+  }
   &.btn-md {
     @include text-style(1.6, 700, $white);
+
+    line-height: 1.6rem;
   }
 
   &.btn-sm {
@@ -76,9 +83,15 @@
     @include text-style(1.8, 500, $white);
   }
 
-  &.btn-lg,
+  &.btn-lg {
+    @include text-style(1.6, 700, $white);
+
+    line-height: 2rem;
+  }
   &.btn-md {
     @include text-style(1.6, 700, $white);
+
+    line-height: 1.6rem;
   }
 
   &.btn-sm {
@@ -107,9 +120,16 @@
     @include text-style(1.8, 500, $black);
   }
 
-  &.btn-lg,
+  &.btn-lg {
+    @include text-style(1.6, 700, $black);
+
+    line-height: 2rem;
+  }
+
   &.btn-md {
     @include text-style(1.6, 700, $black);
+
+    line-height: 1.6rem;
   }
   &.btn-sm {
     @include text-style(1.4, 700, $black);

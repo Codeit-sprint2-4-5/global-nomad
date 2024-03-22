@@ -1,0 +1,70 @@
+.title {
+  @include text-style(2.8, 700, $black);
+
+  line-height: 2.6rem; /* 92.857% */
+}
+
+.date-form {
+  @include column-flexbox();
+  gap: 3.2rem;
+  margin-top: 2rem;
+  max-width: 50rem;
+
+  @include responsive('M') {
+    max-width: none;
+    > button {
+      position: absolute;
+      bottom: 4rem;
+      width: 90%;
+    }
+  }
+}
+
+.abled-time {
+  width: 100%;
+
+  &-label {
+    @include text-style(1.8, 700, $modal-text-color);
+    @include flexbox(start);
+  }
+
+  &-input {
+    &-list {
+      @include inline-flexbox(start);
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+      width: 100%;
+
+      > p {
+        @include text-style(1.4, 500, $darkgreen);
+        margin-bottom: 1rem;
+      }
+    }
+
+    &-item {
+      @include flexbox;
+      @include text-style(1.6, 500, $modal-text-color);
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+
+      border-radius: 0.8rem;
+      border: 1px solid $modal-text-color;
+      cursor: pointer;
+
+      &:disabled {
+        border: 0.1rem solid $gray30;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: $modal-text-color;
+        color: $white;
+      }
+      &:valid {
+        background-color: $modal-text-color;
+        color: $white;
+      }
+    }
+  }
+}

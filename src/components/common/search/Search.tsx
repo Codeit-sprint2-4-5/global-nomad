@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import BaseButton from '@/components/common/button/BaseButton';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
@@ -12,13 +12,22 @@ interface Props {
 
 export default function Search({ keyword, onSubmit, onChange }: Props) {
   const [isKeyword, setIsKeyword] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);
-    
+
     if (e.target.value === '') {
       setIsKeyword(false);
     }
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      onChange(e);
+    }, 300);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

@@ -1,0 +1,79 @@
+.reservations-container {
+  @include column-flexbox(none, none);
+  width: 80rem;
+  height: 142rem;
+  overflow: scroll;
+  scrollbar-width: none;
+
+  @include responsive('T') {
+    width: 42.9rem;
+    height: 108.8rem;
+  }
+  @include responsive('M') {
+    width: 34.4rem;
+    height: 86.3rem;
+  }
+}
+
+.title {
+  position: sticky;
+  @include flexbox(between, center);
+  margin-bottom: 2.4rem;
+  top: 0;
+  @include responsive('M') {
+    margin-bottom: 1.6rem;
+  }
+  background-color: $white;
+}
+.register-button {
+  padding: 1.1rem 1.65rem;
+  border-radius: 0.4rem;
+  background-color: $gray90;
+  @include text-style(1.6, 700, $white);
+}
+.card-lists {
+  @include column-flexbox(none, none);
+
+  gap: 2.4rem;
+
+  @include responsive('T') {
+    gap: 1.6rem;
+  }
+  @include responsive('M') {
+    gap: 0.8rem;
+  }
+}
+.ref-box {
+  height: 0.1rem;
+}
+.ref-box {
+  height: 0.1rem;
+}
+.ref-box {
+  height: 0.1rem;
+}
+.ref-box {
+  height: 0.1rem;
+}
+.loading-container {
+  @include flexbox(center, none);
+  margin-top: 1.2rem;
+}
+.loading-image {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.nodata-container {
+  margin-top: 5.6rem;
+  @include responsive('T') {
+    margin-top: 4rem;
+  }
+}
