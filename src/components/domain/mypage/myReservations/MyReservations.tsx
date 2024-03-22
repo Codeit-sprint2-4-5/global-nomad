@@ -34,7 +34,7 @@ export default function MyReservations() {
       queryFn: ({ pageParam }: any) =>
         getMyReservation({ pageParam }, viewList),
     });
-  console.log(reservationInfo);
+
   const { mutate } = useMutation({
     mutationFn: patchCancelMyReservation,
     onSuccess: () => {
@@ -68,8 +68,6 @@ export default function MyReservations() {
       return null;
     }
   }
-
-  console.log(reservationId);
 
   const handleCancelReservation = (id: number) => {
     setReservationId(id);
