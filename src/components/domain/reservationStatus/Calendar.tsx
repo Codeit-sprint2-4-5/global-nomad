@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { instance } from '@/apis/axios';
 import Dropdown from '@/components/common/dropdown/Dropdown';
 import Days from './Days';
+import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
 import classNames from 'classnames/bind';
 import styles from './Calendar.module.scss';
 
@@ -73,6 +74,8 @@ export default function Calendar() {
     enabled: activityId !== 0,
   });
 
+  if (allActivity?.activities.length === 0) return <NoDataMessage message='아직 등록한 체험이 없어요' />;
+
   return (
     <>
       <Dropdown lists={allActivity?.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
@@ -128,4 +131,3 @@ export default function Calendar() {
     </>
   );
 }
-
