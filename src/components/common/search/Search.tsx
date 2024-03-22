@@ -15,17 +15,19 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e);
+
+    if (e.target.value === '') {
+      setIsKeyword(false);
+    }
+
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
 
     timerRef.current = setTimeout(() => {
       onChange(e);
-    }, 100);
-
-    if (e.target.value === '') {
-      setIsKeyword(false);
-    }
+    }, 300);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
