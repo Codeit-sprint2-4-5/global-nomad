@@ -34,7 +34,6 @@ export default function MyActivities() {
       return null;
     }
   }
-
   //inFiniteScroll을 위한 쿼리요청 키와 함수를 써줘야함
   const { fetchNextPage, hasNextPage, isFetching, data } =
     useCustomInfiniteQuery({
@@ -50,7 +49,6 @@ export default function MyActivities() {
       console.error('Error deleting activity:', error);
     }
   }
-
   //서버에 변경 작업 요청시 사용 캐시된 데이터를 무효화하고 success의 경우 데이터를 다시 불러옴
   const { mutate } = useMutation({
     mutationFn: deleteActivity,
@@ -70,7 +68,6 @@ export default function MyActivities() {
       console.error('Error deleting activity:', error);
     }
   };
-
   //피그마에는 없는데 확인작업으로 정말로 삭제하시겠습니까 모달 만들어 동작하게함
   const handleOpenDeleteModal = (id: number) => {
     setDeleteActivityId(id);
@@ -107,6 +104,7 @@ export default function MyActivities() {
             </button>
             <Title text="내 체험 관리" />
           </div>
+
           <button
             className={cn('register-button')}
             onClick={handleRegisterClick}
@@ -157,7 +155,6 @@ export default function MyActivities() {
         dialogRef={deleteDialogRef}
         onClick={() => handleDeleteClick(deleteActivityId)}
       />
-      <Confirm text="체험을 삭제했습니다" dialogRef={confirmDialogRef} />
     </>
   );
 }
