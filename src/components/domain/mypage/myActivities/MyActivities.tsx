@@ -21,7 +21,7 @@ export default function MyActivities() {
   const queryClient = useQueryClient();
   const router = useRouter();
   const deleteDialogRef = useRef(null);
-  console.log(deleteActivityId);
+
   //본인이 등록한 체험정보 get API
   async function getMyActivities({ pageParam }: any) {
     const cursorId = pageParam ? `cursorId=${pageParam}&` : '';
@@ -33,7 +33,6 @@ export default function MyActivities() {
       return null;
     }
   }
-
   //inFiniteScroll을 위한 쿼리요청 키와 함수를 써줘야함
   const { fetchNextPage, hasNextPage, isFetching, data } =
     useCustomInfiniteQuery({
@@ -49,7 +48,6 @@ export default function MyActivities() {
       console.error('Error deleting activity:', error);
     }
   }
-
   //서버에 변경 작업 요청시 사용 캐시된 데이터를 무효화하고 success의 경우 데이터를 다시 불러옴
   const { mutate } = useMutation({
     mutationFn: deleteActivity,
@@ -69,7 +67,6 @@ export default function MyActivities() {
       console.error('Error deleting activity:', error);
     }
   };
-
   //피그마에는 없는데 확인작업으로 정말로 삭제하시겠습니까 모달 만들어 동작하게함
   const handleOpenDeleteModal = (id: number) => {
     setDeleteActivityId(id);
