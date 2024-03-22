@@ -16,7 +16,7 @@ interface Props {
 export default function Pagination({ data, currentPage, setCurrentPage, PAGE_LIMIT }: Props) {
   const BUTTON_LIMIT = 5;
   const buttonGroup = Math.ceil(currentPage / BUTTON_LIMIT);
-  const totalPage = Math.ceil(data.totalCount / PAGE_LIMIT);
+  const totalPage = Math.ceil(data?.totalCount / PAGE_LIMIT);
   const START_PAGE = (buttonGroup - 1) * BUTTON_LIMIT + 1;
 
   const handleButtonClick = (pageNumber: number) => {
