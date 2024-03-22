@@ -8,7 +8,7 @@ import style from '@/components/common/Input/inputField.module.scss';
 const cn = classNames.bind(style);
 
 interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  type: 'text' | 'password' | 'email';
+  type: 'text' | 'password' | 'email' | 'number';
   isError?: boolean;
   errorMessage?: string;
 }
