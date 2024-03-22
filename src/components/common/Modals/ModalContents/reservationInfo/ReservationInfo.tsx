@@ -61,12 +61,13 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
 
   const onSelectedId = async (id: number) => {
     setScheduledId(id);
-    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus) });
+    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(id, selectedStatus) });
   };
+
   const handleSelect = (status: string) => {
     const newSelectedStatus = status === '신청' ? 'pending' : status === '확정' ? 'confirmed' : 'declined';
     setSelectedStatus(newSelectedStatus);
-    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus) });
+    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, status) });
   };
 
   return (

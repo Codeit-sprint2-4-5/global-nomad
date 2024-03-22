@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { instance } from '@/apis/axios';
 import Dropdown from '@/components/common/dropdown/Dropdown';
-import Days from './Days';
 import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
+import Modal from '@/components/common/Modals';
+import Days from './Days';
 import classNames from 'classnames/bind';
 import styles from './Calendar.module.scss';
 
@@ -12,6 +13,8 @@ const cn = classNames.bind(styles);
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activityId, setActivityId] = useState(0);
+  const [reservedDate, setReservedDate] = useState('');
+  const [showModal, setShowModal] = useState('');
   const dayArr = ['SUN', 'MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
 
   const currentYear = currentDate.getFullYear();
@@ -41,6 +44,14 @@ export default function Calendar() {
 
   const onSelectedId = (id: number) => {
     setActivityId(id);
+  };
+
+  const onReservedDate = (date: string) => {
+    setReservedDate(date);
+  };
+
+  const onShowModal = (type: string) => {
+    setShowModal(type);
   };
 
   async function getAllActivity() {
@@ -74,6 +85,12 @@ export default function Calendar() {
     enabled: activityId !== 0,
   });
 
+  useEffect(() => {
+    if (allActivity) {
+      setActivityId(allActivity?.activities[0].id);
+    }
+  }, [allActivity?.activities]);
+
   if (allActivity?.activities.length === 0) return <NoDataMessage message='아직 등록한 체험이 없어요' />;
 
   return (
@@ -91,7 +108,7 @@ export default function Calendar() {
           다음
         </button>
       </div>
-      <div className={cn('calendar')}>
+      <div className={cn('calendar')} id='modal-root' style={{ position: 'relative' }}>
         <table className={cn('table')}>
           <colgroup>
             <col style={{ width: '14.2%' }} />
@@ -122,11 +139,23 @@ export default function Calendar() {
                     currentYear={currentYear}
                     currentMonth={currentMonth}
                     days={days}
+                    formattedmonth={formattedmonth}
+                    onReservedDate={onReservedDate}
+                    onShowModal={onShowModal}
                   />
                 </tr>
               ))}
           </tbody>
         </table>
+        {showModal === 'reservationInfo' && (
+          <Modal
+            className={cn('reservedInfo')}
+            modalType='reservationInfo'
+            setShowModal={setShowModal}
+            date={reservedDate}
+            activityId={activityId}
+          />
+        )}
       </div>
     </>
   );
