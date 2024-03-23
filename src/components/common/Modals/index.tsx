@@ -82,6 +82,6 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
         onClick={handleClickCloseModal}
       ></div>
     </>,
-    document.body
+    document.getElementById('modal-root') || document.body
   );
 }
