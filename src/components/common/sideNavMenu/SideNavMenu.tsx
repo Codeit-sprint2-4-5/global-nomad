@@ -102,7 +102,7 @@ export default function SideNavMenu({ initialState }: { initialState?: string })
       <div className={cn('side-menu-entire')}>
         <div className={cn('user-profile')}>
           <Image
-            src={profileImage}
+            src={profileImage ? profileImage : initialValue}
             height={160}
             width={160}
             alt='profileImage'
