@@ -10,11 +10,11 @@ export function useCustomInfiniteQuery({
   queryFn,
 }: useCustomInfiniteQueryProps) {
   const { fetchNextPage, hasNextPage, isFetching, data } = useInfiniteQuery({
-    queryKey: queryKey,
+    queryKey,
     queryFn: queryFn,
+    initialPageParam: 0,
     getNextPageParam: (lastPage) =>
       lastPage.cursorId === null ? undefined : lastPage.cursorId,
-    initialPageParam: undefined,
   });
 
   return {

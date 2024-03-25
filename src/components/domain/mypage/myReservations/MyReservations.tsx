@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+
 import Image from 'next/image';
 import Card from '@/components/common/card/Card';
 import { Reservation } from '@/types/myReservation';
@@ -15,6 +15,7 @@ import Filter from '@/components/common/filter/Filter';
 import { ICON } from '@/constants';
 import { useRouter } from 'next/router';
 import Modal from '@/components/common/Modals';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 const cn = classNames.bind(styles);
 
@@ -23,10 +24,10 @@ export default function MyReservations() {
   const [reservationId, setReservationId] = useState<number>(0);
   const deleteDialogRef = useRef(null);
   const queryClient = useQueryClient();
-  const { ref, inView } = useInView();
   const [showModal, setShowModal] = useState('');
   const [reservationInfo, setReservationInfo] = useState<Reservation>();
   const router = useRouter();
+  const observerRef = useRef<HTMLDivElement>(null);
 
   const { fetchNextPage, hasNextPage, isFetching, data } =
     useCustomInfiniteQuery({
@@ -43,20 +44,21 @@ export default function MyReservations() {
   });
 
   async function getMyReservation({ pageParam }: any, viewList: string) {
-    const cursorId = pageParam ? `cursorId=${pageParam}` : '';
-    const apiStatus = viewList === '' ? '' : `&status=${viewList}`;
-
     try {
-      const response = await instance.get(
-        `my-reservations?${cursorId}&size=6${apiStatus}`
-      );
+      const response = await instance.get('my-reservations', {
+        params: {
+          cursorId: pageParam ? pageParam : null,
+          size: 6,
+          status: viewList === '' ? null : viewList,
+        },
+      });
+
       return response.data;
     } catch (error: any) {
       console.error('활동을 불러오는 중 오류 발생:', error.message);
       return null;
     }
   }
-
   async function patchCancelMyReservation(id: number) {
     try {
       const response = await instance.patch(`my-reservations/${id}`, {
@@ -90,13 +92,13 @@ export default function MyReservations() {
   const handleBackButtonClick = () => {
     router.back();
   };
-
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetching) {
-      fetchNextPage();
-    }
-  }, [inView]);
-
+  //옵저버
+  useIntersectionObserver({
+    observerRef,
+    hasNextPage,
+    isFetching,
+    fetchNextPage,
+  });
   return (
     <>
       <div className={cn('reservations-container')}>
@@ -132,7 +134,7 @@ export default function MyReservations() {
                   </React.Fragment>
                 ))}
               </div>
-              <div ref={ref} className={cn('ref-box')}></div>
+              <div ref={observerRef} className={cn('ref-box')}></div>
 
               {isFetching && hasNextPage && (
                 <div className={cn('loading-container')}>

@@ -1,8 +1,8 @@
 import { instance } from '@/apis/axios';
 import { useCustomInfiniteQuery } from '@/hooks/useInfiniteQuery';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useEffect, useRef, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React, { useRef, useState } from 'react';
+
 import styles from '../MyCommonCard.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -13,25 +13,26 @@ import { useRouter } from 'next/router';
 import Question from '@/components/common/popup/question/Question';
 import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
 import { ICON } from '@/constants';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 const cn = classNames.bind(styles);
 
 export default function MyActivities() {
   const [deleteActivityId, setDeleteActivityId] = useState<number>(0);
-  const { ref, inView } = useInView();
+
   const queryClient = useQueryClient();
   const router = useRouter();
   const deleteDialogRef = useRef(null);
-
+  const observerRef = useRef<HTMLDivElement>(null);
   //본인이 등록한 체험정보 get API
   async function getMyActivities({ pageParam }: any) {
     const cursorId = pageParam ? `cursorId=${pageParam}&` : '';
     try {
       const response = await instance.get(`/my-activities?${cursorId}size=6`);
       return response.data;
-    } catch (error: any) {
-      console.error('활동을 불러오는 중 오류 발생:', error.message);
-      return null;
+    } catch (error) {
+      console.error('활동을 불러오는 중 오류 발생:', onmessage);
+      return error;
     }
   }
 
@@ -86,12 +87,12 @@ export default function MyActivities() {
   };
 
   //옵저버의 위치 다음페이지 유무 데이터 불러오는 상태에 따라 무한 스크롤이 구현됨
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetching) {
-      fetchNextPage();
-    }
-  }, [inView]);
-
+  useIntersectionObserver({
+    observerRef,
+    hasNextPage,
+    isFetching,
+    fetchNextPage,
+  });
   return (
     <>
       <div className={cn('reservations-container')}>
@@ -131,7 +132,7 @@ export default function MyActivities() {
                   </React.Fragment>
                 ))}
               </div>
-              <div ref={ref} className={cn('ref-box')}></div>
+              <div ref={observerRef} className={cn('ref-box')}></div>
 
               {isFetching && hasNextPage && (
                 <div className={cn('loading-container')}>
