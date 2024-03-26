@@ -1,16 +1,15 @@
 import { activity } from '@/apis/activity';
 import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import style from './ImageField.module.scss';
-import classNames from 'classnames/bind';
-import IconButton from '@/components/common/button/IconButton';
-import { ICON } from '@/constants';
 import { useEffect, useRef, useState } from 'react';
-import debounce from '@/function/debounce';
 import { GetActivityDetail } from '@/types';
 import { AxiosError } from 'axios';
-import Confirm from '@/components/common/popup/confirm/Confirm';
+import { ICON } from '@/constants';
+import debounce from '@/function/debounce';
+import IconButton from '@/components/common/button/IconButton';
+import style from './ImageField.module.scss';
 
 const cn = classNames.bind(style);
 
@@ -19,7 +18,6 @@ const { leftArrow, rightArrow } = ICON;
 export default function ImageField() {
   const [fieldWidth, setFieldWitdh] = useState(0);
   const [imageFieldIndex, setImageFieldIndex] = useState(0);
-  const [errorMessage, setErrorMessage] = useState<string>('');
   const baseImageUrl =
     'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/b.png';
   const router = useRouter();
@@ -33,7 +31,6 @@ export default function ImageField() {
     queryFn: () => activity.getActivityDetail(id),
   });
   const imageRef = useRef<HTMLImageElement | null>(null);
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const nextButtonEnable =
     activityDetailData?.subImages &&
@@ -121,7 +118,6 @@ export default function ImageField() {
 
   return (
     <>
-      <Confirm dialogRef={dialogRef} text={errorMessage} />
       {activityDetailData && (
         <div className={cn('activity-image')}>
           <div id={'image-field'} className={cn('image-field', { subImage: subImageEnable })} ref={imageRef}>
