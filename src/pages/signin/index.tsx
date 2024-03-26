@@ -51,7 +51,7 @@ export default function Signin() {
     signupMutation.mutate(data);
   };
 
-  if (signupMutation.isPending) return <div>Loading...</div>;
+  // if (signupMutation.isPending) return <div>Loading...</div>;
 
   return (
     <>
