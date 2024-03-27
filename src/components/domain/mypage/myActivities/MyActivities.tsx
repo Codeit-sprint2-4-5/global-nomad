@@ -24,24 +24,34 @@ export default function MyActivities() {
   const router = useRouter();
   const deleteDialogRef = useRef(null);
   const observerRef = useRef<HTMLDivElement>(null);
+
+  //inFiniteScroll을 위한 쿼리요청 키와 함수를 써줘야함
+  const { fetchNextPage, hasNextPage, isFetching, data } =
+    useCustomInfiniteQuery({
+      queryKey: ['MyActivities'],
+      queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
+        getMyActivities({ pageParam }),
+    });
   //본인이 등록한 체험정보 get API
-  async function getMyActivities({ pageParam }: any) {
-    const cursorId = pageParam ? `cursorId=${pageParam}&` : '';
+  async function getMyActivities({
+    pageParam,
+  }: {
+    pageParam: number | undefined;
+  }) {
     try {
-      const response = await instance.get(`/my-activities?${cursorId}size=6`);
+      const response = await instance.get('/my-activities', {
+        params: {
+          cursorId: pageParam ? pageParam : null,
+          size: 6,
+        },
+      });
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error('활동을 불러오는 중 오류 발생:', onmessage);
       return error;
     }
   }
-
-  //inFiniteScroll을 위한 쿼리요청 키와 함수를 써줘야함
-  const { fetchNextPage, hasNextPage, isFetching, data } =
-    useCustomInfiniteQuery({
-      queryKey: ['MyActivities'],
-      queryFn: ({ pageParam }: any) => getMyActivities({ pageParam }),
-    });
 
   //체험 카드 삭제 요청 API
   async function deleteActivity(activityId: number) {
@@ -85,7 +95,7 @@ export default function MyActivities() {
   const handleBackButtonClick = () => {
     router.back();
   };
-
+  console.log(data);
   //옵저버의 위치 다음페이지 유무 데이터 불러오는 상태에 따라 무한 스크롤이 구현됨
   useIntersectionObserver({
     observerRef,
@@ -117,19 +127,15 @@ export default function MyActivities() {
           </button>
         </div>
         <div className={cn('card-container')}>
-          {data?.pages[0].totalCount !== 0 ? (
+          {data?.totalCount !== 0 ? (
             <>
               <div className={cn('card-lists')}>
-                {data?.pages.map((page, index) => (
-                  <React.Fragment key={index}>
-                    {page.activities.map((activity: GetActivitiesList) => (
-                      <MyActivitiesCard
-                        key={activity.id}
-                        activityInfo={activity}
-                        handleDelete={handleOpenDeleteModal}
-                      />
-                    ))}
-                  </React.Fragment>
+                {data?.pages.map((activity: GetActivitiesList) => (
+                  <MyActivitiesCard
+                    key={activity.id}
+                    activityInfo={activity}
+                    handleDelete={handleOpenDeleteModal}
+                  />
                 ))}
               </div>
               <div ref={observerRef} className={cn('ref-box')}></div>

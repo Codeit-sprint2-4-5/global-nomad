@@ -1,25 +1,24 @@
-import { useInfiniteQuery, QueryFunction } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-interface useCustomInfiniteQueryProps {
-  queryKey: string[];
-  queryFn: QueryFunction<any>;
+interface Props {
+  queryKey: (string | number | object)[];
+  queryFn: ({
+    pageParam,
+  }: {
+    pageParam: number | undefined;
+  }) => { cursorId: number | undefined } & any;
 }
 
-export function useCustomInfiniteQuery({
-  queryKey,
-  queryFn,
-}: useCustomInfiniteQueryProps) {
-  const { fetchNextPage, hasNextPage, isFetching, data } = useInfiniteQuery({
+export const useCustomInfiniteQuery = ({ queryKey, queryFn }: Props) =>
+  useInfiniteQuery({
     queryKey,
-    queryFn: queryFn,
-    initialPageParam: 0,
-    getNextPageParam: (lastPage) => lastPage.cursorId,
+    queryFn,
+    initialPageParam: undefined,
+    getNextPageParam: (lastPage) => lastPage?.cursorId,
+    select: (data) => ({
+      pages: data?.pages.flatMap(
+        (page) => page.reservations || page.activities || page.reservation || []
+      ),
+      totalCount: data?.pages[0].totalCount,
+    }),
   });
-
-  return {
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    data,
-  };
-}

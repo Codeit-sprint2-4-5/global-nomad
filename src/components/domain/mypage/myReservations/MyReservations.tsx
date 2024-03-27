@@ -32,10 +32,10 @@ export default function MyReservations() {
   const { fetchNextPage, hasNextPage, isFetching, data } =
     useCustomInfiniteQuery({
       queryKey: ['MyReservations', viewList],
-      queryFn: ({ pageParam }: any) =>
+      queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
         getMyReservation({ pageParam }, viewList),
     });
-
+  console.log(data);
   const { mutate } = useMutation({
     mutationFn: patchCancelMyReservation,
     onSuccess: () => {
@@ -43,7 +43,10 @@ export default function MyReservations() {
     },
   });
 
-  async function getMyReservation({ pageParam }: any, viewList: string) {
+  async function getMyReservation(
+    { pageParam }: { pageParam: number | undefined },
+    viewList: string
+  ) {
     try {
       const response = await instance.get('my-reservations', {
         params: {
@@ -59,6 +62,7 @@ export default function MyReservations() {
       return null;
     }
   }
+  console.log(data);
   async function patchCancelMyReservation(id: number) {
     try {
       const response = await instance.patch(`my-reservations/${id}`, {
@@ -118,20 +122,16 @@ export default function MyReservations() {
           <Filter type="filter" setFilterState={setViewList} />
         </div>
         <div className={cn('card-container')}>
-          {data?.pages[0].totalCount !== 0 ? (
+          {data?.totalCount !== 0 ? (
             <>
               <div className={cn('card-lists')}>
-                {data?.pages.map((page, index) => (
-                  <React.Fragment key={index}>
-                    {page.reservations.map((reservation: Reservation) => (
-                      <Card
-                        key={reservation.id}
-                        reservationsInfo={reservation}
-                        handleCancelReservation={handleCancelReservation}
-                        handleWriteReview={handleWriteReview}
-                      />
-                    ))}
-                  </React.Fragment>
+                {data?.pages.map((reservation: Reservation) => (
+                  <Card
+                    key={reservation.id}
+                    reservationsInfo={reservation}
+                    handleCancelReservation={handleCancelReservation}
+                    handleWriteReview={handleWriteReview}
+                  />
                 ))}
               </div>
               <div ref={observerRef} className={cn('ref-box')}></div>
