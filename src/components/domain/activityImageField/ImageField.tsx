@@ -10,6 +10,7 @@ import { ICON } from '@/constants';
 import debounce from '@/function/debounce';
 import IconButton from '@/components/common/button/IconButton';
 import style from './ImageField.module.scss';
+import ImageViewer from '@/components/common/popup/imageViewer/ImageViewer';
 
 const cn = classNames.bind(style);
 
@@ -18,6 +19,7 @@ const { leftArrow, rightArrow } = ICON;
 export default function ImageField() {
   const [fieldWidth, setFieldWitdh] = useState(0);
   const [imageFieldIndex, setImageFieldIndex] = useState(0);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const baseImageUrl =
     'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/b.png';
   const router = useRouter();
@@ -31,6 +33,7 @@ export default function ImageField() {
     queryFn: () => activity.getActivityDetail(id),
   });
   const imageRef = useRef<HTMLImageElement | null>(null);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const nextButtonEnable =
     activityDetailData?.subImages &&
@@ -67,19 +70,10 @@ export default function ImageField() {
     }
   }, 100);
 
-  const handleBannerImageNewWindowOpenClick = () => {
-    if (activityDetailData) {
-      localStorage.removeItem('newWindowImageUrl');
-      localStorage.setItem('newWindowImageUrl', activityDetailData.bannerImageUrl);
-      window.open('/newWindow', 'newWindow', 'width=640,height=427');
-    }
-  };
-  const handleSubImageNewWindowOpenClick = (index: number) => {
-    if (activityDetailData) {
-      localStorage.removeItem('newWindowImageUrl');
-      localStorage.setItem('newWindowImageUrl', activityDetailData.subImages[index].imageUrl);
-      window.open('/newWindow', 'newWindow', 'width=640,height=480');
-    }
+  const handleImagePopupOpenClick = (url: string) => {
+    if (!dialogRef.current) return;
+    setImageUrl(url);
+    dialogRef.current.showModal();
   };
 
   const onScroll = (width: number, index: number, initialize: boolean = false) => {
@@ -110,14 +104,13 @@ export default function ImageField() {
     };
   }, [activityDetailData, imageRef]);
 
-  useEffect(() => {}, []);
-
   if (isLoading) return <div>Loading....</div>;
 
   if (error) console.error(error);
 
   return (
     <>
+      <ImageViewer dialogRef={dialogRef} imageUrl={imageUrl} />
       {activityDetailData && (
         <div className={cn('activity-image')}>
           <div id={'image-field'} className={cn('image-field', { subImage: subImageEnable })} ref={imageRef}>
@@ -143,7 +136,10 @@ export default function ImageField() {
                 />
               </div>
             )}
-            <div className={cn('image-field-banner')} onClick={handleBannerImageNewWindowOpenClick}>
+            <div
+              className={cn('image-field-banner')}
+              onClick={() => handleImagePopupOpenClick(activityDetailData.bannerImageUrl)}
+            >
               <Image
                 className={cn('image')}
                 src={activityDetailData.bannerImageUrl}
@@ -163,13 +159,13 @@ export default function ImageField() {
                 )}
               >
                 {activityDetailData.subImages.map(
-                  (image, index) =>
+                  (image) =>
                     image.imageUrl &&
                     image.imageUrl !== baseImageUrl && (
                       <div
                         key={image.id}
                         className={cn('sub-image')}
-                        onClick={() => handleSubImageNewWindowOpenClick(index)}
+                        onClick={() => handleImagePopupOpenClick(image.imageUrl)}
                       >
                         <Image
                           className={cn('image')}
