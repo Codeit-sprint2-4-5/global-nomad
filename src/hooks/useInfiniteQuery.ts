@@ -13,8 +13,7 @@ export function useCustomInfiniteQuery({
     queryKey,
     queryFn: queryFn,
     initialPageParam: 0,
-    getNextPageParam: (lastPage) =>
-      lastPage.cursorId === null ? undefined : lastPage.cursorId,
+    getNextPageParam: (lastPage) => lastPage.cursorId,
   });
 
   return {
