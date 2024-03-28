@@ -23,14 +23,14 @@ export default function ImageField() {
   const baseImageUrl =
     'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/b.png';
   const router = useRouter();
-  const id = router.query.id as string;
+  const id = router.query.id as string | undefined;
   const {
     data: activityDetailData,
     error,
-    isLoading,
+    isSuccess,
   } = useQuery<GetActivityDetail, AxiosError>({
     queryKey: ['activity-detail', id],
-    queryFn: () => activity.getActivityDetail(id),
+    queryFn: () => (id ? activity.getActivityDetail(id) : Promise.reject('해당되는 아이디가 없습니다.')),
   });
   const imageRef = useRef<HTMLImageElement | null>(null);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
@@ -104,9 +104,13 @@ export default function ImageField() {
     };
   }, [activityDetailData, imageRef]);
 
-  if (isLoading) return <div>Loading....</div>;
-
-  if (error) console.error(error);
+  if (!isSuccess) {
+    if (!error) {
+      return <div>loading</div>;
+    } else {
+      return <div>error,{error.message}</div>;
+    }
+  }
 
   return (
     <>
