@@ -116,6 +116,7 @@
 
     > h2 {
       @include text-style(2.8, 600, $black);
+
     }
 
     @include responsive(M) {
