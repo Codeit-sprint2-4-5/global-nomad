@@ -45,7 +45,7 @@ export default function MyActivities() {
           size: 6,
         },
       });
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
       console.error('활동을 불러오는 중 오류 발생:', onmessage);
@@ -95,7 +95,7 @@ export default function MyActivities() {
   const handleBackButtonClick = () => {
     router.back();
   };
-  console.log(data);
+
   //옵저버의 위치 다음페이지 유무 데이터 불러오는 상태에 따라 무한 스크롤이 구현됨
   useIntersectionObserver({
     observerRef,

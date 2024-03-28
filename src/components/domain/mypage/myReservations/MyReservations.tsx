@@ -35,7 +35,7 @@ export default function MyReservations() {
       queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
         getMyReservation({ pageParam }, viewList),
     });
-  console.log(data);
+
   const { mutate } = useMutation({
     mutationFn: patchCancelMyReservation,
     onSuccess: () => {
@@ -62,7 +62,7 @@ export default function MyReservations() {
       return null;
     }
   }
-  console.log(data);
+
   async function patchCancelMyReservation(id: number) {
     try {
       const response = await instance.patch(`my-reservations/${id}`, {

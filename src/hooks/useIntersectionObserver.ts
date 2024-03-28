@@ -20,7 +20,6 @@ const useIntersectionObserver = ({
           if (entry.isIntersecting && hasNextPage && !isFetching) {
             fetchNextPage();
           }
-          console.log(entries, 'entries');
         });
       },
       { threshold: 1 }
