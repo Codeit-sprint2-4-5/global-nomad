@@ -98,18 +98,25 @@
       @include responsive('M') {
         width: 100%;
         border-radius: 1.2rem;
+
+        &-none {
+          width: 100%;
+        }
       }
     }
   }
   &-current-situation {
     @include flexbox(between, center);
-    @include text-style(2.4, 600, $black);
     position: fixed;
     width: 88%;
     bottom: 2rem;
     padding: 1rem 0 0;
 
     background-color: $white;
+
+    > h2 {
+      @include text-style(2.8, 600, $black);
+    }
 
     @include responsive(M) {
       width: 90%;
