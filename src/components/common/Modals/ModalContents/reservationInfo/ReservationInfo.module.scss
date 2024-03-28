@@ -115,7 +115,8 @@
     background-color: $white;
 
     > h2 {
-      @include text-style(2.4, 600, $black);
+      @include text-style(2.8, 600, $black);
+
     }
 
     @include responsive(M) {
