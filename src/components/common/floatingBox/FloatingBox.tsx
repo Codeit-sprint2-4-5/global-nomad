@@ -61,7 +61,6 @@ export default function FloatingBox({ price = 10000 }) {
   });
 
   const handelOnSubmit: SubmitHandler<PostReservationData> = (data) => {
-    console.log(data);
     postReservationMutation.mutate(data);
   };
 
