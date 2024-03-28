@@ -5,7 +5,7 @@ import Card from '@/components/common/card/Card';
 import { Reservation } from '@/types/myReservation';
 import classNames from 'classnames/bind';
 import styles from '../MyCommonCard.module.scss';
-import { useCustomInfiniteQuery } from '@/hooks/useInfiniteQuery';
+import { useCustomInfiniteQuery } from '@/hooks/useCustomInfiniteQuery';
 import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
 import Title from '@/components/common/title/Title';
 import { instance } from '@/apis/axios';

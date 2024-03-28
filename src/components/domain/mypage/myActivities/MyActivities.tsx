@@ -1,5 +1,5 @@
 import { instance } from '@/apis/axios';
-import { useCustomInfiniteQuery } from '@/hooks/useInfiniteQuery';
+import { useCustomInfiniteQuery } from '@/hooks/useCustomInfiniteQuery';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useRef, useState } from 'react';
 
