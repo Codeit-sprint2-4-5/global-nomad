@@ -11,6 +11,7 @@ import styles from './KakaoMap.module.scss';
 import ActivityDetailInfo from '@/types/ActivitiyDetailInfo';
 
 import classNames from 'classnames/bind';
+import { ICON } from '@/constants';
 
 const cn = classNames.bind(styles);
 interface KakaoMapProps {
@@ -65,11 +66,7 @@ export default function KakaoMap({ activitiesDetailInfo }: KakaoMapProps) {
   return (
     <>
       <div className={cn('container')}>
-        <Map
-          center={center}
-          style={{ width: '100%', height: '100%' }}
-          level={3}
-        >
+        <Map center={center} className={cn('map')} level={3}>
           <MapTypeControl position={'TOPRIGHT'} />
           <ZoomControl position={'RIGHT'} />
 
@@ -121,7 +118,15 @@ export default function KakaoMap({ activitiesDetailInfo }: KakaoMapProps) {
           </CustomOverlayMap>
         </Map>
 
-        <div className={cn('ellipsis')}>{activitiesDetailInfo.address}</div>
+        <div className={cn('address')}>
+          <Image
+            src={ICON.mapMarker.default.src}
+            width={18}
+            height={18}
+            alt={ICON.mapMarker.default.alt}
+          />
+          {activitiesDetailInfo.address}
+        </div>
         {copied && <div className={cn('toast')}>주소를 복사했습니다</div>}
       </div>
     </>
