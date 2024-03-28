@@ -36,6 +36,7 @@ import IconLoading from '/public/icons/Icon_loading.svg';
 import IconNotification from '/public/icons/Icon_notification.svg';
 import IconSubtract from '/public/icons/Icon_subtract.svg';
 import IconAdd from '/public/icons/Icon_Add.svg';
+import IconMapMarker from '/public/icons/Icon_map_marker.svg';
 
 import ImageLogoSmall from '/public/images/Image_logo_small.svg';
 import ImageLogo from '/public/images/Image_logo.svg';
@@ -284,6 +285,13 @@ export const ICON = {
     },
     active: {},
   },
+  mapMarker: {
+    default: {
+      src: IconMapMarker,
+      alt: '마커',
+    },
+    active: {},
+  },
 };
 
 export const IMAGE = {
@@ -310,5 +318,4 @@ export const IMAGE = {
       alt: '데이터없음',
     },
   },
-
 };
