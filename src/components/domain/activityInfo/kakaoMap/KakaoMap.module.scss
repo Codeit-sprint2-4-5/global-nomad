@@ -1,7 +1,12 @@
 .container {
   position: relative;
-  height: 45rem;
   overflow: hidden;
+  @include column-flexbox(none, none);
+  gap: 0.8rem;
+}
+.map {
+  height: 45rem;
+  border-radius: 1.6rem;
   @include responsive('T') {
     height: 27.6rem;
   }
@@ -112,9 +117,8 @@
 }
 
 .desc {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  @include column-flexbox(around, none);
+
   @include text-style(1.4);
 
   @include responsive('T') {
@@ -127,8 +131,7 @@
 }
 
 .ellipsis {
-  display: flex;
-  flex-direction: column;
+  @include column-flexbox(none, none);
   gap: 0.5rem;
   width: 16.5rem;
   overflow: hidden;
@@ -138,8 +141,7 @@
 
 .copyLink {
   color: $blue;
-  display: flex;
-  align-items: center;
+  @include flexbox(none, center);
   gap: 2rem;
 }
 
@@ -176,4 +178,11 @@
     left: 30%;
     @include text-style(1.3);
   }
+}
+.address {
+  @include flexbox(none, center);
+  flex-direction: row;
+  line-height: 1.67rem;
+  gap: 0.2rem;
+  @include text-style(1.4, 400, $gray90);
 }
