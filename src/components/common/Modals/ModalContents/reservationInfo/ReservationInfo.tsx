@@ -41,8 +41,6 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
     queryFn: () => getMyActivitiesReservation(activityId, scheduledId, selectedStatus),
   });
 
-  console.log(reservedScheduleData);
-
   useEffect(() => {
     if (reservedScheduleData) {
       setScheduledId(reservedScheduleData[0]?.scheduleId);
