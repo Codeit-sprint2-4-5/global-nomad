@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import ReservationCard from './ReservationCard';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import { useCustomInfiniteQuery } from '@/hooks/useCustomInfiniteQuery';
 import Dropdown from '@/components/common/dropdown/Dropdown';
 import { getMyActivitiesReservation, getReservedScheduleDate } from '@/apis/get/getAbledResrvations';
 import { changeDateToStringFormat } from '../utills';
@@ -30,15 +32,29 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
   const [selectedStatus, setSelectedStatus] = useState<ReservationCardType['status']>('pending');
   const [scheduledId, setScheduledId] = useState<number>(0);
   const [schedule, setSchedule] = useState();
+  const observerRef = useRef<HTMLDivElement>(null);
 
   const { data: reservedScheduleData, isSuccess } = useQuery({
     queryKey: queryKey.getMyReservationUseDate(date),
     queryFn: () => getReservedScheduleDate(activityId, date),
   });
 
-  const { data: reservationStatusData } = useQuery({
+  const {
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    data: reservationStatusData,
+  } = useCustomInfiniteQuery({
     queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus),
-    queryFn: () => getMyActivitiesReservation(activityId, scheduledId, selectedStatus),
+    queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
+      getMyActivitiesReservation(activityId, scheduledId, selectedStatus, 10, { pageParam }),
+  });
+
+  useIntersectionObserver({
+    observerRef,
+    hasNextPage,
+    isFetching,
+    fetchNextPage,
   });
 
   useEffect(() => {
@@ -57,7 +73,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
     title: `${reservation.startTime} ~ ${reservation.endTime}`,
   })) ?? [{ id: scheduledId }];
 
-  const cardList = reservationStatusData?.reservations ?? [];
+  const cardList = reservationStatusData?.pages ?? [];
 
   const onSelectedId = async (id: number) => {
     setScheduledId(id);
@@ -94,7 +110,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
           <p className={cn('reservation-date')}>{changeDateToStringFormat(date)}</p>
           <Dropdown name='dateDropdown' onSelectedId={onSelectedId} labelText=' ' lists={dropdownList} />
         </div>
-        <div>
+        <div className={cn('reservation-history')}>
           <h3 className={cn('little-title')}>예약 내역</h3>
           <ul className={cn('reservation-card-list')}>
             {cardList?.length !== 0 ? (
