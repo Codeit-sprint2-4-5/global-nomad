@@ -1,0 +1,15 @@
+.container {
+  @include flexbox;
+  border-radius: 9999px;
+  overflow: hidden;
+
+  &.gnb {
+    height: 3.2rem;
+    width: 3.2rem;
+  }
+
+  &.comment {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+}

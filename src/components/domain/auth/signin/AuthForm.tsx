@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
-import style from '@/components/auth/signin/AuthForm.module.scss';
-import FormHeader from '../formHeader/FormHeader';
+import style from './AuthForm.module.scss';
+import FormHeader from '@/components/domain/auth/formHeader/FormHeader';
 import Input from '@/components/common/Input/Input';
 import BaseButton from '@/components/common/button/BaseButton';
 import { SubmitHandler, useForm } from 'react-hook-form';

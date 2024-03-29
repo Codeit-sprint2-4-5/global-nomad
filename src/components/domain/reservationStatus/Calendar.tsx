@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { instance } from '@/apis/axios';
+import Dropdown from '@/components/common/dropdown/Dropdown';
+import Days from './Days';
 import classNames from 'classnames/bind';
 import styles from './Calendar.module.scss';
 
@@ -6,6 +10,7 @@ const cn = classNames.bind(styles);
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [activityId, setActivityId] = useState(0);
   const dayArr = ['SUN', 'MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
 
   const currentYear = currentDate.getFullYear();
@@ -15,6 +20,7 @@ export default function Calendar() {
   const currentMonthDay = new Date(currentYear, currentMonth + 1, 0);
   const remainingDate = 6 - currentMonthDay.getDay();
   const dateRow = currentMonthDay.getDay() === 0 ? 6 : 5;
+  const formattedmonth = currentMonth + 1 < 10 ? '0' + (currentMonth + 1) : currentMonth + 1;
 
   const prevMonthDate = Array.from(
     { length: prevMonthStartDay },
@@ -23,7 +29,7 @@ export default function Calendar() {
   const currentMonthDate = Array.from({ length: currentMonthDay.getDate() }, (_, i) => i + 1);
   const nextMonthDate = Array.from({ length: remainingDate }, (_, i) => i + 1);
   const days = [...prevMonthDate, ...currentMonthDate, ...nextMonthDate];
-  
+
   const handlePrevClick = () => {
     setCurrentDate(new Date(currentYear, currentMonth - 1));
   };
@@ -32,8 +38,44 @@ export default function Calendar() {
     setCurrentDate(new Date(currentYear, currentMonth + 1));
   };
 
+  const onSelectedId = (id: number) => {
+    setActivityId(id);
+  };
+
+  async function getAllActivity() {
+    try {
+      const res = await instance.get('/my-activities');
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getMonthActivity() {
+    try {
+      const res = await instance.get(`/my-activities/${activityId}/reservation-dashboard`, {
+        params: { year: currentYear, month: formattedmonth },
+      });
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const { data: allActivity } = useQuery({
+    queryKey: ['/my-activities'],
+    queryFn: getAllActivity,
+  });
+
+  const { data: monthActivity } = useQuery({
+    queryKey: [`/my-activities/${activityId}`],
+    queryFn: getMonthActivity,
+    enabled: activityId !== 0,
+  });
+
   return (
     <>
+      <Dropdown lists={allActivity?.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
       <div className={cn('date-control')}>
         <button type='button' className={cn('button', 'prev')} onClick={handlePrevClick}>
           이전
@@ -69,20 +111,15 @@ export default function Calendar() {
               .fill(null)
               .map((_, dayIdx) => (
                 <tr key={dayIdx}>
-                  {Array(7)
-                    .fill(null)
-                    .map((_, i) => {
-                      const currentMonthDate = dayIdx * 7 + i;
-                      const remainingDate =
-                        currentMonthDate < prevMonthDate.length ||
-                        currentMonthDate > prevMonthDate.length + currentMonthDay.getDate() - 1;
-
-                      return (
-                        <td key={i} className={cn({ active: remainingDate })}>
-                          {days[currentMonthDate]}
-                        </td>
-                      );
-                    })}
+                  <Days
+                    dayIdx={dayIdx}
+                    prevMonthDate={prevMonthDate}
+                    currentMonthDay={currentMonthDay}
+                    monthActivity={monthActivity}
+                    currentYear={currentYear}
+                    currentMonth={currentMonth}
+                    days={days}
+                  />
                 </tr>
               ))}
           </tbody>
@@ -91,3 +128,4 @@ export default function Calendar() {
     </>
   );
 }
+
