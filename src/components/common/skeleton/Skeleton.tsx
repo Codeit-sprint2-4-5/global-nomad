@@ -1,7 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { instance } from '@/apis/axios';
+import { useRouter } from 'next/router';
+import throttle from '@/function/throttle';
 import classNames from 'classnames/bind';
 import styles from './Skeleton.module.scss';
-import { throttle } from 'lodash';
+
 const cn = classNames.bind(styles);
 
 type Props = 'popular' | 'all' | 'detail' | 'reservation' | 'management';
@@ -9,33 +13,38 @@ type Props = 'popular' | 'all' | 'detail' | 'reservation' | 'management';
 export default function Skeleton({ type }: { type: Props }) {
   const [allItem, setAllItem] = useState(8);
   const [popularItem, setPopularItem] = useState(3);
-  const [throttle, setThrottle] = useState(false);
+  const router = useRouter();
+  const { id } = router.query;
+
+  async function getActivity() {
+    try {
+      const res = await instance.get(`/activities/${id}`);
+      return res.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['/activities'],
+    queryFn: getActivity,
+  });
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = throttle(() => {
       const breakPoint = window.innerWidth;
 
-      if (throttle) return;
-
-      if (!throttle) {
-        setThrottle(true);
-
-        setTimeout(() => {
-          if (breakPoint > 1200) {
-            setAllItem(8);
-            setPopularItem(3);
-          } else if (breakPoint > 768) {
-            setAllItem(9);
-            setPopularItem(3);
-          } else if (breakPoint > 375) {
-            setAllItem(4);
-            setPopularItem(9);
-          }
-
-          setThrottle(false);
-        }, 100);
+      if (breakPoint > 1200) {
+        setAllItem(8);
+        setPopularItem(3);
+      } else if (breakPoint > 768) {
+        setAllItem(9);
+        setPopularItem(3);
+      } else if (breakPoint > 375) {
+        setAllItem(4);
+        setPopularItem(9);
       }
-    };
+    }, 100);
 
     window.addEventListener('resize', handleResize);
     document.body.style.overflowX = 'hidden';
@@ -43,7 +52,25 @@ export default function Skeleton({ type }: { type: Props }) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [throttle]);
+  }, []);
+
+  if (isLoading) return;
+
+  const subImagesLength = data.subImages.length;
+  let length = '';
+  switch (subImagesLength) {
+    case 1:
+      length = 'one';
+      break;
+    case 2:
+      length = 'two';
+      break;
+    case 3:
+      length = 'three';
+      break;
+    default:
+      return;
+  }
 
   switch (type) {
     case 'popular':
@@ -72,8 +99,8 @@ export default function Skeleton({ type }: { type: Props }) {
         <div className={cn('detail-container')}>
           <div className={cn('img')}></div>
           <div className={cn('wrap')}>
-            {[...Array(4)].map((_, idx) => (
-              <div key={idx} className={cn('box')}></div>
+            {[...Array(subImagesLength)].map((_, idx) => (
+              <div key={idx} className={`${cn('box', `${length}`)}`}></div>
             ))}
           </div>
         </div>

@@ -9,9 +9,9 @@
 
   .box {
     @include skeleton(2.4);
+    @include border-radius(2.4rem);
     width: 38.4rem;
     height: 38.4rem;
-    border-radius: 2.4rem;
 
     @include responsive(M) {
       width: 18.6rem;
@@ -51,9 +51,9 @@
       }
 
       &.img {
+        @include border-radius(2.4rem);
         height: 28.3rem;
         margin: 0 0 1.6rem 0;
-        border-radius: 2.4rem;
 
         @include responsive(T) {
           height: 22.1rem;
@@ -66,7 +66,7 @@
         }
 
         &::before {
-          border-radius: 2.4rem;
+          @include border-radius(2.4rem);
         }
       }
 
@@ -100,9 +100,9 @@
 
   .img {
     @include skeleton(0);
+    @include border-radius(1.2rem 0 0 1.2rem);
     width: 50%;
     height: 53.4rem;
-    border-radius: 1.2rem 0 0 1.2rem;
     background-color: $gray30;
 
     @include responsive(T) {
@@ -110,15 +110,15 @@
     }
 
     @include responsive(M) {
+      @include border-radius(0);
       width: 100%;
-      border-radius: 0;
     }
 
     &::before {
-      border-radius: 1.2rem 0 0 1.2rem;
+      @include border-radius(1.2rem 0 0 1.2rem);
 
       @include responsive(M) {
-        border-radius: 0;
+        @include border-radius(0);
       }
     }
   }
@@ -143,7 +143,7 @@
       @include skeleton(0);
       width: calc(50% - 0.4rem);
       height: 26.3rem;
-      border-radius: 2.4rem 0 0 2.4rem;
+      @include border-radius(2.4rem 0 0 2.4rem);
 
       @include responsive(T) {
         width: calc(50% - 0.26rem);
@@ -153,26 +153,70 @@
       &:nth-child(1),
       &:nth-child(2) {
         align-self: flex-start;
+
+        &.one {
+          width: 100%;
+          height: 100%;
+          @include border-radius(0 1.2rem 1.2rem 0);
+
+          &::before {
+            @include border-radius(0 1.2rem 1.2rem 0);
+          }
+        }
+      }
+
+      &.two {
+        width: 100%;
+        &:nth-child(1) {
+          @include border-radius(0 1.2rem 0 0);
+
+          &::before {
+            @include border-radius(0 1.2rem 0 0);
+          }
+        }
+
+        &:nth-child(2) {
+          @include border-radius(0 0 1.2rem 0);
+
+          &::before {
+            @include border-radius(0 0 1.2rem 0);
+
+          }
+        }
       }
 
       &:nth-child(3),
       &:nth-child(4) {
         align-self: flex-end;
+
+        &.three {
+          width: 100%;
+
+          &:nth-child(3) {
+            @include border-radius(0 0 1.2rem 0);
+
+            &::before {
+              @include border-radius(0 0 1.2rem 0);
+
+            }
+          }
+        }
       }
 
       &:nth-child(2) {
-        border-radius: 0 1.2rem 0 0;
+        @include border-radius(0 1.2rem 0 0);
 
         &::before {
-          border-radius: 0 1.2rem 0 0;
+          @include border-radius(0 1.2rem 0 0);
         }
       }
 
       &:nth-child(4) {
-        border-radius: 0 0 1.2rem 0;
+        @include border-radius(0 0 1.2rem 0);
 
         &::before {
-          border-radius: 0 0 1.2rem 0;
+          @include border-radius(0 0 1.2rem 0);
+
         }
       }
     }
@@ -198,9 +242,9 @@
 
     .img {
       @include skeleton(0);
+      @include border-radius(2.4rem);
       width: 20.4rem;
       height: 20.4rem;
-      border-radius: 2.4rem;
 
       @include responsive(T) {
         width: 15.6rem;
@@ -213,7 +257,7 @@
       }
 
       &::before {
-        border-radius: 2.4rem;
+        @include border-radius(2.4rem);
       }
     }
   }

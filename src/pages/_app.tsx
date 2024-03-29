@@ -19,7 +19,7 @@ function Providers({ children }: { children: ReactNode }) {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Providers>
-      <NextNProgress color='#ffc23d' startPosition={0.3} stopDelayMs={200} height={5} showOnShallow={true} />
+      <NextNProgress color='#0b3b2d' startPosition={0.3} stopDelayMs={200} height={5} showOnShallow={true} />
       <Component {...pageProps} />
     </Providers>
   );
