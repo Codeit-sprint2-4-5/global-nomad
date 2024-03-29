@@ -15,6 +15,7 @@ interface Props {
 export default function Search({ keyword, onSubmit, onChange }: Props) {
   const [isKeyword, setIsKeyword] = useState(false);
   const [title, setTitle] = useState('');
+  const [isFocus, setIsFocus] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   async function getActivity() {
@@ -31,11 +32,19 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
     queryFn: getActivity,
   });
 
+  const handleSearchFocus = () => {
+    setIsFocus(true);
+    setIsKeyword(true);
+  };
+
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);
 
     if (e.target.value === '') {
       setIsKeyword(false);
+    } else {
+      setIsKeyword(true);
+      setIsFocus(false);
     }
 
     if (timerRef.current) {
@@ -52,7 +61,6 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
     if (!keyword) return;
 
     onSubmit();
-    setIsKeyword(true);
   };
 
   let count = 1;
@@ -74,20 +82,14 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
     <div className={cn('container')}>
       <p className={cn('text')}>무엇을 체험하고 싶으신가요?</p>
       <div className={cn('wrap')}>
-        <form onSubmit={handleSubmit} className={cn('form', { acitve: isKeyword })}>
-          <input
-            className={cn('search-bar')}
-            type='search'
-            placeholder='내가 원하는 체험은'
-            onChange={handleValueChange}
-            value={keyword}
-          />
+        <form onSubmit={handleSubmit} className={cn('form', { acitve: isKeyword })} onFocus={handleSearchFocus}>
+          <input className={cn('search-bar')} type='search' onChange={handleValueChange} value={keyword} />
           <div className={cn('button')}>
             <BaseButton type='submit' size='md' text='검색하기' />
           </div>
         </form>
         <div className={cn('title')}>
-          <ul>{!keyword && <li>{title}</li>}</ul>
+          <ul>{!keyword && !isFocus && <li>{title}</li>}</ul>
         </div>
       </div>
     </div>
