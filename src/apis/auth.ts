@@ -1,5 +1,6 @@
 import { FormValues, ProfileFormValues } from '@/types/auth';
 import { instance } from '@/apis/axios';
+import axios from 'axios';
 
 export const auth = {
   signup: async (userData: FormValues) => {
@@ -20,6 +21,19 @@ export const auth = {
   },
   getImageUrl: async (imageUrl: FormData) => {
     const response = await instance.post('/users/me/image', imageUrl);
+    return response.data;
+  },
+  tokensUpdate: async (refreshToken: string) => {
+    const response = await axios.post(
+      'https://sp-globalnomad-api.vercel.app/2-5/auth/tokens',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     return response.data;
   },
 };
