@@ -37,11 +37,13 @@ import IconNotification from '/public/icons/Icon_notification.svg';
 import IconSubtract from '/public/icons/Icon_subtract.svg';
 import IconAdd from '/public/icons/Icon_Add.svg';
 import IconMapMarker from '/public/icons/Icon_map_marker.svg';
+import IconClose from '/public/icons/Icon_close.svg';
 
 import ImageLogoSmall from '/public/images/Image_logo_small.svg';
 import ImageLogo from '/public/images/Image_logo.svg';
 import ImageDefaultProfile from '/public/images/Image_default_profile_image.png';
 import ImageNoData from '/public/images/Image_no_data.svg';
+
 export const ICON = {
   accountCheck: {
     default: {
@@ -289,6 +291,13 @@ export const ICON = {
     default: {
       src: IconMapMarker,
       alt: '마커',
+    },
+    active: {},
+  },
+  close: {
+    default: {
+      src: IconClose,
+      alt: '닫기',
     },
     active: {},
   },
