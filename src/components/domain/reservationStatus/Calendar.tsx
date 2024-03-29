@@ -4,7 +4,6 @@ import { instance } from '@/apis/axios';
 import Dropdown from '@/components/common/dropdown/Dropdown';
 import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
 import Modal from '@/components/common/Modals';
-import ReservationInfo from '@/components/common/Modals/ModalContents/reservationInfo/ReservationInfo';
 import Days from './Days';
 import classNames from 'classnames/bind';
 import styles from './Calendar.module.scss';
@@ -95,7 +94,7 @@ export default function Calendar() {
   if (allActivity?.activities.length === 0) return <NoDataMessage message='아직 등록한 체험이 없어요' />;
 
   return (
-    <>
+    <div>
       <Dropdown lists={allActivity?.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
       <div className={cn('date-control')}>
         <button type='button' className={cn('button', 'prev')} onClick={handlePrevClick}>
@@ -157,8 +156,7 @@ export default function Calendar() {
             activityId={activityId}
           />
         )}
-        {/* <ReservationInfo /> */}
       </div>
-    </>
+    </div>
   );
 }
