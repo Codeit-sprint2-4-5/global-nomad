@@ -1,9 +1,5 @@
 .container {
   position: relative;
-<<<<<<< HEAD
-=======
-  height: 45rem;
->>>>>>> 2e1a388 (refactor: css정리)
   overflow: hidden;
   @include column-flexbox(none, none);
   gap: 0.8rem;
