@@ -17,6 +17,7 @@
 
   .wrap {
     @include flexbox($flex-map);
+    overflow: hidden;
     position: relative;
 
     .form {
@@ -65,7 +66,7 @@
           padding: 0 0.5rem;
           line-height: 2.6rem;
           background-color: $white;
-      
+
           @include responsive(M) {
             @include text-style(1.5, 400, $gray60);
             top: -1rem;
@@ -82,6 +83,38 @@
             height: 4.8rem;
           }
         }
+      }
+    }
+
+    .title {
+      @include text-style(1.6, 400, $gray50);
+      height: 2.5rem;
+      overflow: hidden;
+      position: absolute;
+      left: 17.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+
+      @include responsive(M) {
+        display: none;
+      }
+
+      li {
+        list-style-type: none;
+        margin: 0;
+        animation: up 3s ease-out infinite;
+      }
+    }
+
+    @keyframes up {
+      0% {
+        transform: translateY(100px);
+      }
+      50% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-200%);
       }
     }
   }

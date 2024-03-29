@@ -1,7 +1,9 @@
-import { ChangeEvent, FormEvent, useState, useRef } from 'react';
+import { ChangeEvent, FormEvent, useState, useRef, useEffect } from 'react';
 import BaseButton from '@/components/common/button/BaseButton';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
+import { instance } from '@/apis/axios';
+import { useQuery } from '@tanstack/react-query';
 
 const cn = classNames.bind(styles);
 interface Props {
@@ -12,7 +14,22 @@ interface Props {
 
 export default function Search({ keyword, onSubmit, onChange }: Props) {
   const [isKeyword, setIsKeyword] = useState(false);
+  const [title, setTitle] = useState('');
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  async function getActivity() {
+    const res = await instance.get('/activities', {
+      params: {
+        method: 'offset',
+      },
+    });
+    return res.data;
+  }
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['/activities'],
+    queryFn: getActivity,
+  });
 
   const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);
@@ -38,6 +55,21 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
     setIsKeyword(true);
   };
 
+  let count = 1;
+  useEffect(() => {
+    setTitle(data?.activities[0].title);
+
+    const title = setInterval(() => {
+      if (count < data?.activities.length) {
+        setTitle(data?.activities[count++].title);
+      }
+    }, 3000);
+
+    return () => clearInterval(title);
+  }, []);
+
+  if (isLoading) return;
+
   return (
     <div className={cn('container')}>
       <p className={cn('text')}>무엇을 체험하고 싶으신가요?</p>
@@ -54,6 +86,9 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
             <BaseButton type='submit' size='md' text='검색하기' />
           </div>
         </form>
+        <div className={cn('title')}>
+          <ul>{!keyword && <li>{title}</li>}</ul>
+        </div>
       </div>
     </div>
   );
