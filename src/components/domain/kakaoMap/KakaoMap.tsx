@@ -37,19 +37,6 @@ export default function KakaoMap({ activitiesDetailInfo }: KakaoMapProps) {
         }
       }
     );
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCenter({ lat: latitude, lng: longitude });
-        },
-        (error) => {
-          console.error('Error getting geolocation:', error);
-        }
-      );
-    } else {
-      console.error('Geolocation is not supported by this browser.');
-    }
   }, [activitiesDetailInfo.address]);
   const handleMarkerClick = () => {
     setOverlayVisible(!overlayVisible);
