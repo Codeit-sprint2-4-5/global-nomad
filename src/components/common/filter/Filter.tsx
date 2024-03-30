@@ -33,14 +33,18 @@ export default function Filter({ type, setFilterState }: FilterProps) {
 
 	const FilterType: FilterTypeProps = {
 		price: {
-			text: '가격',
+			text: '정렬',
 			list: [
+        {
+          text: '최신순',
+          handleClick: () => handleDropdownOptionClick('latest'),
+        },
 				{
-					text: '가격이 낮은 순',
+					text: '낮은 가격순',
 					handleClick: () => handleDropdownOptionClick('price_asc'),
 				},
 				{
-					text: '가격이 높은 순',
+					text: '높은 가격순',
 					handleClick: () => handleDropdownOptionClick('price_desc'),
 				},
 			],
@@ -48,6 +52,10 @@ export default function Filter({ type, setFilterState }: FilterProps) {
 		filter: {
 			text: '필터',
 			list: [
+        {
+          text: '전체',
+          handleClick: () => handleDropdownOptionClick(''),
+        },
 				{
 					text: '예약 신청',
 					handleClick: () => handleDropdownOptionClick('pending'),
