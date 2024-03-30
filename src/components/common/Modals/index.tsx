@@ -73,7 +73,14 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
 
   return createPortal(
     <>
-      <section className={cn('modal-content', { modalType: modalType }, className)}>
+      <section
+        className={cn(
+          'modal-content',
+          { modalType: modalType },
+          { notifications: modalType === 'notifications' },
+          className
+        )}
+      >
         <Image src={x.default.src} alt={x.default.alt} width={40} height={40} onClick={handleClickCloseModal} />
         <ContestComponent onClickCloseModal={handleClickCloseModal} {...prop} />
       </section>
