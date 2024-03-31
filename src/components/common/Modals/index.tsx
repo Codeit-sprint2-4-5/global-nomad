@@ -9,8 +9,6 @@ import Notifications from './ModalContents/notifications/Notifications';
 import DateForm from './ModalContents/dateForm/DateForm';
 import { AbledReservationListData } from '@/types/dateform';
 import { ICON, MODAL_TYPE } from '@/constants';
-import { AbledReservationListData } from '@/types/dateform';
-import { ICON, MODAL_TYPE } from '@/constants';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import { PostReservationData } from '../floatingBox/FloatingBox';
