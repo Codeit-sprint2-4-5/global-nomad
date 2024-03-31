@@ -15,7 +15,7 @@ interface Props {
   onDeleteImageUrl: (e: MouseEvent<HTMLButtonElement>) => void;
   onAddImageUrls: (targetId: string, imageData: string) => void;
   inputId: 'bannerImageUrl' | 'subImageUrl';
-  imageUrl: string | { url: string; id: string }[];
+  imageUrl: string | { imageUrl: string; id: string }[];
 }
 
 function ImageLableBox() {
@@ -37,6 +37,8 @@ export default function ImageInput({ inputId, imageUrl, onDeleteImageUrl, onAddI
       onAddImageUrls(targetId, activityImageUrl);
     },
   });
+
+  const label = inputId === 'bannerImageUrl' ? '배너 이미지' : '소개 이미지';
 
   const handelUpLoadImg = async (e: ChangeEvent<HTMLInputElement>) => {
     const targetId = e.target.id;
@@ -63,15 +65,14 @@ export default function ImageInput({ inputId, imageUrl, onDeleteImageUrl, onAddI
   return (
     <div className={cn('image-input-box')}>
       <label className={cn('label', 'file-label')} htmlFor={inputId}>
-        {inputId === 'bannerImageUrl' ? '배너 이미지' : '소개 이미지'}
-        <ImageLableBox />
+        {label} <ImageLableBox />
       </label>
       {inputId === 'bannerImageUrl'
         ? typeof imageUrl === 'string' &&
           imageUrl && <ImageList imageUrl={imageUrl} onDeleteImageUrl={onDeleteImageUrl} />
         : Array.isArray(imageUrl) &&
           imageUrl?.map((image) => (
-            <ImageList key={image.id} onDeleteImageUrl={onDeleteImageUrl} imageUrl={image.url} id={image.id} />
+            <ImageList key={image.id} onDeleteImageUrl={onDeleteImageUrl} imageUrl={image.imageUrl} id={image.id} />
           ))}
       <input className={cn('file-input')} onChange={handelUpLoadImg} type='file' id={inputId} />
     </div>

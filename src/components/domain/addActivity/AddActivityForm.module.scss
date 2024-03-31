@@ -1,14 +1,17 @@
 .form-wrapper {
   @include inline-flexbox(start, start);
   flex-direction: column;
-  margin: 3.4rem auto 0;
   width: 100%;
   position: relative;
   gap: 2.4rem;
 
-  > button:last-child {
+  > p {
+    margin-top: -2.2rem;
+  }
+
+  > button:first-child {
     position: absolute;
-    top: -8rem;
+    top: -0.5rem;
     right: 0;
   }
 }
@@ -19,6 +22,42 @@
   cursor: pointer;
   margin-bottom: -0.8rem;
   /* 108.333% */
+
+  &-date {
+    &-little {
+      @include text-style(2, 500, $gray80);
+      width: 100%;
+      word-break: keep-all;
+    }
+  }
+}
+
+.address {
+  &-label {
+    margin-bottom: 1.2rem;
+  }
+
+  &-input {
+    &-box {
+      @include column-flexbox(start, start);
+      position: relative;
+
+      width: 100%;
+
+      > button {
+        position: absolute;
+        top: 4.8rem;
+        right: 2rem;
+        width: 9rem;
+      }
+    }
+  }
+
+  &-modal {
+    position: absolute;
+    top: 11rem;
+    z-index: $modal;
+  }
 }
 
 .image-input-box {
@@ -29,7 +68,86 @@
     gap: 1.6rem;
   }
   @include responsive(M) {
-    gap: 0.8rem;
+    gap: 0.5rem;
+  }
+}
+
+.schedule {
+  @include column-flexbox(start, start);
+  width: 100%;
+  gap: 2.4rem;
+
+  &-input {
+    @include column-flexbox(start, start);
+    width: 20%;
+    &:first-child {
+      width: 50%;
+
+      @include responsive(T) {
+        gap: 1rem;
+      }
+
+      @include responsive(M) {
+        width: 100%;
+      }
+    }
+    &.time {
+      @include responsive(M) {
+        width: 49%;
+      }
+    }
+
+    @include responsive(M) {
+      width: 100%;
+    }
+    gap: 1rem;
+    > input {
+      border: 1px solid $red;
+    }
+    &-box {
+      @include flexbox(start, end);
+      width: 100%;
+      gap: 2rem;
+      padding-bottom: 2.1rem;
+
+      &.isSchdule {
+        border-bottom: 0.1rem solid $gray30;
+      }
+
+      @include responsive(T) {
+        gap: 0.5rem;
+        justify-content: space-between;
+      }
+
+      @include responsive(M) {
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      & > button {
+        background-color: $darkgreen;
+        border-radius: 1rem;
+
+        @include responsive(M) {
+          width: 100%;
+          margin-top: 1rem;
+        }
+        & img {
+          width: 5rem;
+          height: 5rem;
+          filter: brightness(9999%);
+        }
+      }
+    }
+  }
+}
+
+.time-input-between-wave {
+  @include text-style(2, 700, $black);
+  position: relative;
+  bottom: 1.8rem;
+  @include responsive(T) {
+    display: none;
   }
 }
 
@@ -49,10 +167,19 @@
 
       width: 18rem;
       height: 18rem;
+      max-width: 18rem;
+      max-height: 18rem;
       border-radius: 1.2rem;
       border: 0.1rem dashed $gray80;
       background-color: $gray10;
       margin-top: 2.4rem;
+
+      @include responsive(M) {
+        width: 45vw;
+        height: 45vw;
+
+        gap: 2rem;
+      }
     }
   }
   &-input {
@@ -69,11 +196,16 @@
     }
     &-item {
       @include flexbox(end, end);
-      width: 18rem;
-      height: 18rem;
+      max-width: 18rem;
+      max-height: 18rem;
       border-radius: 2.4rem;
 
       overflow: hidden;
+
+      @include responsive(M) {
+        width: 45vw;
+        height: 45vw;
+      }
 
       &-cancel {
         position: absolute;
@@ -95,6 +227,6 @@
 
 .guide-image-input {
   @include text-style(1.8, 400, $gray80);
-  font-family: Pretendard;
+  margin-top: 2.2rem !important;
   word-break: keep-all;
 }
