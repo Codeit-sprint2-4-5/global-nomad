@@ -81,8 +81,6 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
     enabled: isEdit,
   });
 
-  console.log(activityData);
-
   useMemo(() => {
     if (isSuccess) {
       setValue('title', activityData.title);
@@ -139,8 +137,6 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
       setSchedulesToAdd((prev) => [...prev, nextSchedule]);
     }
     setSchedules((prev) => [...prev, nextSchedule as Schedules]);
-
-    console.log(schedules);
   };
 
   const handleDeleteSchedule = (id: number) => {
@@ -156,7 +152,6 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
       return setSchedules(updateSchedule);
     }
   };
-  console.log(scheduleIdsToRemove);
 
   const handleAddImageUrls = (targetId: string, imageData: string) => {
     if (targetId === 'bannerImageUrl') {
@@ -182,7 +177,6 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
 
     setBannerImageUrl('');
   };
-  console.log(subImageIdsToRemove);
 
   const postActivityMutation = useMutation({
     mutationFn: (data: PostActivityFormValues) => postActivity(data),
@@ -220,11 +214,8 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
       };
       delete patchData.subImageUrls;
       delete patchData.schedules;
-      console.log('patch', patchData);
       return patchActivityMutation.mutate(patchData);
     }
-    console.log(postData);
-
     postActivityMutation.mutate(postData);
   };
   return (

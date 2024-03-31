@@ -7,4 +7,8 @@ export default function isValidImage(file: File | null) {
     alert('사진을 선택해주세요.');
     return false;
   }
+
+  if (file.size > 1024 * 1024 * 2) {
+    return alert('사진 크기는 2MB를 초과할 수 없습니다.');
+  }
 }
