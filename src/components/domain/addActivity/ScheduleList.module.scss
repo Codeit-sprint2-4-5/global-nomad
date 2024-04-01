@@ -1,0 +1,66 @@
+.date-list {
+  @include flexbox(start);
+  width: 100%;
+  gap: 2rem;
+
+  @include responsive(T) {
+    justify-content: space-between;
+
+    gap: 0.5rem;
+  }
+  &.box {
+    margin-bottom: -0.5rem;
+
+    .wave {
+      @include text-style(2, 700, $black);
+
+      @include responsive(T) {
+        display: none;
+      }
+    }
+  }
+
+  &-item {
+    @include text-style(1.6, 400, $black);
+
+    background-color: $white;
+    border: 0.1rem solid $gray40;
+    transition: $base-transition;
+    padding: 1.6rem 2rem;
+    border-radius: 0.6rem;
+
+    &.date {
+      width: 50%;
+
+      @include responsive(M) {
+        width: 40%;
+        padding: 1.6rem 0.8rem;
+      }
+    }
+
+    &.time {
+      width: 20%;
+
+      @include responsive(M) {
+        padding: 1.6rem 0.8rem;
+      }
+    }
+  }
+}
+
+.time-list-lable {
+  @include text-style(1.4, 400, $gray80);
+  margin-bottom: -2rem;
+  width: 20%;
+  &-box {
+    display: none;
+    @include responsive(M) {
+      @include flexbox(between);
+      width: 100%;
+      gap: 0.8rem;
+      & :first-child {
+        width: 40%;
+      }
+    }
+  }
+}

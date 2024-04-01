@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import BaseButton from '../button/BaseButton';
-import { PostformatDate, displayDateFormat } from '../Modals/ModalContents/utills';
+import { postformatDate, displayDateFormat } from '../Modals/ModalContents/utills';
 import Modal from '../Modals';
 import CountMemberInput from './CountMemberInput';
 import DateForm from '../Modals/ModalContents/dateForm/DateForm';
