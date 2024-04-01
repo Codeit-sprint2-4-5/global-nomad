@@ -9,12 +9,10 @@ const cn = classNames.bind(styles);
 export default function ReservationStatus() {
   return (
     <>
-      <Layout>
-        <div className={cn('wrap')}>
-          <SideNavMenu />
-          <Calendar />
-        </div>
-      </Layout>
+      <div className={cn('wrap')}>
+        <SideNavMenu />
+        <Calendar />
+      </div>
     </>
   );
 }
