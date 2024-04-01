@@ -1,3 +1,8 @@
+.wrap {
+  @include flexbox(center, flex-start);
+  gap: 2.4rem;
+}
+
 .date-control {
   @include text-style(2, 700, $black);
   @include flexbox(between, center);
@@ -27,7 +32,6 @@
 .calendar {
   overflow: hidden;
   width: 80rem;
-  margin: 0 auto;
   border-radius: 0.8rem;
   border: 1px solid $calendar-border;
 
@@ -36,7 +40,7 @@
   }
 
   .table {
-    width: 80rem;
+    width: 100%;
     border-collapse: collapse;
 
     @include responsive(M) {
@@ -97,6 +101,21 @@
         transform: translateX(-50%);
         width: calc(100% - 0.2rem);
       }
+    }
+  }
+
+  .reservedInfo {
+    width: 42.9rem;
+    height: 69.7rem;
+    top: 0;
+    left: auto;
+    right: 0;
+    padding: 2.4rem;
+    transform: translate(0, 0);
+
+    @include responsive(M) {
+      width: 100%;
+      height: 100%;
     }
   }
 }

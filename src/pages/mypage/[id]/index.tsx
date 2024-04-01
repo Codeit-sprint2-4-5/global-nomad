@@ -5,9 +5,12 @@ import { useRouter } from 'next/router';
 import style from './Mypage.module.scss';
 import classNames from 'classnames/bind';
 import Test from '@/pages/test';
+import ReservationStatus from '@/pages/reservationStatus';
 import { useEffect, useState } from 'react';
 import useRouteStore from '@/stores/useRoute';
 import throttle from '@/function/throttle';
+import MyReservations from '@/components/domain/mypage/myReservations/MyReservations';
+import MyActivities from '@/components/domain/mypage/myActivities/MyActivities';
 
 const cn = classNames.bind(style);
 
@@ -22,11 +25,11 @@ export default function Mypages() {
       case 'myinfo':
         return <Account />;
       case 'myreservations':
-        return <Test />;
+        return <MyReservations />;
       case 'myactivities':
         return <Test />;
-      case 'myreservedstatus':
-        return <Test />;
+      case 'reservationStatus':
+        return <ReservationStatus />;
     }
   };
 
@@ -51,7 +54,7 @@ export default function Mypages() {
   return (
     <Layout>
       <div className={cn('content')}>
-        {!isMobile && <SideNavMenu initialState='myinfo' />}
+        {!isMobile && <SideNavMenu initialState="myinfo" />}
         {renderComponents()}
       </div>
     </Layout>

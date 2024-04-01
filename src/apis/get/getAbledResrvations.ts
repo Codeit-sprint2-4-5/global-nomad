@@ -25,11 +25,12 @@ export const getMyActivitiesReservation = async (
   activityId: number,
   scheduleId: number,
   status: 'declined' | 'confirmed' | 'pending',
-  size = 10
+  size = 10,
+  { pageParam }: { pageParam: number | undefined }
 ) => {
   try {
     const res = await instance.get(`/my-activities/${activityId}/reservations`, {
-      params: { size, scheduleId, status },
+      params: { size, scheduleId, status, cursorId: pageParam ? pageParam : null },
     });
 
     return res.data;

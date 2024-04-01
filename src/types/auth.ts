@@ -4,7 +4,6 @@ export interface FormValues {
   password: string;
   passwordConfirm?: string;
 }
-
 export interface ProfileFormValues {
   email?: string;
   nickname: string;
