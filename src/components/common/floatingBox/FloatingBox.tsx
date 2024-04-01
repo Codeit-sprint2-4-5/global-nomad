@@ -30,11 +30,12 @@ export default function FloatingBox({ price = 10000 }) {
   const { control, register, handleSubmit, setValue, getValues, watch } = useForm<PostReservationData>({
     defaultValues: { headCount: 1, scheduleId: 0 },
   });
-  const router = useRouter(); // 나중에 라우터에서 id 값 받아와서 아래 함수 id 에 넣어주기
-
+  const router = useRouter();
+  const { query } = router;
+  const id = Number(query.id);
   const { data: abledReservationListData } = useQuery<AbledReservationListData[]>({
-    queryKey: queryKey.reservation(152, 2024, '04'),
-    queryFn: () => getAbledResrvationList(152, 2024, '04'),
+    queryKey: queryKey.reservation(id, 2024, '04'),
+    queryFn: () => getAbledResrvationList(id, 2024, '04'),
     staleTime: 1000 * 60 * 5,
   });
 
@@ -60,11 +61,9 @@ export default function FloatingBox({ price = 10000 }) {
   };
 
   const postReservationMutation = useMutation({
-    mutationFn: (data: PostReservationData) => postReservation(152, data),
-    //라우터에서 id 받아오기
-    onSuccess: () => alert('예약 신청 성공'),
+    mutationFn: (data: PostReservationData) => postReservation(id, data),
+    onSuccess: () => handleShowConfrim(),
     onError: (e: any) => alert(e.response?.data.message),
-    //예약 실패했을땐 뭐나와야하지
   });
 
   const handelOnSubmit: SubmitHandler<PostReservationData> = (data) => {
