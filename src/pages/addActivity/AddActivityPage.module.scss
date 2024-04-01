@@ -1,0 +1,14 @@
+.content {
+  @include flexbox(start, start);
+  gap: 2.4rem;
+
+  @include responsive(T) {
+    gap: 1.6rem;
+  }
+
+  @include responsive(M) {
+    > :first-child {
+      display: none;
+    }
+  }
+}

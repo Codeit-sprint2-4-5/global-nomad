@@ -8,7 +8,7 @@ import style from '@/components/common/Input/inputField.module.scss';
 const cn = classNames.bind(style);
 
 interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  type: 'text' | 'password' | 'email';
+  type: 'text' | 'password' | 'email' | 'number' | 'time';
   isError?: boolean;
   errorMessage?: string;
 }
@@ -19,19 +19,17 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input({ type, i
   return (
     <>
       <div className={cn('input-field')}>
-        <>
-          <input
-            {...props}
-            ref={ref}
-            type={type === 'password' ? inputType : type}
-            className={cn('input', { error: isError })}
-          />
-          {type === 'password' && (
-            <button type='button' onClick={handleToggleClick} className={cn('btn-password-show')}>
-              <Image src={src} alt={alt} width={24} height={24} />
-            </button>
-          )}
-        </>
+        <input
+          {...props}
+          ref={ref}
+          type={type === 'password' ? inputType : type}
+          className={cn('input', { error: isError })}
+        />
+        {type === 'password' && (
+          <button type='button' onClick={handleToggleClick} className={cn('btn-password-show')}>
+            <Image src={src} alt={alt} width={24} height={24} />
+          </button>
+        )}
       </div>
       {isError && <p className={cn('error')}>{errorMessage}</p>}
     </>

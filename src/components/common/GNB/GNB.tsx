@@ -11,14 +11,19 @@ import { useEffect, useState } from 'react';
 import Avatar from '../avatar/Avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import styles from './GNB.module.scss';
+import Modal from '../Modals';
 
 const cn = classNames.bind(styles);
 
 export default function GNB() {
   const router = useRouter();
   const [Auth, setAuth] = useState(false);
-  const { isToggle: isDropdownOpen, handleToggleClick: setIsDropdownOpen } = useToggleButton();
-
+  const { isToggle: isDropdownOpen, handleToggleClick: setIsDropdownOpen } =
+    useToggleButton();
+  const {
+    isToggle: isNotificationOpen,
+    handleToggleClick: setIsNotificationOpen,
+  } = useToggleButton();
   const getMyInfo = async () => {
     const { data } = await instance.get<myInfoProps>('/users/me');
     return data;
@@ -69,28 +74,52 @@ export default function GNB() {
 
   return (
     <div className={cn('container')}>
-      <Link href='/'>
-        <Image src={IMAGE.logo.nav.src} alt={IMAGE.logo.nav.alt} height={28} width={166} />
+      <Link href="/">
+        <Image
+          src={IMAGE.logo.nav.src}
+          alt={IMAGE.logo.nav.alt}
+          height={28}
+          width={166}
+        />
       </Link>
       <div>
         {!Auth ? (
           <div className={cn('not', 'user')}>
-            <Link href='/signin'>로그인</Link>
-            <Link href='/signup'>회원가입</Link>
+            <Link href="/signin">로그인</Link>
+            <Link href="/signup">회원가입</Link>
           </div>
         ) : (
           <div className={cn('user')}>
+            <div className={cn('gnb-button-container')}></div>
             <button className={cn('gnb-button')}>
-              <Image src={ICON.notification.default.src} alt={ICON.notification.default.alt} />
+              <Image
+                src={ICON.notification.default.src}
+                alt={ICON.notification.default.alt}
+                onClick={setIsNotificationOpen}
+              />
             </button>
+            {isNotificationOpen && (
+              <Modal
+                modalType="notifications"
+                setShowModal={setIsNotificationOpen}
+              />
+            )}
             <div className={cn('dropdown-menu-box')}>
               <div className={cn('stroke')} />
               <div className={cn('user-profile-box')}>
-                <Avatar profileImageUrl={MyInfoData?.profileImageUrl} type='gnb' />
-                <button className={cn('gnb-button')} onClick={setIsDropdownOpen}>
+                <Avatar
+                  profileImageUrl={MyInfoData?.profileImageUrl}
+                  type="gnb"
+                />
+                <button
+                  className={cn('gnb-button')}
+                  onClick={setIsDropdownOpen}
+                >
                   {MyInfoData?.nickname}
                 </button>
-                {isDropdownOpen && <DropdownMenu type='gnb' dropdownMenuList={MyMenuList} />}
+                {isDropdownOpen && (
+                  <DropdownMenu type="gnb" dropdownMenuList={MyMenuList} />
+                )}
               </div>
             </div>
           </div>

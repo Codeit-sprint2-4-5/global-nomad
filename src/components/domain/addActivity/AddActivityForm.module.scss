@@ -1,0 +1,232 @@
+.form-wrapper {
+  @include inline-flexbox(start, start);
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  gap: 2.4rem;
+
+  > p {
+    margin-top: -2.2rem;
+  }
+
+  > button:first-child {
+    position: absolute;
+    top: -0.5rem;
+    right: 0;
+  }
+}
+
+.label {
+  @include text-style(2.4, 700, $black);
+  font-family: Pretendard;
+  cursor: pointer;
+  margin-bottom: -0.8rem;
+  /* 108.333% */
+
+  &-date {
+    &-little {
+      @include text-style(2, 500, $gray80);
+      width: 100%;
+      word-break: keep-all;
+    }
+  }
+}
+
+.address {
+  &-label {
+    margin-bottom: 1.2rem;
+  }
+
+  &-input {
+    &-box {
+      @include column-flexbox(start, start);
+      position: relative;
+
+      width: 100%;
+
+      > button {
+        position: absolute;
+        top: 4.8rem;
+        right: 2rem;
+        width: 9rem;
+      }
+    }
+  }
+
+  &-modal {
+    position: absolute;
+    top: 11rem;
+    z-index: $modal;
+  }
+}
+
+.image-input-box {
+  @include flexbox(start, end);
+  gap: 2.4rem;
+  flex-wrap: wrap;
+  @include responsive(T) {
+    gap: 1.6rem;
+  }
+  @include responsive(M) {
+    gap: 0.5rem;
+  }
+}
+
+.schedule {
+  @include column-flexbox(start, start);
+  width: 100%;
+  gap: 2.4rem;
+
+  &-input {
+    @include column-flexbox(start, start);
+    width: 20%;
+    &:first-child {
+      width: 50%;
+
+      @include responsive(T) {
+        gap: 1rem;
+      }
+
+      @include responsive(M) {
+        width: 100%;
+      }
+    }
+    &.time {
+      @include responsive(M) {
+        width: 49%;
+      }
+    }
+
+    @include responsive(M) {
+      width: 100%;
+    }
+    gap: 1rem;
+    > input {
+      border: 1px solid $red;
+    }
+    &-box {
+      @include flexbox(start, end);
+      width: 100%;
+      gap: 2rem;
+      padding-bottom: 2.1rem;
+
+      &.isSchdule {
+        border-bottom: 0.1rem solid $gray30;
+      }
+
+      @include responsive(T) {
+        gap: 0.5rem;
+        justify-content: space-between;
+      }
+
+      @include responsive(M) {
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      & > button {
+        background-color: $darkgreen;
+        border-radius: 1rem;
+
+        @include responsive(M) {
+          width: 100%;
+          margin-top: 1rem;
+        }
+        & img {
+          width: 5rem;
+          height: 5rem;
+          filter: brightness(9999%);
+        }
+      }
+    }
+  }
+}
+
+.time-input-between-wave {
+  @include text-style(2, 700, $black);
+  position: relative;
+  bottom: 1.8rem;
+  @include responsive(T) {
+    display: none;
+  }
+}
+
+.file {
+  &-label {
+    @include column-flexbox(start, start);
+    margin-bottom: 0;
+
+    &-box {
+      @include inline-flexbox(center, center);
+      @include text-style(2.4, 400, $gray80);
+      flex-direction: column;
+
+      position: relative;
+
+      gap: 3.8rem;
+
+      width: 18rem;
+      height: 18rem;
+      max-width: 18rem;
+      max-height: 18rem;
+      border-radius: 1.2rem;
+      border: 0.1rem dashed $gray80;
+      background-color: $gray10;
+      margin-top: 2.4rem;
+
+      @include responsive(M) {
+        width: 45vw;
+        height: 45vw;
+
+        gap: 2rem;
+      }
+    }
+  }
+  &-input {
+    position: absolute;
+    bottom: 40rem;
+    left: 2rem;
+    width: 3rem;
+    z-index: -2;
+  }
+
+  &-preview {
+    &-list {
+      position: relative;
+    }
+    &-item {
+      @include flexbox(end, end);
+      max-width: 18rem;
+      max-height: 18rem;
+      border-radius: 2.4rem;
+
+      overflow: hidden;
+
+      @include responsive(M) {
+        width: 45vw;
+        height: 45vw;
+      }
+
+      &-cancel {
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        top: -1.5rem;
+        right: -1.5rem;
+
+        @include responsive(M) {
+          width: 3rem;
+          height: 3rem;
+          top: -1rem;
+          right: -1rem;
+        }
+      }
+    }
+  }
+}
+
+.guide-image-input {
+  @include text-style(1.8, 400, $gray80);
+  margin-top: 2.2rem !important;
+  word-break: keep-all;
+}

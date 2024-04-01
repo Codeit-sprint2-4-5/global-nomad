@@ -35,7 +35,7 @@ export default function Dropdown({ name, labelText, lists, onSelectedId, ...prop
   useEffect(() => {
     setSelectedList(labelText ? list[0]?.id : null);
   }, [list]);
-  
+
   return (
     <div className={cn('dropdown-field')}>
       <button

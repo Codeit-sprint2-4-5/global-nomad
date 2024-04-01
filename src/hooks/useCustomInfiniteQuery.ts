@@ -17,7 +17,11 @@ export const useCustomInfiniteQuery = ({ queryKey, queryFn }: Props) =>
     getNextPageParam: (lastPage) => lastPage?.cursorId,
     select: (data) => ({
       pages: data?.pages.flatMap(
-        (page) => page.reservations || page.activities || page.reservation || []
+        (page) =>
+          page.reservations ||
+          page.activities ||
+          page.reservation ||
+          page.notifications
       ),
       totalCount: data?.pages[0].totalCount,
     }),

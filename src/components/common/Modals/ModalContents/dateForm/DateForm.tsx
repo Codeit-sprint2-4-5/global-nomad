@@ -5,7 +5,7 @@ import SmallCalender from './smallCalendar/SmallCalender';
 import { AbledReservationListData } from '@/types/dateform';
 import styles from './DateForm.module.scss';
 import classNames from 'classnames/bind';
-import { PostformatDate } from '../utills';
+import { postformatDate } from '../utills';
 import { PostReservationData } from '@/components/common/floatingBox/FloatingBox';
 
 const cn = classNames.bind(styles);
@@ -31,7 +31,7 @@ export default function DateForm({
   className,
 }: DateFormProps) {
   const [calenderValue, onChangeCalender] = useState<Value>();
-  const formatDate = PostformatDate(calenderValue as Date);
+  const formatDate = postformatDate(calenderValue as Date);
 
   const [scheduleId, setscheduleId] = useState<number>();
   const abledDate = abledReservationListData?.find((data: AbledReservationListData) => data.date === formatDate);
@@ -43,11 +43,15 @@ export default function DateForm({
     }
   };
 
+  const handleChangeValue = (data: Value | string) => {
+    onChangeCalender(data as Value);
+  };
+
   return (
     <>
       <h2 className={cn('title', className)}>날짜</h2>
       <div className={cn('date-form', className)}>
-        <SmallCalender value={calenderValue} onChange={onChangeCalender} />
+        <SmallCalender value={calenderValue} onChange={handleChangeValue} />
         <div className={cn('abled-time')}>
           <label htmlFor='abled-time' className={cn('abled-time-label')}>
             예약 가능한 시간

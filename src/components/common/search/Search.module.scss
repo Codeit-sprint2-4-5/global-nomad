@@ -26,6 +26,7 @@
 
       .search-bar {
         @include text-style(1.6, 400, $black);
+        position: relative;
         width: 100%;
         padding: 1.5rem 1.2rem 1.5rem 4.8rem;
         border: 1px solid $gray70;
@@ -39,13 +40,6 @@
           background: url('~/public/icons/icon_bed.svg') no-repeat 1.2rem 1.2rem;
         }
 
-        &::placeholder {
-          @include text-style(1.6, 400, $gray50);
-          @include responsive(M) {
-            @include text-style(1.4, 400, $gray50);
-          }
-        }
-
         &::-webkit-search-decoration,
         &::-webkit-search-cancel-button,
         &::-webkit-search-results-button,
@@ -54,18 +48,23 @@
         }
       }
 
+      &::before {
+        @include text-style(1.6, 400, $gray60);
+        content: '내가 원하는 체험은';
+        display: block;
+        position: absolute;
+        left: 4.3rem;
+        padding: 0 0.5rem;
+        line-height: 2.6rem;
+      }
+
       &.acitve {
         &::before {
-          @include text-style(1.6, 400, $gray60);
-          content: '내가 원하는 체험은';
-          display: block;
-          position: absolute;
-          left: 4.3rem;
-          top: -1.2rem;
-          padding: 0 0.5rem;
-          line-height: 2.6rem;
+          z-index: 1;
           background-color: $white;
-      
+          transform: translateY(-30px);
+          transition: transform 0.3s;
+
           @include responsive(M) {
             @include text-style(1.5, 400, $gray60);
             top: -1rem;
@@ -82,6 +81,38 @@
             height: 4.8rem;
           }
         }
+      }
+    }
+
+    .title {
+      @include text-style(1.6, 400, $gray50);
+      height: 2.5rem;
+      overflow: hidden;
+      position: absolute;
+      left: 17.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+
+      @include responsive(M) {
+        display: none;
+      }
+
+      li {
+        list-style-type: none;
+        margin: 0;
+        animation: up 3s ease-out infinite;
+      }
+    }
+
+    @keyframes up {
+      0% {
+        transform: translateY(100px);
+      }
+      50% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-200%);
       }
     }
   }
