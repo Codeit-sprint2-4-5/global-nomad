@@ -7,6 +7,9 @@ import { getMyNotifications } from '@/apis/get/getMyNotifications';
 import { queryKey } from '@/apis/quertKey';
 import getTimeAgo from '../utills/getTimeAgo';
 import { delelteNotifications } from '@/apis/delete/deleteNotification';
+import { useCustomInfiniteQuery } from '@/hooks/useCustomInfiniteQuery';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import { useRef } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -14,15 +17,22 @@ const { ellipse, xMedium } = ICON;
 
 export default function Notifications() {
   const queryClient = useQueryClient();
-
-  const { data: notificationsData } = useQuery({
+  const observerRef = useRef<HTMLDivElement>(null);
+  const {
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    data: notificationsData,
+  } = useCustomInfiniteQuery({
     queryKey: queryKey.myNotifications,
-    queryFn: () => getMyNotifications(10),
+    queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
+      getMyNotifications({ pageParam }, 2),
   });
 
   const deleteNotificationMutation = useMutation({
     mutationFn: (id: number) => delelteNotifications(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
   });
 
   const handelDeleteNotification = (id: number) => {
@@ -31,7 +41,10 @@ export default function Notifications() {
 
   function highlightContent(content: string) {
     if (content.includes('승인')) {
-      return content.replace(/승인/g, '<span style= "color: #0085ff " >$&</span>');
+      return content.replace(
+        /승인/g,
+        '<span style= "color: #0085ff " >$&</span>'
+      );
     } else if (content.includes('거절')) {
       return content.replace(/거절/g, '<span style="color: #ff472e">$&</span>');
     } else {
@@ -50,12 +63,17 @@ export default function Notifications() {
       ></div>
     );
   };
-
+  useIntersectionObserver({
+    observerRef,
+    hasNextPage,
+    isFetching,
+    fetchNextPage,
+  });
   return (
     <>
       <h1 className={cn('title')}>알림 {notificationsData?.totalCount}개</h1>
       <ul className={cn('notification-list')}>
-        {notificationsData?.notifications.map((notification: any) => (
+        {notificationsData?.pages.map((notification: any) => (
           <li key={notification.id} className={cn('notification-item')}>
             <div className={cn('notification-item-top-line')}>
               <Image
@@ -69,15 +87,23 @@ export default function Notifications() {
                 )}
               />
               <button onClick={() => handelDeleteNotification(notification.id)}>
-                <Image src={xMedium.default.src} alt={xMedium.default.alt} width={24} height={24} />
+                <Image
+                  src={xMedium.default.src}
+                  alt={xMedium.default.alt}
+                  width={24}
+                  height={24}
+                />
               </button>
             </div>
 
             <h2>{description(notification.content)}</h2>
 
-            <p className={cn('notification-item-timeAgo')}>{getTimeAgo(notification.createdAt)}</p>
+            <p className={cn('notification-item-timeAgo')}>
+              {getTimeAgo(notification.createdAt)}
+            </p>
           </li>
-        ))}
+        ))}{' '}
+        <div ref={observerRef} className={cn('ref-box')}></div>
       </ul>
       {notificationsData?.totalCount === 0 && <h2>알림이 없습니다.</h2>}
     </>
