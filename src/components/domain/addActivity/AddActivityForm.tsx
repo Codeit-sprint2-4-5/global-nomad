@@ -58,6 +58,7 @@ interface PatchValues {
 
 export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boolean; activityId?: number }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const priceRef = useRef<HTMLInputElement>();
   const router = useRouter();
 
   const [bannerImageUrl, setBannerImageUrl] = useState('');
@@ -70,7 +71,7 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
   const [schedulesToAdd, setSchedulesToAdd] = useState<Schedules[]>([]);
   const [confrimText, setConfirmText] = useState('');
   const { register, formState, handleSubmit, getValues, setValue } = useForm<PostActivityFormValues>({
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const { errors } = formState;
@@ -92,7 +93,6 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
       setBannerImageUrl(activityData.bannerImageUrl);
       setSubImageUrls(activityData.subImages);
       setValue('category', activityData.category);
-      isEdit;
     }
   }, [activityData, isEdit]);
 
@@ -101,21 +101,21 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
   const handleSelectedCategoryId = (id: number) => {
     setSelectedCategoryId(id);
     const updateCategory = USER_CATEGORYS.find((category) => id === category.id)?.category;
-    if (updateCategory) setValue('category', updateCategory);
+    if (updateCategory) return setValue('category', updateCategory);
   };
 
   const handlePostDateValue = (value: string) => {
-    setValue('schedules.date', value);
+    return setValue('schedules.date', value);
   };
 
   const handleSetAddressValue = (value: string) => {
-    setValue('address', value);
+    return setValue('address', value);
   };
 
-  const handleErrorScheduleValue = (text: string) => {
+  const handleConfirmText = (text: string) => {
     if (!dialogRef.current) return;
     setConfirmText(text);
-    dialogRef.current.showModal();
+    return dialogRef.current.showModal();
   };
 
   const handleAddSchdule = () => {
@@ -125,18 +125,16 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
       Object.values(nextSchedule).every((value) => value !== '' && value !== null && value !== undefined);
 
     if (!isValid || !nextSchedule) {
-      handleErrorScheduleValue('날짜, 시작시간, 종료 시간을 확인해 주세요');
-      return;
+      return handleConfirmText('날짜, 시작시간, 종료 시간을 확인해 주세요');
     }
 
     if (schedules.find((item) => item?.date === nextSchedule?.date && item?.startTime === nextSchedule?.startTime)) {
-      handleErrorScheduleValue('날짜, 시작시간, 종료 시간을 확인해 주세요');
-      return;
+      return handleConfirmText('날짜, 시작시간, 종료 시간을 확인해 주세요');
     }
     if (isEdit) {
-      setSchedulesToAdd((prev) => [...prev, nextSchedule]);
+      return setSchedulesToAdd((prev) => [...prev, nextSchedule]);
     }
-    setSchedules((prev) => [...prev, nextSchedule as Schedules]);
+    return setSchedules((prev) => [...prev, nextSchedule as Schedules]);
   };
 
   const handleDeleteSchedule = (id: number) => {
@@ -161,7 +159,7 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
         isEdit && setSubImageUrlsToAdd((prev) => [...prev, { imageUrl: imageData, id: setUrlsId(imageData) }]);
         return setSubImageUrls((prev) => [...prev, { imageUrl: imageData, id: setUrlsId(imageData) }]);
       }
-      handleErrorScheduleValue('이미지를 4개 이상 추가 할 수 없습니다');
+      return handleConfirmText('이미지를 4개 이상 추가 할 수 없습니다');
     }
   };
 
@@ -175,16 +173,17 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
       return setSubImageUrls(newList);
     }
 
-    setBannerImageUrl('');
+    return setBannerImageUrl('');
   };
 
   const postActivityMutation = useMutation({
     mutationFn: (data: PostActivityFormValues) => postActivity(data),
+    onSuccess: () => handleConfirmText('등록이 완료되었습니다.'),
   });
 
   const patchActivityMutation = useMutation({
     mutationFn: (data: unknown) => patchActivity(activityId as number, data),
-    onSuccess: () => router.reload(),
+    onSuccess: () => handleConfirmText('수정이 완료되었습니다.'),
   });
 
   const onHandleSubmit: SubmitHandler<PostActivityFormValues> = (data) => {
