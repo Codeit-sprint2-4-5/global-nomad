@@ -1,6 +1,7 @@
 import Category from '@/components/common/category/Category';
 import Filter from '@/components/common/filter/Filter';
 import { ICON } from '@/constants';
+import useResponsiveSize from '@/hooks/useResponsiveSize';
 import { useCategoryFilterStore } from '@/stores/Activities';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -14,6 +15,7 @@ export default function CategoryFilter() {
   const [filterState, setFilterState] = useState('');
   const [categoryXState, setCategoryXState] = useState(0);
 
+  const translateSize = useResponsiveSize(1, 1, 2, 3);
   const categoryRef = useRef<HTMLUListElement>(null);
 
   const { mainCategory, setMainCategory, mainFilter, setMainFilter } = useCategoryFilterStore();
@@ -39,7 +41,7 @@ export default function CategoryFilter() {
   const handleButtonClick = (direction: number) => {
     const newIndex = categoryXState + direction;
 
-    if (newIndex >= 0 && newIndex <= 1) {
+    if (newIndex >= 0 && newIndex <= translateSize) {
       setCategoryXState(newIndex);
     }
   };
@@ -48,11 +50,11 @@ export default function CategoryFilter() {
     if (categoryRef.current !== null) {
       categoryRef.current.style.transition = 'all 0.5s ease-in-out';
     }
-    
+
     if (categoryRef.current !== null) {
       categoryRef.current.style.transform = `translateX(-${categoryXState * 50}%)`;
     }
-  }, [categoryXState]);
+  }, [categoryXState, translateSize]);
 
   useEffect(() => {
     setMainCategory(categoryState);
@@ -76,14 +78,14 @@ export default function CategoryFilter() {
             ))}
           </ul>
         </div>
-        {!!categoryXState && (
+        {categoryXState !== 0 && (
           <div className={cn('category-button', 'left')}>
             <button onClick={() => handleButtonClick(-1)}>
               <Image src={ICON.rightArrow.default.src} alt={ICON.rightArrow.default.alt} height={32} width={32} />
             </button>
           </div>
         )}
-        {!categoryXState && (
+        {categoryXState < translateSize && (
           <div className={cn('category-button', 'right')}>
             <button onClick={() => handleButtonClick(1)}>
               <Image src={ICON.rightArrow.default.src} alt={ICON.rightArrow.default.alt} height={32} width={32} />

@@ -47,6 +47,10 @@
         @include flexbox(end, center);
         background: linear-gradient(to left, #a4a1aa 0%, transparent 100%);
       }
+
+      @include responsive('M') {
+        width: 4rem;
+      }
     }
   }
 }
