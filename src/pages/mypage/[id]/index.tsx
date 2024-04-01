@@ -27,7 +27,7 @@ export default function Mypages() {
       case 'myreservations':
         return <MyReservations />;
       case 'myactivities':
-        return <Test />;
+        return <MyActivities />;
       case 'reservationStatus':
         return <ReservationStatus />;
     }
