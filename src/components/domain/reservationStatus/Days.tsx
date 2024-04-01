@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import styles from './Calendar.module.scss';
 
 const cn = classNames.bind(styles);
-
 interface Item {
   date: string;
   reservations: {
@@ -12,7 +11,6 @@ interface Item {
     completed: string;
   };
 }
-
 interface Props {
   dayIdx: number;
   prevMonthDate: number[];
@@ -21,6 +19,9 @@ interface Props {
   currentYear: number;
   currentMonth: number;
   days: number[];
+  formattedmonth: string | number;
+  onReservedDate: (date: string) => void;
+  onShowModal: (type: string) => void;
 }
 
 export default function Days({
@@ -31,6 +32,9 @@ export default function Days({
   currentYear,
   currentMonth,
   days,
+  formattedmonth,
+  onReservedDate,
+  onShowModal,
 }: Props) {
   return (
     <>
@@ -44,7 +48,7 @@ export default function Days({
 
           let statusPending;
           let statusConfirmed;
-          let statusCompleted;
+          let statusCompleted: string | number | undefined;
           const reservationDate = monthActivity?.some((item: Item) => {
             const [year, month, day] = item.date.split('-').map(Number);
             const formattedMonth = month < 10 ? '0' + month : month;
@@ -74,11 +78,19 @@ export default function Days({
           }
 
           const handleDateClick = () => {
-            //예약 정보 모달 연결
+            const reservedDateArr = [];
+            const formattedDate =
+              days[currentMonthDate] + 1 < 10 ? '0' + days[currentMonthDate] : days[currentMonthDate];
+            reservedDateArr.push(currentYear, formattedmonth, formattedDate);
+            const reservedDate = reservedDateArr.join('-');
+
+            onReservedDate(reservedDate);
+            if(reservationDate) onShowModal('reservationInfo');
+            if(statusCompleted) onShowModal('');
           };
 
           return (
-            <td key={i} className={cn({ active: remainingDate }, { on: reservationDate })} onClick={handleDateClick}>
+            <td key={i} className={cn({ active: remainingDate }, { on: reservationDate && !statusCompleted })} onClick={handleDateClick}>
               {days[currentMonthDate]}
               {reservationDate && !remainingDate && (
                 <>

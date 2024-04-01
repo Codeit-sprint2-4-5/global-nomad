@@ -5,7 +5,7 @@ const cn = classNames.bind(styles);
 
 interface ChipsProps {
 	status: 'confirmed' | 'complete' | 'reservation' | 'seat';
-	count?: number;
+	count?: string | number;
 }
 
 export default function Chips({ status, count = 0 }: ChipsProps) {
