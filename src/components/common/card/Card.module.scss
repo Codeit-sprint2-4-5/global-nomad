@@ -88,16 +88,16 @@
 }
 
 .price-section {
-  width: 55rem;
+  width: 54.3rem;
   margin-top: 1.6rem;
   @include flexbox(between, center);
 
   @include responsive('T') {
-    width: 24.5rem;
+    width: 24.2rem;
     margin-top: 1rem;
   }
   @include responsive('M') {
-    width: 19.3rem;
+    width: 19.2rem;
     margin-top: 0.8rem;
     @include text-style(1.6);
   }

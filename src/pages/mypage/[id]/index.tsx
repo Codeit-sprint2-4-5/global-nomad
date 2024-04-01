@@ -8,6 +8,8 @@ import Test from '@/pages/test';
 import { useEffect, useState } from 'react';
 import useRouteStore from '@/stores/useRoute';
 import throttle from '@/function/throttle';
+import MyReservations from '@/components/domain/mypage/myReservations/MyReservations';
+import MyActivities from '@/components/domain/mypage/myActivities/MyActivities';
 
 const cn = classNames.bind(style);
 
@@ -22,9 +24,9 @@ export default function Mypages() {
       case 'myinfo':
         return <Account />;
       case 'myreservations':
-        return <Test />;
+        return <MyReservations />;
       case 'myactivities':
-        return <Test />;
+        return <MyActivities />;
       case 'myreservedstatus':
         return <Test />;
     }
@@ -51,7 +53,7 @@ export default function Mypages() {
   return (
     <Layout>
       <div className={cn('content')}>
-        {!isMobile && <SideNavMenu initialState='myinfo' />}
+        {!isMobile && <SideNavMenu initialState="myinfo" />}
         {renderComponents()}
       </div>
     </Layout>
