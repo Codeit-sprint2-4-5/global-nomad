@@ -17,7 +17,7 @@ export default function Banner() {
     const bannerImageList: { imageSrc: string; title: string; text: string }[] = [
       {
         imageSrc:
-          'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-5_113_1711933727905.jpeg',
+        'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-5_113_1711934745731.jpeg',
         title: '고민없이 여행을',
         text: '여행을 갈 때 무엇을 할지에 대한 해답을 제공합니다.',
       },
@@ -28,8 +28,7 @@ export default function Banner() {
         text: '원하는 여행지의 다양한 체험 상품을 탐색하고, 몇 번의 클릭만으로 예약을 완료할 수 있습니다.',
       },
       {
-        imageSrc:
-          'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-5_113_1711934745731.jpeg',
+        imageSrc:'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-5_113_1711933727905.jpeg',
         title: '체험 상품 등록',
         text: '여행지의 체험을 등록해 체험을 소개하고, 여행자들에게 잊지 못할 추억을 선사해 주세요.',
       },
