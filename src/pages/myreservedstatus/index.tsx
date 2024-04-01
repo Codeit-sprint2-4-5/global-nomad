@@ -1,8 +1,8 @@
 import Layout from '@/components/common/layout/Layout';
-import Calendar from '@/components/domain/reservationStatus/Calendar';
+import Calendar from '@/components/domain/myreservedstatus/Calendar';
 import SideNavMenu from '@/components/common/sideNavMenu/SideNavMenu';
 import classNames from 'classnames/bind';
-import styles from '@/components/domain/reservationStatus/Calendar.module.scss';
+import styles from '@/components/domain/myreservedstatus/Calendar.module.scss';
 
 const cn = classNames.bind(styles);
 
