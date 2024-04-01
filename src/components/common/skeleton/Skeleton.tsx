@@ -71,7 +71,7 @@ export default function Skeleton({ type }: { type: Props }) {
       break;
     default:
       return;
-  }
+  };
 
   switch (type) {
     case 'popular':
