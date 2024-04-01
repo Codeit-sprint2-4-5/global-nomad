@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import Calendar from '@/components/domain/reservationStatus/Calendar';
+
 export default function Home() {
   return (
     <>
@@ -8,7 +8,6 @@ export default function Home() {
         <title>Global Nomad</title>
       </Head>
       <Link href="/scss-example">scss-example</Link>
-      <Calendar />
     </>
   );
 }
