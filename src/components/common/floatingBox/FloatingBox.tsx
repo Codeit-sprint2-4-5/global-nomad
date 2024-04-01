@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -13,6 +13,7 @@ import styles from './FloatingBox.module.scss';
 import classNames from 'classnames/bind';
 import { postReservation } from '@/apis/post/postReservation';
 import { AbledReservationListData } from '@/types';
+import Confirm from '../popup/confirm/Confirm';
 
 const cn = classNames.bind(styles);
 
@@ -22,6 +23,7 @@ export interface PostReservationData {
 }
 
 export default function FloatingBox({ price = 10000 }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [totalPrice, setTotalPrice] = useState(price);
   const [showModal, setShowModal] = useState('');
   const [reservedTime, setReservedTime] = useState('');
@@ -51,6 +53,11 @@ export default function FloatingBox({ price = 10000 }) {
       setReservedTime(nextRserveTime);
     }
   }, [abledReservationListData, scheduleIdValue]);
+
+  const handleShowConfrim = () => {
+    if (!dialogRef.current) return;
+    dialogRef.current.showModal();
+  };
 
   const postReservationMutation = useMutation({
     mutationFn: (data: PostReservationData) => postReservation(152, data),
@@ -113,6 +120,7 @@ export default function FloatingBox({ price = 10000 }) {
       {showModal === 'countMemberInput' && (
         <Modal modalType='countMemberInput' control={control} setShowModal={setShowModal} setValue={setValue} />
       )}
+      <Confirm text='예약 완료되었습니다' dialogRef={dialogRef} />
     </section>
   );
 }

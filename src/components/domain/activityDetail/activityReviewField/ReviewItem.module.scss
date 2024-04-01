@@ -1,0 +1,39 @@
+.review {
+  &-list {
+    @include column-flexbox(start);
+    gap: 2.4rem;
+    width: 100%;
+  }
+
+  &-item {
+    @include flexbox(start);
+    gap: 1.6rem;
+    padding-bottom: 2.4rem;
+    width: 100%;
+    border-bottom: 0.1rem solid $gray60;
+    &:last-child {
+      border: none;
+    }
+    &-user {
+      &-profileImg {
+        border-radius: 50rem;
+        overflow: hidden;
+      }
+
+      &-nickname {
+        @include text-style(1.8, 700, $modal-text-color);
+      }
+    }
+
+    &-createdDate {
+      @include text-style(1.6, 400, $gray60);
+    }
+
+    &-content {
+      @include text-style(1.6, 400, $modal-text-color);
+      margin-top: 0.8rem;
+    }
+    &-text-box {
+    }
+  }
+}
