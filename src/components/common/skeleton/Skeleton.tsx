@@ -28,6 +28,7 @@ export default function Skeleton({ type }: { type: Props }) {
   const { data, isLoading } = useQuery({
     queryKey: ['/activities'],
     queryFn: getActivity,
+    enabled: id === 'activityDetail'
   });
 
   useEffect(() => {
