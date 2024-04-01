@@ -52,8 +52,8 @@ export default function ActivityReviewField() {
   const [currentPage, setCurrentPage] = useState(1);
   const PAGE_LIMIT = 3;
   const { data: reviewData, isSuccess } = useQuery<Reviews>({
-    queryKey: queryKey.getActivityReview(id),
-    queryFn: () => getReviews(id, currentPage),
+    queryKey: queryKey.getActivityReview(id, currentPage),
+    queryFn: () => getReviews(id, currentPage, PAGE_LIMIT),
   });
 
   if (!isSuccess) return <EmptyReview />;

@@ -10,5 +10,5 @@ export const queryKey = {
     selectedStatus,
   ],
   getMyReservationUseDate: (date: string) => ['my-activities', 'reservation', date],
-  getActivityReview: (id: number) => ['activity', 'review', id],
+  getActivityReview: (id: number, page: number) => ['activity', 'review', id, page],
 };
