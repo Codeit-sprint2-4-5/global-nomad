@@ -6,7 +6,7 @@
   }
 
   &-item {
-    @include flexbox(start);
+    @include flexbox(start, start);
     gap: 1.6rem;
     padding-bottom: 2.4rem;
     width: 100%;
@@ -32,8 +32,10 @@
     &-content {
       @include text-style(1.6, 400, $modal-text-color);
       margin-top: 0.8rem;
-    }
-    &-text-box {
+      width: 80vw;
+      overflow: hidden;
+      word-break: break-all;
+      max-height: 12rem;
     }
   }
 }
