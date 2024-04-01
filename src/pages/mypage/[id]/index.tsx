@@ -28,7 +28,7 @@ export default function Mypages() {
         return <MyReservations />;
       case 'myactivities':
         return <MyActivities />;
-      case 'reservationStatus':
+      case 'myreservedstatus':
         return <ReservationStatus />;
     }
   };
