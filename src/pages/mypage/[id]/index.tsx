@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import style from './Mypage.module.scss';
 import classNames from 'classnames/bind';
 import Test from '@/pages/test';
-import ReservationStatus from '@/pages/reservationStatus';
+import ReservationStatus from '@/pages/myreservedstatus';
 import { useEffect, useState } from 'react';
 import useRouteStore from '@/stores/useRoute';
 import throttle from '@/function/throttle';
