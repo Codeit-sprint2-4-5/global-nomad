@@ -38,7 +38,7 @@ const useWindowSize = (): WindowSize => {
   return windowSize;
 };
 
-const useResponsiveSize = (): number => {
+const useResponsiveSize = (P = 8, T = 9, M = 4, S = 4): number => {
   const { width } = useWindowSize();
   const [sizeState, setSizeState] = useState<number>(8);
 
@@ -46,20 +46,25 @@ const useResponsiveSize = (): number => {
     if (!width) return;
     
     if (width >= 1200) {
-      setSizeState(8);
+      setSizeState(P);
       return;
     }
     
     if (width >= 768) {
-      setSizeState(9);
+      setSizeState(T);
       return;
     }
     
-    if (width < 768) {
-      setSizeState(4);
+    if (width >= 430) {
+      setSizeState(M);
       return;
     }
-  }, [width]);
+    
+    if (width < 430) {
+      setSizeState(S);
+      return;
+    }
+  }, [P, T, M, S, width]);
 
   return sizeState;
 };
