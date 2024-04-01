@@ -1,8 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import ReservationCard from './ReservationCard';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { useCustomInfiniteQuery } from '@/hooks/useCustomInfiniteQuery';
 import Dropdown from '@/components/common/dropdown/Dropdown';
 import { getMyActivitiesReservation, getReservedScheduleDate } from '@/apis/get/getAbledResrvations';
 import { changeDateToStringFormat } from '../utills';
@@ -32,29 +30,15 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
   const [selectedStatus, setSelectedStatus] = useState<ReservationCardType['status']>('pending');
   const [scheduledId, setScheduledId] = useState<number>(0);
   const [schedule, setSchedule] = useState();
-  const observerRef = useRef<HTMLDivElement>(null);
 
   const { data: reservedScheduleData, isSuccess } = useQuery({
     queryKey: queryKey.getMyReservationUseDate(date),
     queryFn: () => getReservedScheduleDate(activityId, date),
   });
 
-  const {
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    data: reservationStatusData,
-  } = useCustomInfiniteQuery({
+  const { data: reservationStatusData } = useQuery({
     queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus),
-    queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
-      getMyActivitiesReservation(activityId, scheduledId, selectedStatus, 10, { pageParam }),
-  });
-
-  useIntersectionObserver({
-    observerRef,
-    hasNextPage,
-    isFetching,
-    fetchNextPage,
+    queryFn: () => getMyActivitiesReservation(activityId, scheduledId, selectedStatus),
   });
 
   useEffect(() => {
@@ -73,17 +57,16 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
     title: `${reservation.startTime} ~ ${reservation.endTime}`,
   })) ?? [{ id: scheduledId }];
 
-  const cardList = reservationStatusData?.pages ?? [];
+  const cardList = reservationStatusData?.reservations ?? [];
 
   const onSelectedId = async (id: number) => {
     setScheduledId(id);
-    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(id, selectedStatus) });
+    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus) });
   };
-
   const handleSelect = (status: string) => {
     const newSelectedStatus = status === '신청' ? 'pending' : status === '확정' ? 'confirmed' : 'declined';
     setSelectedStatus(newSelectedStatus);
-    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, status) });
+    queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(scheduledId, selectedStatus) });
   };
 
   return (
@@ -110,7 +93,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
           <p className={cn('reservation-date')}>{changeDateToStringFormat(date)}</p>
           <Dropdown name='dateDropdown' onSelectedId={onSelectedId} labelText=' ' lists={dropdownList} />
         </div>
-        <div className={cn('reservation-history')}>
+        <div>
           <h3 className={cn('little-title')}>예약 내역</h3>
           <ul className={cn('reservation-card-list')}>
             {cardList?.length !== 0 ? (
