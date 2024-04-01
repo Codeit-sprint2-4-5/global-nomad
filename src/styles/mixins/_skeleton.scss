@@ -24,3 +24,7 @@
     }
   }
 }
+
+@mixin border-radius($border-radius){
+  border-radius: $border-radius;
+}
