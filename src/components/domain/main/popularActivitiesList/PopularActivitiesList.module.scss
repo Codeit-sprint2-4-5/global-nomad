@@ -1,0 +1,56 @@
+.container {
+  @include column-flexbox;
+  gap: 3.2rem;
+  width: 100%;
+
+  .title-button-box {
+    @include flexbox(between, center);
+    width: 100%;
+
+    .title {
+      @include text-style(3.6, 700, $black);
+    }
+
+    .button-box {
+      @include flexbox;
+
+      @include responsive('T') {
+        display: none;
+      }
+
+      .right-arrow-button,
+      .left-arrow-button {
+        @include flexbox;
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: default;
+        }
+      }
+
+      .right-arrow-button {
+        rotate: 180deg;
+      }
+    }
+  }
+
+  .popular-activities-container {
+    @include flexbox(start, center);
+    width: 100%;
+    overflow: hidden;
+
+    @include responsive('T') {
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+
+      // &::-webkit-scrollbar {
+      //   display: none;
+      // }
+    }
+
+    .popular-activities-box {
+      @include flexbox(start, center);
+      gap: 1.6rem;
+    }
+  }
+}
