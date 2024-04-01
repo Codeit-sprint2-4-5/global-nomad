@@ -134,7 +134,7 @@ export default function MyReservations() {
                   />
                 ))}
               </div>
-              <div ref={observerRef} className={cn('ref-box')}></div>
+              <div ref={observerRef}></div>
 
               {isFetching && hasNextPage && (
                 <div className={cn('loading-container')}>
