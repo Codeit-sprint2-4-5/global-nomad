@@ -10,9 +10,13 @@
     font-family: 'Spoqa Han Sans Neo';
     list-style-type: disc !important;
     word-break: keep-all;
-    min-width: 35rem;
+    width: 36.8rem;
+    height: 27rem;
+    overflow: scroll;
+    scrollbar-width: none;
     @include responsive(M) {
-      min-width: 80vw;
+      min-width: 100%;
+      height: 100%;
     }
   }
 
@@ -37,11 +41,13 @@
         &:first-child {
           margin-top: 0.4rem;
           &.rejection {
-            filter: invert(40%) sepia(72%) saturate(3888%) hue-rotate(343deg) brightness(101%) contrast(100%);
+            filter: invert(40%) sepia(72%) saturate(3888%) hue-rotate(343deg)
+              brightness(101%) contrast(100%);
           }
 
           &.approval {
-            filter: invert(32%) sepia(47%) saturate(4169%) hue-rotate(198deg) brightness(104%) contrast(106%);
+            filter: invert(32%) sepia(47%) saturate(4169%) hue-rotate(198deg)
+              brightness(104%) contrast(106%);
           }
         }
       }
