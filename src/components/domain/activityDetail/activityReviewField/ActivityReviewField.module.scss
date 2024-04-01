@@ -1,0 +1,48 @@
+.review {
+  &-field {
+    @include column-flexbox(start, start);
+    gap: 2.4rem;
+  }
+  &-title {
+    @include text-style(2, 700, $modal-text-color);
+  }
+
+  &-none {
+    &-box {
+      @include column-flexbox(start);
+      @include text-style(2, 400, $gray80);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+  }
+
+  &-total {
+    &-box {
+      @include flexbox(start);
+      gap: 1.6rem;
+    }
+
+    &-average {
+      @include text-style(5, 600, $modal-text-color);
+    }
+
+    &-count {
+      @include column-flexbox(start, start);
+      gap: 0.8rem;
+
+      &-rating {
+        @include text-style(1.8, 400, $modal-text-color);
+      }
+
+      &-text {
+        @include flexbox;
+        @include text-style(1.4, 400, $black);
+        gap: 0.6rem;
+      }
+    }
+  }
+}
+
+.pagination-line {
+  width: 100%;
+}
