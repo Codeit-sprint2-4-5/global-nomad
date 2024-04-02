@@ -16,7 +16,7 @@ const cn = classNames.bind(style);
 export default function Mypages() {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
-  const { id } = router.query;
+  const id = router.query.id as string | undefined;
   const { prevRoute } = useRouteStore();
 
   const renderComponents = () => {
@@ -53,7 +53,7 @@ export default function Mypages() {
   return (
     <Layout>
       <div className={cn('content')}>
-        {!isMobile && <SideNavMenu initialState='myinfo' />}
+        {!isMobile && <SideNavMenu initialState={id} />}
         {renderComponents()}
       </div>
     </Layout>
