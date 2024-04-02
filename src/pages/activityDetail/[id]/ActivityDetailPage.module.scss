@@ -1,0 +1,18 @@
+.content {
+  @include flexbox(start, start);
+  position: relative;
+  gap: 2.4rem;
+  width: 100%;
+  margin: 8.6rem 0;
+  @include responsive(T) {
+    margin: 3.2rem 0;
+  }
+  @include responsive(M) {
+    margin: 0;
+  }
+}
+
+.detail {
+  flex-shrink: 2;
+  flex-grow: 2;
+}

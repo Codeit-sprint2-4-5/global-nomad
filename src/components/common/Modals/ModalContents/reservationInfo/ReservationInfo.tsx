@@ -7,7 +7,7 @@ import Dropdown from '@/components/common/dropdown/Dropdown';
 import { getMyActivitiesReservation, getReservedScheduleDate } from '@/apis/get/getAbledResrvations';
 import { changeDateToStringFormat } from '../utills';
 import { ReservationCardType } from '@/types/reservationInfo';
-import { queryKey } from '@/apis/quertKey';
+import { queryKey } from '@/apis/queryKey';
 import styles from './ReservationInfo.module.scss';
 import classNames from 'classnames/bind';
 

@@ -7,7 +7,7 @@ import { postformatDate, displayDateFormat } from '../Modals/ModalContents/utill
 import Modal from '../Modals';
 import CountMemberInput from './CountMemberInput';
 import DateForm from '../Modals/ModalContents/dateForm/DateForm';
-import { queryKey } from '@/apis/quertKey';
+import { queryKey } from '@/apis/queryKey';
 import { getAbledResrvationList } from '@/apis/get/getAbledResrvations';
 import styles from './FloatingBox.module.scss';
 import classNames from 'classnames/bind';

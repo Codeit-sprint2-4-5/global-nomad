@@ -54,7 +54,15 @@
     }
   }
 
+  &.dateForm {
+    top: 0;
+    right: 0;
+    left: auto;
+    transform: translate(0);
+  }
+
   @include responsive('M') {
+    position: fixed;
     width: 100vw;
     height: 100vh;
     max-height: 100vh;

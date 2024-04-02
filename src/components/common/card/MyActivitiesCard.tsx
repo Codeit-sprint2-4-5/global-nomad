@@ -13,10 +13,7 @@ interface MyActivitiesCardProps {
   handleDelete: (id: number) => void;
 }
 
-export default function MyActivitiesCard({
-  activityInfo,
-  handleDelete,
-}: MyActivitiesCardProps) {
+export default function MyActivitiesCard({ activityInfo, handleDelete }: MyActivitiesCardProps) {
   const router = useRouter();
 
   const handleModifyClick = (id: number) => {
@@ -25,13 +22,7 @@ export default function MyActivitiesCard({
 
   return (
     <div className={cn('card-container')}>
-      <Image
-        src={activityInfo.bannerImageUrl}
-        width={204}
-        height={204}
-        alt="배너이미지"
-        className={cn('card-image')}
-      />
+      <Image src={activityInfo.bannerImageUrl} width={204} height={204} alt='배너이미지' className={cn('card-image')} />
       <div className={cn('card-info-container')}>
         <div className={cn('info-section')}>
           <div className={cn('info-rating')}>
