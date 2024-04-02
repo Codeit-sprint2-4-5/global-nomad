@@ -1,5 +1,6 @@
 .dropdown-menu {
 	@include dropdown-menu(6.1, 4.9);
+  z-index: 1;
 
 	&.meatball {
 		@include dropdown-menu(4.8, 4);
