@@ -2,6 +2,14 @@
   &-field {
     @include column-flexbox(start, start);
     gap: 2.4rem;
+    padding: 4rem 0;
+    border-top: 0.1rem solid $gray60;
+    margin: 4rem 0;
+
+    @include responsive(M) {
+      border: none;
+      margin: 0;
+    }
   }
   &-title {
     @include text-style(2, 700, $modal-text-color);

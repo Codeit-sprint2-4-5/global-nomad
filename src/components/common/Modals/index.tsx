@@ -76,7 +76,7 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
       <section
         className={cn(
           'modal-content',
-          { modalType: modalType },
+          `${MODAL_TYPE[modalType]}`,
           { notifications: modalType === 'notifications' },
           className
         )}

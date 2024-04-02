@@ -6,12 +6,12 @@ import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);
 
-export default function AddACtivity({ isEdit = false, activityId }: { isEdit?: boolean; activityId?: number }) {
+export default function AddACtivity({ isEdit = false }: { isEdit?: boolean }) {
   return (
     <Layout>
       <section className={cn('content')}>
-        <SideNavMenu />
-        <AddActivityForm isEdit={isEdit} activityId={activityId} />
+        <SideNavMenu initialState='myactivities' />
+        <AddActivityForm isEdit={isEdit} />
       </section>
     </Layout>
   );

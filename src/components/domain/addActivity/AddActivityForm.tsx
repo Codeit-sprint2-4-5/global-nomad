@@ -56,11 +56,11 @@ interface PatchValues {
   subImageUrls?: string[];
 }
 
-export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boolean; activityId?: number }) {
+export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const priceRef = useRef<HTMLInputElement>();
   const router = useRouter();
-
+  const { id: activityId } = router.query;
   const [bannerImageUrl, setBannerImageUrl] = useState('');
   const [subImageUrls, setSubImageUrls] = useState<{ imageUrl: string; id: string }[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<number>();
@@ -78,7 +78,7 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
 
   const { data: activityData, isSuccess } = useQuery({
     queryKey: [activityId],
-    queryFn: () => getActiviy(activityId as number),
+    queryFn: () => getActiviy(activityId as string),
     enabled: isEdit,
   });
 
@@ -178,11 +178,16 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
 
   const postActivityMutation = useMutation({
     mutationFn: (data: PostActivityFormValues) => postActivity(data),
-    onSuccess: () => handleConfirmText('등록이 완료되었습니다.'),
+    onSuccess: () => {
+      handleConfirmText('등록이 완료되었습니다.');
+    },
   });
+  const handleClickSuccessConfirm = () => {
+    router.push('mypage/myactivities');
+  };
 
   const patchActivityMutation = useMutation({
-    mutationFn: (data: unknown) => patchActivity(activityId as number, data),
+    mutationFn: (data: unknown) => patchActivity(activityId as string, data),
     onSuccess: () => handleConfirmText('수정이 완료되었습니다.'),
   });
 
@@ -246,7 +251,7 @@ export default function AddActivityForm({ isEdit, activityId }: { isEdit?: boole
       <Input
         {...register('price', {
           required: '가격을 입력해 주세요',
-          min: { value: 1, message: '올바른 가격을 입력해 주세요' },
+          min: { value: 0, message: '올바른 가격을 입력해 주세요' },
         })}
         type='number'
         id='price'
