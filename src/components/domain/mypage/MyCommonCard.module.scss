@@ -1,14 +1,17 @@
 .reservations-container {
   @include column-flexbox(none, none);
-  width: 100%;
 }
 
 .title {
+  width: 80rem;
   @include flexbox(between, center);
   margin-bottom: 2.4rem;
-
+  @include responsive('T') {
+    margin-bottom: 1.6rem;
+  }
   @include responsive('M') {
     margin-bottom: 1.6rem;
+    width: 100%;
   }
 }
 .back-button {
