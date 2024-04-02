@@ -28,7 +28,7 @@
 .card-info-container {
   background-color: $white;
   padding: 2.55rem 2.4rem;
-  width: 77%;
+  flex-grow: 1;
   height: 100%;
   border-radius: 0 2.4rem 2.4rem 0;
   display: flex;
@@ -95,8 +95,6 @@
 .price-section {
   @include flexbox(between, center);
 
-  @include responsive('T') {
-  }
   @include responsive('M') {
     @include text-style(1.6);
   }

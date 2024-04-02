@@ -18,7 +18,7 @@ export default function CardResource({
 }: CardResourceProps) {
   const router = useRouter();
   const handleClick = (id: number) => {
-    router.push(`/activities/${id}`);
+    router.push(`/activityDetail/${id}`);
   };
 
   return (
