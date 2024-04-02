@@ -17,6 +17,7 @@ export default function Mypages() {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const id = router.query.id as string | undefined;
+  const id = router.query.id as string | undefined;
   const { prevRoute } = useRouteStore();
 
   const renderComponents = () => {
