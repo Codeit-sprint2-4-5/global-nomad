@@ -53,7 +53,7 @@ export default function Mypages() {
   return (
     <Layout>
       <div className={cn('content')}>
-        {!isMobile && <SideNavMenu initialState={id} />}
+        {!isMobile && id && <SideNavMenu initialState={id} />}
         {renderComponents()}
       </div>
     </Layout>
