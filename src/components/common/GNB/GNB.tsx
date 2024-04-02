@@ -80,7 +80,7 @@ export default function GNB() {
             <Link href='/signup'>회원가입</Link>
           </div>
         ) : (
-          <div className={cn('user')} id='modal-root'>
+          <div className={cn('user')} id='modal-root-notice'>
             <button className={cn('gnb-button')}>
               <Image
                 src={ICON.notification.default.src}

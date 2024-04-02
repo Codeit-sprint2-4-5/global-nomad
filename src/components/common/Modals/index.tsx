@@ -34,8 +34,19 @@ interface ModalProps {
   className?: string;
 }
 
-const modalRoot = (modalType: keyof typeof MODAL_TYPE) =>
-  modalType === 'review' ? document.body : document.getElementById('modal-root')!;
+const modalRoot = (modalType: keyof typeof MODAL_TYPE) => {
+  switch (modalType) {
+    case 'review':
+      return document.body;
+      break;
+    case 'notifications':
+      return document.getElementById('modal-root-notice')!;
+      break;
+    default:
+      return document.getElementById('modal-root') || document.body;
+      break;
+  }
+};
 
 export default function Modal({ modalType, className, setShowModal, ...props }: ModalProps) {
   const handleClickCloseModal = () => {
