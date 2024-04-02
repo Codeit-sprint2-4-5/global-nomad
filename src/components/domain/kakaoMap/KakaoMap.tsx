@@ -11,8 +11,13 @@ import styles from './KakaoMap.module.scss';
 
 import classNames from 'classnames/bind';
 import { ICON } from '@/constants';
+import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { instance } from '@/apis/axios';
 
 const cn = classNames.bind(styles);
+
 interface KakaoMapProps {
   address: string;
   title: string;
@@ -23,12 +28,14 @@ export default function KakaoMap({
   title,
   bannerImageUrl,
 }: KakaoMapProps) {
+
   const [center, setCenter] = useState({
     lat: 37.49676871972202,
     lng: 127.02474726969814,
   });
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [copied, setCopied] = useState(false);
+
 
   const searchRoute = `https://map.kakao.com/link/to/${address},${center.lat},${center.lng}`;
   useEffect(() => {
@@ -40,6 +47,7 @@ export default function KakaoMap({
       }
     });
   }, [address]);
+
   const handleMarkerClick = () => {
     setOverlayVisible(!overlayVisible);
   };
