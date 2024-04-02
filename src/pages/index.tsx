@@ -1,3 +1,4 @@
+import MainPage from '@/components/domain/main/MainPage';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -7,7 +8,7 @@ export default function Home() {
       <Head>
         <title>Global Nomad</title>
       </Head>
-      <Link href="/scss-example">scss-example</Link>
+      <MainPage />
     </>
   );
 }

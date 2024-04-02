@@ -1,0 +1,38 @@
+.box {
+  @include flexbox(start, start);
+  gap: 5rem;
+}
+
+.search-box {
+  position: relative;
+  bottom: 6rem;
+}
+
+.list-box {
+  @include column-flexbox(center, start);
+  gap: 4rem;
+}
+
+.pagination-box {
+  margin-top: 7.2rem;
+}
+
+.no-result {
+  @include column-flexbox;
+  margin-top: 10rem;
+  gap: 2rem;
+
+  img {
+    width: 24rem;
+    height: 24rem;
+
+    @include responsive('T') {
+      width: 20rem;
+      height: 20rem;
+    }
+  }
+
+  span {
+    @include text-style(2.4, 500, $gray70);
+  }
+}
