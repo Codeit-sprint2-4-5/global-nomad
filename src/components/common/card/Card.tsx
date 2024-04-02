@@ -60,7 +60,11 @@ export default function Card({
 
         <div className={cn('price-section')}>
           <div className={cn('price')}>
-            ₩{reservationsInfo.totalPrice.toLocaleString()}
+            {reservationsInfo.totalPrice === 0 ? (
+              '무료체험'
+            ) : (
+              <>￦ {reservationsInfo.totalPrice.toLocaleString()}</>
+            )}
           </div>
 
           {buttonContent && (

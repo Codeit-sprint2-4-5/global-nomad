@@ -4,7 +4,7 @@
   height: 20.4rem;
   border-radius: 2.4rem;
   box-shadow: 0 0.4rem 1.6rem 0 $search-popup-box-shadow;
-
+  width: 100%;
   @include responsive('T') {
     height: 15.6rem;
   }
@@ -12,23 +12,28 @@
     height: 12.8rem;
   }
 }
-.card-image {
-  height: 100%;
-  border-radius: 2.4rem 0 0 2.4rem;
 
+.card-image {
+  border-radius: 2.4rem 0 0 2.4rem;
+  width: 20.4rem;
   @include responsive('T') {
     width: 15.6rem;
+    height: 15.6rem;
   }
   @include responsive('M') {
     width: 12.8rem;
+    height: 12.8rem;
   }
 }
 .card-info-container {
   background-color: $white;
   padding: 2.55rem 2.4rem;
+  width: 77%;
   height: 100%;
   border-radius: 0 2.4rem 2.4rem 0;
-
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   @include responsive('T') {
     padding: 1.2rem 1.8rem 1.2rem 1.2rem;
   }
@@ -88,17 +93,11 @@
 }
 
 .price-section {
-  width: 54.3rem;
-  margin-top: 1.6rem;
   @include flexbox(between, center);
 
   @include responsive('T') {
-    width: 24.2rem;
-    margin-top: 1rem;
   }
   @include responsive('M') {
-    width: 19.2rem;
-    margin-top: 0.8rem;
     @include text-style(1.6);
   }
 }
@@ -180,9 +179,8 @@
 }
 .info-section2 {
   @extend .price-section;
-  margin-top: 7.2rem;
   position: relative;
-
+  width: 100%;
   @include responsive('T') {
     margin-top: 4rem;
   }
@@ -190,15 +188,7 @@
     margin-top: 2.9rem;
   }
 }
-.context-menu {
-  z-index: 1;
-  position: absolute;
-  background-color: $white;
-  border: 0.1rem solid $gray30;
-  border-radius: 0.6rem;
-  top: 110%;
-  right: 0%;
-}
+
 .menu {
   padding: 1.8rem 4.85rem;
   @include text-style(1.8, 500, $gray80);

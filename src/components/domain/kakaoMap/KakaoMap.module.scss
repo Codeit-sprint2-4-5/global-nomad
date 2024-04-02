@@ -132,6 +132,7 @@
 
 .ellipsis {
   @include column-flexbox(none, none);
+  display: inline-block;
   gap: 0.5rem;
   width: 16.5rem;
   overflow: hidden;

@@ -14,7 +14,7 @@
 .user {
   @include flexbox;
   gap: 2.5rem;
-
+  position: relative;
   a {
     @include flexbox;
     @include text-style(1.4, 500, $black);
@@ -23,6 +23,9 @@
   &.not {
     @include flexbox(start, center);
     gap: 2.5rem;
+  }
+  @include responsive('M') {
+    position: static;
   }
 }
 
@@ -46,4 +49,16 @@
 .gnb-button {
   @include flexbox;
   @include text-style(1.4, 500, $black);
+}
+
+.notifications-box {
+  margin-top: 24rem;
+  margin-left: -13rem;
+  @include responsive('T') {
+    margin-left: -22.5rem;
+  }
+  @include responsive('M') {
+    margin-top: 0;
+    margin-left: 0;
+  }
 }

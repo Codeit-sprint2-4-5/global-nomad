@@ -14,6 +14,7 @@ import Question from '@/components/common/popup/question/Question';
 import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
 import { ICON } from '@/constants';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import Skeleton from '@/components/common/skeleton/Skeleton';
 
 const cn = classNames.bind(styles);
 
@@ -89,7 +90,7 @@ export default function MyActivities() {
     deleteDialogRef.current.showModal();
   };
   const handleRegisterClick = () => {
-    router.push('등록페이지 정해지면 수정');
+    router.push('/addActivity');
   };
 
   const handleBackButtonClick = () => {
@@ -103,6 +104,9 @@ export default function MyActivities() {
     isFetching,
     fetchNextPage,
   });
+  // if (isFetching) {
+  //   return <Skeleton type="reservation" />;
+  // }
   return (
     <>
       <div className={cn('reservations-container')}>
@@ -154,7 +158,7 @@ export default function MyActivities() {
             </>
           ) : (
             <div className={cn('nodata-container')}>
-              <NoDataMessage message="등록한 체험이 없습니다." />
+              <NoDataMessage message="아직 등록한 체험이 없어요." />
             </div>
           )}
         </div>
