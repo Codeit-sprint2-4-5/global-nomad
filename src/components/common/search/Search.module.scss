@@ -67,6 +67,7 @@
 
           @include responsive(M) {
             @include text-style(1.5, 400, $gray60);
+            transform: translateY(0);
             top: -1rem;
           }
         }
