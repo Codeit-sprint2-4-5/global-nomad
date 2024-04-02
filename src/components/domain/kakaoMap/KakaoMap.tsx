@@ -11,6 +11,10 @@ import styles from './KakaoMap.module.scss';
 
 import classNames from 'classnames/bind';
 import { ICON } from '@/constants';
+import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { instance } from '@/apis/axios';
 
 const cn = classNames.bind(styles);
 
