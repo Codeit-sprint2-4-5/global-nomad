@@ -34,6 +34,9 @@ interface ModalProps {
   className?: string;
 }
 
+const modalRoot = (modalType: keyof typeof MODAL_TYPE) =>
+  modalType === 'review' ? document.body : document.getElementById('modal-root')!;
+
 export default function Modal({ modalType, className, setShowModal, ...props }: ModalProps) {
   const handleClickCloseModal = () => {
     setShowModal('');
@@ -89,6 +92,6 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
         onClick={handleClickCloseModal}
       ></div>
     </>,
-    document.getElementById('modal-root') || document.body
+    modalRoot(modalType)
   );
 }

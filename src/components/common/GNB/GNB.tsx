@@ -87,7 +87,7 @@ export default function GNB() {
                 alt={ICON.notification.default.alt}
                 onClick={setIsNotificationOpen}
               />
-            </button>{' '}
+            </button>
             {isNotificationOpen && (
               <Modal
                 className={cn('notifications-box')}
