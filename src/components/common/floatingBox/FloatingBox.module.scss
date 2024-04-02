@@ -1,7 +1,8 @@
 .floating-box {
   @include text-style(2, 700, $modal-text-color);
-  position: absolute;
-  word-break: keep-all;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
 
   background-color: $white;
   width: 38.4rem;
@@ -23,6 +24,7 @@
   @include responsive(M) {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     border-radius: 0;
   }

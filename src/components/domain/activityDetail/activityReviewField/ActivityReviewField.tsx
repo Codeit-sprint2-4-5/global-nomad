@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { ICON, IMAGE } from '@/constants';
-import { queryKey } from '@/apis/quertKey';
+import { queryKey } from '@/apis/queryKey';
 import { getReviews } from '@/apis/get/getReviews';
 
 import styles from './ActivityReviewField.module.scss';

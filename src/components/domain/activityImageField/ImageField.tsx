@@ -1,11 +1,7 @@
-import { activity } from '@/apis/activity';
-import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { GetActivityDetail } from '@/types';
-import { AxiosError } from 'axios';
 import { ICON } from '@/constants';
 import debounce from '@/function/debounce';
 import IconButton from '@/components/common/button/IconButton';
@@ -16,22 +12,16 @@ const cn = classNames.bind(style);
 
 const { leftArrow, rightArrow } = ICON;
 
-export default function ImageField() {
+interface ImageFieldProps {
+  detailData: GetActivityDetail;
+}
+
+export default function ImageField({ detailData: activityDetailData }: ImageFieldProps) {
   const [fieldWidth, setFieldWitdh] = useState(0);
   const [imageFieldIndex, setImageFieldIndex] = useState(0);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const baseImageUrl =
     'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/b.png';
-  const router = useRouter();
-  const id = router.query.id as string | undefined;
-  const {
-    data: activityDetailData,
-    error,
-    isSuccess,
-  } = useQuery<GetActivityDetail, AxiosError>({
-    queryKey: ['activity-detail', id],
-    queryFn: () => (id ? activity.getActivityDetail(id) : Promise.reject('해당되는 아이디가 없습니다.')),
-  });
   const imageRef = useRef<HTMLImageElement | null>(null);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -103,14 +93,6 @@ export default function ImageField() {
       window.removeEventListener('resize', handleResize);
     };
   }, [activityDetailData, imageRef]);
-
-  if (!isSuccess) {
-    if (!error) {
-      return <div>loading</div>;
-    } else {
-      return <div>error,{error.message}</div>;
-    }
-  }
 
   return (
     <>

@@ -4,7 +4,7 @@ import { ICON } from '@/constants';
 import styles from './Notifications.module.scss';
 import classNames from 'classnames/bind';
 import { getMyNotifications } from '@/apis/get/getMyNotifications';
-import { queryKey } from '@/apis/quertKey';
+import { queryKey } from '@/apis/queryKey';
 import getTimeAgo from '../utills/getTimeAgo';
 import { delelteNotifications } from '@/apis/delete/deleteNotification';
 import { useCustomInfiniteQuery } from '@/hooks/useCustomInfiniteQuery';
@@ -25,14 +25,12 @@ export default function Notifications() {
     data: notificationsData,
   } = useCustomInfiniteQuery({
     queryKey: queryKey.myNotifications,
-    queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
-      getMyNotifications({ pageParam }, 2),
+    queryFn: ({ pageParam }: { pageParam: number | undefined }) => getMyNotifications({ pageParam }, 2),
   });
 
   const deleteNotificationMutation = useMutation({
     mutationFn: (id: number) => delelteNotifications(id),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
   });
 
   const handelDeleteNotification = (id: number) => {
@@ -41,10 +39,7 @@ export default function Notifications() {
 
   function highlightContent(content: string) {
     if (content.includes('승인')) {
-      return content.replace(
-        /승인/g,
-        '<span style= "color: #0085ff " >$&</span>'
-      );
+      return content.replace(/승인/g, '<span style= "color: #0085ff " >$&</span>');
     } else if (content.includes('거절')) {
       return content.replace(/거절/g, '<span style="color: #ff472e">$&</span>');
     } else {
@@ -87,20 +82,13 @@ export default function Notifications() {
                 )}
               />
               <button onClick={() => handelDeleteNotification(notification.id)}>
-                <Image
-                  src={xMedium.default.src}
-                  alt={xMedium.default.alt}
-                  width={24}
-                  height={24}
-                />
+                <Image src={xMedium.default.src} alt={xMedium.default.alt} width={24} height={24} />
               </button>
             </div>
 
             <h2>{description(notification.content)}</h2>
 
-            <p className={cn('notification-item-timeAgo')}>
-              {getTimeAgo(notification.createdAt)}
-            </p>
+            <p className={cn('notification-item-timeAgo')}>{getTimeAgo(notification.createdAt)}</p>
           </li>
         ))}{' '}
         <div ref={observerRef} className={cn('ref-box')}></div>

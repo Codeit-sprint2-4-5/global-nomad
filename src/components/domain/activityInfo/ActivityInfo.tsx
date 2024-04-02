@@ -8,24 +8,20 @@ import Question from '@/components/common/popup/question/Question';
 import Confirm from '@/components/common/popup/confirm/Confirm';
 import classNames from 'classnames/bind';
 import styles from './ActivityInfo.module.scss';
+import { GetActivityDetail } from '@/types';
 
 const cn = classNames.bind(styles);
 
-export default function ActivityInfo() {
+interface ActivityInfoProps {
+  detailData: GetActivityDetail;
+}
+
+export default function ActivityInfo({ detailData }: ActivityInfoProps) {
   const router = useRouter();
   const { id } = router.query;
   const queryClient = useQueryClient();
   const confirmRef = useRef<HTMLDialogElement>(null);
   const questionRef = useRef<HTMLDialogElement>(null);
-
-  async function getAcitivity() {
-    try {
-      const res = await instance.get(`/activities/${id}`);
-      return res.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   async function getUser() {
     try {
@@ -45,11 +41,6 @@ export default function ActivityInfo() {
     }
   }
 
-  const { data: activity } = useQuery({
-    queryKey: ['/activities'],
-    queryFn: getAcitivity,
-  });
-
   const { data: user } = useQuery({
     queryKey: ['/users/me'],
     queryFn: getUser,
@@ -66,7 +57,7 @@ export default function ActivityInfo() {
   });
 
   const handleModifyClick = () => {
-    router.push('/editActivity');
+    router.push(`/editActivity/${id}`);
   };
 
   const handleDeleteClick = () => {
@@ -87,14 +78,14 @@ export default function ActivityInfo() {
     <>
       <div className={cn('container')}>
         <div className={cn('activity-info')}>
-          <p className={cn('category')}>{activity?.category}</p>
-          <Title text={activity?.title} />
+          <p className={cn('category')}>{detailData?.category}</p>
+          <Title text={detailData?.title} />
           <div className={cn('wrap')}>
-            <p className={cn('rating')}>{activity?.rating}</p>
-            <p className={cn('address')}>{activity?.address}</p>
+            <p className={cn('rating')}>{detailData?.rating}</p>
+            <p className={cn('address')}>{detailData?.address}</p>
           </div>
         </div>
-        {activity?.userId === user?.id && (
+        {detailData?.userId === user?.id && (
           <Menu handleModifyClick={handleModifyClick} handleDeleteClick={handleDeleteClick} />
         )}
       </div>

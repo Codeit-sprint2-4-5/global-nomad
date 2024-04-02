@@ -8,8 +8,8 @@
   &-item {
     @include flexbox(start, start);
     gap: 1.6rem;
-    padding-bottom: 2.4rem;
     width: 100%;
+    padding-bottom: 2.4rem;
     border-bottom: 0.1rem solid $gray60;
     &:last-child {
       border: none;
@@ -31,8 +31,8 @@
 
     &-content {
       @include text-style(1.6, 400, $modal-text-color);
+      width: 100%;
       margin-top: 0.8rem;
-      width: 80vw;
       overflow: hidden;
       word-break: break-all;
       max-height: 12rem;

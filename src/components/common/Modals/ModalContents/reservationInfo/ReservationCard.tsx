@@ -4,7 +4,7 @@ import { patchReservationStatus } from '@/apis/patch/patchReservationStatus';
 import ReservationTag from '@/components/common/ReservationTag';
 import classNames from 'classnames/bind';
 import styles from './ReservationInfo.module.scss';
-import { queryKey } from '@/apis/quertKey';
+import { queryKey } from '@/apis/queryKey';
 const cn = classNames.bind(styles);
 
 interface ReservationStatusProps {
