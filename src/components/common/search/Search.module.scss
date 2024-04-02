@@ -17,6 +17,7 @@
 
   .wrap {
     @include flexbox($flex-map);
+    overflow: hidden;
     position: relative;
 
     .form {
