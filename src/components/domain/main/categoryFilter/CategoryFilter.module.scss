@@ -1,0 +1,56 @@
+.container {
+  @include flexbox(between, center);
+  width: 100%;
+  min-width: 0;
+
+  .category-button-box {
+    @include flexbox(start, center);
+    position: relative;
+    min-width: 0;
+
+    .category-box-container {
+      overflow: hidden;
+      .category-box {
+        @include flexbox(start, center);
+        gap: 2.4rem;
+
+        li {
+          flex-shrink: 0;
+        }
+
+        @include responsive('T') {
+          gap: 1.6rem;
+        }
+
+        @include responsive('M') {
+          gap: 0.8rem;
+        }
+      }
+    }
+
+    .category-button {
+      display: none;
+      position: absolute;
+      width: 8rem;
+      height: 5.5rem;
+
+      &.left {
+        rotate: 180deg;
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+      }
+
+      @media (max-width: 900px) {
+        @include flexbox(end, center);
+        background: linear-gradient(to left, #a4a1aa 0%, transparent 100%);
+      }
+
+      @include responsive('M') {
+        width: 4rem;
+      }
+    }
+  }
+}
