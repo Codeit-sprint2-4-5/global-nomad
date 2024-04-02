@@ -1,5 +1,5 @@
-import { GetActivitiesList } from '@/types';
 import { instance } from '../axios';
+import { GetActivitiesList } from '@/types/activities';
 
 interface getActivitiesType {
   totalCount: number;
