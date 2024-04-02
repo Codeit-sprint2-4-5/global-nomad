@@ -5,12 +5,11 @@ import { useQueryClient } from '@tanstack/react-query';
 
 export default function Auth() {
   const router = useRouter();
-  const { id } = router.query;
   const queryClient = useQueryClient();
 
   const handleRouteChangeStart = async (asPath: string) => {
-    if (['/', '/signin', '/signup', `/activityDetail/${id}`].includes(asPath)) return;
-
+    if (['/', '/signin', '/signup'].some((path) => asPath.startsWith(path)) || asPath.startsWith('/activityDetail/'))
+      return;
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
     if (!accessToken || !refreshToken) return router.push('/signin');
