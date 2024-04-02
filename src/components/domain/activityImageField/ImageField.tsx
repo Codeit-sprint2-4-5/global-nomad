@@ -20,21 +20,15 @@ export default function ImageField({ detailData: activityDetailData }: ImageFiel
   const [fieldWidth, setFieldWitdh] = useState(0);
   const [imageFieldIndex, setImageFieldIndex] = useState(0);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const baseImageUrl =
-    'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/b.png';
   const imageRef = useRef<HTMLImageElement | null>(null);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const nextButtonEnable =
     activityDetailData?.subImages &&
     activityDetailData.subImages.length > 0 &&
-    activityDetailData.subImages.length - imageFieldIndex !== 0 &&
-    activityDetailData.subImages[0].imageUrl !== baseImageUrl;
+    activityDetailData.subImages.length - imageFieldIndex !== 0;
 
-  const subImageEnable =
-    activityDetailData?.subImages &&
-    activityDetailData.subImages.length <= 1 &&
-    activityDetailData.subImages[0].imageUrl === baseImageUrl;
+  const subImageEnable = activityDetailData?.subImages && activityDetailData.subImages.length <= 1;
 
   const handleNextClick = () => {
     setImageFieldIndex((prev) => {
@@ -146,8 +140,7 @@ export default function ImageField({ detailData: activityDetailData }: ImageFiel
               >
                 {activityDetailData.subImages.map(
                   (image) =>
-                    image.imageUrl &&
-                    image.imageUrl !== baseImageUrl && (
+                    image.imageUrl && (
                       <div
                         key={image.id}
                         className={cn('sub-image')}
