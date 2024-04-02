@@ -4,8 +4,7 @@ import SideNavMenu from '@/components/common/sideNavMenu/SideNavMenu';
 import { useRouter } from 'next/router';
 import style from './Mypage.module.scss';
 import classNames from 'classnames/bind';
-import Test from '@/pages/test';
-import ReservationStatus from '@/pages/myreservedstatus';
+import Calendar from '@/components/domain/myreservedstatus/Calendar';
 import { useEffect, useState } from 'react';
 import useRouteStore from '@/stores/useRoute';
 import throttle from '@/function/throttle';
@@ -29,7 +28,7 @@ export default function Mypages() {
       case 'myactivities':
         return <MyActivities />;
       case 'myreservedstatus':
-        return <ReservationStatus />;
+        return <Calendar />;
     }
   };
 
