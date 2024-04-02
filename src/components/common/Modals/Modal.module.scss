@@ -47,6 +47,9 @@
   &.notifications {
     background-color: $lightgreen;
     padding: 2.4rem 2rem;
+    top: 0;
+    left: 0;
+    transform: translate(-35%, -57%);
     > img {
       width: 2.4rem;
       height: 2.4rem;
