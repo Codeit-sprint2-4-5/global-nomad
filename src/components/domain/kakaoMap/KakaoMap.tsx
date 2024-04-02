@@ -12,7 +12,6 @@ interface KakaoMapProps {
 }
 
 export default function KakaoMap({ detailData }: KakaoMapProps) {
-
   const [center, setCenter] = useState({
     lat: 37.49676871972202,
     lng: 127.02474726969814,
@@ -21,7 +20,6 @@ export default function KakaoMap({ detailData }: KakaoMapProps) {
   const [copied, setCopied] = useState(false);
 
   const searchRoute = `https://map.kakao.com/link/to/${detailData.address},${center.lat},${center.lng}`;
-
   useEffect(() => {
     const geocoder = new window.kakao.maps.services.Geocoder();
     geocoder.addressSearch(detailData.address, function (result: any[], status: string) {
