@@ -30,7 +30,9 @@ export default function KakaoMap({
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const searchRoute = `https://map.kakao.com/link/to/${address},${center.lat},${center.lng}`;
+  const searchRoute = activitiesDetailInfo
+    ? `https://map.kakao.com/link/to/${activitiesDetailInfo.address},${center.lat},${center.lng}`
+    : '';
   useEffect(() => {
     const geocoder = new window.kakao.maps.services.Geocoder();
     geocoder.addressSearch(address, function (result: any[], status: string) {
