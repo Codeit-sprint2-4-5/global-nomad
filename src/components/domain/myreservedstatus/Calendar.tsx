@@ -96,7 +96,7 @@ export default function Calendar() {
 
   return (
     <>
-      <Title text='예약 현황' />
+      <Title text='예약 현황' /> 
       <div className={cn('container')}>
         <Dropdown lists={allActivity?.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
         <div className={cn('date-control')}>
