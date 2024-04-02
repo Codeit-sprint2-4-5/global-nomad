@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { auth } from '@/apis/auth';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function Auth() {
   const router = useRouter();
+  const { id } = router.query;
+  const queryClient = useQueryClient();
 
   const handleRouteChangeStart = async (asPath: string) => {
-    if (['/', '/signin', '/signup'].includes(asPath)) return;
+    if (['/', '/signin', '/signup', `/activityDetail/${id}`].includes(asPath)) return;
 
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -22,6 +25,7 @@ export default function Auth() {
             localStorage.setItem('accessToken', response.accessToken);
             localStorage.setItem('refreshToken', response.refreshToken);
             await auth.getUser();
+            queryClient.invalidateQueries({ queryKey: ['myInfo'] });
           } catch {
             router.push('/signin');
             return;
@@ -32,6 +36,7 @@ export default function Auth() {
   };
 
   useEffect(() => {
+    handleRouteChangeStart(router.asPath);
     if (typeof window !== undefined) router.events.on('routeChangeStart', handleRouteChangeStart);
 
     return () => {
