@@ -26,9 +26,9 @@
   height: 28.3rem;
   border-radius: 2rem;
   z-index: -1;
-
   @include responsive('T') {
     width: 100%;
+
     min-height: 22.1rem;
     object-fit: cover;
     object-position: center;
@@ -36,6 +36,7 @@
   @include responsive('M') {
     width: 100%;
     min-height: 16.8rem;
+
   }
 }
 

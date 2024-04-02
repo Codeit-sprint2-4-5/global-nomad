@@ -27,7 +27,6 @@
     @include column-flexbox(start, start);
 
     gap: 1.2rem;
-    //margin-right: 2.4rem;
 
     &-title {
       @include text-style(2, 700);
