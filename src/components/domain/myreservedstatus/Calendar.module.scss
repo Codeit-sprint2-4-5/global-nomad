@@ -20,7 +20,7 @@
     text-indent: 100%;
     width: 2.4rem;
     height: 2.4rem;
-    background: url('~/public/icons/Icon_calendar_control.svg') no-repeat;
+    background: url("~/public/icons/Icon_calendar_control.svg") no-repeat;
 
     &.next {
       transform: rotate(-180deg);
@@ -55,7 +55,7 @@
     td {
       text-align: left;
       padding: 1.2rem;
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
       border-right: 1px solid $calendar-border;
       border-top: 1px solid $calendar-border;
       background-color: $white;
