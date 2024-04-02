@@ -16,7 +16,7 @@ const cn = classNames.bind(styles);
 type ErrorMessage = {
   message: string;
 };
-export default function SideNavMenu({ initialState }: { initialState?: string }) {
+export default function SideNavMenu({ initialState }: { initialState: string | undefined }) {
   const initialValue = '/images/Image_default_profile_image.png';
   const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
