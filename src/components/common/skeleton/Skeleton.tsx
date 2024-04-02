@@ -28,7 +28,7 @@ export default function Skeleton({ type }: { type: Props }) {
   const { data, isLoading } = useQuery({
     queryKey: ['/activities'],
     queryFn: getActivity,
-    enabled: id === 'activityDetail'
+    enabled: id !== undefined,
   });
 
   useEffect(() => {
@@ -57,20 +57,24 @@ export default function Skeleton({ type }: { type: Props }) {
 
   if (isLoading) return;
 
-  const subImagesLength = data.subImages.length;
+  let subImagesLength;
   let length = '';
-  switch (subImagesLength) {
-    case 1:
-      length = 'one';
-      break;
-    case 2:
-      length = 'two';
-      break;
-    case 3:
-      length = 'three';
-      break;
-    default:
-      return;
+
+  if (id !== undefined) {
+    subImagesLength = data.subImages.length;
+    switch (subImagesLength) {
+      case 1:
+        length = 'one';
+        break;
+      case 2:
+        length = 'two';
+        break;
+      case 3:
+        length = 'three';
+        break;
+      default:
+        return;
+    }
   }
 
   switch (type) {
