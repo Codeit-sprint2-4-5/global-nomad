@@ -150,7 +150,7 @@ export default function MyReservations() {
             </>
           ) : (
             <div className={cn('nodata-container')}>
-              <NoDataMessage message="예약 내역이 없습니다." />
+              <NoDataMessage message="아직 예약한 체험이 없어요." />
             </div>
           )}
         </div>

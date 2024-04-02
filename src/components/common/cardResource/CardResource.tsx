@@ -12,17 +12,27 @@ interface CardResourceProps {
   banner: boolean;
 }
 
-export default function CardResource({ activitiesData, banner }: CardResourceProps) {
+export default function CardResource({
+  activitiesData,
+  banner,
+}: CardResourceProps) {
   const router = useRouter();
   const handleClick = (id: number) => {
     router.push(`/activities/${id}`);
   };
 
   return (
-    <div onClick={() => handleClick(activitiesData.id)} className={cn('entire', { banner })}>
-      <div className={cn('image-container')}>
-        <Image src={activitiesData.bannerImageUrl} width={384} height={384} alt='배너 이미지' className={cn('image')} />
-      </div>
+    <div
+      onClick={() => handleClick(activitiesData.id)}
+      className={cn('entire', { banner })}
+    >
+      <Image
+        src={activitiesData.bannerImageUrl}
+        width={384}
+        height={384}
+        alt="배너 이미지"
+        className={cn('image')}
+      />
 
       <div className={cn('info')}>
         <div className={cn('info-rating')}>
@@ -39,13 +49,12 @@ export default function CardResource({ activitiesData, banner }: CardResourcePro
         </div>
         <div className={cn('info-title')}>{activitiesData.title}</div>
         <div className={cn('info-price')}>
-          {activitiesData.price > 0 ? (
-            <>
-              ￦ {activitiesData.price.toLocaleString()}
-              <span>/ 인</span>
-            </>
+          {activitiesData.price === 0 ? (
+            '무료체험'
           ) : (
-            <>무료</>
+            <>
+              ￦ {activitiesData.price.toLocaleString()} <span>/ 인</span>
+            </>
           )}
         </div>
       </div>

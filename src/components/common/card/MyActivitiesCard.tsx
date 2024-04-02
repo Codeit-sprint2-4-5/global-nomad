@@ -20,7 +20,7 @@ export default function MyActivitiesCard({
   const router = useRouter();
 
   const handleModifyClick = (id: number) => {
-    router.push(`/my-activities/${id}`);
+    router.push(`/editActivity/${id}`);
   };
 
   return (
@@ -48,9 +48,14 @@ export default function MyActivitiesCard({
           <div className={cn('title')}>{activityInfo.title}</div>
         </div>
         <div className={cn('info-section2')}>
-          <div className={cn('section2-price')}>
-            ￦ {activityInfo.price.toLocaleString()}
-            <span>/ 인</span>
+          <div className={cn('price')}>
+            {activityInfo.price === 0 ? (
+              '무료체험'
+            ) : (
+              <>
+                ￦ {activityInfo.price.toLocaleString()} <span>/ 인</span>
+              </>
+            )}
           </div>
           <Menu
             handleModifyClick={() => handleModifyClick(activityInfo.id)}
