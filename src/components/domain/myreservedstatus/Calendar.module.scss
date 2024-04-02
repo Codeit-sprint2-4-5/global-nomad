@@ -1,3 +1,7 @@
+.container {
+  margin: 3.2rem 0 0;
+}
+
 .wrap {
   @include flexbox(center, flex-start);
   gap: 2.4rem;
