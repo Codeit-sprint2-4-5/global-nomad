@@ -26,14 +26,13 @@
   height: 28.3rem;
   border-radius: 2rem;
   z-index: -1;
-
   @include responsive('T') {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 22.1rem;
+  }
+  @include responsive('M') {
+    width: 100%;
+    height: 16.8rem;
   }
 }
 
@@ -99,7 +98,11 @@
   width: 38.4rem;
   height: 38.4rem;
   position: relative;
-  background: linear-gradient(180deg, $card-resource-gradient-from 33.33%, $card-resource-gradient-to 91.67%);
+  background: linear-gradient(
+    180deg,
+    $card-resource-gradient-from 33.33%,
+    $card-resource-gradient-to 91.67%
+  );
   border-radius: 2rem;
   flex-direction: column-reverse;
 
