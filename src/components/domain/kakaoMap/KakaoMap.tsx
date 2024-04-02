@@ -14,16 +14,23 @@ import { ICON } from '@/constants';
 
 const cn = classNames.bind(styles);
 
-interface KakaoMapProps {
-  address: string;
-  title: string;
-  bannerImageUrl: string;
-}
-export default function KakaoMap({
-  address,
-  title,
-  bannerImageUrl,
-}: KakaoMapProps) {
+export default function KakaoMap() {
+  const router = useRouter();
+  const id = router.query.id as string | undefined;
+
+  const {
+    data: activitiesDetailInfo,
+    error,
+    isLoading,
+  } = useQuery<ActivityDetailInfo, AxiosError>({
+    queryKey: ['activity-detail', id],
+    queryFn: () => getActivityDetail(id),
+  });
+  const getActivityDetail = async (id: string | undefined) => {
+    const response = await instance.get(`/activities/${id}`);
+    return response.data;
+  };
+
   const [center, setCenter] = useState({
     lat: 37.49676871972202,
     lng: 127.02474726969814,
@@ -31,7 +38,9 @@ export default function KakaoMap({
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const searchRoute = `https://map.kakao.com/link/to/${address},${center.lat},${center.lng}`;
+  const searchRoute = activitiesDetailInfo
+    ? `https://map.kakao.com/link/to/${activitiesDetailInfo.address},${center.lat},${center.lng}`
+    : '';
   useEffect(() => {
     const geocoder = new window.kakao.maps.services.Geocoder();
     geocoder.addressSearch(address, function (result: any[], status: string) {
