@@ -90,8 +90,10 @@ export default function Notifications() {
 
             <p className={cn('notification-item-timeAgo')}>{getTimeAgo(notification.createdAt)}</p>
           </li>
-        ))}{' '}
-        <div ref={observerRef} className={cn('ref-box')}></div>
+        ))}
+        <div ref={observerRef} className={cn('ref-box')}>
+          &nbsp;
+        </div>
       </ul>
       {notificationsData?.totalCount === 0 && <h2>알림이 없습니다.</h2>}
     </>

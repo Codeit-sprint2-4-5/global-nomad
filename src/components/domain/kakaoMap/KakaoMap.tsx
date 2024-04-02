@@ -2,17 +2,17 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { CustomOverlayMap, Map, MapMarker, MapTypeControl, ZoomControl } from 'react-kakao-maps-sdk';
 import styles from './KakaoMap.module.scss';
-
 import classNames from 'classnames/bind';
 import { ICON } from '@/constants';
 import { GetActivityDetail } from '@/types';
 
 const cn = classNames.bind(styles);
-
 interface KakaoMapProps {
   detailData: GetActivityDetail;
 }
+
 export default function KakaoMap({ detailData }: KakaoMapProps) {
+
   const [center, setCenter] = useState({
     lat: 37.49676871972202,
     lng: 127.02474726969814,
@@ -21,6 +21,7 @@ export default function KakaoMap({ detailData }: KakaoMapProps) {
   const [copied, setCopied] = useState(false);
 
   const searchRoute = `https://map.kakao.com/link/to/${detailData.address},${center.lat},${center.lng}`;
+
   useEffect(() => {
     const geocoder = new window.kakao.maps.services.Geocoder();
     geocoder.addressSearch(detailData.address, function (result: any[], status: string) {
