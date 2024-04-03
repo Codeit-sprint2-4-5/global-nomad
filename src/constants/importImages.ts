@@ -43,6 +43,9 @@ import ImageLogoSmall from '/public/images/Image_logo_small.svg';
 import ImageLogo from '/public/images/Image_logo.svg';
 import ImageDefaultProfile from '/public/images/Image_default_profile_image.png';
 import ImageNoData from '/public/images/Image_no_data.svg';
+import ImageStreetDance from '/public/images/Image_street_dance.jpg';
+import ImageHotAirBalloon from '/public/images/Image_hot_air_balloon.png';
+import ImageSteppingStone from '/public/images/Image_stepping_stone.jpg';
 
 export const ICON = {
   accountCheck: {
@@ -318,6 +321,20 @@ export const IMAGE = {
     default: {
       src: ImageDefaultProfile,
       alt: '기본 프로필 이미지',
+    },
+  },
+  banner: {
+    first: {
+      src: ImageSteppingStone,
+      alt: '첫 번째 배너 이미지',
+    },
+    second: {
+      src: ImageHotAirBalloon,
+      alt: '두 번째 배너 이미지',
+    },
+    third: {
+      src: ImageStreetDance,
+      alt: '세 번째 배너 이미지',
     },
   },
 
