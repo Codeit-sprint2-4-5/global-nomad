@@ -73,6 +73,7 @@ export default function MainPage() {
           <Search keyword={keyword} onSubmit={onSearchResult} onChange={handleValueChange} />
         </div>
         <div className={cn('list-box')}>
+          <Skeleton type='title' />
           <Skeleton type='popular' />
           <CategoryFilter />
           <Skeleton type='all' />
