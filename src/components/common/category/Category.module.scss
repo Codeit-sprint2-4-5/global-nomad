@@ -1,28 +1,36 @@
 .category {
-	@include flexbox;
-	width: fit-content;
+  @include flexbox;
+  width: fit-content;
   flex-shrink: 0;
-	padding: 1.6rem 3rem;
-	gap: 1rem;
-	border-radius: 1.5rem;
-	border: 1px solid $darkgreen;
-	background: $white;
-	@include text-style(1.8, 500, $darkgreen);
-	text-align: center;
-	cursor: pointer;
+  padding: 1.6rem 3rem;
+  gap: 1rem;
+  border-radius: 1.5rem;
+  border: 1px solid $darkgreen;
+  background: $white;
+  @include text-style(1.8, 500, $darkgreen);
+  text-align: center;
+  cursor: pointer;
 
-	@include responsive('M') {
-		font-size: $font-size-16;
-		padding: 1rem 2rem;
-	}
+  &:hover {
+    background: $gray20;
+  }
 
-	&.active {
-		background: $darkgreen;
-		@include text-style(1.8, 500, $white);
+  @include responsive('M') {
+    font-size: $font-size-16;
+    padding: 1rem 2rem;
+  }
 
-		@include responsive('M') {
-			font-size: $font-size-16;
-			padding: 1rem 2rem;
-		}
-	}
+  &.active {
+    background: $darkgreen;
+    @include text-style(1.8, 500, $white);
+
+    &:hover {
+      background: $gray90;
+    }
+
+    @include responsive('M') {
+      font-size: $font-size-16;
+      padding: 1rem 2rem;
+    }
+  }
 }

@@ -15,6 +15,10 @@
 	background: $white;
 	white-space: nowrap;
 	@include text-style(1.8, 500, $darkgreen);
+  
+  &:hover {
+    background: $gray20;
+  }
 
 	@include responsive('M') {
 		@include flexbox(between, center);
