@@ -10,7 +10,7 @@ export default function Mypage() {
     if (window.innerWidth > 767) {
       Router.push('/mypage/myinfo', undefined, { shallow: true });
     }
-  }, 100);
+  }, 200);
 
   useEffect(() => {
     handleResize();
