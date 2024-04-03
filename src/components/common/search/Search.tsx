@@ -76,7 +76,7 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
     }, 3000);
 
     return () => clearInterval(title);
-  }, []);
+  }, [data]);
 
   if (isLoading) return;
 
