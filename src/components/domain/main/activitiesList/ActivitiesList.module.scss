@@ -9,6 +9,8 @@
   }
 
   .category {
+    @include flexbox(between, center);
+    width: 100%;
     @include text-style(3.6, 700, $black);
     span {
       font-weight: 400;
