@@ -12,11 +12,11 @@ interface CalenderProps {
   ref?: MutableRefObject<null>;
 }
 
-export default function SmallCalender({ onChange, value }: CalenderProps) {
+export default function SmallCalender({ onChange, value, ref }: CalenderProps) {
   return (
     <>
       <div className={cn('calendar-container')}>
-        <Calendar minDate={new Date()} locale='en' value={value} onChange={onChange} />
+        <Calendar minDate={new Date()} locale='en' ref={ref && ref} value={value} onChange={onChange} />
       </div>
     </>
   );

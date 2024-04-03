@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { ICON } from '@/constants';
 import style from '@/components/common/Input/inputField.module.scss';
 import classNames from 'classnames/bind';
-import { DetailedHTMLProps, InputHTMLAttributes, useEffect, useMemo, useRef, useState } from 'react';
+import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useMemo, useRef, useState } from 'react';
 import { useOutsideClick, useToggleButton } from '@/hooks';
 import SmallCalender from '../Modals/ModalContents/dateForm/smallCalendar/SmallCalender';
 import { Value } from '../Modals/ModalContents/dateForm/DateForm';
@@ -17,7 +17,10 @@ interface DateInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInput
   name: string;
 }
 
-export default function DateInput({ name, onPostDataValue, ...props }: DateInputProps) {
+export default forwardRef<HTMLInputElement, DateInputProps>(function DateInput(
+  { name, onPostDataValue, ...props },
+  ref
+) {
   const [calenderValue, onChangeCalender] = useState<Value>();
 
   const { isToggle, handleToggleClick } = useToggleButton();
@@ -53,6 +56,7 @@ export default function DateInput({ name, onPostDataValue, ...props }: DateInput
             value={selectedDate ? selectedDate : ''}
             readOnly
             placeholder='YY/MM/DD'
+            ref={ref}
           />
           <div className={cn('date-input-img')}>
             <Image src={calendar.default.src} alt={calendar.default.alt} width={28} height={28} />
@@ -67,4 +71,4 @@ export default function DateInput({ name, onPostDataValue, ...props }: DateInput
       </div>
     </>
   );
-}
+});
