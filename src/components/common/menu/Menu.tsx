@@ -1,9 +1,10 @@
 import { ICON } from '@/constants/importImages';
-import { useToggleButton } from '@/hooks';
+import { useOutsideClick, useToggleButton } from '@/hooks';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import styles from './Menu.module.scss';
+import { useRef } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -26,16 +27,19 @@ interface MenuListProps {
 }
 
 export default function Menu({ handleModifyClick, handleDeleteClick }: MenuProps) {
-	const { isToggle: isOpen, handleToggleClick: isOpentoggle } = useToggleButton();
+	const { isToggle: isOpen, handleToggleClick: isOpenToggle } = useToggleButton();
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useOutsideClick(ref,isOpen,isOpenToggle)
 
 	const handleModifyOptionClick = () => {
 		handleModifyClick();
-		isOpentoggle();
+		isOpenToggle();
 	};
 
 	const handleDeleteOptionClick = () => {
 		handleDeleteClick();
-		isOpentoggle();
+		isOpenToggle();
 	};
 
 	const MenuList: MenuListProps = {
@@ -53,7 +57,7 @@ export default function Menu({ handleModifyClick, handleDeleteClick }: MenuProps
 
 	return (
 		<div className={cn('menu')}>
-			<button className={cn('menu-button', { open: isOpen })} onClick={isOpentoggle}>
+			<button className={cn('menu-button', { open: isOpen })} onClick={isOpenToggle} ref={ref}>
 				<Image src={ICON.menu.default.src} alt={ICON.menu.default.alt} height={40} width={40} />
 			</button>
 			{isOpen && <DropdownMenu dropdownMenuList={MenuList.list} type='meatball' />}

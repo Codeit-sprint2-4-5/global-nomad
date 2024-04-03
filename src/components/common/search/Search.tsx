@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { instance } from '@/apis/axios';
 import { useQuery } from '@tanstack/react-query';
+import Skeleton from '../skeleton/Skeleton';
 
 const cn = classNames.bind(styles);
 interface Props {
@@ -58,7 +59,6 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!keyword) return;
 
     onSubmit();
   };
@@ -78,7 +78,7 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
     return () => clearInterval(title);
   }, [data]);
 
-  if (isLoading) return;
+  if (isLoading) return <Skeleton type='search' />;
 
   return (
     <div className={cn('container')}>

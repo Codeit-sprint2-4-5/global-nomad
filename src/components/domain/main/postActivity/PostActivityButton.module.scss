@@ -1,0 +1,15 @@
+.post-activity-button {
+  border-radius: 1rem;
+  background-color: $darkgreen;
+  padding: 1.5rem 1.5rem;
+  @include text-style(1.8, 500, $white);
+
+  &:hover {
+    background-color: $gray90;
+  }
+
+  @include responsive('M') {
+    font-size: 1.6rem;
+    padding: 1rem 1.5rem;
+  }
+}

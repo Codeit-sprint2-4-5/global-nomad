@@ -1,6 +1,7 @@
 import CardResource from '@/components/common/cardResource/CardResource';
 import { GetActivitiesList } from '@/types/activities';
 import classNames from 'classnames/bind';
+import PostActivityButton from '../postActivity/PostActivityButton';
 import styles from './ActivitiesList.module.scss';
 import SearchActivitiesHeader from './SearchActivitiesHeader';
 
@@ -34,7 +35,10 @@ export default function ActivitiesList({
         </>
       ) : (
         <>
-          <h2 className={cn('category')}>{category ? category : '전체 체험'}</h2>
+          <h2 className={cn('category')}>
+            {category ? category : '전체 체험'}
+            <PostActivityButton />
+          </h2>
           <ul className={cn('list-box')}>
             {activities?.map((activity, index) => (
               <li key={`${activity.id}-${activity.userId}-${index}`}>

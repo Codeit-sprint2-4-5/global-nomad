@@ -1,14 +1,7 @@
 .dropdown {
 	position: relative;
-	width: 12.7rem;
-
-	@include responsive('T') {
-		width: 12rem;
-	}
-
-	@include responsive('M') {
-		width: 9rem;
-	}
+	width: fit-content;
+  min-width: 13rem;
 }
 
 .dropdown-button {
@@ -22,6 +15,10 @@
 	background: $white;
 	white-space: nowrap;
 	@include text-style(1.8, 500, $darkgreen);
+  
+  &:hover {
+    background: $gray20;
+  }
 
 	@include responsive('M') {
 		@include flexbox(between, center);

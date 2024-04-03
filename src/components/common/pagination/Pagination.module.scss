@@ -9,6 +9,10 @@
     border-radius: 1.5rem;
     background-color: $white;
 
+    &:hover {
+      background-color: $gray20;
+    }
+
     @include responsive(M) {
       width: 4rem;
       height: 4rem;
@@ -21,6 +25,10 @@
     overflow: hidden;
     text-indent: 100%;
     background: url('~/public/icons/Icon_pagination_next.svg') no-repeat center $white;
+
+    &:active {
+      background-color: $darkgreen;
+    }
 
     &.prev {
       transform: rotate(-180deg);
@@ -52,6 +60,10 @@
       &.active {
         color: $white;
         background-color: $darkgreen;
+
+        &:hover {
+          background-color: $gray90;
+        }
       }
     }
   }
