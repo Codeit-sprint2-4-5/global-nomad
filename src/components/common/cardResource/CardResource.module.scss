@@ -12,6 +12,8 @@
 .image-container {
   width: 28.3rem;
   height: 28.3rem;
+  border-radius: 2rem;
+  overflow: hidden;
 
   @include responsive('T') {
     width: 100%;
@@ -19,23 +21,26 @@
     position: relative;
     height: auto;
   }
+
+  &:hover {
+    .image {
+      transform: scale(1.2);
+    }
+  }
 }
 
 .image {
   width: 28.3rem;
   height: 28.3rem;
-  border-radius: 2rem;
-  z-index: -1;
-  @include responsive('T') {
-    width: 100%;
+  transition: 0.3s ease-in-out;
+  object-fit: cover;
 
-    min-height: 22.1rem;
-    object-fit: cover;
-    object-position: center;
-  }
-  @include responsive('M') {
+  @include responsive('T') {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    min-height: 16.8rem;
+    height: 100%;
   }
 }
 
@@ -70,7 +75,6 @@
   text-overflow: ellipsis;
 
   @include responsive('M') {
-    // width: 14.6rem;
     @include text-style(1.8, 700);
     line-height: 2.15rem;
   }
@@ -101,13 +105,14 @@
   width: 38.4rem;
   height: 38.4rem;
   position: relative;
-  background: linear-gradient(
-    180deg,
-    $card-resource-gradient-from 33.33%,
-    $card-resource-gradient-to 91.67%
-  );
+  background: linear-gradient(180deg, $card-resource-gradient-from 33.33%, $card-resource-gradient-to 91.67%);
   border-radius: 2rem;
   flex-direction: column-reverse;
+  &:hover {
+    .image {
+      transform: scale(1.2);
+    }
+  }
 
   @include responsive('M') {
     width: 18.6rem;
