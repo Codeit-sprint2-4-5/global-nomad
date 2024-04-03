@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './sideNavMenu.module.scss';
+import styles from './SideNavMenu.module.scss';
 import classNames from 'classnames/bind';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import MENU_ITEMS from '@/constants/menuItems';

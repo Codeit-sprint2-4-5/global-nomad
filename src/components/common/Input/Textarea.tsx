@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import style from '@/components/common/Input/inputField.module.scss';
+import style from '@/components/common/Input/InputField.module.scss';
 import { DetailedHTMLProps, TextareaHTMLAttributes, forwardRef } from 'react';
 
 const cn = classNames.bind(style);

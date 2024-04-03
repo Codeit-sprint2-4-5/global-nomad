@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import styles from "./footer.module.scss";
+import styles from "./Footer.module.scss";
 import classNames from "classnames/bind";
 
 import { ICON } from "@/constants/importImages";

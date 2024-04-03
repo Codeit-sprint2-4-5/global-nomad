@@ -1,4 +1,4 @@
-import styles from './cardResource.module.scss';
+import styles from './CardResource.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { ICON } from '@/constants';
