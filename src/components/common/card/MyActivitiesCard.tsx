@@ -13,16 +13,29 @@ interface MyActivitiesCardProps {
   handleDelete: (id: number) => void;
 }
 
-export default function MyActivitiesCard({ activityInfo, handleDelete }: MyActivitiesCardProps) {
+export default function MyActivitiesCard({
+  activityInfo,
+  handleDelete,
+}: MyActivitiesCardProps) {
   const router = useRouter();
 
   const handleModifyClick = (id: number) => {
     router.push(`/editActivity/${id}`);
   };
-
+  const handlePageRouter = (id: number) => {
+    router.push(`/activityDetail/${id}`);
+  };
   return (
     <div className={cn('card-container')}>
-      <Image src={activityInfo.bannerImageUrl} width={204} height={204} alt='배너이미지' className={cn('card-image')} />
+      <button type="button" onClick={() => handlePageRouter(activityInfo.id)}>
+        <Image
+          src={activityInfo.bannerImageUrl}
+          width={204}
+          height={204}
+          alt="배너이미지"
+          className={cn('card-image')}
+        />
+      </button>
       <div className={cn('card-info-container')}>
         <div className={cn('info-section')}>
           <div className={cn('info-rating')}>

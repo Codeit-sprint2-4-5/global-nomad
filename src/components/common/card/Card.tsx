@@ -26,7 +26,9 @@ export default function Card({
 
   const buttonContent = clsx({
     '예약 취소': reservationsInfo.status === 'pending',
-    '후기 작성': reservationsInfo.status === 'completed',
+    '후기 작성':
+      !reservationsInfo.reviewSubmitted &&
+      reservationsInfo.status === 'completed',
   });
 
   const handleButtonClick = () => {

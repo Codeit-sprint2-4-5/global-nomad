@@ -5,6 +5,7 @@ interface IntersectionObserverProps {
   hasNextPage: boolean;
   isFetching: boolean;
   fetchNextPage: () => void;
+  loadingShow?: boolean;
 }
 
 const useIntersectionObserver = ({
@@ -12,27 +13,30 @@ const useIntersectionObserver = ({
   hasNextPage,
   isFetching,
   fetchNextPage,
+  loadingShow,
 }: IntersectionObserverProps) => {
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && hasNextPage && !isFetching) {
-            fetchNextPage();
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
+    if (!loadingShow) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && hasNextPage && !isFetching) {
+              fetchNextPage();
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
 
-    if (observerRef.current && hasNextPage) {
-      observer.observe(observerRef.current);
+      if (observerRef.current && hasNextPage) {
+        observer.observe(observerRef.current);
+      }
+
+      return () => {
+        observer.disconnect();
+      };
     }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [observerRef, hasNextPage, isFetching, fetchNextPage]);
+  }, [observerRef, hasNextPage, isFetching, fetchNextPage, loadingShow]);
 };
 
 export default useIntersectionObserver;

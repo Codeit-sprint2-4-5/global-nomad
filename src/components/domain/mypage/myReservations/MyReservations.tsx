@@ -16,6 +16,7 @@ import { ICON } from '@/constants';
 import { useRouter } from 'next/router';
 import Modal from '@/components/common/Modals';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import Skeleton from '@/components/common/skeleton/Skeleton';
 
 const cn = classNames.bind(styles);
 
@@ -28,6 +29,7 @@ export default function MyReservations() {
   const [reservationInfo, setReservationInfo] = useState<Reservation>();
   const router = useRouter();
   const observerRef = useRef<HTMLDivElement>(null);
+  const [loadingShow, setLoadingShow] = useState(false);
 
   const { fetchNextPage, hasNextPage, isFetching, data } =
     useCustomInfiniteQuery({
@@ -102,7 +104,41 @@ export default function MyReservations() {
     hasNextPage,
     isFetching,
     fetchNextPage,
+    loadingShow,
   });
+
+  useEffect(() => {
+    if (isFetching && !loadingShow) {
+      setLoadingShow(true);
+    }
+    if (!isFetching) {
+      setLoadingShow(false);
+    }
+  }, [isFetching, loadingShow]);
+
+  if (loadingShow) {
+    return (
+      <div className={cn('reservations-container')}>
+        <div className={cn('title')}>
+          <div className={cn('back-button')}>
+            <button className={cn('back-icon')} onClick={handleBackButtonClick}>
+              <Image
+                width={40}
+                height={40}
+                src={ICON.leftArrow.default.src}
+                alt={ICON.leftArrow.default.alt}
+              />
+            </button>
+            <Title text="내 예약 관리" />
+          </div>
+          <Filter type="filter" setFilterState={setViewList} />
+        </div>
+        <div className={cn('card-container')}>
+          <Skeleton type="reservation" />
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <div className={cn('reservations-container')}>
@@ -134,7 +170,7 @@ export default function MyReservations() {
                   />
                 ))}
               </div>
-              <div ref={observerRef}></div>
+              <div ref={observerRef}>&nbsp;</div>
 
               {isFetching && hasNextPage && (
                 <div className={cn('loading-container')}>

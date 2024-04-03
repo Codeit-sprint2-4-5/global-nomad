@@ -1,7 +1,7 @@
 import { instance } from '@/apis/axios';
 import { useCustomInfiniteQuery } from '@/hooks/useCustomInfiniteQuery';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from '../MyCommonCard.module.scss';
 import classNames from 'classnames/bind';
@@ -25,14 +25,20 @@ export default function MyActivities() {
   const router = useRouter();
   const deleteDialogRef = useRef<HTMLDialogElement>(null);
   const observerRef = useRef<HTMLDivElement>(null);
-
+  const [loadingShow, setLoadingShow] = useState(false);
   //inFiniteScroll을 위한 쿼리요청 키와 함수를 써줘야함
-  const { fetchNextPage, hasNextPage, isFetching, data } = useCustomInfiniteQuery({
-    queryKey: ['MyActivities'],
-    queryFn: ({ pageParam }: { pageParam: number | undefined }) => getMyActivities({ pageParam }),
-  });
+  const { fetchNextPage, hasNextPage, isFetching, data } =
+    useCustomInfiniteQuery({
+      queryKey: ['MyActivities'],
+      queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
+        getMyActivities({ pageParam }),
+    });
   //본인이 등록한 체험정보 get API
-  async function getMyActivities({ pageParam }: { pageParam: number | undefined }) {
+  async function getMyActivities({
+    pageParam,
+  }: {
+    pageParam: number | undefined;
+  }) {
     try {
       const response = await instance.get('/my-activities', {
         params: {
@@ -97,19 +103,66 @@ export default function MyActivities() {
     hasNextPage,
     isFetching,
     fetchNextPage,
+    loadingShow,
   });
+
+  useEffect(() => {
+    if (isFetching && !loadingShow) {
+      setLoadingShow(true);
+    }
+    if (!isFetching) {
+      setLoadingShow(false);
+    }
+  }, [isFetching, loadingShow]);
+  if (loadingShow) {
+    return (
+      <div className={cn('reservations-container')}>
+        <div className={cn('title')}>
+          <div className={cn('back-button')}>
+            <button className={cn('back-icon')} onClick={handleBackButtonClick}>
+              <Image
+                width={40}
+                height={40}
+                src={ICON.leftArrow.default.src}
+                alt={ICON.leftArrow.default.alt}
+              />
+            </button>
+            <Title text="내 체험 관리" />
+          </div>
+
+          <button
+            className={cn('register-button')}
+            onClick={handleRegisterClick}
+          >
+            체험 등록하기
+          </button>
+        </div>
+        <div className={cn('card-container')}>
+          <Skeleton type="reservation" />
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <div className={cn('reservations-container')}>
         <div className={cn('title')}>
           <div className={cn('back-button')}>
             <button className={cn('back-icon')} onClick={handleBackButtonClick}>
-              <Image width={40} height={40} src={ICON.leftArrow.default.src} alt={ICON.leftArrow.default.alt} />
+              <Image
+                width={40}
+                height={40}
+                src={ICON.leftArrow.default.src}
+                alt={ICON.leftArrow.default.alt}
+              />
             </button>
-            <Title text='내 체험 관리' />
+            <Title text="내 체험 관리" />
           </div>
 
-          <button className={cn('register-button')} onClick={handleRegisterClick}>
+          <button
+            className={cn('register-button')}
+            onClick={handleRegisterClick}
+          >
             체험 등록하기
           </button>
         </div>
@@ -118,7 +171,11 @@ export default function MyActivities() {
             <>
               <div className={cn('card-lists')}>
                 {data?.pages.map((activity: GetActivitiesList) => (
-                  <MyActivitiesCard key={activity.id} activityInfo={activity} handleDelete={handleOpenDeleteModal} />
+                  <MyActivitiesCard
+                    key={activity.id}
+                    activityInfo={activity}
+                    handleDelete={handleOpenDeleteModal}
+                  />
                 ))}
               </div>
               <div ref={observerRef} className={cn('ref-box')}></div>
@@ -126,10 +183,10 @@ export default function MyActivities() {
               {isFetching && hasNextPage && (
                 <div className={cn('loading-container')}>
                   <Image
-                    src='/icons/Icon_loading.svg'
+                    src="/icons/Icon_loading.svg"
                     width={50}
                     height={50}
-                    alt='loadingIcon'
+                    alt="loadingIcon"
                     className={cn('loading-image')}
                   />
                 </div>
@@ -137,14 +194,14 @@ export default function MyActivities() {
             </>
           ) : (
             <div className={cn('nodata-container')}>
-              <NoDataMessage message='아직 등록한 체험이 없어요.' />
+              <NoDataMessage message="아직 등록한 체험이 없어요." />
             </div>
           )}
         </div>
       </div>
       <Question
-        text='정말로 삭제하시겠습니까?'
-        buttonText='삭제하기'
+        text="정말로 삭제하시겠습니까?"
+        buttonText="삭제하기"
         dialogRef={deleteDialogRef}
         onClick={() => handleDeleteClick(deleteActivityId)}
       />
