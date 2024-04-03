@@ -38,34 +38,8 @@
       @include text-style(2.8, 700, $black);
     }
 
-    &-btn {
-      cursor: default;
-      > span {
-        display: none;
-      }
-    }
-
     @include responsive(M) {
-      @include text-style(2);
-      position: absolute;
-      top: 1.6rem;
-      border: none;
-      margin: 0;
-      padding: 0;
-
-      &-point {
-        @include text-style(2, 700, $black);
-      }
-
-      &-btn {
-        @include text-style(1.8, 500, $darkgreen);
-        cursor: pointer;
-        text-decoration: underline;
-        > span {
-          display: inline-block;
-          text-decoration: underline;
-        }
-      }
+      display: none;
     }
   }
 
@@ -119,6 +93,19 @@
       }
     }
   }
+
+  &-counthead-btn {
+    display: none;
+    @include responsive(M) {
+      display: inline-block;
+
+      @include text-style(2, 500, $darkgreen);
+      text-decoration: underline;
+      > span {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 .total-price {
@@ -130,6 +117,17 @@
   }
 
   @include responsive(M) {
-    display: none;
+    // display: none;
+    > :first-child {
+      display: none;
+    }
+    > h2 {
+      @include text-style(2.8, 700);
+    }
+    position: absolute;
+    top: 1.6rem;
+    border: none;
+    margin: 0;
+    padding: 0;
   }
 }
