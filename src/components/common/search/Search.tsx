@@ -65,7 +65,9 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
 
   let count = 1;
   useEffect(() => {
-    setTitle(data?.activities[0].title);
+    if(data && data?.activities[0]) {
+      setTitle(data?.activities[0].title);
+    }
 
     const title = setInterval(() => {
       if (count < data?.activities.length) {
