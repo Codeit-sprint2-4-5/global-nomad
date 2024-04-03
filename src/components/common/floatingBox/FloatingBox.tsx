@@ -131,12 +131,7 @@ export default function FloatingBox({ price = 10000 }) {
         <Modal modalType='countMemberInput' control={control} setShowModal={setShowModal} setValue={setValue} />
       )}
       <Confirm text='예약 완료되었습니다' dialogRef={confrimRef} />
-      <Question
-        dialogRef={questionRef}
-        text='로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?'
-        onClick={hadledirectSignin}
-        buttonText='예'
-      />
+      <Question dialogRef={questionRef} text='로그인 하시겠습니까?' onClick={hadledirectSignin} buttonText='예' />
     </section>
   );
 }
