@@ -1,6 +1,7 @@
 .reservations-container {
   width: 80rem;
   @include column-flexbox(none, none);
+
   @include responsive('T') {
   }
 
@@ -11,6 +12,7 @@
 
 .title {
   width: 100%;
+
   @include flexbox(between, center);
   margin-bottom: 2.4rem;
   @include responsive('T') {

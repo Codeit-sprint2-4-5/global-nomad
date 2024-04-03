@@ -1,4 +1,12 @@
 .container {
+  width: calc(100% - 27.5rem);
+  
+  @include responsive(M) {
+    width: 100%;
+  }
+}
+
+.reservedStatus {
   margin: 3.2rem 0 0;
 }
 
@@ -39,7 +47,7 @@
   border-radius: 0.8rem;
   border: 1px solid $calendar-border;
 
-  @include responsive(M) {
+  @include responsive(T) {
     width: 100%;
   }
 

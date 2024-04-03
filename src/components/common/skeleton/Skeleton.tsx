@@ -1,35 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { instance } from '@/apis/axios';
-import { useRouter } from 'next/router';
 import throttle from '@/function/throttle';
 import classNames from 'classnames/bind';
 import styles from './Skeleton.module.scss';
 
 const cn = classNames.bind(styles);
 
-type Props = 'popular' | 'all' | 'detail' | 'reservation' | 'management';
+type Props = 'popular' | 'all' | 'reservation' | 'management';
 
 export default function Skeleton({ type }: { type: Props }) {
   const [allItem, setAllItem] = useState(8);
   const [popularItem, setPopularItem] = useState(3);
-  const router = useRouter();
-  const { id } = router.query;
-
-  async function getActivity() {
-    try {
-      const res = await instance.get(`/activities/${id}`);
-      return res.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['/activities'],
-    queryFn: getActivity,
-    enabled: id !== undefined,
-  });
 
   useEffect(() => {
     const handleResize = throttle(() => {
@@ -55,28 +37,6 @@ export default function Skeleton({ type }: { type: Props }) {
     };
   }, []);
 
-  if (isLoading) return;
-
-  let subImagesLength;
-  let length = '';
-
-  if (id !== undefined) {
-    subImagesLength = data.subImages.length;
-    switch (subImagesLength) {
-      case 1:
-        length = 'one';
-        break;
-      case 2:
-        length = 'two';
-        break;
-      case 3:
-        length = 'three';
-        break;
-      default:
-        return;
-    }
-  }
-
   switch (type) {
     case 'popular':
       return (
@@ -97,17 +57,6 @@ export default function Skeleton({ type }: { type: Props }) {
               <div className={cn('price')}></div>
             </div>
           ))}
-        </div>
-      );
-    case 'detail':
-      return (
-        <div className={cn('detail-container')}>
-          <div className={cn('img')}></div>
-          <div className={cn('wrap')}>
-            {[...Array(subImagesLength)].map((_, idx) => (
-              <div key={idx} className={`${cn('box', `${length}`)}`}></div>
-            ))}
-          </div>
         </div>
       );
     case 'reservation':
