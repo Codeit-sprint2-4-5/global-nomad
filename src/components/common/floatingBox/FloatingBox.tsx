@@ -14,6 +14,7 @@ import classNames from 'classnames/bind';
 import { postReservation } from '@/apis/post/postReservation';
 import { AbledReservationListData } from '@/types';
 import Confirm from '../popup/confirm/Confirm';
+import Question from '../popup/question/Question';
 
 const cn = classNames.bind(styles);
 
@@ -23,7 +24,8 @@ export interface PostReservationData {
 }
 
 export default function FloatingBox({ price = 10000 }) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const confrimRef = useRef<HTMLDialogElement>(null);
+  const questionRef = useRef<HTMLDialogElement>(null);
   const [totalPrice, setTotalPrice] = useState(price);
   const [showModal, setShowModal] = useState('');
   const [reservedTime, setReservedTime] = useState('');
@@ -42,6 +44,10 @@ export default function FloatingBox({ price = 10000 }) {
   const countMemberValue = watch('headCount');
   const scheduleIdValue = getValues('scheduleId');
 
+  const hadledirectSignin = () => {
+    router.push('/signin');
+  };
+
   useEffect(() => {
     if (abledReservationListData && scheduleIdValue) {
       const foundDateData = abledReservationListData.find((item: AbledReservationListData) =>
@@ -56,14 +62,19 @@ export default function FloatingBox({ price = 10000 }) {
   }, [abledReservationListData, scheduleIdValue]);
 
   const handleShowConfrim = () => {
-    if (!dialogRef.current) return;
-    dialogRef.current.showModal();
+    if (!confrimRef.current) return;
+    confrimRef.current.showModal();
   };
 
   const postReservationMutation = useMutation({
     mutationFn: (data: PostReservationData) => postReservation(id, data),
     onSuccess: () => handleShowConfrim(),
-    onError: (e: any) => alert(e.response?.data.message),
+    onError: (e: any) => {
+      if (e.response?.status === 401) {
+        if (!questionRef.current) return;
+        questionRef.current.showModal();
+      }
+    },
   });
 
   const handelOnSubmit: SubmitHandler<PostReservationData> = (data) => {
@@ -119,7 +130,8 @@ export default function FloatingBox({ price = 10000 }) {
       {showModal === 'countMemberInput' && (
         <Modal modalType='countMemberInput' control={control} setShowModal={setShowModal} setValue={setValue} />
       )}
-      <Confirm text='예약 완료되었습니다' dialogRef={dialogRef} />
+      <Confirm text='예약 완료되었습니다' dialogRef={confrimRef} />
+      <Question dialogRef={questionRef} text='로그인 하시겠습니까?' onClick={hadledirectSignin} buttonText='예' />
     </section>
   );
 }
