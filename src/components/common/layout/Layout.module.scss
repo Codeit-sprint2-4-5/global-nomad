@@ -1,13 +1,14 @@
 .main {
   max-width: 120rem;
   margin: 0 auto;
-  padding: 7rem 0 16rem 0;
+  padding: 14rem 0 16rem 0;
+  min-height: calc(100vh - 16rem);
 
   @include responsive(T) {
-    padding: 7rem 2.4rem 16rem 2.4rem;
+    padding: 14rem 2.4rem 16rem 2.4rem;
   }
 
   @include responsive(M) {
-    padding: 7rem 1.6rem 16rem 1.6rem;
+    padding: 14rem 1.6rem 16rem 1.6rem;
   }
 }

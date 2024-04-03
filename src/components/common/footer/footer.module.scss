@@ -1,5 +1,4 @@
 .footer-entire {
-  margin-top: 12rem;
   height: 16rem;
   display: flex;
   align-items: center;
@@ -8,11 +7,11 @@
   background-color: $gray90;
   @include text-style(1.6, 400, $gray85);
 
-  @include responsive("T") {
+  @include responsive('T') {
     gap: 6rem;
   }
 
-  @include responsive("M") {
+  @include responsive('M') {
     flex-direction: column;
     gap: 2.4rem;
   }
@@ -22,11 +21,11 @@
   display: flex;
   gap: 40rem;
 
-  @include responsive("T") {
+  @include responsive('T') {
     gap: 6rem;
   }
 
-  @include responsive("M") {
+  @include responsive('M') {
     gap: 1.2rem;
   }
 }
