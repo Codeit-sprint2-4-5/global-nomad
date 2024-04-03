@@ -43,13 +43,20 @@
         right: 0;
       }
 
-      @media (max-width: 900px) {
-        @include flexbox(end, center);
-        background: linear-gradient(to left, #a4a1aa 0%, transparent 100%);
+      @include responsive('T') {
+        @media (max-width: 900px) {
+          @include flexbox(end, center);
+          background: linear-gradient(to left, $gray10 0%, transparent 100%);
+        }
       }
 
       @include responsive('M') {
+        display: none;
         width: 4rem;
+
+        @media (max-width: 700px) {
+          display: flex;
+        }
       }
     }
   }
