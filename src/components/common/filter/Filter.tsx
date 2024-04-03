@@ -1,8 +1,8 @@
 import { ICON } from '@/constants/importImages';
-import { useToggleButton } from '@/hooks';
+import { useOutsideClick, useToggleButton } from '@/hooks';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import styles from './Filter.module.scss';
 
@@ -25,11 +25,14 @@ interface FilterTypeProps {
 }
 
 export default function Filter({ type, filterState, setFilterState }: FilterProps) {
-  const { isToggle: isOpen, handleToggleClick: isOpentoggle } = useToggleButton();
+  const { isToggle: isOpen, handleToggleClick: isOpenToggle } = useToggleButton();
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useOutsideClick(ref, isOpen, isOpenToggle);
 
   const handleDropdownOptionClick = (option: string) => {
     setFilterState(option);
-    isOpentoggle();
+    isOpenToggle();
   };
 
   const FilterType: FilterTypeProps = {
@@ -95,7 +98,7 @@ export default function Filter({ type, filterState, setFilterState }: FilterProp
 
   return (
     <div className={cn('dropdown')}>
-      <button className={cn('dropdown-button', { open: isOpen })} onClick={isOpentoggle}>
+      <button className={cn('dropdown-button', { open: isOpen })} onClick={isOpenToggle} ref={ref}>
         <span>{FilterType[type].text}</span>
         <Image src={ICON.filter.default.src} alt={ICON.filter.default.alt} height={22} width={22} />
       </button>

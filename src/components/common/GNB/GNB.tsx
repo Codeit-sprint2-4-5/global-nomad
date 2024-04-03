@@ -1,13 +1,13 @@
 import { instance } from '@/apis/axios';
 import { ICON, IMAGE } from '@/constants';
-import { useToggleButton } from '@/hooks';
+import { useOutsideClick, useToggleButton } from '@/hooks';
 import { myInfoProps } from '@/types/myInfo';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Avatar from '../avatar/Avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import styles from './GNB.module.scss';
@@ -18,8 +18,12 @@ const cn = classNames.bind(styles);
 export default function GNB() {
   const router = useRouter();
   const [Auth, setAuth] = useState(false);
-  const { isToggle: isDropdownOpen, handleToggleClick: setIsDropdownOpen } = useToggleButton();
-  const { isToggle: isNotificationOpen, handleToggleClick: setIsNotificationOpen } = useToggleButton();
+  const { isToggle: isDropdownOpen, handleToggleClick: isDropdownOpenToggle } = useToggleButton();
+  const { isToggle: isNotificationOpen, handleToggleClick: isNotificationOpenToggle } = useToggleButton();
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useOutsideClick(ref, isDropdownOpen, isDropdownOpenToggle);
+
   const getMyInfo = async () => {
     const { data } = await instance.get<myInfoProps>('/users/me');
     return data;
@@ -35,13 +39,13 @@ export default function GNB() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     if (!localStorage.getItem('accessToken')) {
-      setIsDropdownOpen();
+      isDropdownOpenToggle();
       router.push('/signin');
     }
   };
 
   const handleMyPageClick = () => {
-    setIsDropdownOpen();
+    isDropdownOpenToggle();
     router.push('/mypage');
   };
 
@@ -86,21 +90,21 @@ export default function GNB() {
                 <Image
                   src={ICON.notification.default.src}
                   alt={ICON.notification.default.alt}
-                  onClick={setIsNotificationOpen}
+                  onClick={isNotificationOpenToggle}
                 />
               </button>
               {isNotificationOpen && (
                 <Modal
                   className={cn('notifications-box')}
                   modalType='notifications'
-                  setShowModal={setIsNotificationOpen}
+                  setShowModal={isNotificationOpenToggle}
                 />
               )}
               <div className={cn('dropdown-menu-box')}>
                 <div className={cn('stroke')} />
                 <div className={cn('user-profile-box')}>
                   <Avatar profileImageUrl={MyInfoData?.profileImageUrl} type='gnb' />
-                  <button className={cn('gnb-button')} onClick={setIsDropdownOpen}>
+                  <button className={cn('gnb-button')} onClick={isDropdownOpenToggle} ref={ref}>
                     {MyInfoData?.nickname}
                   </button>
                   {isDropdownOpen && <DropdownMenu type='gnb' dropdownMenuList={MyMenuList} />}
