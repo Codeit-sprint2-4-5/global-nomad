@@ -1,11 +1,12 @@
-import Input from '@/components/common/Input/Input';
 import DaumPostcode from 'react-daum-postcode';
-import styles from './AddActivityForm.module.scss';
-import classNames from 'classnames/bind';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import Input from '@/components/common/Input/Input';
 import BaseButton from '@/components/common/button/BaseButton';
 import { useToggleButton } from '@/hooks';
-import { PostActivityFormValues } from './AddActivityForm';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+
+import styles from './AddActivityForm.module.scss';
+import classNames from 'classnames/bind';
+import { PostActivityFormValues } from '@/types';
 
 const cn = classNames.bind(styles);
 
@@ -17,7 +18,7 @@ interface Props {
 
 export default function AddressInput({ register, errors, onSetAddressValue }: Props) {
   const { isToggle: isopen, handleToggleClick } = useToggleButton();
-  //추가
+
   const completeHandler = (data: any) => {
     onSetAddressValue(data.roadAddress);
   };

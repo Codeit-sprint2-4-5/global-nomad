@@ -20,41 +20,10 @@ import setUrlsId from './utills/setUrlsId';
 import styles from './AddActivityForm.module.scss';
 import classNames from 'classnames/bind';
 import { Router, useRouter } from 'next/router';
+import { PatchValues, PostActivityFormValues, Schedules } from '@/types';
 
 const cn = classNames.bind(styles);
 const { add } = ICON;
-
-export interface Schedules {
-  date: string;
-  startTime: string;
-  endTime: string;
-  id?: number;
-}
-export interface PostActivityFormValues {
-  title: string;
-  category: string;
-  description: string;
-  address?: string;
-  price: number;
-  schedules: Schedules | Schedules[];
-  bannerImageUrl: string;
-  subImageUrls?: string[];
-}
-
-interface PatchValues {
-  title: string;
-  category: string;
-  description: string;
-  price: number;
-  address?: string;
-  bannerImageUrl: string;
-  subImageIdsToRemove: number[];
-  subImageUrlsToAdd: string[];
-  scheduleIdsToRemove: number[];
-  schedulesToAdd?: Schedules[];
-  schedules?: Schedules | Schedules[];
-  subImageUrls?: string[];
-}
 
 export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -93,6 +62,9 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
       setBannerImageUrl(activityData.bannerImageUrl);
       setSubImageUrls(activityData.subImages);
       setValue('category', activityData.category);
+
+      const categoryId = USER_CATEGORYS.find((category) => activityData.category === category.category)?.id;
+      if (categoryId) return setSelectedCategoryId(categoryId);
     }
   }, [activityData, isEdit]);
 
@@ -114,6 +86,7 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
 
   const handleConfirmText = (text: string) => {
     if (!dialogRef.current) return;
+
     setConfirmText(text);
     return dialogRef.current.showModal();
   };
@@ -132,8 +105,9 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
       return handleConfirmText('날짜, 시작시간, 종료 시간을 확인해 주세요');
     }
     if (isEdit) {
-      return setSchedulesToAdd((prev) => [...prev, nextSchedule]);
+      setSchedulesToAdd((prev) => [...prev, nextSchedule]);
     }
+
     return setSchedules((prev) => [...prev, nextSchedule as Schedules]);
   };
 
@@ -176,19 +150,22 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
     return setBannerImageUrl('');
   };
 
+  const handleClickSuccessConfirm = () => {
+    router.push('/mypage/myactivities');
+  };
+
   const postActivityMutation = useMutation({
     mutationFn: (data: PostActivityFormValues) => postActivity(data),
     onSuccess: () => {
-      handleConfirmText('등록이 완료되었습니다.');
+      handleClickSuccessConfirm();
     },
   });
-  const handleClickSuccessConfirm = () => {
-    router.push('mypage/myactivities');
-  };
 
   const patchActivityMutation = useMutation({
     mutationFn: (data: unknown) => patchActivity(activityId as string, data),
-    onSuccess: () => handleConfirmText('수정이 완료되었습니다.'),
+    onSuccess: () => {
+      handleClickSuccessConfirm();
+    },
   });
 
   const onHandleSubmit: SubmitHandler<PostActivityFormValues> = (data) => {
