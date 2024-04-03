@@ -23,14 +23,17 @@ export default function Notifications() {
     hasNextPage,
     isFetching,
     data: notificationsData,
+    isSuccess,
   } = useCustomInfiniteQuery({
     queryKey: queryKey.myNotifications,
-    queryFn: ({ pageParam }: { pageParam: number | undefined }) => getMyNotifications({ pageParam }, 2),
+    queryFn: ({ pageParam }: { pageParam: number | undefined }) =>
+      getMyNotifications({ pageParam }, 2),
   });
 
   const deleteNotificationMutation = useMutation({
     mutationFn: (id: number) => delelteNotifications(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: queryKey.myNotifications }),
   });
 
   const handelDeleteNotification = (id: number) => {
@@ -39,18 +42,18 @@ export default function Notifications() {
 
   function highlightContent(content: string) {
     if (content.includes('승인')) {
-      return content.replace(/승인/g, '<span style= "color: #0085ff " >$&</span>');
+      return content.replace(
+        /승인/g,
+        '<span style= "color: #0085ff " >$&</span>'
+      );
     } else if (content.includes('거절')) {
       return content.replace(/거절/g, '<span style="color: #ff472e">$&</span>');
     } else {
-      //예약 들어온 경우 swagger 에 안나옵니다..
       return content;
     }
   }
 
   const description = (context: string) => {
-    // 이렇게 하면 안되는 걸 아는데 다른 방법을 못찾겠어요
-
     return (
       <div
         className={cn('notification-item-context')}
@@ -66,8 +69,16 @@ export default function Notifications() {
   });
   return (
     <>
-      <h1 className={cn('title')}>알림 {notificationsData?.totalCount}개</h1>
-      <ul className={cn('notification-list')}>
+      <h2 className={cn('title')}>알림 {notificationsData?.totalCount}개</h2>
+      <ul
+        className={cn('notification-list', {
+          none: notificationsData?.totalCount === 0,
+        })}
+      >
+        {!isSuccess ||
+          (notificationsData.totalCount === 0 && (
+            <h3 className={cn('item-none')}>알림이 없습니다.</h3>
+          ))}
         {notificationsData?.pages.map((notification: any) => (
           <li key={notification.id} className={cn('notification-item')}>
             <div className={cn('notification-item-top-line')}>
@@ -82,20 +93,26 @@ export default function Notifications() {
                 )}
               />
               <button onClick={() => handelDeleteNotification(notification.id)}>
-                <Image src={xMedium.default.src} alt={xMedium.default.alt} width={24} height={24} />
+                <Image
+                  src={xMedium.default.src}
+                  alt={xMedium.default.alt}
+                  width={24}
+                  height={24}
+                />
               </button>
             </div>
 
             <h2>{description(notification.content)}</h2>
 
-            <p className={cn('notification-item-timeAgo')}>{getTimeAgo(notification.createdAt)}</p>
+            <p className={cn('notification-item-timeAgo')}>
+              {getTimeAgo(notification.createdAt)}
+            </p>
           </li>
         ))}
         <div ref={observerRef} className={cn('ref-box')}>
           &nbsp;
         </div>
       </ul>
-      {notificationsData?.totalCount === 0 && <h2>알림이 없습니다.</h2>}
     </>
   );
 }
