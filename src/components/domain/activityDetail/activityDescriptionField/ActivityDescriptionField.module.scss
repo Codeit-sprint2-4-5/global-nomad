@@ -19,6 +19,6 @@
 
   &-content {
     @include text-style(1.6, 400, $modal-text-color);
-    word-break: keep-all;
+    word-break: break-all;
   }
 }
