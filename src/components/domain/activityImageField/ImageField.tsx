@@ -7,6 +7,7 @@ import debounce from '@/function/debounce';
 import IconButton from '@/components/common/button/IconButton';
 import style from './ImageField.module.scss';
 import ImageViewer from '@/components/common/popup/imageViewer/ImageViewer';
+import Banner from '../main/banner/Banner';
 
 const cn = classNames.bind(style);
 
@@ -20,21 +21,20 @@ export default function ImageField({ detailData: activityDetailData }: ImageFiel
   const [fieldWidth, setFieldWitdh] = useState(0);
   const [imageFieldIndex, setImageFieldIndex] = useState(0);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const baseImageUrl =
-    'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/b.png';
+  const [imageLoading, setImageLoading] = useState({
+    banner: true,
+    subImage: activityDetailData.subImages.map(() => true),
+  });
+
   const imageRef = useRef<HTMLImageElement | null>(null);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const nextButtonEnable =
     activityDetailData?.subImages &&
     activityDetailData.subImages.length > 0 &&
-    activityDetailData.subImages.length - imageFieldIndex !== 0 &&
-    activityDetailData.subImages[0].imageUrl !== baseImageUrl;
+    activityDetailData.subImages.length - imageFieldIndex !== 0;
 
-  const subImageEnable =
-    activityDetailData?.subImages &&
-    activityDetailData.subImages.length <= 1 &&
-    activityDetailData.subImages[0].imageUrl === baseImageUrl;
+  const subImageEnable = activityDetailData?.subImages && activityDetailData.subImages.length < 1;
 
   const handleNextClick = () => {
     setImageFieldIndex((prev) => {
@@ -123,16 +123,17 @@ export default function ImageField({ detailData: activityDetailData }: ImageFiel
               </div>
             )}
             <div
-              className={cn('image-field-banner')}
+              className={cn({ 'image-field-banner': !imageLoading.banner }, { imageLoading: imageLoading.banner })}
               onClick={() => handleImagePopupOpenClick(activityDetailData.bannerImageUrl)}
             >
               <Image
-                className={cn('image')}
+                className={cn('image', { visible: imageLoading.banner })}
                 src={activityDetailData.bannerImageUrl}
                 alt={activityDetailData.title}
                 sizes={'100%'}
                 fill
                 priority
+                onLoad={() => setImageLoading((prev) => ({ ...prev, banner: false }))}
               />
             </div>
             {!subImageEnable && (
@@ -145,21 +146,26 @@ export default function ImageField({ detailData: activityDetailData }: ImageFiel
                 )}
               >
                 {activityDetailData.subImages.map(
-                  (image) =>
-                    image.imageUrl &&
-                    image.imageUrl !== baseImageUrl && (
+                  (image, index) =>
+                    image.imageUrl && (
                       <div
                         key={image.id}
-                        className={cn('sub-image')}
+                        className={cn(
+                          { 'sub-image': !imageLoading.subImage[index] },
+                          { subImageLoading: imageLoading.subImage[index] }
+                        )}
                         onClick={() => handleImagePopupOpenClick(image.imageUrl)}
                       >
                         <Image
-                          className={cn('image')}
+                          className={cn('image', { visible: imageLoading.subImage[index] })}
                           src={image.imageUrl}
                           alt={'서브 이미지'}
                           sizes={'100%'}
                           fill
                           priority
+                          onLoad={() =>
+                            setImageLoading((prev) => ({ ...prev, subImage: { ...prev.subImage, [index]: false } }))
+                          }
                         />
                       </div>
                     )

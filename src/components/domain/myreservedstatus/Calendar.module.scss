@@ -2,7 +2,7 @@
   @include responsive(T) {
     width: calc(100% - 27.5rem);
   }
-
+  
   @include responsive(M) {
     width: 100%;
   }

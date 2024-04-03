@@ -1,9 +1,8 @@
 import IconButton from '@/components/common/button/IconButton';
 import { ICON } from '@/constants';
-
+import { Schedules } from '@/types';
 import styles from './ScheduleList.module.scss';
 import classNames from 'classnames/bind';
-import { Schedules } from './AddActivityForm';
 
 const cn = classNames.bind(styles);
 const { minusTime } = ICON;

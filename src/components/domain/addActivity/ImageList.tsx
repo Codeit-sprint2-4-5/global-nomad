@@ -1,8 +1,8 @@
 import Image from 'next/image';
+import { MouseEvent } from 'react';
+import { ICON } from '@/constants';
 import styles from './AddActivityForm.module.scss';
 import classNames from 'classnames/bind';
-import { ICON } from '@/constants';
-import { MouseEvent } from 'react';
 
 const { cancel } = ICON;
 
