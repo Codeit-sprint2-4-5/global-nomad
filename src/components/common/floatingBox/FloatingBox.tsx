@@ -82,10 +82,7 @@ export default function FloatingBox({ detailData }: Props) {
         <span className={cn('floating-box-head-point')}>
           {'\uFFE6'} {detailData.price.toLocaleString()}
         </span>
-        /
-        <button onClick={() => setShowModal('countMemberInput')} className={cn('floating-box-head-btn')}>
-          <span> 총 {getValues('headCount')}</span>인
-        </button>
+        /인
       </h1>
       <form onSubmit={handleSubmit(handelOnSubmit)} className={cn('floating-box-form')}>
         <DateForm
@@ -106,6 +103,9 @@ export default function FloatingBox({ detailData }: Props) {
         <h2>총 합계</h2>
         <h2>
           {'\uFFE6'} {totalPrice.toLocaleString()}
+          <button onClick={() => setShowModal('countMemberInput')} className={cn('floating-box-counthead-btn')}>
+            <span> / 총 {getValues('headCount')}인</span>
+          </button>
         </h2>
       </article>
       {showModal === 'dateForm' && (
