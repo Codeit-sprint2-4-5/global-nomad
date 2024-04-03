@@ -1,7 +1,8 @@
 import { getActivities, getPopularActivities, getSearchActivities } from '@/apis/get/getActivities';
-import Layout from '@/components/common/layout/Layout';
+import MainLayout from '@/components/common/layout/MainLayout';
 import Pagination from '@/components/common/pagination/Pagination';
 import Search from '@/components/common/search/Search';
+import Skeleton from '@/components/common/skeleton/Skeleton';
 import ActivitiesList from '@/components/domain/main/activitiesList/ActivitiesList';
 import Banner from '@/components/domain/main/banner/Banner';
 import CategoryFilter from '@/components/domain/main/categoryFilter/CategoryFilter';
@@ -12,9 +13,8 @@ import { useCategoryFilterStore } from '@/stores/Activities';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import styles from './MainPage.module.scss';
-import Skeleton from '@/components/common/skeleton/Skeleton';
 
 const cn = classNames.bind(styles);
 
@@ -35,13 +35,15 @@ export default function MainPage() {
     setMainFilter('');
     setCurrentPage(1);
     if (keyword) {
-      if (!!searchResultData?.activities.length) {
-        setSearchKeyword(keyword);
-        return;
-      }
+      setSearchKeyword(keyword);
+      return;
     }
     setSearchKeyword('');
   };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [mainCategory, mainFilter]);
 
   const { data: popularActivitiesData, isSuccess: isGetPopularActivitiesSuccess } = useQuery({
     queryKey: ['popularActivities'],
@@ -65,21 +67,21 @@ export default function MainPage() {
 
   if (!isGetPopularActivitiesSuccess || !isGetActivitiesSuccess)
     return (
-      <Layout>
+      <MainLayout>
         <Banner />
         <div className={cn('search-box')}>
           <Search keyword={keyword} onSubmit={onSearchResult} onChange={handleValueChange} />
         </div>
         <div className={cn('list-box')}>
-          {/* <Skeleton type='popular' /> */}
+          <Skeleton type='popular' />
           <CategoryFilter />
-          {/* <Skeleton type='all' /> */}
+          <Skeleton type='all' />
         </div>
-      </Layout>
+      </MainLayout>
     );
 
   return (
-    <Layout>
+    <MainLayout>
       <Banner />
       <div className={cn('search-box')}>
         <Search keyword={keyword} onSubmit={onSearchResult} onChange={handleValueChange} />
@@ -114,7 +116,7 @@ export default function MainPage() {
       ) : (
         <>
           <div className={cn('list-box')}>
-            <PopularActivities popularActivities={popularActivitiesData?.activities} />
+            <PopularActivities popularActivities={popularActivitiesData.activities} />
             <CategoryFilter />
             <ActivitiesList category={mainCategory} activities={activitiesData?.activities} />
           </div>
@@ -128,6 +130,6 @@ export default function MainPage() {
           </div>
         </>
       )}
-    </Layout>
+    </MainLayout>
   );
 }
