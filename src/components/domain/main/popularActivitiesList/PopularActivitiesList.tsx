@@ -1,22 +1,25 @@
+import CardResource from '@/components/common/cardResource/CardResource';
+import { ICON } from '@/constants';
+import useResponsiveSize from '@/hooks/useResponsiveSize';
 import { GetActivitiesList } from '@/types/activities';
 import classNames from 'classnames/bind';
-import styles from './PopularActivitiesList.module.scss';
 import Image from 'next/image';
-import { ICON } from '@/constants';
-import CardResource from '@/components/common/cardResource/CardResource';
 import { useEffect, useRef, useState } from 'react';
+import styles from './PopularActivitiesList.module.scss';
 
 const cn = classNames.bind(styles);
 
 interface PopularActivitiesListProps {
-  popularActivities?: GetActivitiesList[];
+  popularActivities: GetActivitiesList[];
 }
 
 export default function PopularActivitiesList({ popularActivities }: PopularActivitiesListProps) {
-  const ref = useRef<HTMLUListElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasNext, setHasNext] = useState(true);
   const [hasPrev, setHasPrev] = useState(false);
+  const size = useResponsiveSize(10, 12, 0, 0);
+
+  const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     if (ref.current !== null) {
@@ -26,9 +29,14 @@ export default function PopularActivitiesList({ popularActivities }: PopularActi
 
   useEffect(() => {
     if (ref.current !== null) {
-      ref.current.style.transform = `translateX(-${currentIndex}0%)`;
-    };
-  }, [currentIndex]);
+      ref.current.style.transform = `translateX(-${currentIndex * size}%)`;
+    }
+    if (size === 0) {
+      setCurrentIndex(0);
+      setHasNext(true);
+      setHasPrev(false);
+    }
+  }, [currentIndex, size]);
 
   const handleArrowButtonClick = (direction: number) => {
     const newIndex = currentIndex + direction;
