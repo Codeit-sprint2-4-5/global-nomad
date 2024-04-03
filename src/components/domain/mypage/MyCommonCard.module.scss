@@ -1,9 +1,16 @@
 .reservations-container {
+  width: 80rem;
   @include column-flexbox(none, none);
+  @include responsive('T') {
+  }
+
+  @include responsive('M') {
+    width: 100%;
+  }
 }
 
 .title {
-  width: 80rem;
+  width: 100%;
   @include flexbox(between, center);
   margin-bottom: 2.4rem;
   @include responsive('T') {
@@ -79,5 +86,103 @@
   margin-top: 5.6rem;
   @include responsive('T') {
     margin-top: 4rem;
+  }
+}
+
+.skeleton-card-wrap {
+  @include flexbox(center, center);
+  gap: 2.4rem;
+
+  @include responsive(T) {
+    gap: 1.2rem;
+  }
+
+  @include responsive(M) {
+    gap: 0.8rem;
+  }
+
+  & + .card-wrap {
+    margin: 2.4rem 0 0;
+  }
+
+  .skeleton-img {
+    @include skeleton(0);
+    @include border-radius(2.4rem);
+    width: 20.4rem;
+    height: 20.4rem;
+
+    @include responsive(T) {
+      width: 15.6rem;
+      height: 15.6rem;
+    }
+
+    @include responsive(M) {
+      width: 12.8rem;
+      height: 12.8rem;
+    }
+
+    &::before {
+      @include border-radius(2.4rem);
+    }
+  }
+
+  .skeleton-text-wrap {
+    width: calc(100% - 8.9rem);
+
+    div {
+      @include skeleton(0);
+      &.status {
+        width: 6.5rem;
+        height: 2.6rem;
+        margin: 0 0 0.8rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 0.5rem 0;
+        }
+
+        @include responsive(M) {
+          height: 2rem;
+        }
+      }
+
+      &.skeleton-title {
+        width: 35rem;
+        height: 2.6rem;
+        margin: 0 0 1.3rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 1rem 0;
+        }
+
+        @include responsive(M) {
+          width: 100%;
+          height: 2rem;
+        }
+      }
+
+      &.skeleton-date {
+        width: 30rem;
+        height: 2.6rem;
+        margin: 0 0 1.4rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 1rem 0;
+        }
+
+        @include responsive(M) {
+          width: 100%;
+          height: 2rem;
+        }
+      }
+
+      &.skeleton-reservation-price {
+        width: 10rem;
+        height: 2.9rem;
+
+        @include responsive(M) {
+          height: 1.9rem;
+        }
+      }
+    }
   }
 }
