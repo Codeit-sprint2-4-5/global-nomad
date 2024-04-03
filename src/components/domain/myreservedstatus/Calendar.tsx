@@ -8,6 +8,11 @@ import Title from '@/components/common/title/Title';
 import Days from './Days';
 import classNames from 'classnames/bind';
 import styles from './Calendar.module.scss';
+import Image from 'next/image';
+import { ICON } from '@/constants';
+import Router from 'next/router';
+
+const { leftArrow } = ICON;
 
 const cn = classNames.bind(styles);
 
@@ -55,6 +60,10 @@ export default function Calendar() {
     setShowModal(type);
   };
 
+  const handleBackButtonClick = () => {
+    Router.back();
+  };
+
   async function getAllActivity() {
     try {
       const res = await instance.get('/my-activities');
@@ -95,7 +104,12 @@ export default function Calendar() {
   return (
     <>
       <div className={cn('container')}>
-        <Title text='예약 현황' />
+        <div className={cn('back')}>
+          <button className={cn('back-icon')} onClick={handleBackButtonClick}>
+            <Image width={40} height={40} src={leftArrow.default.src} alt={leftArrow.default.alt} />
+          </button>
+          <Title text='예약 현황' />
+        </div>
         {allActivity?.activities.length !== 0 ? (
           <div className={cn('reservedStatus')}>
             <Dropdown lists={allActivity?.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
