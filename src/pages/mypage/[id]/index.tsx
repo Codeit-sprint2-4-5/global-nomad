@@ -41,7 +41,7 @@ export default function Mypages() {
     }
     setIsMobile(false);
     useRouteStore.setState({ prevRoute: '' });
-  }, 100);
+  }, 200);
   useEffect(() => {
     handleResize();
     window.addEventListener('resize', handleResize);
