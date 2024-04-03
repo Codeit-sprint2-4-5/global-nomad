@@ -110,6 +110,7 @@
 }
 
 .subImage,
+.subImageLoading,
 .grid-pattern1 {
   grid-template-columns: 1fr;
 }
@@ -123,13 +124,30 @@
     'one two'
     'three three';
 
-  .sub-image:nth-child(1) {
+  .sub-image:nth-child(1),
+  .subImageLoading:nth-child(1) {
     grid-area: one;
   }
-  .sub-image:nth-child(2) {
+  .sub-image:nth-child(2),
+  .subImageLoading:nth-child(2) {
     grid-area: two;
   }
-  .sub-image:nth-child(3) {
+  .sub-image:nth-child(3),
+  .subImageLoading:nth-child(3) {
     grid-area: three;
   }
+}
+
+.imageLoading {
+  @include skeleton(0);
+  width: 100%;
+  height: 53.4rem;
+  background-color: $gray30;
+}
+.subImageLoading {
+  @include skeleton(0);
+}
+
+.visible {
+  visibility: hidden;
 }
