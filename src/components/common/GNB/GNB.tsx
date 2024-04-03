@@ -28,7 +28,7 @@ export default function GNB() {
   const { data: MyInfoData, isPending } = useQuery({
     queryKey: ['myInfo'],
     queryFn: getMyInfo,
-    retry: false,
+    retry: 1,
   });
 
   const handleLogout = () => {
@@ -57,7 +57,7 @@ export default function GNB() {
   ];
 
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
+    if (localStorage.getItem('accessToken') && localStorage.getItem('refreshToken')) {
       setAuth(true);
       return;
     }
@@ -70,43 +70,45 @@ export default function GNB() {
 
   return (
     <div className={cn('container')}>
-      <Link href='/'>
-        <Image src={IMAGE.logo.nav.src} alt={IMAGE.logo.nav.alt} height={28} width={166} />
-      </Link>
-      <div>
-        {!Auth ? (
-          <div className={cn('not', 'user')}>
-            <Link href='/signin'>로그인</Link>
-            <Link href='/signup'>회원가입</Link>
-          </div>
-        ) : (
-          <div className={cn('user')} id='modal-root-notice'>
-            <button className={cn('gnb-button')}>
-              <Image
-                src={ICON.notification.default.src}
-                alt={ICON.notification.default.alt}
-                onClick={setIsNotificationOpen}
-              />
-            </button>
-            {isNotificationOpen && (
-              <Modal
-                className={cn('notifications-box')}
-                modalType='notifications'
-                setShowModal={setIsNotificationOpen}
-              />
-            )}
-            <div className={cn('dropdown-menu-box')}>
-              <div className={cn('stroke')} />
-              <div className={cn('user-profile-box')}>
-                <Avatar profileImageUrl={MyInfoData?.profileImageUrl} type='gnb' />
-                <button className={cn('gnb-button')} onClick={setIsDropdownOpen}>
-                  {MyInfoData?.nickname}
-                </button>
-                {isDropdownOpen && <DropdownMenu type='gnb' dropdownMenuList={MyMenuList} />}
+      <div className={cn('gnb-box')}>
+        <Link href='/'>
+          <Image src={IMAGE.logo.nav.src} alt={IMAGE.logo.nav.alt} height={28} width={166} />
+        </Link>
+        <div>
+          {!Auth ? (
+            <div className={cn('not', 'user')}>
+              <Link href='/signin'>로그인</Link>
+              <Link href='/signup'>회원가입</Link>
+            </div>
+          ) : (
+            <div className={cn('user')} id='modal-root-notice'>
+              <button className={cn('gnb-button')}>
+                <Image
+                  src={ICON.notification.default.src}
+                  alt={ICON.notification.default.alt}
+                  onClick={setIsNotificationOpen}
+                />
+              </button>
+              {isNotificationOpen && (
+                <Modal
+                  className={cn('notifications-box')}
+                  modalType='notifications'
+                  setShowModal={setIsNotificationOpen}
+                />
+              )}
+              <div className={cn('dropdown-menu-box')}>
+                <div className={cn('stroke')} />
+                <div className={cn('user-profile-box')}>
+                  <Avatar profileImageUrl={MyInfoData?.profileImageUrl} type='gnb' />
+                  <button className={cn('gnb-button')} onClick={setIsDropdownOpen}>
+                    {MyInfoData?.nickname}
+                  </button>
+                  {isDropdownOpen && <DropdownMenu type='gnb' dropdownMenuList={MyMenuList} />}
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
