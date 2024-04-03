@@ -58,7 +58,6 @@ export default function Search({ keyword, onSubmit, onChange }: Props) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!keyword) return;
 
     onSubmit();
   };
