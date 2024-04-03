@@ -87,81 +87,83 @@ export default function Calendar() {
   });
 
   useEffect(() => {
-    if (allActivity) {
+    if (allActivity && allActivity?.activities[0]) {
       setActivityId(allActivity?.activities[0].id);
     }
   }, [allActivity?.activities]);
 
-  if (allActivity?.activities.length === 0) return <NoDataMessage message='아직 등록한 체험이 없어요' />;
-
   return (
     <>
-      <div>
+      <div className={cn('container')}>
         <Title text='예약 현황' />
-        <div className={cn('container')}>
-          <Dropdown lists={allActivity?.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
-          <div className={cn('date-control')}>
-            <button type='button' className={cn('button', 'prev')} onClick={handlePrevClick}>
-              이전
-            </button>
-            <div className={cn('date')}>
-              <p className={cn('year')}>{currentYear}년</p>
-              <p className={cn('month')}>{currentMonth + 1}월</p>
+        {allActivity?.activities.length !== 0 ? (
+          <div className={cn('reservedStatus')}>
+            <Dropdown lists={allActivity?.activities} name='dropdown' labelText='체험명' onSelectedId={onSelectedId} />
+            <div className={cn('date-control')}>
+              <button type='button' className={cn('button', 'prev')} onClick={handlePrevClick}>
+                이전
+              </button>
+              <div className={cn('date')}>
+                <p className={cn('year')}>{currentYear}년</p>
+                <p className={cn('month')}>{currentMonth + 1}월</p>
+              </div>
+              <button type='button' className={cn('button', 'next')} onClick={handleNextClick}>
+                다음
+              </button>
             </div>
-            <button type='button' className={cn('button', 'next')} onClick={handleNextClick}>
-              다음
-            </button>
+            <div className={cn('calendar')} id='modal-root' style={{ position: 'relative' }}>
+              <table className={cn('table')}>
+                <colgroup>
+                  <col style={{ width: '14.2%' }} />
+                  <col style={{ width: '14.2%' }} />
+                  <col style={{ width: '14.2%' }} />
+                  <col style={{ width: '14.2%' }} />
+                  <col style={{ width: '14.2%' }} />
+                  <col style={{ width: '14.2%' }} />
+                  <col style={{ width: '14.2%' }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    {dayArr.map((day, i) => (
+                      <th key={i}>{day}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {Array(dateRow)
+                    .fill(null)
+                    .map((_, dayIdx) => (
+                      <tr key={dayIdx}>
+                        <Days
+                          dayIdx={dayIdx}
+                          prevMonthDate={prevMonthDate}
+                          currentMonthDay={currentMonthDay}
+                          monthActivity={monthActivity}
+                          currentYear={currentYear}
+                          currentMonth={currentMonth}
+                          days={days}
+                          formattedmonth={formattedmonth}
+                          onReservedDate={onReservedDate}
+                          onShowModal={onShowModal}
+                        />
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+              {showModal === 'reservationInfo' && (
+                <Modal
+                  className={cn('reservedInfo')}
+                  modalType='reservationInfo'
+                  setShowModal={setShowModal}
+                  date={reservedDate}
+                  activityId={activityId}
+                />
+              )}
+            </div>
           </div>
-          <div className={cn('calendar')} id='modal-root' style={{ position: 'relative' }}>
-            <table className={cn('table')}>
-              <colgroup>
-                <col style={{ width: '14.2%' }} />
-                <col style={{ width: '14.2%' }} />
-                <col style={{ width: '14.2%' }} />
-                <col style={{ width: '14.2%' }} />
-                <col style={{ width: '14.2%' }} />
-                <col style={{ width: '14.2%' }} />
-                <col style={{ width: '14.2%' }} />
-              </colgroup>
-              <thead>
-                <tr>
-                  {dayArr.map((day, i) => (
-                    <th key={i}>{day}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {Array(dateRow)
-                  .fill(null)
-                  .map((_, dayIdx) => (
-                    <tr key={dayIdx}>
-                      <Days
-                        dayIdx={dayIdx}
-                        prevMonthDate={prevMonthDate}
-                        currentMonthDay={currentMonthDay}
-                        monthActivity={monthActivity}
-                        currentYear={currentYear}
-                        currentMonth={currentMonth}
-                        days={days}
-                        formattedmonth={formattedmonth}
-                        onReservedDate={onReservedDate}
-                        onShowModal={onShowModal}
-                      />
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-            {showModal === 'reservationInfo' && (
-              <Modal
-                className={cn('reservedInfo')}
-                modalType='reservationInfo'
-                setShowModal={setShowModal}
-                date={reservedDate}
-                activityId={activityId}
-              />
-            )}
-          </div>
-        </div>
+        ) : (
+          <NoDataMessage message='아직 등록한 체험이 없어요' />
+        )}
       </div>
     </>
   );
