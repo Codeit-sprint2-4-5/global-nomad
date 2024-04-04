@@ -21,7 +21,6 @@ const cn = classNames.bind(styles);
 
 export default function MyActivities() {
   const [deleteActivityId, setDeleteActivityId] = useState<number>(0);
-
   const queryClient = useQueryClient();
   const router = useRouter();
   const deleteDialogRef = useRef<HTMLDialogElement>(null);
@@ -59,11 +58,13 @@ export default function MyActivities() {
   async function deleteActivity(activityId: number) {
     try {
       await instance.delete(`/my-activities/${activityId}`);
-    } catch (error) {
+      alert('체험을 삭제 했습니다.');
+    } catch (error: any) {
+      alert(error.response.data.message);
+
       console.error('Error deleting activity:', error);
     }
   }
-
   //서버에 변경 작업 요청시 사용 캐시된 데이터를 무효화하고 success의 경우 데이터를 다시 불러옴
   const { mutate } = useMutation({
     mutationFn: deleteActivity,
@@ -77,7 +78,6 @@ export default function MyActivities() {
     try {
       if (!deleteDialogRef.current) return;
       deleteDialogRef.current.close();
-
       mutate(activityId);
     } catch (error) {
       console.error('Error deleting activity:', error);
