@@ -62,7 +62,7 @@ export default function Days({
             );
           });
 
-          const isStatusCompleted = statusCompleted ? 'active' : '';
+          const isStatusCompleted = statusCompleted && !statusPending && !statusConfirmed ? 'active' : '';
           let status: 'confirmed' | 'reservation' | 'complete' | 'seat';
           let count;
 
@@ -85,12 +85,15 @@ export default function Days({
             const reservedDate = reservedDateArr.join('-');
 
             onReservedDate(reservedDate);
-            if(reservationDate) onShowModal('reservationInfo');
-            if(statusCompleted) onShowModal('');
+            if (reservationDate) onShowModal('reservationInfo');
           };
 
           return (
-            <td key={i} className={cn({ active: remainingDate }, { on: reservationDate && !statusCompleted })} onClick={handleDateClick}>
+            <td
+              key={i}
+              className={cn({ active: remainingDate }, { on: reservationDate })}
+              onClick={handleDateClick}
+            >
               {days[currentMonthDate]}
               {reservationDate && !remainingDate && (
                 <>
