@@ -26,12 +26,11 @@
   height: 28.3rem;
   border-radius: 2rem;
   z-index: -1;
+  object-fit: cover;
+
   @include responsive('T') {
     width: 100%;
-
     min-height: 22.1rem;
-    object-fit: cover;
-    object-position: center;
   }
   @include responsive('M') {
     width: 100%;
@@ -70,7 +69,6 @@
   text-overflow: ellipsis;
 
   @include responsive('M') {
-    // width: 14.6rem;
     @include text-style(1.8, 700);
     line-height: 2.15rem;
   }
