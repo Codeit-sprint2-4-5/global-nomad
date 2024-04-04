@@ -1,4 +1,4 @@
-import { MouseEvent, useMemo, useRef, useEffect,useState } from 'react';
+import { MouseEvent, useMemo, useRef, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Input from '@/components/common/Input/Input';
@@ -173,7 +173,6 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
       return router.push('/mypage/myactivities');
     } else return;
   };
-
   const onHandleSubmit: SubmitHandler<PostActivityFormValues> = (data) => {
     const postData = { ...data };
     postData.schedules = schedules.map((schedule: Schedules) => ({

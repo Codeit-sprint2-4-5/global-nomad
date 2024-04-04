@@ -65,7 +65,7 @@
       @include text-style(1.6, 600, $darkgreen);
       text-decoration-line: underline;
       word-break: keep-all;
-      z-index: 15;
+
       @include responsive(T) {
         display: inline-block;
       }
