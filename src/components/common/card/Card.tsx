@@ -25,7 +25,7 @@ export default function Card({
     '예약 거절': reservationsInfo.status === 'declined',
     '예약 취소': reservationsInfo.status === 'canceled',
   });
-  console.log(reservationsInfo);
+
   const buttonContent = clsx({
     '예약 취소': reservationsInfo.status === 'pending',
     '후기 작성': reservationsInfo.status === 'completed',
