@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import RatingInput from './RatingInput';
 import BaseButton from '@/components/common/button/BaseButton';
 import { postMyReview } from '@/apis/post/postReview';
@@ -19,6 +19,7 @@ interface Props {
 }
 
 export default function ReviewFrom({ id, onClickCloseModal }: Props) {
+  const queryClient = useQueryClient();
   const { control, handleSubmit, setValue, register } = useForm<FormData>({
     defaultValues: { rating: 0, content: '' },
   });
@@ -26,7 +27,7 @@ export default function ReviewFrom({ id, onClickCloseModal }: Props) {
     mutationFn: (data: FormData) => postMyReview(id, data),
     onSuccess: () => {
       onClickCloseModal();
-      //후기리스트 다시 불러오는 거추가..?
+      queryClient.invalidateQueries({ queryKey: ['MyReservations'] });
     },
   });
 
