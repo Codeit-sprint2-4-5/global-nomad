@@ -5,7 +5,7 @@ import IconCalendar from '/public/icons/Icon_calendar.svg';
 import IconCalendarCheck from '/public/icons/Icon_calendar_check.svg';
 import IconEyeOn from '/public/icons/Icon_eye_on.svg';
 import IconEyeOff from '/public/icons/Icon_eye_off.svg';
-import IconFacebook from '/public/icons/Icon_faceBook.svg';
+import IconFacebook from '/public/icons/Icon_facebook.svg';
 import IconInstagram from '/public/icons/Icon_instagram.svg';
 import IconTwitter from '/public/icons/Icon_twitter.svg';
 import IconYoutube from '/public/icons/Icon_youtube.svg';

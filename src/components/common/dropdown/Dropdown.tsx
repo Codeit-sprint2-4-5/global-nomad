@@ -3,7 +3,7 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useOutsideClick, useToggleButton } from '@/hooks';
 import { ICON } from '@/constants';
-import style from '@/components/common/dropdown/dropdown.module.scss';
+import style from '@/components/common/dropdown/Dropdown.module.scss';
 
 const { downArrow, check } = ICON;
 
