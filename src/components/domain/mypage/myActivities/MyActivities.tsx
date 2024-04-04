@@ -130,13 +130,13 @@ export default function MyActivities() {
             </button>
             <Title text="내 체험 관리" />
           </div>
-
-          <button
-            className={cn('register-button')}
+          <BaseButton
             onClick={handleRegisterClick}
-          >
-            체험 등록하기
-          </button>
+            size="md"
+            type="submit"
+            variant="primary"
+            text="체험 등록하기"
+          />
         </div>
         <div className={cn('card-container')}>
           <Skeleton type="reservation" />
@@ -160,7 +160,7 @@ export default function MyActivities() {
             <Title text="내 체험 관리" />
           </div>
           <BaseButton
-            form="accountForm"
+            onClick={handleRegisterClick}
             size="md"
             type="submit"
             variant="primary"
