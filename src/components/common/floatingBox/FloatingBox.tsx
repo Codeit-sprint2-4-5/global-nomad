@@ -12,7 +12,6 @@ import { postReservation } from '@/apis/post/postReservation';
 import { GetActivityDetail } from '@/types';
 import Confirm from '../popup/confirm/Confirm';
 import Question from '../popup/question/Question';
-import test from 'node:test';
 
 const cn = classNames.bind(styles);
 
