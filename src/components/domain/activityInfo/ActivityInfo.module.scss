@@ -1,0 +1,27 @@
+.container {
+  @include flexbox(between, center);
+  @include text-style(1.4, 400, $gray90);
+  margin-bottom: 3.2rem;
+
+  .category {
+    overflow: hidden;
+    margin: 0 0 1rem 0;
+  }
+
+  .wrap {
+    @include flexbox(left, center);
+    gap: 1.2rem;
+    margin: 2.2rem 0 0;
+  }
+
+  .rating {
+    padding: 0 0 0 2.2rem;
+    @include text-style(1.4, 400, $black);
+    background: url('~/public/icons/Icon_star.svg') no-repeat;
+  }
+
+  .address {
+    padding: 0 0 0 1.8rem;
+    background: url('~/public/icons/Icon_location.png') no-repeat;
+  }
+}

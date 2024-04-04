@@ -1,0 +1,191 @@
+.reservations-container {
+  width: 80rem;
+  @include column-flexbox(none, none);
+
+  @include responsive('T') {
+    width: calc(100% - 27.5rem);
+  }
+
+  @include responsive('M') {
+    width: 100%;
+  }
+}
+
+.title {
+  width: 100%;
+
+  @include flexbox(between, center);
+  margin-bottom: 2.4rem;
+  @include responsive('T') {
+    margin-bottom: 1.6rem;
+  }
+  @include responsive('M') {
+    margin-bottom: 1.6rem;
+    width: 100%;
+  }
+}
+.back-button {
+  @include flexbox(none, center);
+}
+.back-icon {
+  display: none;
+  @include responsive('M') {
+    display: block;
+  }
+}
+.register-button {
+  padding: 1.1rem 1.65rem;
+  border-radius: 0.4rem;
+  background-color: $gray90;
+  @include text-style(1.6, 700, $white);
+}
+.card-lists {
+  @include column-flexbox(none, none);
+
+  gap: 2.4rem;
+
+  @include responsive('T') {
+    gap: 1.6rem;
+  }
+  @include responsive('M') {
+    gap: 0.8rem;
+  }
+}
+.ref-box {
+  height: 0.1rem;
+}
+.card-container {
+  height: 134.3rem;
+  overflow: scroll;
+  scrollbar-width: none;
+
+  @include responsive('T') {
+    height: 101.8rem;
+  }
+  @include responsive('M') {
+    height: 80.6rem;
+  }
+}
+.ref-box {
+  height: 10px;
+}
+.loading-container {
+  @include flexbox(center, none);
+  margin-top: 1.2rem;
+}
+.loading-image {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.nodata-container {
+  margin-top: 5.6rem;
+  @include responsive('T') {
+    margin-top: 4rem;
+  }
+}
+
+.skeleton-card-wrap {
+  @include flexbox(center, center);
+  gap: 2.4rem;
+
+  @include responsive(T) {
+    gap: 1.2rem;
+  }
+
+  @include responsive(M) {
+    gap: 0.8rem;
+  }
+
+  & + .card-wrap {
+    margin: 2.4rem 0 0;
+  }
+
+  .skeleton-img {
+    @include skeleton(0);
+    @include border-radius(2.4rem);
+    width: 20.4rem;
+    height: 20.4rem;
+
+    @include responsive(T) {
+      width: 15.6rem;
+      height: 15.6rem;
+    }
+
+    @include responsive(M) {
+      width: 12.8rem;
+      height: 12.8rem;
+    }
+
+    &::before {
+      @include border-radius(2.4rem);
+    }
+  }
+
+  .skeleton-text-wrap {
+    width: calc(100% - 8.9rem);
+
+    div {
+      @include skeleton(0);
+      &.status {
+        width: 6.5rem;
+        height: 2.6rem;
+        margin: 0 0 0.8rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 0.5rem 0;
+        }
+
+        @include responsive(M) {
+          height: 2rem;
+        }
+      }
+
+      &.skeleton-title {
+        width: 35rem;
+        height: 2.6rem;
+        margin: 0 0 1.3rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 1rem 0;
+        }
+
+        @include responsive(M) {
+          width: 100%;
+          height: 2rem;
+        }
+      }
+
+      &.skeleton-date {
+        width: 30rem;
+        height: 2.6rem;
+        margin: 0 0 1.4rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 1rem 0;
+        }
+
+        @include responsive(M) {
+          width: 100%;
+          height: 2rem;
+        }
+      }
+
+      &.skeleton-reservation-price {
+        width: 10rem;
+        height: 2.9rem;
+
+        @include responsive(M) {
+          height: 1.9rem;
+        }
+      }
+    }
+  }
+}

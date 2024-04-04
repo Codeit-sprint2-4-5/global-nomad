@@ -1,0 +1,9 @@
+.content {
+  @include flexbox($ai: start);
+
+  gap: 2.4rem;
+
+  @include responsive(T) {
+    gap: 1.6rem;
+  }
+}

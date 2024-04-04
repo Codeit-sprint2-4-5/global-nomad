@@ -1,0 +1,232 @@
+.popular-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 2.4rem;
+
+  @include responsive(M) {
+    grid-template-columns: repeat(9, 1fr);
+  }
+
+  .box {
+    @include skeleton(2.4);
+    @include border-radius(2.4rem);
+    width: 38.4rem;
+    height: 38.4rem;
+
+    @include responsive(M) {
+      width: 18.6rem;
+      height: 18.6rem;
+    }
+  }
+}
+
+.all-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(auto, 28.2rem));
+  gap: 4.8rem 2.4rem;
+
+  @include responsive('T') {
+    grid-template-columns: repeat(3, minmax(23rem, 38rem));
+    width: 100%;
+    row-gap: 3.2rem;
+  }
+
+  @include responsive('M') {
+    grid-template-columns: repeat(2, minmax(16rem, 38rem));
+  }
+
+  .wrap {
+    div {
+      width: 100%;
+      @include skeleton(0);
+      // @include responsive(T) {
+      //   width: calc(100% - 1.6rem);
+      // }
+
+      // @include responsive(M) {
+      //   width: calc(100% - 0.8rem);
+      // }
+
+      &.img {
+        @include border-radius(2.4rem);
+        height: 28.3rem;
+        margin: 0 0 1.6rem 0;
+
+        @include responsive(T) {
+          height: 22.1rem;
+          padding: calc(100% - 1.6rem) 0 0;
+        }
+
+        @include responsive(M) {
+          height: 16rem;
+          padding: calc(100% - 0.8rem) 0 0;
+        }
+
+        &::before {
+          @include border-radius(2.4rem);
+        }
+      }
+
+      &.rating {
+        width: 9rem;
+        height: 2rem;
+        margin: 0 0 1rem 0;
+      }
+
+      &.title {
+        height: 2.9rem;
+        margin: 0 0 1.5rem 0;
+      }
+
+      &.price {
+        width: 15rem;
+        height: 3.3rem;
+      }
+    }
+  }
+}
+
+.card-container {
+  .card-wrap {
+    @include flexbox(center, center);
+    gap: 2.4rem;
+
+    @include responsive(T) {
+      gap: 1.2rem;
+    }
+
+    @include responsive(M) {
+      gap: 0.8rem;
+    }
+
+    & + .card-wrap {
+      margin: 2.4rem 0 0;
+    }
+
+    .img {
+      @include skeleton(0);
+      @include border-radius(2.4rem);
+      width: 20.4rem;
+      height: 20.4rem;
+
+      @include responsive(T) {
+        width: 15.6rem;
+        height: 15.6rem;
+      }
+
+      @include responsive(M) {
+        width: 12.8rem;
+        height: 12.8rem;
+      }
+
+      &::before {
+        @include border-radius(2.4rem);
+      }
+    }
+  }
+
+  .text-wrap {
+    width: calc(100% - 8.9rem);
+
+    div {
+      @include skeleton(0);
+      &.status {
+        width: 6.5rem;
+        height: 2.6rem;
+        margin: 0 0 0.8rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 0.5rem 0;
+        }
+
+        @include responsive(M) {
+          height: 2rem;
+        }
+      }
+
+      &.title {
+        width: 35rem;
+        height: 2.6rem;
+        margin: 0 0 1.3rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 1rem 0;
+        }
+
+        @include responsive(M) {
+          width: 100%;
+          height: 2rem;
+        }
+      }
+
+      &.date {
+        width: 30rem;
+        height: 2.6rem;
+        margin: 0 0 1.4rem 0;
+
+        @include responsive(T) {
+          margin: 0 0 1rem 0;
+        }
+
+        @include responsive(M) {
+          width: 100%;
+          height: 2rem;
+        }
+      }
+
+      &.reservation-price {
+        width: 10rem;
+        height: 2.9rem;
+
+        @include responsive(M) {
+          height: 1.9rem;
+        }
+      }
+
+      &.management-price {
+        margin: 7.7rem 0 0;
+        width: 30rem;
+        height: 2.9rem;
+
+        @include responsive(T) {
+          margin: 4.8rem 0 0;
+        }
+
+        @include responsive(M) {
+          width: 100%;
+          margin: 3.6rem 0 0;
+          height: 1.9rem;
+        }
+      }
+    }
+  }
+}
+
+.search-container {
+  width: 100%;
+  height: 18rem;
+  box-shadow: 0px 4px 16px 0px $search-popup-box-shadow;
+  border-radius: 1.6rem;
+  background-color: $white;
+
+  @include skeleton(1.6);
+
+  @include responsive('M') {
+    height: 14.6rem;
+  }
+}
+
+.title-container {
+  @include flexbox(between, center);
+  width: 100%;
+
+  .text {
+    @include text-style(3.6, 700, $black);
+  }
+
+  .arrow {
+    @include skeleton(0);
+    width: 10rem;
+    height: 4.8rem;
+  }
+}

@@ -1,0 +1,56 @@
+// Primary
+$primary: #333236;
+
+// Secondary
+$blue: #0085ff;
+$skyblue: #2eb4ff;
+$lightblue: #e5f3ff;
+$green: #00ac07;
+$darkgreen: #0b3b2d;
+$lightgreen: #ced8d5;
+$yellow: #ffc23d;
+$orange: #ff7c1d;
+$lightorange: #fff4e8;
+$red: #ff472e;
+$lightred: #ffe4e0;
+
+// Grayscale
+$black: #1b1b1b;
+$white: #fff;
+$gray90: #112211;
+$gray80: #4b4b4b;
+$gray85: #676767;
+$gray70: #79747e;
+$gray60: #a4a1aa;
+$gray55: #a1a1a1;
+$gray50: #adaeb8;
+$gray40: #cbc9cf;
+$gray30: #ddd;
+$gray25: #e5e4e7;
+$gray20: #eee;
+$gray10: #fafafa;
+
+// opacity
+$opacity-black-30: rgba(0 0 0 / 30%);
+$opacity-black-60: rgba(0 0 0 / 60%);
+$opacity-white-5: rgba(255 255 255 / 5%);
+$opacity-100: rgba(0, 0, 0, 0);
+// Specific color
+$search-popup-box-shadow: #1122110d;
+$user-profile-image-shadow: #00000014;
+$user-category-box-shadow: 0px 10px 30px 3px rgba(5, 16, 55, 0.15);
+$popup-background: #000000b2;
+$modal-background: $opacity-black-60;
+$column-background: $gray80;
+$stroke: $gray70;
+$card-background: $gray60;
+$tag-background: $opacity-white-5;
+$modal-shadow: rgba(121, 116, 126, 1);
+$modal-text-color: #121;
+$modal-box-shadow: rgba(17, 34, 17, 0.05);
+$card-resource-gradient-from: #00000000;
+$card-resource-gradient-to: #000000cc;
+$calendar-text-color: #969696;
+$calendar-text-active-color: #9696964a;
+$calendar-border: #e8e8e8;
+$skeleton: 90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%;

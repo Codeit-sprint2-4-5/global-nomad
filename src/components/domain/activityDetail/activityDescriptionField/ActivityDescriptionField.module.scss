@@ -1,0 +1,24 @@
+.description {
+  &-box {
+    padding: 4rem 0;
+    border-top: 0.1rem solid $gray60;
+    border-bottom: 0.1rem solid $gray60;
+    flex-shrink: 2;
+
+    @include responsive(M) {
+      padding: 1.6rem 0;
+      border-top: none;
+      margin-bottom: 1.6rem;
+    }
+  }
+
+  &-title {
+    @include text-style(2, 700, $modal-text-color);
+    margin-bottom: 1.6rem;
+  }
+
+  &-content {
+    @include text-style(1.6, 400, $modal-text-color);
+    word-break: break-all;
+  }
+}
