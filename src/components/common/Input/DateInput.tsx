@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { ICON } from '@/constants';
-import style from '@/components/common/Input/inputField.module.scss';
+import style from '@/components/common/Input/InputField.module.scss';
 import classNames from 'classnames/bind';
 import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useMemo, useRef, useState } from 'react';
 import { useOutsideClick, useToggleButton } from '@/hooks';

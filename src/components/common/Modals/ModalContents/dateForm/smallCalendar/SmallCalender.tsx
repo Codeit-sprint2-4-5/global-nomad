@@ -1,7 +1,7 @@
 import Calendar from 'react-calendar';
 import { MutableRefObject } from 'react';
 import { Value } from '../DateForm';
-import styles from './smallCalender.module.scss';
+import styles from './SmallCalender.module.scss';
 import classNames from 'classnames/bind';
 import moment from 'moment';
 
