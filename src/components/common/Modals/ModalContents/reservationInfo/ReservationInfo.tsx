@@ -23,11 +23,12 @@ export interface ReservationSchedule {
 interface Props {
   date?: string;
   activityId?: number;
+  onClickCloseModal?: () => void;
 }
 
 const STATUSES = ['신청', '확정', '거절'];
 
-export default function ReservationInfo({ date = '2024-03-20', activityId = 178 }: Props) {
+export default function ReservationInfo({ date = '2024-03-20', activityId = 178, onClickCloseModal }: Props) {
   const queryClient = useQueryClient();
   const [selectedStatus, setSelectedStatus] = useState<ReservationCardType['status']>('pending');
   const [scheduledId, setScheduledId] = useState<number>(0);
@@ -123,6 +124,7 @@ export default function ReservationInfo({ date = '2024-03-20', activityId = 178 
                   selectedStatus={selectedStatus}
                   status={reservation.status}
                   activityId={reservation.activityId}
+                  onClickCloseModal={onClickCloseModal}
                 />
               ))
             ) : (
