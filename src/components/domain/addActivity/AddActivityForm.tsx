@@ -50,16 +50,6 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
     enabled: isEdit,
   });
 
-  // const categoryValue = getValues('category');
-
-  // useMemo(() => {
-  //   if (categoryValue) {
-  //     const categoryId = USER_CATEGORYS.find((category) => activityData.category === category.category)?.id;
-  //     console.log(categoryId);
-  //     setSelectedCategoryId(categoryId);
-  //   }
-  // }, [isEdit, activityData, selectedCategoryId, categoryValue]);
-
   const titleText = useMemo(() => (isEdit ? '수정' : '등록'), [isEdit]);
 
   const handleSelectedCategoryId = (id: number) => {
@@ -208,7 +198,6 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
       };
       delete patchData.subImageUrls;
       delete patchData.schedules;
-      console.log(patchData);
       return patchActivityMutation.mutate(patchData);
     }
     postActivityMutation.mutate(postData);
