@@ -50,6 +50,14 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
     enabled: isEdit,
   });
 
+  const titleText = useMemo(() => (isEdit ? '수정' : '등록'), [isEdit]);
+
+  const handleSelectedCategoryId = (id: number) => {
+    setSelectedCategoryId(id);
+    const updateCategory = USER_CATEGORYS.find((category) => id === category.id)?.category;
+    if (updateCategory) return setValue('category', updateCategory);
+  };
+
   useEffect(() => {
     if (isSuccess) {
       setValue('title', activityData.title);
@@ -61,19 +69,11 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
       setBannerImageUrl(activityData.bannerImageUrl);
       setSubImageUrls(activityData.subImages);
       setValue('category', activityData.category);
-
       const categoryId = USER_CATEGORYS.find((category) => activityData.category === category.category)?.id;
-      if (categoryId) return setSelectedCategoryId(categoryId);
+      categoryId && handleSelectedCategoryId(categoryId);
+      setSelectedCategoryId(categoryId);
     }
   }, [activityData, isEdit]);
-
-  const titleText = useMemo(() => (isEdit ? '수정' : '등록'), [isEdit]);
-
-  const handleSelectedCategoryId = (id: number) => {
-    setSelectedCategoryId(id);
-    const updateCategory = USER_CATEGORYS.find((category) => id === category.id)?.category;
-    if (updateCategory) return setValue('category', updateCategory);
-  };
 
   const handlePostDateValue = (value: string) => {
     return setValue('schedules.date', value);
@@ -153,7 +153,6 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
     mutationFn: (data: PostActivityFormValues) => postActivity(data),
     onSuccess: () => {
       handleConfirmText('체험 등록이 완료되었습니다');
-      // handleClickSuccessConfirm();
     },
   });
 
@@ -161,7 +160,6 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
     mutationFn: (data: unknown) => patchActivity(activityId as string, data),
     onSuccess: () => {
       handleConfirmText('체험 수정이 완료되었습니다');
-      // handleClickSuccessConfirm();
     },
   });
 
@@ -200,7 +198,6 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
       };
       delete patchData.subImageUrls;
       delete patchData.schedules;
-      console.log(patchData);
       return patchActivityMutation.mutate(patchData);
     }
     postActivityMutation.mutate(postData);
@@ -221,7 +218,8 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
         placeholder='카테고리'
         onSelectedId={handleSelectedCategoryId}
         lists={USER_CATEGORYS}
-        {...register('category', { required: '카테고리를 선택해 주세요' })}
+        selectedCategoryId={selectedCategoryId}
+        {...register('category')}
       />
       <Textarea
         {...register('description', { required: '체험 설명 칸을 입력해 주세요' })}

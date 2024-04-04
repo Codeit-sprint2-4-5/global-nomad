@@ -14,15 +14,16 @@ interface DropdownProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputE
   labelText?: string;
   lists: { id: number; category: string; title?: string }[];
   onSelectedId: (id: number) => void;
+  selectedCategoryId?: number;
 }
 
 export default forwardRef<HTMLInputElement, DropdownProps>(function Dropdown(
-  { name, labelText, lists, onSelectedId, ...props },
+  { name, labelText, lists, onSelectedId, selectedCategoryId, ...props },
   ref
 ) {
   const { isToggle, handleToggleClick } = useToggleButton();
   const list = lists ?? [];
-  const [selectedList, setSelectedList] = useState<number | null>(null);
+  const [selectedList, setSelectedList] = useState<number | null>(selectedCategoryId || null);
   const dropdownRef = useRef(null);
   const findId = list.find((item) => item.id === selectedList);
   const isLabelText = labelText ? findId?.title : findId?.category;
