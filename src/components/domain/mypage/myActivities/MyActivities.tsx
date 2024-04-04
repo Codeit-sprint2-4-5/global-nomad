@@ -15,6 +15,7 @@ import NoDataMessage from '@/components/common/noDataMessgae/NoDataMessage';
 import { ICON } from '@/constants';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import Skeleton from '@/components/common/skeleton/Skeleton';
+import BaseButton from '@/components/common/button/BaseButton';
 
 const cn = classNames.bind(styles);
 
@@ -158,13 +159,13 @@ export default function MyActivities() {
             </button>
             <Title text="내 체험 관리" />
           </div>
-
-          <button
-            className={cn('register-button')}
-            onClick={handleRegisterClick}
-          >
-            체험 등록하기
-          </button>
+          <BaseButton
+            form="accountForm"
+            size="md"
+            type="submit"
+            variant="primary"
+            text="체험 등록하기"
+          />
         </div>
         <div className={cn('card-container')}>
           {data?.totalCount !== 0 ? (

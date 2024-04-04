@@ -3,6 +3,7 @@ import styles from './card.module.scss';
 import { Reservation } from '@/types/myReservation';
 import classNames from 'classnames/bind';
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 
 const cn = classNames.bind(styles);
 
@@ -16,6 +17,7 @@ export default function Card({
   handleCancelReservation,
   handleWriteReview,
 }: CardProps) {
+  const router = useRouter();
   const statusText = clsx({
     '예약 신청': reservationsInfo.status === 'pending',
     '예약 완료': reservationsInfo.status === 'confirmed',
@@ -26,9 +28,7 @@ export default function Card({
 
   const buttonContent = clsx({
     '예약 취소': reservationsInfo.status === 'pending',
-    '후기 작성':
-      !reservationsInfo.reviewSubmitted &&
-      reservationsInfo.status === 'completed',
+    '후기 작성': reservationsInfo.status === 'completed',
   });
 
   const handleButtonClick = () => {
@@ -39,15 +39,23 @@ export default function Card({
       handleWriteReview(reservationsInfo);
     }
   };
+  const handlePageRouter = (id: number) => {
+    router.push(`/activityDetail/${id}`);
+  };
   return (
     <div className={cn('card-container')}>
-      <Image
-        src={reservationsInfo.activity.bannerImageUrl}
-        width={204}
-        height={204}
-        alt="배너이미지"
-        className={cn('card-image')}
-      />
+      <button
+        type="button"
+        onClick={() => handlePageRouter(reservationsInfo.activity.id)}
+      >
+        <Image
+          src={reservationsInfo.activity.bannerImageUrl}
+          width={204}
+          height={204}
+          alt="배너이미지"
+          className={cn('card-image')}
+        />
+      </button>
       <div className={cn('card-info-container')}>
         <div className={cn('info-section')}>
           <div className={cn('status', `${reservationsInfo.status}`)}>
@@ -69,14 +77,18 @@ export default function Card({
             )}
           </div>
 
-          {buttonContent && (
-            <button
-              className={cn('action-button', `${reservationsInfo.status}`)}
-              onClick={handleButtonClick}
-            >
-              {buttonContent}
-            </button>
-          )}
+          {buttonContent &&
+            (reservationsInfo.reviewSubmitted ? (
+              // <div className={cn('details')}>후기 작성 완료</div>
+              ''
+            ) : (
+              <button
+                className={cn('action-button', `${reservationsInfo.status}`)}
+                onClick={handleButtonClick}
+              >
+                {buttonContent}
+              </button>
+            ))}
         </div>
       </div>
     </div>

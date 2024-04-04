@@ -3,6 +3,7 @@
   @include column-flexbox(none, none);
 
   @include responsive('T') {
+    width: calc(100% - 27.5rem);
   }
 
   @include responsive('M') {
