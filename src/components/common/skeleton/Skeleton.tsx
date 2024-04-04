@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { instance } from '@/apis/axios';
 import throttle from '@/function/throttle';
 import classNames from 'classnames/bind';
 import styles from './Skeleton.module.scss';
