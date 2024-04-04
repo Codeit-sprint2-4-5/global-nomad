@@ -33,11 +33,11 @@
         border-radius: 0.4rem;
         line-height: 2.6rem;
         background-color: $white;
-        background: url('~/public/icons/icon_bed.svg') no-repeat 1.2rem 1.6rem;
+        background: url('~/public/icons/Icon_bed.svg') no-repeat 1.2rem 1.6rem;
 
         @include responsive(M) {
           @include text-style(1.4, 400, $primary);
-          background: url('~/public/icons/icon_bed.svg') no-repeat 1.2rem 1.2rem;
+          background: url('~/public/icons/Icon_bed.svg') no-repeat 1.2rem 1.2rem;
         }
 
         &::-webkit-search-decoration,
