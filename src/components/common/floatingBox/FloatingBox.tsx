@@ -17,7 +17,7 @@ const cn = classNames.bind(styles);
 
 export interface PostReservationData {
   headCount: number;
-  scheduleId: number | null;
+  scheduleId: number | string;
 }
 
 interface Props {
@@ -64,7 +64,7 @@ export default function FloatingBox({ detailData }: Props) {
     onSuccess: () => {
       handleShowConfrim('예약 완료되었습니다');
       setValue('headCount', 1);
-      setValue('scheduleId', null);
+      setValue('scheduleId', '');
     },
     onError: (e: any) => {
       if (e.response?.status === 401) {
