@@ -23,7 +23,7 @@ const cn = classNames.bind(styles);
 export default function MyReservations() {
   const [viewList, setViewList] = useState<string>('');
   const [reservationId, setReservationId] = useState<number>(0);
-  const deleteDialogRef = useRef(null);
+  const deleteDialogRef = useRef<HTMLDialogElement>(null);
   const queryClient = useQueryClient();
   const [showModal, setShowModal] = useState('');
   const [reservationInfo, setReservationInfo] = useState<Reservation>();

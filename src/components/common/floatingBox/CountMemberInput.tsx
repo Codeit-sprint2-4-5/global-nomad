@@ -12,7 +12,7 @@ const cn = classNames.bind(styles);
 
 interface Props {
   onDownDisabled?: boolean;
-  control?: Control<PostReservationData, any, PostReservationData>;
+  control?: Control<PostReservationData, any>;
   setValue?: UseFormSetValue<PostReservationData>;
   onClickCloseModal?: () => void;
 }
