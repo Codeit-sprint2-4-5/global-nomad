@@ -11,22 +11,25 @@ interface ReservationStatusProps {
   selectedStatus: 'pending' | 'declined' | 'confirmed';
   reservationId: number;
   activityId: number;
+  onClickCloseModal?: () => void;
 }
 interface Props extends ReservationStatusProps {
   nickname: string;
   headCount: number;
   status: ReservationStatusProps['selectedStatus'];
 }
-function ReservationStatus({ selectedStatus, reservationId, activityId }: ReservationStatusProps) {
+function ReservationStatus({ selectedStatus, reservationId, activityId, onClickCloseModal }: ReservationStatusProps) {
   const queryClient = useQueryClient();
-
-  //버튼 클릭시 status 변경하는 프롭 받아오기
 
   const patchStatusMutation = useMutation({
     mutationFn: (data: { status: ReservationStatusProps['selectedStatus'] }) =>
       patchReservationStatus(activityId, reservationId, data),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(reservationId, selectedStatus) }),
+
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: queryKey.getMyReservationsUseTime(reservationId, selectedStatus) });
+      queryClient.invalidateQueries({ queryKey: [`/my-activities/${activityId}`] });
+      onClickCloseModal && onClickCloseModal();
+    },
   });
   const handleClickConfirmed = () => {
     patchStatusMutation.mutate({ status: 'confirmed' });
@@ -63,6 +66,7 @@ export default function ReservationCard({
   status,
   reservationId,
   activityId,
+  onClickCloseModal,
 }: Props) {
   if (status === selectedStatus) {
     return (
@@ -74,7 +78,12 @@ export default function ReservationCard({
           인원<span>{headCount}명</span>
         </p>
         <div className={cn('reservation-card-item-status')}>
-          <ReservationStatus activityId={activityId} reservationId={reservationId} selectedStatus={selectedStatus} />
+          <ReservationStatus
+            onClickCloseModal={onClickCloseModal}
+            activityId={activityId}
+            reservationId={reservationId}
+            selectedStatus={selectedStatus}
+          />
         </div>
       </li>
     );
