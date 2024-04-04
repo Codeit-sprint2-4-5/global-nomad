@@ -12,12 +12,13 @@ import { postReservation } from '@/apis/post/postReservation';
 import { GetActivityDetail } from '@/types';
 import Confirm from '../popup/confirm/Confirm';
 import Question from '../popup/question/Question';
+import test from 'node:test';
 
 const cn = classNames.bind(styles);
 
 export interface PostReservationData {
   headCount: number;
-  scheduleId: number;
+  scheduleId: number | null;
 }
 
 interface Props {
@@ -30,6 +31,7 @@ export default function FloatingBox({ detailData }: Props) {
   const [totalPrice, setTotalPrice] = useState(detailData.price);
   const [showModal, setShowModal] = useState('');
   const [reservedTime, setReservedTime] = useState('');
+  const [text, setText] = useState('');
   const { control, handleSubmit, setValue, getValues, watch } = useForm<PostReservationData>({
     defaultValues: { headCount: 1 },
   });
@@ -52,18 +54,25 @@ export default function FloatingBox({ detailData }: Props) {
     setReservedTime(nextText);
   };
 
-  const handleShowConfrim = () => {
+  const handleShowConfrim = (text: string) => {
+    setText(text);
     if (!confrimRef.current) return;
     confrimRef.current.showModal();
   };
 
   const postReservationMutation = useMutation({
     mutationFn: (data: PostReservationData) => postReservation(id, data),
-    onSuccess: () => handleShowConfrim(),
+    onSuccess: () => {
+      handleShowConfrim('예약 완료되었습니다');
+      setValue('headCount', 1);
+      setValue('scheduleId', null);
+    },
     onError: (e: any) => {
       if (e.response?.status === 401) {
         if (!questionRef.current) return;
-        questionRef.current.showModal();
+        return questionRef.current.showModal();
+      } else if (e.response.data.message) {
+        return handleShowConfrim(`${e.response.data.message}`);
       }
     },
   });
@@ -120,7 +129,7 @@ export default function FloatingBox({ detailData }: Props) {
       {showModal === 'countMemberInput' && (
         <Modal modalType='countMemberInput' control={control} setShowModal={setShowModal} setValue={setValue} />
       )}
-      <Confirm text='예약 완료되었습니다' dialogRef={confrimRef} />
+      <Confirm text={text} dialogRef={confrimRef} />
       <Question dialogRef={questionRef} text='로그인 하시겠습니까?' onClick={hadledirectSignin} buttonText='예' />
     </section>
   );
