@@ -26,14 +26,15 @@ export default function CardResource({
       onClick={() => handleClick(activitiesData.id)}
       className={cn('entire', { banner })}
     >
-      <Image
-        src={activitiesData.bannerImageUrl}
-        width={384}
-        height={384}
-        alt="배너 이미지"
-        className={cn('image')}
-      />
-
+      <div className={cn('image-container')}>
+        <Image
+          src={activitiesData.bannerImageUrl}
+          width={384}
+          height={384}
+          alt="배너 이미지"
+          className={cn('image')}
+        />
+      </div>
       <div className={cn('info')}>
         <div className={cn('info-rating')}>
           <Image

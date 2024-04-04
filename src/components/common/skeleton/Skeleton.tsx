@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { instance } from '@/apis/axios';
 import throttle from '@/function/throttle';
 import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
 import styles from './Skeleton.module.scss';
 
 const cn = classNames.bind(styles);
 
-type Props = 'popular' | 'all' | 'reservation' | 'management';
+type Props = 'popular' | 'all' | 'reservation' | 'management' | 'search' | 'title';
 
 export default function Skeleton({ type }: { type: Props }) {
   const [allItem, setAllItem] = useState(8);
@@ -89,6 +87,15 @@ export default function Skeleton({ type }: { type: Props }) {
             </div>
           ))}
         </div>
+      );
+    case 'search':
+      return <div className={cn('search-container')} />;
+    case 'title':
+      return (
+      <div className={cn('title-container')}>
+        <span className={cn('text')}>🔥 인기 체험</span>
+        <span className={cn('arrow')} />
+      </div>
       );
     default:
       return;

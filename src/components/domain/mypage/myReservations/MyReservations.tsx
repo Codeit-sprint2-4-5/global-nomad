@@ -131,7 +131,7 @@ export default function MyReservations() {
             </button>
             <Title text="내 예약 관리" />
           </div>
-          <Filter type="filter" setFilterState={setViewList} />
+          <Filter type="filter" filterState={viewList} setFilterState={setViewList} />
         </div>
         <div className={cn('card-container')}>
           <Skeleton type="reservation" />
@@ -155,7 +155,7 @@ export default function MyReservations() {
             <Title text="내 예약 관리" />
           </div>
 
-          <Filter type="filter" setFilterState={setViewList} />
+          <Filter type="filter" filterState={viewList} setFilterState={setViewList} />
         </div>
         <div className={cn('card-container')}>
           {data?.totalCount !== 0 ? (

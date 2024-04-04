@@ -1,6 +1,6 @@
-import { ICON } from '@/constants';
+import { ICON, IMAGE } from '@/constants';
 import classNames from 'classnames/bind';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Banner.module.scss';
 
@@ -8,27 +8,25 @@ const cn = classNames.bind(styles);
 
 export default function Banner() {
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [bannerList, setBannerList] = useState<{ imageSrc: string; title: string; text: string }[]>([]);
+  const [bannerList, setBannerList] = useState<{ imageSrc: StaticImageData; title: string; text: string }[]>([]);
   const [isHover, setIsHover] = useState(false);
 
   const bannerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const bannerImageList: { imageSrc: string; title: string; text: string }[] = [
+    const bannerImageList: { imageSrc: StaticImageData; title: string; text: string }[] = [
       {
-        imageSrc:
-        'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-5_113_1711934745731.jpeg',
+        imageSrc: IMAGE.banner.first.src,
         title: '고민없이 여행을',
         text: '여행을 갈 때 무엇을 할지에 대한 해답을 제공합니다.',
       },
       {
-        imageSrc:
-          'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-5_113_1711933880311.png',
+        imageSrc: IMAGE.banner.second.src,
         title: '간편한 체험 예약',
         text: '원하는 여행지의 다양한 체험 상품을 탐색하고, 몇 번의 클릭만으로 예약을 완료할 수 있습니다.',
       },
       {
-        imageSrc:'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/2-5_113_1711933727905.jpeg',
+        imageSrc: IMAGE.banner.third.src,
         title: '체험 상품 등록',
         text: '여행지의 체험을 등록해 체험을 소개하고, 여행자들에게 잊지 못할 추억을 선사해 주세요.',
       },

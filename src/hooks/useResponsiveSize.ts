@@ -6,14 +6,12 @@ interface WindowSize {
 
 const useWindowSize = (): WindowSize => {
   const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: undefined,
+    width: typeof window !== 'undefined' ? window.innerWidth : undefined,
   });
 
   useEffect(() => {
     let timeoutId: number | null = null;
-    setWindowSize({
-      width: window.innerWidth,
-    });
+
     const handleResize = () => {
       if (timeoutId === null) {
         timeoutId = window.setTimeout(() => {
@@ -44,22 +42,22 @@ const useResponsiveSize = (P = 8, T = 9, M = 4, S = 4): number => {
 
   useEffect(() => {
     if (!width) return;
-    
+
     if (width >= 1200) {
       setSizeState(P);
       return;
     }
-    
+
     if (width >= 768) {
       setSizeState(T);
       return;
     }
-    
+
     if (width >= 430) {
       setSizeState(M);
       return;
     }
-    
+
     if (width < 430) {
       setSizeState(S);
       return;

@@ -94,7 +94,7 @@ export default function CategoryFilter() {
         )}
       </div>
       <div>
-        <Filter type='price' setFilterState={setFilterState} />
+        <Filter type='price' filterState={filterState} setFilterState={setFilterState} />
       </div>
     </div>
   );

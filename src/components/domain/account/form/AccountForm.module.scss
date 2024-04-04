@@ -27,3 +27,15 @@
     }
   }
 }
+
+.back {
+  @include flexbox(stretch, center);
+
+  &-icon {
+    display: none;
+
+    @include responsive(M) {
+      display: block;
+    }
+  }
+}
