@@ -9,6 +9,8 @@
   }
 
   .category {
+    @include flexbox(between, center);
+    width: 100%;
     @include text-style(3.6, 700, $black);
     span {
       font-weight: 400;
@@ -25,9 +27,8 @@
 
   .list-box {
     display: grid;
-    grid-template-columns: repeat(4, minmax(auto, 28.3rem));
-    column-gap: 1.6rem;
-    row-gap: 4.8rem;
+    grid-template-columns: repeat(4, minmax(auto, 28.2rem));
+    gap: 4.8rem 2.4rem;
 
     @include responsive('T') {
       grid-template-columns: repeat(3, minmax(23rem, 38rem));

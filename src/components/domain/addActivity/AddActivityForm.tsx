@@ -27,7 +27,6 @@ const { add } = ICON;
 
 export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const priceRef = useRef<HTMLInputElement>();
   const router = useRouter();
   const { id: activityId } = router.query;
   const [bannerImageUrl, setBannerImageUrl] = useState('');
@@ -157,14 +156,16 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
   const postActivityMutation = useMutation({
     mutationFn: (data: PostActivityFormValues) => postActivity(data),
     onSuccess: () => {
-      handleClickSuccessConfirm();
+      handleConfirmText('체험 등록이 완료되었습니다');
+      // handleClickSuccessConfirm();
     },
   });
 
   const patchActivityMutation = useMutation({
     mutationFn: (data: unknown) => patchActivity(activityId as string, data),
     onSuccess: () => {
-      handleClickSuccessConfirm();
+      handleConfirmText('체험 수정이 완료되었습니다');
+      // handleClickSuccessConfirm();
     },
   });
 
@@ -195,6 +196,7 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
       };
       delete patchData.subImageUrls;
       delete patchData.schedules;
+      console.log(patchData);
       return patchActivityMutation.mutate(patchData);
     }
     postActivityMutation.mutate(postData);

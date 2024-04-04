@@ -22,7 +22,11 @@
 
       & button {
         width: 1.6rem;
-        @include text-style(1.4, 700, $black);
+        @include text-style(3, 700, $black);
+
+        > span {
+          @include text-style(2, 700, $black);
+        }
 
         &:disabled {
           color: $gray30;
@@ -79,16 +83,26 @@
     }
 
     .react-calendar__tile:enabled:hover,
-    .react-calendar__tile:enabled:focus {
+    .react-calendar__tile:enabled:focus,
+    .react-calendar__tile--active {
       background: $darkgreen;
       color: $white;
       border-radius: 0.8rem;
     }
 
+    .react-calendar__tile,
+    .react-calendar__month-view__days__day {
+      &:disabled {
+        > abbr {
+          color: $gray50;
+        }
+      }
+    }
+
     .react-calendar__month-view__days__day--neighboringMonth:disabled,
     .react-calendar__decade-view__years__year--neighboringDecade:disabled,
     .react-calendar__century-view__decades__decade--neighboringCentury:disabled {
-      color: $gray50;
+      color: $gray30;
     }
   }
 }

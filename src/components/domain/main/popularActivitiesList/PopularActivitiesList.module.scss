@@ -14,16 +14,21 @@
     .button-box {
       @include flexbox;
 
-      @include responsive('T') {
+      @include responsive('M') {
         display: none;
       }
 
       .right-arrow-button,
       .left-arrow-button {
         @include flexbox;
+        opacity: 0.8;
+
+        &:hover {
+          opacity: 1;
+        }
 
         &:disabled {
-          opacity: 0.6;
+          opacity: 0.4;
           cursor: default;
         }
       }
@@ -39,18 +44,23 @@
     width: 100%;
     overflow: hidden;
 
-    @include responsive('T') {
+    @include responsive('M') {
       overflow: scroll;
       -webkit-overflow-scrolling: touch;
 
-      // &::-webkit-scrollbar {
-      //   display: none;
-      // }
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
-    .popular-activities-box {
+    ul {
       @include flexbox(start, center);
       gap: 1.6rem;
+
+      li {
+        display: inline-block;
+        white-space: normal;
+      }
     }
   }
 }

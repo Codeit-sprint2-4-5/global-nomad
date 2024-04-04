@@ -1,9 +1,9 @@
-import { DetailedHTMLProps, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
+import { DetailedHTMLProps, forwardRef, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useOutsideClick, useToggleButton } from '@/hooks';
 import { ICON } from '@/constants';
-import style from '@/components/common/dropdown/Dropdown.module.scss';
+import style from '@/components/common/dropdown/dropdown.module.scss';
 
 const { downArrow, check } = ICON;
 
@@ -16,7 +16,10 @@ interface DropdownProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputE
   onSelectedId: (id: number) => void;
 }
 
-export default function Dropdown({ name, labelText, lists, onSelectedId, ...props }: DropdownProps) {
+export default forwardRef<HTMLInputElement, DropdownProps>(function Dropdown(
+  { name, labelText, lists, onSelectedId, ...props },
+  ref
+) {
   const { isToggle, handleToggleClick } = useToggleButton();
   const list = lists ?? [];
   const [selectedList, setSelectedList] = useState<number | null>(null);
@@ -44,7 +47,7 @@ export default function Dropdown({ name, labelText, lists, onSelectedId, ...prop
         onClick={handleToggleClick}
         ref={dropdownRef}
       >
-        <input {...props} className={cn('dropdown')} name={name} readOnly value={isLabelText || ''} />
+        <input {...props} className={cn('dropdown')} name={name} readOnly value={isLabelText || ''} ref={ref} />
         {labelText && <span className={cn('dropdown-label')}>{labelText}</span>}
         <Image
           className={cn('dropdown-btn-img')}
@@ -72,4 +75,4 @@ export default function Dropdown({ name, labelText, lists, onSelectedId, ...prop
       </ul>
     </div>
   );
-}
+});

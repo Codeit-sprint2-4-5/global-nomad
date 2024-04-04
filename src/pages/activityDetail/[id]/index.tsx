@@ -35,7 +35,7 @@ export default function ActivityDetail() {
           <KakaoMap detailData={detailData} />
           <ActivityReviewField />
         </div>
-        <FloatingBox price={detailData.price} />
+        <FloatingBox detailData={detailData} />
       </section>
     </Layout>
   );

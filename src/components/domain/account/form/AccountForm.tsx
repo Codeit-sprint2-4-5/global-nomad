@@ -5,9 +5,13 @@ import classNames from 'classnames/bind';
 import Title from '@/components/common/title/Title';
 import Input from '@/components/common/Input/Input';
 import { GetUserData, ProfileFormValues } from '@/types/auth';
-import { USER_INPUT_VALIDATION } from '@/constants';
+import { ICON, USER_INPUT_VALIDATION } from '@/constants';
 import BaseButton from '@/components/common/button/BaseButton';
 import style from './AccountForm.module.scss';
+import Router from 'next/router';
+import Image from 'next/image';
+
+const { leftArrow } = ICON;
 
 const cn = classNames.bind(style);
 
@@ -46,6 +50,10 @@ export default function AccountForm({ onProfileSubmit }: AccountForm) {
     onProfileSubmit(formdata, reset);
   };
 
+  const handleBackButtonClick = () => {
+    Router.back();
+  };
+
   useEffect(() => {
     if (userData) {
       setValue('nickname', userData.nickname);
@@ -59,7 +67,12 @@ export default function AccountForm({ onProfileSubmit }: AccountForm) {
       <fieldset>
         <legend>Mypage - 내정보 수정</legend>
         <div className={cn('form-field-title')}>
-          <Title text='내정보' />
+          <div className={cn('back')}>
+            <button className={cn('back-icon')} onClick={handleBackButtonClick}>
+              <Image width={40} height={40} src={leftArrow.default.src} alt={leftArrow.default.alt} />
+            </button>
+            <Title text='내정보' />
+          </div>
           <BaseButton
             form='accountForm'
             size='md'

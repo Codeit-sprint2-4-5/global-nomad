@@ -12,7 +12,7 @@ import { ICON, MODAL_TYPE } from '@/constants';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import { PostReservationData } from '../floatingBox/FloatingBox';
-import { Reservation } from '@/types';
+import { GetActivityDetail, Reservation } from '@/types';
 
 const { x } = ICON;
 
@@ -23,8 +23,9 @@ interface ModalProps {
   setShowModal: Dispatch<SetStateAction<string>>;
   control?: Control<PostReservationData, any, PostReservationData>;
   id?: number;
-  abledReservationListData?: AbledReservationListData[];
+  abledShedule?: GetActivityDetail['schedules'];
   setValue?: UseFormSetValue<PostReservationData>;
+  handleSelectSchedule?: (id: number) => void;
   onDownDisabled?: boolean;
   date?: string;
   activityId?: number;
@@ -66,10 +67,8 @@ export default function Modal({ modalType, className, setShowModal, ...props }: 
       prop: {
         onClickCloseModal: handleClickCloseModal,
         control: props.control,
-        abledReservationListData: props.abledReservationListData,
-        setValue: props.setValue,
-        getdate: props.getdate,
-        register: props.register,
+        abledShedule: props.abledShedule,
+        handleSelectSchedule: props.handleSelectSchedule,
       },
     },
     [MODAL_TYPE.notifications]: { component: Notifications, prop: {} },
