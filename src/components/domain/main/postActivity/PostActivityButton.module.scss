@@ -8,6 +8,10 @@
     background-color: $gray90;
   }
 
+  &:disabled {
+    background-color: $black;
+  }
+
   @include responsive('M') {
     font-size: 1.6rem;
     padding: 1rem 1.5rem;

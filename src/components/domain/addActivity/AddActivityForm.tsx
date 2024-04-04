@@ -1,4 +1,4 @@
-import { MouseEvent, useMemo, useRef, useState } from 'react';
+import { MouseEvent, useMemo, useRef, useEffect,useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Input from '@/components/common/Input/Input';
@@ -50,7 +50,7 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
     enabled: isEdit,
   });
 
-  useMemo(() => {
+  useEffect(() => {
     if (isSuccess) {
       setValue('title', activityData.title);
       setValue('description', activityData.description);
@@ -149,10 +149,6 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
     return setBannerImageUrl('');
   };
 
-  const handleClickSuccessConfirm = () => {
-    router.push('/mypage/myactivities');
-  };
-
   const postActivityMutation = useMutation({
     mutationFn: (data: PostActivityFormValues) => postActivity(data),
     onSuccess: () => {
@@ -168,6 +164,15 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
       // handleClickSuccessConfirm();
     },
   });
+
+  const postSuccess = postActivityMutation.isSuccess;
+  const patchSuccess = patchActivityMutation.isSuccess;
+
+  const handleClickSuccessConfirm = () => {
+    if (postSuccess || patchSuccess) {
+      return router.push('/mypage/myactivities');
+    } else return;
+  };
 
   const onHandleSubmit: SubmitHandler<PostActivityFormValues> = (data) => {
     const postData = { ...data };
@@ -286,7 +291,7 @@ export default function AddActivityForm({ isEdit }: { isEdit?: boolean }) {
         onAddImageUrls={handleAddImageUrls}
       />
       <p className={cn('guide-image-input')}>* 배너 이미지는 1개, 소개 이미지는 최대 4개까지 등록 가능합니다.</p>
-      <Confirm dialogRef={dialogRef} text={confrimText} />
+      <Confirm dialogRef={dialogRef} text={confrimText} handleClickSuccessConfirm={handleClickSuccessConfirm} />
     </form>
   );
 }

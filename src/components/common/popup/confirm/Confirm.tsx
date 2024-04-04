@@ -8,12 +8,16 @@ const cn = classNames.bind(styles);
 interface Props {
   text: string;
   dialogRef: RefObject<HTMLDialogElement>;
+  handleClickSuccessConfirm?:()=> void
 }
 
-export default function Confirm({ text, dialogRef }: Props) {
+export default function Confirm({ text, dialogRef , handleClickSuccessConfirm}: Props) {
   const handleCloseClick = () => {
     if (!dialogRef.current) return;
     dialogRef.current.close();
+    if(handleClickSuccessConfirm){
+      handleClickSuccessConfirm()
+    }
   };
 
   return (

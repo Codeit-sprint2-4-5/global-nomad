@@ -2,7 +2,6 @@
   @include text-style(2, 700, $modal-text-color);
   flex-shrink: 0;
   position: relative;
-  z-index: 10;
 
   background-color: $white;
   width: 38.4rem;
@@ -66,6 +65,7 @@
       @include text-style(1.6, 600, $darkgreen);
       text-decoration-line: underline;
       word-break: keep-all;
+      z-index: 15;
       @include responsive(T) {
         display: inline-block;
       }
@@ -75,6 +75,7 @@
     }
     > button:last-child {
       margin-top: -4rem;
+      z-index: 10
     }
 
     @include responsive(M) {

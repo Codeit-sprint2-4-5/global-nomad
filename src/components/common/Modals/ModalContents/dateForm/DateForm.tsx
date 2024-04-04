@@ -11,7 +11,7 @@ import { GetActivityDetail } from '@/types';
 const cn = classNames.bind(styles);
 
 interface DateFormProps {
-  control?: Control<PostReservationData, any, PostReservationData>;
+  control?: Control<PostReservationData, any>;
   onClickCloseModal?: () => void;
   className?: string;
   handleSelectSchedule?: (id: number) => void;

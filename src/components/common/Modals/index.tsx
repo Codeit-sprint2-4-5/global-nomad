@@ -21,7 +21,7 @@ const cn = classNames.bind(styles);
 interface ModalProps {
   modalType: keyof typeof MODAL_TYPE;
   setShowModal: Dispatch<SetStateAction<string>>;
-  control?: Control<PostReservationData, any, PostReservationData>;
+  control?: Control<PostReservationData, any>;
   id?: number;
   abledShedule?: GetActivityDetail['schedules'];
   setValue?: UseFormSetValue<PostReservationData>;
