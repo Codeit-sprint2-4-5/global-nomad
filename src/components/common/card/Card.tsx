@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './card.module.scss';
+import styles from './Card.module.scss';
 import { Reservation } from '@/types/myReservation';
 import classNames from 'classnames/bind';
 import clsx from 'clsx';
