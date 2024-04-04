@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './card.module.scss';
+import styles from './Card.module.scss';
 import classNames from 'classnames/bind';
 import { GetActivitiesList } from '@/types/activities';
 import { ICON } from '@/constants';

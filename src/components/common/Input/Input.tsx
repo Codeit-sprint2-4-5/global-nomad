@@ -3,7 +3,7 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useToggleButton } from '@/hooks';
 import { USER_PASSWORD_SHOW } from '@/constants';
-import style from '@/components/common/Input/inputField.module.scss';
+import style from '@/components/common/Input/InputField.module.scss';
 
 const cn = classNames.bind(style);
 

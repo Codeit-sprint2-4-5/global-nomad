@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './NodataMessage.module.scss';
+import styles from './NoDataMessage.module.scss';
 import classNames from 'classnames/bind';
 import { IMAGE } from '@/constants';
 
