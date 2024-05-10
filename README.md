@@ -28,11 +28,11 @@ PW: test1234 <br>
 </table>
 
 ## ✨ 주요 기능 구현
-김미진 - 달력 컴포넌트 제작, 로딩바/스켈레톤 구현, 팝업 컴포넌트 구현, 검색 컴포넌트 구현, 예약 현황 페이지, 체험 상세 페이지, 체험 정보 페이지
-고성선 - 버튼 컴포넌트 구현, 인풋 컴포넌트 구현, 로그인, 회원가입 페이지, 내정보 수정 페이지, Route guard 구현, AccessToken 재발급, 체험상세 - ImageField 구현
-김재환 - Footer 구현, Card 컴포넌트 구현, 무한스크롤 Hook 구현, 내 체험 정보, 내 예약 정보 구현, 카카오맵 구현
-박운성 - 메인 페이지, 캐러셀 구현, 드롭다운 컴포넌트 구현, GNB 컴포넌트 구현, 카테고리 컴포넌트 구현, 칩 컴포넌트 구현
-박지원 - 모달 컴포넌트 구현, 체험 상세 페이지 (체험 설명, 후기,예약 컴포넌트) 구현, 체험 등록 / 수정 페이지 구현, axios interceptor 적용
+#### 김미진 - 달력 컴포넌트 제작, 로딩바/스켈레톤 구현, 팝업 컴포넌트 구현, 검색 컴포넌트 구현, 예약 현황 페이지, 체험 상세 페이지, 체험 정보 페이지<br/>
+#### 고성선 - 버튼 컴포넌트 구현, 인풋 컴포넌트 구현, 로그인, 회원가입 페이지, 내정보 수정 페이지, Route guard 구현, AccessToken 재발급, 체험상세 - ImageField 구현<br/>
+#### 김재환 - Footer 구현, Card 컴포넌트 구현, 무한스크롤 Hook 구현, 내 체험 정보, 내 예약 정보 구현, 카카오맵 구현<br/>
+#### 박운성 - 메인 페이지, 캐러셀 구현, 드롭다운 컴포넌트 구현, GNB 컴포넌트 구현, 카테고리 컴포넌트 구현, 칩 컴포넌트 구현<br/>
+#### 박지원 - 모달 컴포넌트 구현, 체험 상세 페이지 (체험 설명, 후기,예약 컴포넌트) 구현, 체험 등록 / 수정 페이지 구현, axios interceptor 적용
 
 ## 🛠️ Dev Tools
 <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"> <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> <img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white"> <img src="https://img.shields.io/badge/Zustand-F36D00?style=for-the-badge&logo=&logoColor=white"> <img src="https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white"> <img alt="Static Badge" src="https://img.shields.io/badge/ReactQuery-FF4154?style=for-the-badge"><br/>
