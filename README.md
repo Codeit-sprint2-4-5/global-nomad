@@ -8,20 +8,25 @@ PW: test1234 <br>
 <table>
   <tbody>
     <tr>
-      <td>
-        팀장 김미진
+      <td align="center">
+        <img src="https://github.com/Codeit-sprint2-4-5/global-nomad/assets/148178373/fedf676d-fe44-4182-b4aa-ae73b2d864e9"/><br/>
+        <a href="https://github.com/mijin0928">팀장 FE_김미진</a>
       </td>
-      <td>
-        고성선
+      <td align="center">
+        <img src="https://github.com/Codeit-sprint2-4-5/global-nomad/assets/148178373/5b5f7057-a524-42d3-a76a-366ae99af6e5"/><br/>
+        <a href="https://github.com/seongseonko">FE_고성선</a>
       </td>
-      <td>
-        김재환
+      <td align="center">
+        <img src="https://github.com/Codeit-sprint2-4-5/global-nomad/assets/148178373/7cd319f3-5864-4357-b75d-bef9bd42b582"/><br/>
+        <a href="https://github.com/BBoBBoM">FE_김재환</a>
       </td>
-      <td>
-        박운성
+      <td align="center">
+        <img src="https://github.com/Codeit-sprint2-4-5/global-nomad/assets/148178373/d7ad988e-f367-4df1-93d0-40ff620628d8" /><br/>
+        <a href="https://github.com/Useong0">FE_박운성</a>
       </td>
-      <td>
-        박지원
+      <td align="center">
+        <img width="100px" src="https://github.com/Codeit-sprint2-4-5/global-nomad/assets/148178373/bd1a1e3f-5aa1-4ad1-8480-2b01ec57226e"><br/>
+        <a href="https://github.com/bjiwon324">FE_박지원</a>
       </td>
     </tr>
   </tbody>
