@@ -1,18 +1,20 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import styles from './ReviewItem.module.scss';
 import classNames from 'classnames/bind';
 import { Review } from './ActivityReviewField';
 import { displayDateFormat } from '@/components/common/Modals/ModalContents/utills';
+import { IMAGE } from '@/constants/importImages';
 
 const cn = classNames.bind(styles);
 
 function ReviewItem({ review }: { review: Review }) {
   const ceratedDate = displayDateFormat(review.createdAt)?.split('/').join('.');
+  const isProfileImage: any = review.user.profileImageUrl === null ? IMAGE.avatar.default : review.user.profileImageUrl;
   return (
     <div className={cn('review-item')}>
       <Image
         className={cn('review-item-user-profileImg')}
-        src={review.user.profileImageUrl}
+        src={isProfileImage}
         alt='프로필 이미지'
         width={45}
         height={45}
