@@ -9,7 +9,9 @@ const cn = classNames.bind(styles);
 
 function ReviewItem({ review }: { review: Review }) {
   const ceratedDate = displayDateFormat(review.createdAt)?.split('/').join('.');
-  const isProfileImage: any = review.user.profileImageUrl === null ? IMAGE.avatar.default : review.user.profileImageUrl;
+  const isProfileImage: any =
+    review.user.profileImageUrl === null ? '/images/Image_default_profile_image.png' : review.user.profileImageUrl;
+
   return (
     <div className={cn('review-item')}>
       <Image
